@@ -373,6 +373,10 @@ It can be helpful to humans to include some information about the hierarchy insi
 | 2004   | 01              | 011      | Meat of bovine animals, fresh, chilled or frozen | ...         |
 | ...    |                 | ...      | ...                                              | ...         |
 
+### Units of measurement
+
+
+
 ## Cataloguing
 
 > TODO: Should we support dcat:DatasetSeries?
@@ -412,7 +416,7 @@ We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSerie
 We recommend catalogues have IRIs of the form:
 
 - ```http://{domain}/catalogue```
-- ```http://{domain}/catalogue/{catalogue_name}```
+- ```http://{domain}/catalogue/{catalogue_slug}```
 
 For example:
 
@@ -430,11 +434,11 @@ We recommend the use of the following properties:
 | `dcat:contactPoint`     | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
 | `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                    |
 | `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                    |
-| `dcterms:themeTaxonomy` | recommended       | See [themes](#themes)                                                      |
+| `dcterms:themeTaxonomy` | optional          | See [themes](#themes)                                                      |
 
 For example:
 
-```
+```ttl
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
@@ -464,12 +468,12 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property               | Requirement level | Notes |
-| ---------------------- | ----------------- | ----- |
-| `dcterms:issued`       | mandatory         |       |
-| `foaf:primaryTopic`    | mandatory         |       |
-| `prov:wasAttributedTo` | recommended       |       |
-| `dcterms:modified`     | optional          |       |
+| Property               | Requirement level | Notes                                                                          |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
+| `dcterms:issued`       | mandatory         | See [dates and times](#dates-and-times)                                        |
+| `foaf:primaryTopic`    | mandatory         | This points to the IRI of the `dcat:Dataset` described by the catalogue record |
+| `prov:wasAttributedTo` | recommended       |                                                                                |
+| `dcterms:modified`     | recommended       | See [dates and times](#dates-and-times)                                        |
 
 We may use `prov:wasAttributedTo` to attribute the creation of the catalogue record to a specific entity, such as the person who added the dataset to the catalogue.
 
@@ -615,7 +619,7 @@ Where metadata is stored as RDF, such as being made available via a SPARQL endpo
 
 [^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
 
-```trig
+```ttl
 <http://data.gov.uk/dataset/my-dataset/record> {
     ...
 }
@@ -633,8 +637,7 @@ WHERE {
 
 We also recommend placing catalogue records into a named graph that is the same as the IRI of the catalog.
 
-```trig
-
+```ttl
 <http://data.gov.uk/catalogue/my-datasets> {
 
     <http://data.gov.uk/catalogue/my-datasets> a dcat:Catalog ;
@@ -658,14 +661,21 @@ We also recommend placing catalogue records into a named graph that is the same 
 
 ## Distributions
 
+```mermaid
+classDiagram
+    class Dataset {
+        a dcat:Dataset
+    }
+    class Distribution{
+        a dcat:Distribution
+    }
+
+    Dataset --> "1..*" Distribution : dcat.distribution
+```
+
 > a `dcat:Distribution` represents an accessible form of a dataset such as a downloadable file.
 
-
-### Classes
-
-#### Distribution
-
-We recommend distributions have IRIs which are identical to the dataset IRI, with 
+We recommend distributions have IRIs which are identical to the dataset IRI, with file extension appended. 
 
 - `http://{dataset_iri}.{extension}`
 
@@ -679,33 +689,21 @@ For example:
 - `http://data.gov.uk/dataset/my-dataset.csv`
 - `http://data.gov.uk/dataset/my-dataset.ttl`
 - `http://data.gov.uk/dataset/my-dataset.json`
-
-### Classes
-
-```mermaid
-classDiagram
-    class Dataset {
-        a dcat:Dataset
-    }
-    class Distribution{
-        a dcat:Distribution
-    }
-
-    Dataset --> "1..*" Distribution : dcat.distribution
-```
+- `http://data.gov.uk/dataset/my-dataset/datacube`
 
 ### Content negotiation of distributions
 
 We recommend that data providers implement content negotiation as a method for clients to access the data in the format they require.
 
-The IRI of the `dcat:Dataset` 
+The IRI of the `dcat:Dataset` should be used as the generic IRI which a user can request different formats of the data from.
 
+For example, a `dcat:Dataset` with an IRI of `http://data.gov.uk/dataset/my-dataset` may have a CSV distribution with its own IRI of `http://data.gov.uk/dataset/my-dataset.csv`. A user agent wishing to access the data in CSV format could navigate to `http://data.gov.uk/dataset/my-dataset.csv` directly, or content negotiate against the IRI of the `dcat:Dataset` to find the CSV distribution.
 
 ```sh
 curl http://data.gov.uk/dataset/my-dataset -H "Accept: text/csv"
 ```
 
-> What is the flow, do we 303 redirect to the CSV version of the dataset?
+> What is the flow, do we 303 redirect to the CSV distribution of the dataset?
 
 ```mermaid
 sequenceDiagram
@@ -717,9 +715,19 @@ sequenceDiagram
 
 ## Editions
 
-> TODO
+Many statistics producers publish sets of statistics at a regular frequency as monthly, quarterly, or annual releases.
 
-```turtle
+Previous years of data may be repeated without any changes, though in some instances some previous year's data may be revised or updated to include new data or better estimates.
+
+We refer to these as _editions_, as opposed to _versions_ which are used to specifically describe changes in a dataset resulting from a revision. Each edition is given its own IRI which typically contains the latest time period for which data is available.
+
+For example, `http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018` is the IRI of the 2018 edition of the series `name-of-my-statistical-series`.
+
+Editions should be related to a `dcat:DatasetSeries`. The dataset series should have an IRI which does not reference particular time period and can represent the collection of editions.
+
+For example, the following dataset series has two editions from 2017 and 2018.
+
+```ttl
 <http://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries .
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
@@ -733,11 +741,56 @@ sequenceDiagram
     .
 ```
 
+### Scheduled revisions (provisional and final releases)
+
+Statisticians may wish to release early or provisional estimates of statistics which are later revised as "final" statistics when additional data is available. The Government Statistical Service [refers to these as scheduled revisions](https://analysisfunction.civilservice.gov.uk/policy-store/communicating-quality-uncertainty-and-change/).
+
+The IRIs of provisional and final datasets should contain `provisional` or `final`. Provisional and final statistics can both be attached to the same dataset series and related to one another by the `dcat:prev` property.
+
+```mermaid
+flowchart LR
+
+    2017/provisional --> 2017/final
+    2017/final --> 2018/provisional
+    2018/provisional --> 2018/final
+
+    2017/final .->|dcat:prev| 2017/provisional
+    2018/provisional .->|dcat:prev| 2017/final
+    2018/final .->|dcat:prev| 2018/provisional
+   
+```
+
+For example, the following dataset series has two editions from both 2017 and 2018, one provisional and one final.
+
+```ttl
+<http://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/final> a dcat:Dataset ;
+    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> ;
+    .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> a dcat:Dataset ;
+    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> ;
+    .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> a dcat:Dataset ;
+    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> ;
+    .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> a dcat:Dataset ;
+    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016/final> ;
+    .
+```
+
 ## Versions
 
 > TODO
 
-```turtle
+```ttl
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
     dcat:hasCurrentVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
     dcat:hasVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>, 
@@ -765,33 +818,13 @@ sequenceDiagram
 
 ## Publish CSV on the web (CSVW)
 
-> TODO
+Our aim is to publish metadata in a machine readable and structured format alongside the statistical data. 
 
-### Classes
+Structured data formats, such as JSON-LD can be understood by search engines and are used for [search engine optimisation](https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data), with some search engines offering specific [dataset search functionality](https://developers.google.com/search/docs/advanced/structured-data/dataset) where structured metadata are provided using common vocabularies such as DCAT or [schema.org](https://schema.org/).
 
-```mermaid
-classDiagram
-    class `Table` {
-        a csvw:Table, dcat:Distribution
-    }
-    class `TableSchema` {
-        a csvw:TableSchema
-    }
-    class `Column` {
-        a csvw:Column
-    }
-    class `Dataset` {
-        a dcat:Dataset
-    }
+CSV on the Web 
 
-    Table --> "1" Dataset: dcat.isDistributionOf
-    Table --> "1" TableSchema: csvw.tableSchema
-    TableSchema --> "1" Column: csvw.column
-    Table "1" <-- Dataset: dcat.distribution
-    
-```
-
-### Example
+### Structural CSV metadata
 
 | area      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
@@ -805,6 +838,7 @@ classDiagram
 {
     "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
+    "url": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
     "tableSchema": {
         "columns": [
             {
@@ -842,13 +876,35 @@ CSVW prohibits the use of the `@reverse` JSON-LD property, so there's no neat wa
 
 Suggesting the use of a DCAT inverse property `dcat:isDistributionOf`, open issue [here](https://github.com/w3c/dxwg/issues/1322).
 
+```mermaid
+classDiagram
+    class `Table` {
+        a csvw:Table, dcat:Distribution
+    }
+    class `TableSchema` {
+        a csvw:TableSchema
+    }
+    class `Column` {
+        a csvw:Column
+    }
+    class `Dataset` {
+        a dcat:Dataset
+    }
+
+    Table --> "1" Dataset: dcat.isDistributionOf
+    Table --> "1" TableSchema: csvw.tableSchema
+    TableSchema --> "1" Column: csvw.column
+    Table "1" <-- Dataset: dcat.distribution
+    
+```
+
 ```json
 {
     "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
     "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
-    "dcterms:title": "Life expectancy by local authority and sex (CSV)",
-    "dcterms:description": "A CSV version of the life expectancy by local authority and sex dataset."
     "url": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
+    "dcterms:title": "Life expectancy by local authority and sex (CSV)",
+    "dcterms:description": "A CSV version of the life expectancy by local authority and sex dataset.",
     "dcat:isDistributionOf": {
         "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time",
         "@type": "dcat:Dataset",
@@ -881,6 +937,10 @@ Suggesting the use of a DCAT inverse property `dcat:isDistributionOf`, open issu
     }
 }
 ```
+
+### Discoverability of CSVW
+
+
 
 ## RDF data cubes
 
@@ -1077,6 +1137,8 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 
 > TODO: [Recently updated guidance exists](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/). We may need to update our markers codelist.
 
+See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
+
 | Label                       | Notation | IRI                                                        |
 | --------------------------- | -------- | ---------------------------------------------------------- |
 | Break in time series        | `[b]`    | `http://data.gov.uk/codelist/statistical-markers/code/[b]`   |
@@ -1149,6 +1211,10 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 #### Keywords
 
 > TODO: Advice for keywords
+
+#### Welsh language
+
+> TODO: Language string example for Welsh
 
 ### `rdfs` vs `dcterms`
 
