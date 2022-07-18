@@ -1,5 +1,9 @@
 # Application Profile
 
+_Working draft._
+
+The key words must, must not, required, shall, shall not, should, should not, recommended, may, and optional are to be interpreted as described in RFC 2119.
+
 ## Preamble
 
 The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, we recognise there are still barriers and challenges in accessing and using the data we produce:
@@ -27,29 +31,29 @@ We have explored how to follow the best practices when publishing statistics, in
 
 The Application Profile uses terms from various existing specifications. Classes and properties specified in the following sections come from the following namespaces.
 
-| Namespace | Namespace IRI                           | Specification name                                                                   |
-| --------- | --------------------------------------- | ------------------------------------------------------------------------------------ |
-| `adms`    | `http://www.w3.org/ns/adms#`            | Asset Description Metadata Schema                                                    |
-| `dcat`    | `http://www.w3.org/ns/dcat#`            | Data Catalog Vocabulary                                                              |
-| `dcterms` | `http://purl.org/dc/terms/`             | DCMI (Dublin Core Metadata Initiative) Metadata Terms                                |
-| `dpv`     | `http://www.w3.org/ns/dpv#`             | Data Privacy Vocabulary (DPV)                                                        |
-| `foaf`    | `http://xmlns.com/foaf/0.1/`            | FOAF (Friend of a friend) Vocabulary                                                 |
-| `owl`     | `http://www.w3.org/2002/07/owl#`        | OWL Web Ontology Language                                                            |
-| `prov`    | `http://www.w3.org/ns/prov#`            | Provenance Vocabulary                                                                |
-| `qb`      | `http://purl.org/linked-data/cube#`     | RDF Data Cube Vocabulary                                                             |
-| `rdfs`    | `http://www.w3.org/2000/01/rdf-schema#` | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
-| `skos`    | `http://www.w3.org/2004/02/skos/core#`  | SKOS Simple Knowledge Organization System - Reference                                |
-| `spdx`    | `http://spdx.org/rdf/terms#`            | Software Package Data Exchange                                                       |
-| `xsd`     | `http://www.w3.org/2001/XMLSchema#`     | XML Schema Part 2: Datatypes Second Edition                                          |
-| `vcard`   | `http://www.w3.org/2006/vcard/ns#`      | File format standard for electronic business cards                                   |
+
+| Namespace | Namespace IRI                                 | Specification name                                                                   |
+| --------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `adms`    | `http://www.w3.org/ns/adms#`                  | Asset Description Metadata Schema                                                    |
+| `dcat`    | `http://www.w3.org/ns/dcat#`                  | Data Catalog Vocabulary                                                              |
+| `dcterms` | `http://purl.org/dc/terms/`                   | DCMI (Dublin Core Metadata Initiative) Metadata Terms                                |
+| `dpv`     | `http://www.w3.org/ns/dpv#`                   | Data Privacy Vocabulary (DPV)                                                        |
+| `foaf`    | `http://xmlns.com/foaf/0.1/`                  | FOAF (Friend of a friend) Vocabulary                                                 |
+| `owl`     | `http://www.w3.org/2002/07/owl#`              | OWL Web Ontology Language                                                            |
+| `prov`    | `http://www.w3.org/ns/prov#`                  | Provenance Vocabulary                                                                |
+| `qb`      | `http://purl.org/linked-data/cube#`           | RDF Data Cube Vocabulary                                                             |
+| `rdfs`    | `http://www.w3.org/2000/01/rdf-schema#`       | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
+| `skos`    | `http://www.w3.org/2004/02/skos/core#`        | SKOS Simple Knowledge Organization System - Reference                                |
+| `spdx`    | `http://spdx.org/rdf/terms#`                  | Software Package Data Exchange                                                       |
+| `xkos`    | `http://rdf-vocabulary.ddialliance.org/xkos#` | XKOS: an SKOS extension for representing statistical classifications                 |
+| `xsd`     | `http://www.w3.org/2001/XMLSchema#`           | XML Schema Part 2: Datatypes Second Edition                                          |
+| `vcard`   | `http://www.w3.org/2006/vcard/ns#`            | File format standard for electronic business cards                                   |
 
 ## Data structure
 
 ### Publish machine-readable data
 
 > Machine-readable data is data in a standard format that can be read and processed automatically by a computing system. Traditional word processing documents and portable document format (PDF) files are easily read by humans but typically are difficult for machines to interpret and manipulate. Formats such as XML, JSON, HDF5, RDF and CSV are machine-readable data formats [^machine]
-
-[^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
 
 Many of the excel workbooks produced by statisticians are designed to be easily read by humans but typically are difficult for machines to interpret and manipulate.
 
@@ -152,7 +156,7 @@ Consider this example taken from the [RDF data cube vocabulary](https://www.w3.o
 
 The table is a cross tabulation of the data, with the columns representing the time period of the observation and the sex of the observed population and the rows representing different locations. Having multiple header rows which span multiple columns makes the data difficult to read with software. Downstream users of the data will have to wrangle the data into a usable format.
 
-For example, importing the above table into some statistical software such as [R](https://www.r-project.org/) produces a result with some problems:
+Importing the above table into a statistical software such as [R](https://www.r-project.org/) produces a result with some problems:
 
 - The header rows are not treated as headers.
 - The header row representing time period is not fully populated.
@@ -163,9 +167,9 @@ For example, importing the above table into some statistical software such as [R
 # An example of how the above table looks once imported into R:
 
 # A tibble: 6 x 7
-  V1                V2        V3        V4        V5     V6    V7    
+  V1                V2        V3        V4        V5     V6    V7  
   <chr>             <chr>     <chr>     <chr>     <chr>  <chr> <chr> 
-1 ""                2004-2006 2005-2007 2006-2008 NA     NA    NA    
+1 ""                2004-2006 2005-2007 2006-2008 NA     NA    NA  
 2 ""                Male      Female    Male      Female Male  Female
 3 "Newport"         76.7      80.7      77.1      80.9   77.0  81.5  
 4 "Cardiff"         78.7      83.3      78.6      83.7   78.7  83.4  
@@ -302,9 +306,9 @@ After pivoting with the above code, each of the measures has its own column.
 | ...       | ...                     | ...    | ...             |                                 |
 
 > TODO: Is there a need to support a multiple-measure structure instead of a measure-type dimension, e.g.
-> 
+>
 > | area      | period                  | sex    | life_expectancy | life_expectancy_marker | disability_free_life_expectancy | disability_free_life_expectancy_marker |
-> | --------- | ----------------------- | ------ | --------------- | ---------------------- | ------------------------------- | -------------------------------------- |
+> | ----------- | ------------------------- | -------- | ----------------- | ------------------------ | --------------------------------- | ---------------------------------------- |
 > | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |                        | 70.1                            |                                        |
 > | W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |                        | 80.2                            | [p]                                    |
 > | W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |                        | 70.3                            |                                        |
@@ -344,7 +348,8 @@ This would typically be presented in a dataset with `industry`, `sub_industry` a
 | ...    | ...      |              |                | ...                                              | ...         |
 
 There may be some difficulties in working with data structured in this way:
-- Different publishers may indicate hierarchy in different ways, using different combinations of multiple columns and blank entries. Understanding how each dataset's structure relates to its interpretation requires investigation. 
+
+- Different publishers may indicate hierarchy in different ways, using different combinations of multiple columns and blank entries. Understanding how each dataset's structure relates to its interpretation requires investigation.
 - The number of columns is determined by the number of levels in the hierarchy, potentially making datasets very wide. Naming becomes more difficult as the number of columns increases.
 - Using blank entries to indicate hierarchy means blank entries cannot then also be used where data is unknown or does not exist.
 - The hierarchical relationship between columns is not explicit. It can be difficult to infer the structure, especially when a dataset has multiple hierarchies.
@@ -375,7 +380,33 @@ It can be helpful to humans to include some information about the hierarchy insi
 
 ### Units of measurement
 
+### Different granularity of time periods
 
+Statisticians may wish to report statistics at different time granularities. For example, a single dataset may report statistics by month, quarter, year and financial year.
+
+| period  | industry | trade_value |
+| ------- | -------- | ----------- |
+| 2004    | 0        | ...         |
+| 2004-01 | 0        | ...         |
+| 2004-02 | 0        | ...         |
+| ...     | ...      | ...         |
+| 2004    | 00       | ...         |
+| 2004-01 | 00       | ...         |
+| 2004-02 | 00       | ...         |
+| ...     | ...      | ...         |
+
+| period_type | period  | industry | trade_value |
+| ----------- | ------- | -------- | ----------- |
+| year        | 2004    | 0        | ...         |
+| month       | 2004-01 | 0        | ...         |
+| month       | 2004-02 | 0        | ...         |
+| ...         | ...     | ...      | ...         |
+| year        | 2005    | 00       | ...         |
+| month       | 2005-01 | 001      | ...         |
+| month       | 2005-02 | 01       | ...         |
+| ...         | ...     | ...      | ...         |
+
+`http://reference.data.gov.uk/id/{period_type}/{period}`
 
 ## Cataloguing
 
@@ -425,8 +456,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                | Requirement level | Notes                                                                      |
-| ----------------------- | ----------------- | -------------------------------------------------------------------------- |
+| Property                | Requirement level | Notes                                                                     |
+| ----------------------- | ----------------- | ------------------------------------------------------------------------- |
 | `dcterms:title`         | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`     | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -468,11 +499,11 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property               | Requirement level | Notes                                                                          |
-| ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
+| Property               | Requirement level | Notes                                                                         |
+| ---------------------- | ----------------- | ----------------------------------------------------------------------------- |
 | `dcterms:issued`       | mandatory         | See [dates and times](#dates-and-times)                                        |
-| `foaf:primaryTopic`    | mandatory         | This points to the IRI of the `dcat:Dataset` described by the catalogue record |
-| `prov:wasAttributedTo` | recommended       |                                                                                |
+| `foaf:primaryTopic`    | mandatory         | This points to the IRI of the`dcat:Dataset` described by the catalogue record |
+| `prov:wasAttributedTo` | recommended       |                                                                               |
 | `dcterms:modified`     | recommended       | See [dates and times](#dates-and-times)                                        |
 
 We may use `prov:wasAttributedTo` to attribute the creation of the catalogue record to a specific entity, such as the person who added the dataset to the catalogue.
@@ -509,8 +540,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                     | Requirement level | Notes                                                                      |
-| ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
+| Property                     | Requirement level | Notes                                                                     |
+| ---------------------------- | ----------------- | ------------------------------------------------------------------------- |
 | `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -531,16 +562,16 @@ We recommend the use of the following properties:
 | `dcat:version`               | recommended       | See [versions](#versions)                                                  |
 | `adms:versionNotes`          | recommended       | See [versions](#versions)                                                  |
 | `dcat:prev`                  | recommended       | See [versions](#versions)                                                  |
-| `dcat:landingPage`           | optional          |                                                                            |
-| `dcterms:identifier`         | optional          |                                                                            |
-| `dcterms:isReferencedBy`     | optional          |                                                                            |
+| `dcat:landingPage`           | optional          |                                                                           |
+| `dcterms:identifier`         | optional          |                                                                           |
+| `dcterms:isReferencedBy`     | optional          |                                                                           |
 
 For example:
 
 ```ttl
 <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018> a dcat:Dataset ;
     dcterms:title "Final UK greenhouse gas emissions national statistics: 1990 to 2018"@en ;
-    dcterms:description "Final estimates of UK territorial greenhouse gas emissions.."@en ;
+    dcterms:description "Final estimates of UK territorial greenhouse gas emissions..."@en ;
     dcterms:license <https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
     dcterms:publisher <http://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
     dcterms:issued "2020-02-04T09:30:00"^^xsd:dateTime ;
@@ -581,8 +612,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                     | Requirement level | Notes                                                                      |
-| ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
+| Property                     | Requirement level | Notes                                                                     |
+| ---------------------------- | ----------------- | ------------------------------------------------------------------------- |
 | `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -611,13 +642,11 @@ For example:
 
 Many of the properties which apply to dataset series are also applicable to datasets within that series. We recommend specifying properties for both resources.
 
-###  Named graphs for catalogue metadata
+### Named graphs for catalogue metadata
 
 Where metadata is stored as RDF, such as being made available via a SPARQL endpoint, DCAT makes a recommendation about the names of graphs to use for catalogue records.
 
 > If a catalog is represented as an RDF Dataset with named graphs (as defined in [[SPARQL11-QUERY]](https://www.w3.org/TR/sparql11-query/)), then it is appropriate to place the description of each dataset (consisting of all RDF triples that mention the dcat:Dataset, dcat:CatalogRecord, and any of its dcat:Distributions) into a separate named graph. The name of that graph SHOULD be the IRI of the catalog record.[^named-graphs]
-
-[^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
 
 ```ttl
 <http://data.gov.uk/dataset/my-dataset/record> {
@@ -675,7 +704,7 @@ classDiagram
 
 > a `dcat:Distribution` represents an accessible form of a dataset such as a downloadable file.
 
-We recommend distributions have IRIs which are identical to the dataset IRI, with file extension appended. 
+We recommend distributions have IRIs which are identical to the dataset IRI, with file extension appended.
 
 - `http://{dataset_iri}.{extension}`
 
@@ -690,6 +719,39 @@ For example:
 - `http://data.gov.uk/dataset/my-dataset.ttl`
 - `http://data.gov.uk/dataset/my-dataset.json`
 - `http://data.gov.uk/dataset/my-dataset/datacube`
+
+| Property                | Requirement level | Notes                                                                          |
+| ----------------------- | ----------------- | ------------------------------------------------------------------------------ |
+| `dcterms:title`         | mandatory         | See [titles](#titles)                                                           |
+| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                               |
+| `dcterms:license`       | mandatory         | See [licenses](#licenses)                                                       |
+| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts)      |
+| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                         |
+| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                         |
+| `dcat:isDistributionOf` | recommended       | See [CSVs as self contained datasets](#csvs-as-self-contained-datasets)         |
+| `dcat:mediaType`        | recommended       | See [media types](#media-types)                                                 |
+| `dcat:downloadURL`      | recommended       |                                                                                |
+| `dcat:byteSize`         | recommended       |                                                                                |
+| `spdx:checksum`         | recommended       |                                                                                |
+| `wdrs:describedby`      | optional          | For CSV distributions, we can relate the CSVW metadata using`wdrs:describedby` |
+
+For example:
+
+```ttl
+<http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> a dcat:Distribution ;
+    dcterms:title "Final UK greenhouse gas emissions national statistics: 1990 to 2018 (CSV)"@en ;
+    dcterms:description "Final estimates of UK territorial greenhouse gas emissions..."@en ;
+    dcterms:license <https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:issued "2020-02-04T09:30:00"^^xsd:dateTime ;
+    dcterms:modified "2020-07-30T08:30:06"^^xsd:dateTime ;
+    dcterms:title "2018.csv" ;
+    wdrs:describedby <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv-metadata.json> ;
+    dcat:mediaType <https://www.w3.org/ns/iana/media-types/text/csv#Resource> ;
+    dcat:downloadURL <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> ;
+    dcat:byteSize "12345"^^xsd:nonNegativeInteger ;
+    spdx:checksum "CE114E4501D2F4E2DCEA3E17B546F339"^^spdx:Checksum ;
+    .
+```
 
 ### Content negotiation of distributions
 
@@ -714,6 +776,8 @@ sequenceDiagram
 ```
 
 ## Editions
+
+> `dcat:DatasetSeries` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
 
 Many statistics producers publish sets of statistics at a regular frequency as monthly, quarterly, or annual releases.
 
@@ -754,9 +818,9 @@ flowchart LR
     2017/final --> 2018/provisional
     2018/provisional --> 2018/final
 
-    2017/final .->|dcat:prev| 2017/provisional
-    2018/provisional .->|dcat:prev| 2017/final
-    2018/final .->|dcat:prev| 2018/provisional
+    2017/final -->|dcat:prev| 2017/provisional
+    2018/provisional -->|dcat:prev| 2017/final
+    2018/final -->|dcat:prev| 2018/provisional
    
 ```
 
@@ -788,7 +852,39 @@ For example, the following dataset series has two editions from both 2017 and 20
 
 ## Versions
 
-> TODO
+> **Note**
+> `dcat:version` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+
+Different versions of a dataset are the result of an unscheduled revision or correction.
+
+We recommend the IRI of a `dcat:Dataset` is chosen to be generic and not specific to a particular version. A user should expect that the generic IRI of a dataset refers to the latest version of the dataset.
+
+IRIs should be created to represent each specific version of a dataset. We should assert an equivalence between IRI of the generic dataset and the latest version of the dataset with an `owl:sameAs` relationship, for example:
+
+```ttl
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>
+    owl:sameAs
+        <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
+    .
+```
+
+| Property                 | Requirement level |
+| ------------------------ | ----------------- |
+| `dcat:hasCurrentVersion` | recommended       |
+| `dcat:hasVersion`        | recommended       |
+| `dcat:version`           | recommended       |
+| `adms:versionNotes`      | recommended       |
+| `dcat:prev`              | recommended       |
+
+For specific versions, we recommend using the following properties:
+
+| Property                | Requirement level |
+| ----------------------- | ----------------- |
+| `dcterms:issued`        | recommended       |
+| `dcat:isVersionOf`      | recommended       |
+| `dcat:previousVersion`  | recommended       |
+| `prov:wasRevisionOf`    | recommended       |
+| `prov:specializationOf` | recommended       |
 
 ```ttl
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
@@ -818,13 +914,15 @@ For example, the following dataset series has two editions from both 2017 and 20
 
 ## Publish CSV on the web (CSVW)
 
-Our aim is to publish metadata in a machine readable and structured format alongside the statistical data. 
+Our aim is to publish metadata in a machine readable and structured format alongside the statistical data.
 
 Structured data formats, such as JSON-LD can be understood by search engines and are used for [search engine optimisation](https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data), with some search engines offering specific [dataset search functionality](https://developers.google.com/search/docs/advanced/structured-data/dataset) where structured metadata are provided using common vocabularies such as DCAT or [schema.org](https://schema.org/).
 
-CSV on the Web 
-
 ### Structural CSV metadata
+
+The most basic of CSVW metadata will include the `tableSchema` properties with details of the columns in the CSV. Since the CSVW metadata specification includes several defaults for properties, a basic CSVW provides some implicit information, such as the file being comma delimited.
+
+We can consider the following CSV file:
 
 | area      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
@@ -834,10 +932,11 @@ CSV on the Web
 | W06000015 | 2004-01-01T00:00:00/P3Y | Female | 83.3            |
 | ...       | ...                     | ...    | ...             |
 
+Given the above CSV, a fairly basic CSVW metadata file would look as follows:
+
 ```json
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
     "url": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
     "tableSchema": {
         "columns": [
@@ -868,13 +967,14 @@ CSV on the Web
 
 ### CSVs as self-contained datasets
 
-> TODO
+> **Note**
+> This method of relating CSVW and DCAT together suggests the use of a DCAT inverse property `dcat:isDistributionOf`. This would need to introduce a new inverse property to the DCAT v3 vocabulary. We have contributed to an open issue [here](https://github.com/w3c/dxwg/issues/1322) which is being considered.
 
-A CSV file can be considered as a distribution of a dataset.
+A CSVW should provide all the necessary metadata that would be needed for a user of the data to feature it in a `dcat:Catalog`. 
 
-CSVW prohibits the use of the `@reverse` JSON-LD property, so there's no neat way of linking a CSV distribution to its dataset from within a CSVW metadata file.
+The subject resource of a CSVW metadata file is typically a `csvw:Table` which corresponds to a CSV file. This CSV file can be considered as a distribution of some `dcat:Dataset`.
 
-Suggesting the use of a DCAT inverse property `dcat:isDistributionOf`, open issue [here](https://github.com/w3c/dxwg/issues/1322).
+When using a CSVW metadata file to describe some CSV, we recommend asserting the distribution relationship between the `csvw:Table` and the `dcat:Dataset`. The CSVW specification prohibits the use of the `@reverse` JSON-LD property, meaning we are unable to use the `dcat:distribution` property to achieve this, and instead rely upon its inverse `dcat:isDistributionOf`.
 
 ```mermaid
 classDiagram
@@ -894,9 +994,10 @@ classDiagram
     Table --> "1" Dataset: dcat.isDistributionOf
     Table --> "1" TableSchema: csvw.tableSchema
     TableSchema --> "1" Column: csvw.column
-    Table "1" <-- Dataset: dcat.distribution
-    
+  
 ```
+
+A example of a CSVW metadata file containing the relevant relationship with a `dcat:Dataset` could look as follows:
 
 ```json
 {
@@ -940,7 +1041,15 @@ classDiagram
 
 ### Discoverability of CSVW
 
+We recommend naming CSVW metadata files by appending `-metadata.json` to end the CSV's filename, so a CSV file named `countries.csv` would have a metadata file named `countries.csv-metadata.json`.
 
+Where possible, we recommend serving CSV files with a `Link` header within the response with the `rel="describedby"` attribute pointing to the CSVW metadata file.
+
+We recommend CSVW metadata is served with the media type `application/csvm+json`.
+
+### Foreign-key constraints
+
+Publishers may wish to use the `csvw:foreignKey` property to assert relationships between different CSVs.
 
 ## RDF data cubes
 
@@ -948,18 +1057,78 @@ classDiagram
 
 > Always publish geography and time.
 
-### Using CSVW to create an RDF data cube
+### Components
 
-> TODO
+- If components are used across many different data cubes (common dimensions such as time or geography) then we should assign an IRI which is sufficiently general and not tied to a particular dataset.
+- If components are unlikely to be used across many different data cubes (for example if they are domain specific) but will be reused by cubes in the same series, then we can assign an IRI which is "local" to the dataset series.
+- If components are likely to only be used within one dataset, then we can assign an IRI which is "local" to that dataset.
+
+IRI schemes which follow this idea are:
+
+- `http://{domain}/dimension/{dimension_name}` (example of a general IRI)
+- `http://{domain}/series/name-of-my-statistical-series/dimension/{dimension_name}` (example of an IRI which is local to a dataset series)
+- `http://{domain}/dataset/name-of-my-dataset/dimension/{dimension_name}` (example of an IRI which is local to a dataset)
+
+```ttl
+ex:dimension1 a qb:DimensionProperty ;
+    rdfs:label "Dimension 1"@en ;
+    rdfs:comment "A dimension property"@en ;
+    rdfs:range xsd:string ;
+    .
+```
+
+> TODO: `qb:order`
+
+> TODO: `qb:concept`.
+
+> TODO: `qb:measureType`.
+
+#### Measure
+
+```ttl
+ex:measure1 a qb:MeasureProperty ;
+    rdfs:label "Measure 1"@en ;
+    rdfs:comment "A measure property"@en ;
+    rdfs:range xsd:decimal ;
+    .
+```
+
+#### Attribute
+
+The RDF data cube specification We allow attributes to be attached to a list of of values via `qb:codeList`.
+
+```ttl
+ex:attribute1 a qb:AttributeProperty ;
+    rdfs:label "Attribute 1"@en ;
+    rdfs:comment "An attribute property"@en ;
+    rdfs:range skos:Concept ;
+    qb:codeList <http://data.gov.uk/codelist/statistical-markers> ;
+    .
+```
+
+### Observation
+
+The dimensions form a composite key for each observation in the cube - meaning the observations can be used to uniquely identify each observation in the cube.
+
+`http://{domain}/obs/{dimension_1}-{...}-{dimension_n}`
+
+### Multiple measures
+
+### Using CSVW to create an RDF data cube
 
 A CSVW provides a way for the rows, cells and column headers of a CSV files to be mapped to RDF resources.
 
 The CSVW specification also describes a method for [transforming CSV files into RDF](https://www.w3.org/TR/csv2rdf/). By doing so, we can generate an RDF data cube.
 
-Within a single CSVW metadata file we are able to describe a dataset and define two distributions, a CSV distribution and an RDF data cube, for example, a singular CSVW
-- a dataset, with a IRI of `<http://data.gov.uk/dataset/my-dataset>`
-- a CSV distribution of that dataset, with a IRI of `<http://data.gov.uk/dataset/my-dataset.csv>`
-- an RDF data cube distribution of a dataset, with a IRI of `<http://data.gov.uk/dataset/my-dataset/datacube>`.
+Within a single CSVW metadata file we are able to describe a dataset and define two distributions, a CSV distribution and an RDF data cube.
+
+For example, we can represent the relationships between the following resources within a single CSVW metadata file:
+
+- a dataset: `<http://data.gov.uk/dataset/my-dataset>`
+- a CSV distribution of that dataset: `<http://data.gov.uk/dataset/my-dataset.csv>`
+- an RDF data cube distribution of a dataset: `<http://data.gov.uk/dataset/my-dataset/datacube>`
+
+Our recommended format for a CSVW is as follows. Note the use of virtual columns within the CSVW `columns` definition to assert additional RDF relationships when converting CSV to RDF.
 
 ```jsonc
 {
@@ -969,11 +1138,22 @@ Within a single CSVW metadata file we are able to describe a dataset and define 
     "url": "http://data.gov.uk/dataset/my-dataset.csv",
     "tableSchema": {
         "columns": [
-            // CSVW column definitions
+            // CSVW column definitions,
+            // ...
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "qb:Observation"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "qb:dataSet",
+                "valueUrl": "http://data.gov.uk/dataset/my-dataset/datacube"
+            }
         ]
     },
     "dcat:mediaType": {
-        "@id": "http://www.iana.org/assignments/media-types/text/csv"
+        "@id": "https://www.w3.org/ns/iana/media-types/text/csv#Resource"
     },
     "dcat:isDistributionOf": {
         "@id": "http://data.gov.uk/dataset/my-dataset",
@@ -981,7 +1161,7 @@ Within a single CSVW metadata file we are able to describe a dataset and define 
         "dcat:distribution": [
             {
                 "@id": "http://data.gov.uk/dataset/my-dataset.csv",
-                "@type": "dcat:Distribution",
+                "@type": "dcat:Distribution"
             },
             {
                 "@id": "http://data.gov.uk/dataset/my-dataset/datacube",
@@ -1039,22 +1219,402 @@ classDiagram
     Component --> "1" Dimension: qb.dimension
     Component --> "1" Measure: qb.measure
     Component --> "1" Attribute: qb.attribute
-    
+  
 ```
 
 We may then generate an RDF representation of the data which describes an RDF data cube, using a CSVW and following the approach as set out in [Generating RDF from Tabular Data on the Web](https://www.w3.org/TR/csv2rdf/).
 
 ## Codelists
 
-> What is the relationship between a `skos:ConceptScheme` and a `dcat:Dataset`?
+> What is the relationship between a `skos:ConceptScheme` and a `dcat:Dataset`? In the way that we propose `qb:DataSet` is a distribution of a `dcat:Dataset`, maybe a `skos:ConceptScheme` is a distribution of a `dcat:Dataset`. Does the advice on editions/versioning also apply to `skos:ConceptScheme`s?
+
+> TODO: Some stuff [here](https://groups.niso.org/higherlogic/ws/public/download/12591/z39-19-2005r2010.pdf) around the styling of labels used in a taxonomy.
+
+> TODO: Some UN best practices for creating classifications [here](https://unstats.un.org/unsd/classifications/bestpractices/Best_practice_Nov_2013.pdf).
+
+Every `qb:DimensionConcept` must have a `skos:ConceptScheme` associated with it which is related using the `qb:codeList` property. The `skos:ConceptScheme` is used to define the list of codes used by the dimension.
+
+All codes which are part of a codelist must have type `skos:Concept` and be related to the codelist using the `skos:inScheme` property.
+
+
+### Classes
+
+```mermaid
+classDiagram
+    class Dimension {
+        a qb:DimensionProperty
+    }
+    class Codelist {
+        a skos:ConceptScheme
+    }
+    class Code {
+        a skos:Concept
+    }
+
+    Dimension --> "1" Codelist : qb.codeList
+    Codelist --> "1..*" Code : skos.hasTopConcept
+    Code --> "1" Codelist : skos.inScheme
+    Code --> "1..*" Code : skos.narrower
+    Code "1" <--  Code : skos.broader
+```
+
+We recommend the use of `skos:ConceptScheme`, `skos:Concept`.
+
+### Concept Scheme
+
+We recommend dataset series have IRIs of the form:
+
+- `http://{domain}/codelist/{codelist_slug}`
+- `http://{domain}/codelist/{codelist_slug}/{edition_year}`
+
+For example:
+
+- `http://data.gov.uk/codelist/some-codelist`
+- `http://data.gov.uk/codelist/sitc/2022`
+
+| Property              | Requirement level | Notes                                                                     |
+| --------------------- | ----------------- | ------------------------------------------------------------------------- |
+| `dcterms:title`       | mandatory         | See [titles](#titles)                                                      |
+| `dcterms:description` | mandatory         | See [descriptions](#descriptions)                                          |
+| `dcterms:publisher`   | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcterms:license`     | mandatory         | See [licenses](#licenses)                                                  |
+| `dcat:distribution`   | mandatory         | See [distributions](#distributions)                                        |
+| `dcterms:creator`     | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcat:contactPoint`   | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcterms:issued`      | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcterms:modified`    | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcat:keyword`        | recommended       | See [keywords](#keywords)                                                  |
+| `dcat:theme`          | recommended       | See [themes](#themes)                                                      |
+
+- `http://{domain}/codelist/{codelist_slug}/code/{code_slug}`
+
+For example:
+
+- `http://data.gov.uk/codelist/some-codelist`
+- `http://data.gov.uk/codelist/sitc/rev4`
+
+### Concept
+
+| Property           | Requirement level | Notes                                                 |
+| ------------------ | ----------------- | ----------------------------------------------------- |
+| `skos:inScheme`    | mandatory         | See [codelists](#codelists)                           |
+| `rdfs:label`       | mandatory         | See [titles](#titles)                                 |
+| `skos:prefLabel`   | mandatory         | See [titles](#titles)                                 |
+| `skos:notation`    | mandatory         |                                                       |
+| `skos:broader`     | recommended       | See [hierarchical codelists](#hierarchical-codelists) |
+| `skos:narrower`    | recommended       | See [hierarchical codelists](#hierarchical-codelists) |
+| `skos:related`     | recommended       | See [correspondence](#correspondence)                 |
+| `skos:exactMatch`  | recommended       | See [correspondence](#correspondence)                 |
+| `skos:closeMatch`  | recommended       | See [correspondence](#correspondence)                 |
+| `skos:broadMatch`  | recommended       | See [correspondence](#correspondence)                 |
+| `skos:altLabel`    | optional          |                                                       |
+| `skos:hiddenLabel` | optional          |                                                       |
+
+### Hierarchical codelists
+
+Hierarchies in codelists must be indicated by using the `skos:broader` and `skos:narrower` predicates.
+
+For example, in a dataset describing types of animals, we can express the relationship:
+
+- _some_ animals are mammals,
+- but _all_ mammals are animals
+
+by asserting:
+
+```ttl
+<#animals> skos:narrower <#mammals> .
+<#mammals> skos:broader <#animals> .
+```
+
+This looks diagrammatically as follows:
+
+```mermaid
+flowchart TD
+    id1[animals] -->|some| id2[mammals]
+    id2[mammals] -->|all| id1[animals]
+    id3[animals] -->|skos:narrower| id4[mammals]
+    id4[mammals] -->|skos:broader| id3[animals]
+```
+
+The codes at the top of the hierarchy (and so have no `skos:broader` relationships) must be related to the codelist using the `skos:hasTopConcept` property.
+
+```mermaid
+flowchart TD
+    Animals[Animals Codelist] -->|skos:hasTopConcept| animals
+    animals -->|skos:narrower| mammals
+    mammals -->|skos:broader| animals
+```
+
+### Extending codelists
+
+Wherever possible, statisticians should aim to reuse codes from common codelists, however, statisticians may wish to combine or alter codes within a codelist for reasons of statistical suppression or quality. They create a variant of some official codelist which is customised to suit their needs.
+
+Codelists created for this purpose should 
+
+For example, some statistics which make use of the Standard Industrial Classification (SIC) have changed some categories and included the following notations for these codes within their statistical output:
+
+- `11.01-06`
+- `20.11 + 20.13`
+- `20.14+20.16+20.17+20.6`
+- `20.15 /1`
+- `20.15 /2`
+- `24.4-5 (not 24.42 nor 24.46)`
+- `33 (not 33.15-16)`
+
+> TODO: How to express these sorts of semantics using OWL?
+
+Notations like these, while intending to be descriptive, may be consfusing or not be appropriate to be included in an IRI. When extending a codelist with custom codes, we recommend generating new notations which are:
+
+- Similar in style and convention to the codelist which is being extended.
+- Do not clash with any current (or future) notations which feature in the codelist.
+
+We may achieve this in several ways:
+
+- Assigning new codes to large unused digits (such as `99`) or unused letters (e.g. `X` or `Z`),
+- Combining new or related digits with an unused character (e.g. `33x` or `33.15x`, `X.1`, `X.2` etc.),
+- Appending `/1` through `/9` when creating new subdivisions of an already existing code.
+
+When extending an already established codelist, the creator of the new codelist must familiarise themselves with the existing codelist, how it is structured and ensure their extension does not introduce any clashes with existing codes.
+
+| Example                        | Possible notation         | Notes                                                                                                                      |
+| ------------------------------ | ------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `11.01-06`                     | `11.0X`, `11.0Z`, `11.9x` | Expresses the sum of`11.01` through to `11.06`, which are subdivisions of `11.0`. `11.07` is occupied by another category. |
+| `20.15 /1`                     | `20.15/1`                 | Expresses a custom subdivision of an already existing category,`25.15`.                                                    |
+| `20.14+20.16+20.17+20.6`       | `20.X`, `20.Z`, `20.9x`   | Expresses the sum of`20.14`, `20.16` and `20.17`, which are subdivisions of `20.1`, along with `20.6`.                     |
+| `24.4-5 (not 24.42 nor 24.46)` | `24.X`, `24.Z`, `24.9x`   | Expresses the sum of`24.4` and `24.5` but excluding the subdivisions `24.42` and `24.46`.                                  |
+| `33 (not 33.15-16)`            | `33X`, `33Z`, `33.9x`     | Expresses the sum of`33.1` and `33.2`, which are subdivisons of `33`, excluding `33.15` and `33.16`.                       |
+|                                |                           |                                                                                                                            |
 
 ### Using CSVW to create a codelist
 
-> TODO
+We can use CSVW as a convenient way to create a codelist, represented in RDF using SKOS.
+
+For example, take the Standard Industrial Trade Classification (SITC):
+
+```
+0 Food and live animals
+├─ 00 Live animals other than animals of division 03
+│  ├─ 001 Live animals other than animals of division 03
+├─ 01 Meat and meat preparations
+│  ├─ 011 Meat of bovine animals, fresh, chilled or frozen
+│  ├─ 012 Other meat and edible meat offal
+│  ├─ 016 Meat, edible meat offal, salted, dried; flours, meals
+│  ├─ 017 Meat, edible meat offal, prepared, preserved, n.e.s
+│  ├─ ...
+├─ 02 Dairy products and birds' eggs
+│  ├─   022 Milk, cream and milk products (excluding butter, cheese)
+│  ├─ ...
+```
+
+We can create a CSV representation of the different classifications along with the hierarchy as follows:
+
+| notation | label                                                    | comment | parent |
+| -------- | -------------------------------------------------------- | ------- | ------ |
+| 0        | Food and live animals                                    | ...     |        |
+| 00       | Live animals other than animals of division 03           | ...     | 0      |
+| 001      | Live animals other than animals of division 03           | ...     | 00     |
+| 01       | Meat and meat preparations                               | ...     | 0      |
+| 011      | Meat of bovine animals, fresh, chilled or frozen         | ...     | 01     |
+| 012      | Other meat and edible meat offal                         | ...     | 01     |
+| 016      | Meat, edible meat offal, salted, dried; flours, meals    | ...     | 01     |
+| 017      | Meat, edible meat offal, prepared, preserved, n.e.s      | ...     | 01     |
+| ...      | ...                                                      | ...     |        |
+| 02       | Dairy products and birds' eggs                           | ...     | 0      |
+| 022      | Milk, cream and milk products (excluding butter, cheese) | ...     | 02     |
+| ...      | ...                                                      | ...     |        |
+
+We are able to create a CSVW file which can be used to create a codelist. Note the use of virtual columns to assert the type and the relationship between the concepts and the concept scheme.
+
+```json
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://data.gov.uk/dataset/sitc-rev-4.csv",
+    "@type": "Table",
+    "url": "http://data.gov.uk/dataset/sitc-rev-4.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "notation",
+                "name": "notation",
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "label",
+                "name": "label",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "parent_notation",
+                "name": "parent_notation",
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://data.gov.uk/codelist/sitc-rev-4/{+parent_notation}"
+            },
+            {
+                "titles": "description",
+                "name": "description",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://data.gov.uk/codelist/sitc-rev-4"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            }
+        ],
+        "aboutUrl": "http://data.gov.uk/codelist/sitc-rev-4/{+notation}"
+    }
+}
+```
+
+Performing `csv2rdf` on this CSVW produces RDF like:
+
+```ttl
+http://data.gov.uk/codelist/sitc-rev-4/0 a skos:Concept ;
+    skos:notation "0" ;
+    rdfs:label "Food and live animals" ;
+    rdfs:comment "..." ;
+    skos:inScheme <http://data.gov.uk/codelist/sitc-rev-4> ;
+    .
+
+<http://data.gov.uk/codelist/sitc-rev-4/00> a skos:Concept ;
+    skos:notation "00" ;
+    rdfs:label "Live animals other than animals of division 03" ;
+    rdfs:comment "..." ;
+    skos:broader <http://data.gov.uk/codelist/sitc-rev-4/0> ;
+    skos:inScheme <http://data.gov.uk/codelist/sitc-rev-4> ;
+    .
+
+# etc...
+```
+
+A limitation of using CSVW to produce a `skos:ConceptScheme` is the inability to set both `skos:narrower` and `skos:broader` relationships concurrently, and to set the `skos:hasTopConcept` relationship. When loading a `skos:ConceptScheme` generated from CSVW in this way, we serialise these additional relationships using `CONSTRUCT` queries in SPARQL.
+
+The following SPARQL query produces `skos:narrower` relationships:
+
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+    ?broaderConcept skos:narrower ?concept.
+}
+WHERE {
+    ?conceptScheme a skos:ConceptScheme .
+    ?concept 
+        skos:inScheme ?conceptScheme;
+        skos:broader ?broaderConcept.
+        FILTER NOT EXISTS {
+            ?broaderConcept skos:narrower ?concept.
+        }
+}
+```
+
+The following SPARQL query produces `skos:hasTopConcept` relationships:
+
+```sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+    ?conceptScheme skos:hasTopConcept ?concept.
+}
+WHERE {
+    ?conceptScheme a skos:ConceptScheme .
+    ?concept skos:inScheme ?conceptScheme.
+        FILTER NOT EXISTS {
+            # Find concepts which don't have anything broader, they are by definition topConcepts.
+            ?concept skos:broader ?broaderConcept.
+        }
+        FILTER NOT EXISTS {
+            # Ensure we don't add topConcept where it is already set.
+            ?conceptScheme skos:hasTopConcept ?concept.
+        }
+}
+```
+
+#### Mixing codes from different namespaces
+
+Statisticians may wish to report statistics against multiple classifications. Doing so may be difficult, as different classifications typically use different namespaces for their IRIs.
+
+For example, consider a dataset which mixes codes from the NUTS geography codelist with codes from the ONS geography codelist.
+
+| geography | geography_label     | value |
+| --------- | ------------------- | ----- |
+| UKC       | North East, England | ...   |
+| UKD       | North West, England | ...   |
+| E92000001 | England             | ...   |
+
+The NUTS codes have IRIs which are maintained by Eurostat, such as `http://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `http://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
+
+We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
+
+We address this by creating new identifiers for each of the codes under a shared namespace, and using `owl:sameAs` relations to relate these new identifiers to the more commonly used identifiers. For example, 
+
+```ttl
+<http://data.gov.uk/dataset/some-dataset/codelist/geography/code/E92000001>
+    owl:sameAs <http://statistics.data.gov.uk/id/statistical-geography/E92000001> ;
+    .
+```
+
+> TODO: Should this be `owl:sameAs` or `skos:exactMatch`?
+
+If [using a CSVW to create a codelist](#using-csvw-to-create-a-codelist), then the `owl:sameAs` relationships can be expressed by adding an additional column to the CSV:
+
+| notation  | label               | same_as                                                            |     |
+| --------- | ------------------- | ------------------------------------------------------------------ | --- |
+| UKC       | North East, England | `http://data.europa.eu/nuts/code/UKC`                              | ... |
+| UKD       | North West, England | `http://data.europa.eu/nuts/code/UKD`                              | ... |
+| E92000001 | England             | `http://statistics.data.gov.uk/id/statistical-geography/E92000001` | ... |
+
+The additional column would have the following specification inside the CSVW:
+
+```json
+{
+    "titles": "same_as",
+    "name": "same_as",
+    "required": true,
+    "propertyUrl": "owl:sameAs",
+    "valueUrl": "{+same_as}"
+}
+```
+
+This would result in the following RDF:
+
+```ttl
+<http://data.gov.uk/dataset/some-dataset/codelist/geography/code/UKC> a skos:Concept ;
+    skos:notation "UKC" ;
+    rdfs:label "North East, England" ;
+    skos:prefLabel "North East, England" ;
+    skos:inScheme <http://data.gov.uk/dataset/some-dataset/codelist/geography> ;
+    owl:sameAs <http://data.europa.eu/nuts/code/UKC> ;
+    .
+
+# ...
+
+<http://data.gov.uk/dataset/some-dataset/codelist/geography/code/E92000001> a skos:Concept ;
+    skos:notation "E92000001" ;
+    rdfs:label "England" ;
+    skos:prefLabel "England" ;
+    skos:inScheme <http://data.gov.uk/dataset/some-dataset/codelist/geography> ;
+    owl:sameAs <http://statistics.data.gov.uk/id/statistical-geography/E92000001> ;
+    .
+```
+
+### Correspondence between codelists
+
+> TODO: https://rdf-vocabulary.ddialliance.org/xkos.html
 
 ## Provenance
 
 > TODO: http://www.w3.org/TR/prov-o/
+
+### Datasets derived from other datasets
 
 ## Data quality
 
@@ -1065,6 +1625,7 @@ We may then generate an RDF representation of the data which describes an RDF da
 > TODO: http://www.w3.org/TR/vocab-duv/
 
 ## Data privacy
+
 > TODO: http://dpvcg.github.io/dpv/
 
 ## Appendicies
@@ -1074,6 +1635,7 @@ We may then generate an RDF representation of the data which describes an RDF da
 #### Geography
 
 Prefer using IRIs from the `http://statistics.data.gov.uk` vocabulary, based on ONS geography codes.
+
 
 | Label             | IRI                                                                |
 | ----------------- | ------------------------------------------------------------------ |
@@ -1103,6 +1665,7 @@ Prefer using IRIs from the [Dublin core collection description frequency vocabul
 
 Common options include:
 
+
 | Label     | IRI                                  |
 | --------- | ------------------------------------ |
 | Annual    | `http://purl.org/cld/freq/annual`    |
@@ -1113,9 +1676,12 @@ Common options include:
 
 #### Licenses
 
+
 | Label                        | IRI                                                                         |
 | ---------------------------- | --------------------------------------------------------------------------- |
 | Open Government Licence v3.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/` |
+| Open Government Licence v2.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/` |
+| Open Government Licence v1.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/1/` |
 
 #### Organisations
 
@@ -1126,6 +1692,7 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 #### Statistics designations
 
 > TODO: IRIs for official/national/experimental stats classifications.
+
 
 | Label                   | IRI                                          |
 | ----------------------- | -------------------------------------------- |
@@ -1139,8 +1706,9 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 
 See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
 
-| Label                       | Notation | IRI                                                        |
-| --------------------------- | -------- | ---------------------------------------------------------- |
+
+| Label                       | Notation | IRI                                                          |
+| --------------------------- | -------- | ------------------------------------------------------------ |
 | Break in time series        | `[b]`    | `http://data.gov.uk/codelist/statistical-markers/code/[b]`   |
 | Confidential                | `[c]`    | `http://data.gov.uk/codelist/statistical-markers/code/[c]`   |
 | Estimated                   | `[e]`    | `http://data.gov.uk/codelist/statistical-markers/code/[e]`   |
@@ -1162,8 +1730,9 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 
 > TODO: OSR have [domains](https://osr.statisticsauthority.gov.uk/what-we-do/our-domains/). Might be similar to the statistics authority themes.
 
-| Label                                         | IRI                                                                                       |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------- |
+
+| Label                                         | IRI                                                                                      |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | Business, Trade and International Development | `http://osr.statisticsauthority.gov.uk/themes/business-trade-international-development/` |
 | Children, Education and Skills                | `http://osr.statisticsauthority.gov.uk/themes/children-education-skills/`                |
 | Crime and Security                            | `http://osr.statisticsauthority.gov.uk/themes/crime-security/`                           |
@@ -1174,15 +1743,27 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 | Population and Society                        | `http://osr.statisticsauthority.gov.uk/themes/population-society/`                       |
 | Transport, Environment and Climate Change     | `http://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change/`     |
 
+#### Media types
+
+https://www.w3.org/ns/iana/media-types/
+
+
+| Label  | IRI                                                                |
+| ------ | ------------------------------------------------------------------ |
+| CSV    | `https://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
+| JSON   | `https://www.w3.org/ns/iana/media-types/application/json#Resource` |
+| Turtle | `https://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
+
 ### Style
 
 #### Titles
 
-> TODO: Do we want to recommend a house style for titles? 
+> TODO: Do we want to recommend a house style for titles?
 >
 > ONS style guide suggests:
 >
 > Titles appear in search results and should:
+>
 > - accurately describe the statistics, using plain English
 > - include the geographical area and period covered by the content
 > - be unique
@@ -1192,7 +1773,7 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 
 #### Descriptions
 
-> TODO: Do we want to recommend a house style for descriptions? 
+> TODO: Do we want to recommend a house style for descriptions?
 >
 > ONS style guide suggests:
 >
@@ -1232,7 +1813,6 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 > Above link suggests vocabularies to use `rdfs`, so `skos:Concept`, `qb:ComponentProperty` resources should use `rdfs`.
 >
 > Document-like resources to use `dcterms`. So `dcat:Dataset`, `dcat:Catalog`, `dcat:Distribution` etc. should use `dcterms`.
->
 
 ### Publishers, creators and contacts
 
@@ -1242,10 +1822,14 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 >
 > ```ttl
 > <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> dcat:contactPoint <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> .
-> 
+>
 > <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> a vcard:Individual ;
 >     vcard:hasEmail <mailto:joe.bloggs@ons.gov.uk> ;
 >     vcard:hasTelephone <tel:+441234123456> ;
 >     vcard:fn "Joe Bloggs" ;
 >     .
 > ```
+
+[^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
+    
+[^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
