@@ -213,6 +213,8 @@ In this example, adopting ISO 8601 time intervals allows machines to provide add
 
 Producing data which _only_ uses identifiers could reduce usability by humans. It may be reasonable to include some of the redundant, human-friendly data such as labels alongside identifiers (known formally as denormalisation).
 
+When [using a CSVW to create an RDF data cube](#using-csvw-to-create-an-rdf-data-cube), any redundant columns must be suppressed by setting `"suppressOutput": "true"`.
+
 | area      | area_label | period                  | period_label | sex    | life_expectancy |
 | --------- | ---------- | ----------------------- | ------------ | ------ | --------------- |
 | W06000022 | Newport    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Male   | 76.7            |
@@ -367,7 +369,9 @@ We suggest collapsing the hierarchy into a single column, and using a defined cl
 | 2004   | 011      | Meat of bovine animals, fresh, chilled or frozen | ...         |
 | ...    | ...      | ...                                              | ...         |
 
-It can be helpful to humans to include some information about the hierarchy inside the dataset, for example to make some aggregations simpler to perform. We recommend including a single `parent_x` column where there is a need to do so (a form of denormalisation). A blank entry in the parent column indicates no parent exists.
+It can be helpful to humans to include some information about the hierarchy inside the dataset, for example to make some aggregations simpler to perform. We recommend including a single `parent_x` column where there is a need to do so (a form of denormalisation). A blank entry in the parent column indicates no parent exists. 
+
+When [using a CSVW to create an RDF data cube](#using-csvw-to-create-an-rdf-data-cube), the `parent_x` column must be suppressed by setting `"suppressOutput": "true"`.
 
 | period | parent_industry | industry | industry_label                                   | trade_value |
 | ------ | --------------- | -------- | ------------------------------------------------ | ----------- |
@@ -380,33 +384,50 @@ It can be helpful to humans to include some information about the hierarchy insi
 
 ### Units of measurement
 
+Units of an observation may be specified by including a units column.
+
+| area      | period                  | sex    | life_expectancy | units |
+| --------- | ----------------------- | ------ | --------------- | ----- |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | years |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            | years |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | years |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Female | 83.3            | years |
+| ...       | ...                     | ...    | ...             |       |
+
+In the case of a single-measure dataset (or multiple-measures where those measures share the same units of measurement), the units of an observation may be specified via a CSVW virtual column.
+
 ### Different granularity of time periods
 
 Statisticians may wish to report statistics at different time granularities. For example, a single dataset may report statistics by month, quarter, year and financial year.
 
-| period  | industry | trade_value |
-| ------- | -------- | ----------- |
-| 2004    | 0        | ...         |
-| 2004-01 | 0        | ...         |
-| 2004-02 | 0        | ...         |
-| ...     | ...      | ...         |
-| 2004    | 00       | ...         |
-| 2004-01 | 00       | ...         |
-| 2004-02 | 00       | ...         |
-| ...     | ...      | ...         |
+| period    | industry | trade_value |
+| --------- | -------- | ----------- |
+| 2004      | 0        | ...         |
+| 2004-2005 | 0        | ...         |
+| 2004-01   | 0        | ...         |
+| 2004-02   | 0        | ...         |
+| ...       | ...      | ...         |
+| 2005      | 00       | ...         |
+| 2005-01   | 001      | ...         |
+| 2005-02   | 01       | ...         |
+| ...       | ...      | ...         |
 
-| period_type | period  | industry | trade_value |
-| ----------- | ------- | -------- | ----------- |
-| year        | 2004    | 0        | ...         |
-| month       | 2004-01 | 0        | ...         |
-| month       | 2004-02 | 0        | ...         |
-| ...         | ...     | ...      | ...         |
-| year        | 2005    | 00       | ...         |
-| month       | 2005-01 | 001      | ...         |
-| month       | 2005-02 | 01       | ...         |
-| ...         | ...     | ...      | ...         |
+We adopt IRIs from the [reference.data.gov.uk service](https://github.com/epimorphics/IntervalServer/blob/master/interval-uris.md).
 
 `http://reference.data.gov.uk/id/{period_type}/{period}`
+
+| period_type     | period    | industry | trade_value |
+| --------------- | --------- | -------- | ----------- |
+| year            | 2004      | 0        | ...         |
+| government-year | 2004-2005 | 0        | ...         |
+| month           | 2004-01   | 0        | ...         |
+| month           | 2004-02   | 0        | ...         |
+| ...             | ...       | ...      | ...         |
+| year            | 2005      | 00       | ...         |
+| government-year | 2005-2006 | 00       | ...         |
+| month           | 2005-01   | 001      | ...         |
+| month           | 2005-02   | 01       | ...         |
+| ...             | ...       | ...      | ...         |
 
 ## Cataloguing
 
@@ -499,11 +520,11 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property               | Requirement level | Notes                                                                         |
-| ---------------------- | ----------------- | ----------------------------------------------------------------------------- |
+| Property               | Requirement level | Notes                                                                          |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
 | `dcterms:issued`       | mandatory         | See [dates and times](#dates-and-times)                                        |
-| `foaf:primaryTopic`    | mandatory         | This points to the IRI of the`dcat:Dataset` described by the catalogue record |
-| `prov:wasAttributedTo` | recommended       |                                                                               |
+| `foaf:primaryTopic`    | mandatory         | This points to the IRI of the `dcat:Dataset` described by the catalogue record |
+| `prov:wasAttributedTo` | recommended       |                                                                                |
 | `dcterms:modified`     | recommended       | See [dates and times](#dates-and-times)                                        |
 
 We may use `prov:wasAttributedTo` to attribute the creation of the catalogue record to a specific entity, such as the person who added the dataset to the catalogue.
@@ -618,7 +639,6 @@ We recommend the use of the following properties:
 | `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
 | `dcterms:license`            | mandatory         | See [licenses](#licenses)                                                  |
-| `dcat:distribution`          | mandatory         | See [distributions](#distributions)                                        |
 | `dcterms:creator`            | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
 | `dcat:contactPoint`          | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
 | `dcterms:issued`             | recommended       | See [dates and times](#dates-and-times)                                    |
@@ -943,22 +963,22 @@ Given the above CSV, a fairly basic CSVW metadata file would look as follows:
             {
                 "name": "area",
                 "titles": "area",
-                "type": "string"
+                "datatype": "string"
             },
             {
                 "name": "period",
                 "titles": "period",
-                "type": "dayTimeDuration"
+                "datatype": "dayTimeDuration"
             },
             {
                 "name": "sex",
                 "titles": "sex",
-                "type": "string"
+                "datatype": "string"
             },
             {
                 "name": "life_expectancy",
                 "titles": "life_expectancy",
-                "type": "decimal"
+                "datatype": "decimal"
             }
         ]
     }
@@ -992,7 +1012,7 @@ classDiagram
     }
 
     Table --> "1" Dataset: dcat.isDistributionOf
-    Table --> "1" TableSchema: csvw.tableSchema
+    Table --> "1..*" TableSchema: csvw.tableSchema
     TableSchema --> "1" Column: csvw.column
   
 ```
@@ -1017,22 +1037,22 @@ A example of a CSVW metadata file containing the relevant relationship with a `d
             {
                 "name": "area",
                 "titles": "area",
-                "type": "string"
+                "datatype": "string"
             },
             {
                 "name": "period",
                 "titles": "period",
-                "type": "dayTimeDuration"
+                "datatype": "dayTimeDuration"
             },
             {
                 "name": "sex",
                 "titles": "sex",
-                "type": "string"
+                "datatype": "string"
             },
             {
                 "name": "life_expectancy",
                 "titles": "life_expectancy",
-                "type": "decimal"
+                "datatype": "decimal"
             }
         ]
     }
@@ -1053,11 +1073,42 @@ Publishers may wish to use the `csvw:foreignKey` property to assert relationship
 
 ## RDF data cubes
 
-> TODO
+The [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/) provides a way to provide an explicit linked-data representation of a tabular dataset. 
 
-> Always publish geography and time.
+### Classes
+
+```mermaid
+classDiagram
+    class `RDF Data Cube` {
+        a qb:DataSet, dcat:Distribution
+    }
+    class `Data Structure Definition` {
+        a qb:DataStructureDefinition
+    }
+    class Component {
+        a qb:ComponentSpecification
+    }
+    class Dimension {
+        a qb:DimensionProperty
+    }
+    class Measure {
+        a qb:MeasureProperty
+    }
+    class Attribute {
+        a qb:AttributeProperty
+    }
+
+    `RDF Data Cube` --> "1" `Data Structure Definition` : qb.structure
+    `Data Structure Definition` --> "1..*" Component: qb.component
+    Component --> "1" Dimension: qb.dimension
+    Component --> "1" Measure: qb.measure
+    Component --> "1" Attribute: qb.attribute
+  
+```
 
 ### Components
+
+The components of a data cube (dimensions/measures/attributes).
 
 - If components are used across many different data cubes (common dimensions such as time or geography) then we should assign an IRI which is sufficiently general and not tied to a particular dataset.
 - If components are unlikely to be used across many different data cubes (for example if they are domain specific) but will be reused by cubes in the same series, then we can assign an IRI which is "local" to the dataset series.
@@ -1069,20 +1120,6 @@ IRI schemes which follow this idea are:
 - `http://{domain}/series/name-of-my-statistical-series/dimension/{dimension_name}` (example of an IRI which is local to a dataset series)
 - `http://{domain}/dataset/name-of-my-dataset/dimension/{dimension_name}` (example of an IRI which is local to a dataset)
 
-```ttl
-ex:dimension1 a qb:DimensionProperty ;
-    rdfs:label "Dimension 1"@en ;
-    rdfs:comment "A dimension property"@en ;
-    rdfs:range xsd:string ;
-    .
-```
-
-> TODO: `qb:order`
-
-> TODO: `qb:concept`.
-
-> TODO: `qb:measureType`.
-
 #### Measure
 
 ```ttl
@@ -1093,9 +1130,36 @@ ex:measure1 a qb:MeasureProperty ;
     .
 ```
 
-#### Attribute
+| Property             | Requirement level | Notes                       |
+| -------------------- | ----------------- | --------------------------- |
+| `rdfs:label`         | mandatory         |                             |
+| `rdfs:comment`       | mandatory         |                             |
+| `rdfs:range`         | mandatory         |                             |
+| `qb:concept`         | recommended       |                             |
+| `rdfs:subPropertyOf` | recommended       |                             |
 
-The RDF data cube specification We allow attributes to be attached to a list of of values via `qb:codeList`.
+#### Dimension
+
+```ttl
+ex:dimension1 a qb:DimensionProperty ;
+    rdfs:label "Dimension 1"@en ;
+    rdfs:comment "A dimension property"@en ;
+    rdfs:range xsd:string ;
+    .
+```
+
+| Property             | Requirement level | Notes                       |
+| -------------------- | ----------------- | --------------------------- |
+| `rdfs:label`         | mandatory         |                             |
+| `rdfs:comment`       | mandatory         |                             |
+| `rdfs:range`         | recommended       |                             |
+| `qb:codelist`        | recommended       | See [codelists](#codelists) |
+| `qb:concept`         | recommended       |                             |
+| `rdfs:subPropertyOf` | recommended       |                             |
+
+Dimensions must have an associated codelist (see [codelists](#codelists)).
+
+#### Attribute
 
 ```ttl
 ex:attribute1 a qb:AttributeProperty ;
@@ -1106,19 +1170,64 @@ ex:attribute1 a qb:AttributeProperty ;
     .
 ```
 
+| Property             | Requirement level | Notes                       |
+| -------------------- | ----------------- | --------------------------- |
+| `rdfs:label`         | mandatory         |                             |
+| `rdfs:comment`       | mandatory         |                             |
+| `rdfs:range`         | recommended       |                             |
+| `qb:codelist`        | recommended       | See [codelists](#codelists) |
+| `qb:concept`         | recommended       |                             |
+| `rdfs:subPropertyOf` | recommended       |                             |
+
+
+We allow attributes to be attached to a list of of values via `qb:codeList`.
+
 ### Observation
 
-The dimensions form a composite key for each observation in the cube - meaning the observations can be used to uniquely identify each observation in the cube.
+The dimensions form a composite key for each observation in the cube - meaning the combination of dimensions can be used to uniquely identify each observation in the cube.
 
-`http://{domain}/obs/{dimension_1}-{...}-{dimension_n}`
+We recommend IRIs for observations be of the form:
 
-### Multiple measures
+- `http://{domain}/obs/{dimension_1}-{...}-{dimension_n}`
+- `http://{domain}#obs/{dimension_1}-{...}-{dimension_n}`
+
+For example:
+
+- `http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male`
 
 ### Using CSVW to create an RDF data cube
 
 A CSVW provides a way for the rows, cells and column headers of a CSV files to be mapped to RDF resources.
 
-The CSVW specification also describes a method for [transforming CSV files into RDF](https://www.w3.org/TR/csv2rdf/). By doing so, we can generate an RDF data cube.
+The CSVW specification also describes a method for [transforming CSV files into RDF](https://www.w3.org/TR/csv2rdf/). By doing so, we can generate an RDF data cube. The idea is to use the CSVW `aboutUrl`, `propertyUrl` and `valueUrl` to construct triples from the CSV data.
+
+Given a CSVW with a column specification as follows:
+
+```jsonc
+    // ...
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "area",
+                "titles": "area",
+                "datatype": "string",
+                "propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area",
+                "valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+            },
+            // ...
+        ],
+        "aboutUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+area}-{+period}-{+sex}"
+```
+
+The `aboutUrl`, `propertyUrl` and `valueUrl` and the CSV data produce triples as follows:
+
+```ttl
+<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male>
+  <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area>
+    <http://statistics.data.gov.uk/id/statistical-geography/W06000022> ;
+    # ...
+    .
+```
 
 Within a single CSVW metadata file we are able to describe a dataset and define two distributions, a CSV distribution and an RDF data cube.
 
@@ -1224,6 +1333,49 @@ classDiagram
 
 We may then generate an RDF representation of the data which describes an RDF data cube, using a CSVW and following the approach as set out in [Generating RDF from Tabular Data on the Web](https://www.w3.org/TR/csv2rdf/).
 
+### Multiple measures
+
+We adopt the [measure dimension](https://www.w3.org/TR/vocab-data-cube/#dfn-measure-dimension) approach as, unlike the [multi-measure observations](https://www.w3.org/TR/vocab-data-cube/#dsd-mm-obs) approach, this allows us to specify measure- and observation-specific attributes.
+
+We include a column in the CSV which specifies the measure for each observation.
+
+
+| area      | period                  | sex    | measure_type                    | value | marker |
+| --------- | ----------------------- | ------ | ------------------------------- | ----- | ------ |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 76.7  |        |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 | 80.7  |        |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | disability-free-life-expectancy | 70.1  |        |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Female | disability-free-life-expectancy | 80.2  | [p]    |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 78.7  |        |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 |       | [x]    |
+| ...       | ...                     | ...    | ...                             | ...   |        |
+
+Within the CSVW metadata, we add a column definition for the measure dimension and values columns look as follows:
+
+```json
+{
+    "titles": "measure_type",
+    "name": "measure_type",
+    "propertyUrl": "qb:measureType",
+    "valueUrl": "http://{domain}/dataset/name-of-my-dataset/measure/{measure_type}"
+},
+{
+    "titles": "value",
+    "name": "value",
+    "propertyUrl": "http://{domain}/dataset/name-of-my-dataset/measure/{measure_type}"
+}
+```
+
+```ttl
+<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male> a qb:Observation ;
+    # area, period, sex, ...
+    qb:measureType
+        <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy> ;
+    <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy>
+        76.7 ;
+    .
+```
+
 ## Codelists
 
 > What is the relationship between a `skos:ConceptScheme` and a `dcat:Dataset`? In the way that we propose `qb:DataSet` is a distribution of a `dcat:Dataset`, maybe a `skos:ConceptScheme` is a distribution of a `dcat:Dataset`. Does the advice on editions/versioning also apply to `skos:ConceptScheme`s?
@@ -1235,7 +1387,6 @@ We may then generate an RDF representation of the data which describes an RDF da
 Every `qb:DimensionConcept` must have a `skos:ConceptScheme` associated with it which is related using the `qb:codeList` property. The `skos:ConceptScheme` is used to define the list of codes used by the dimension.
 
 All codes which are part of a codelist must have type `skos:Concept` and be related to the codelist using the `skos:inScheme` property.
-
 
 ### Classes
 
@@ -1286,6 +1437,9 @@ For example:
 | `dcat:keyword`        | recommended       | See [keywords](#keywords)                                                  |
 | `dcat:theme`          | recommended       | See [themes](#themes)                                                      |
 
+
+### Concept
+
 - `http://{domain}/codelist/{codelist_slug}/code/{code_slug}`
 
 For example:
@@ -1293,22 +1447,21 @@ For example:
 - `http://data.gov.uk/codelist/some-codelist`
 - `http://data.gov.uk/codelist/sitc/rev4`
 
-### Concept
 
-| Property           | Requirement level | Notes                                                 |
-| ------------------ | ----------------- | ----------------------------------------------------- |
-| `skos:inScheme`    | mandatory         | See [codelists](#codelists)                           |
-| `rdfs:label`       | mandatory         | See [titles](#titles)                                 |
-| `skos:prefLabel`   | mandatory         | See [titles](#titles)                                 |
-| `skos:notation`    | mandatory         |                                                       |
-| `skos:broader`     | recommended       | See [hierarchical codelists](#hierarchical-codelists) |
-| `skos:narrower`    | recommended       | See [hierarchical codelists](#hierarchical-codelists) |
-| `skos:related`     | recommended       | See [correspondence](#correspondence)                 |
-| `skos:exactMatch`  | recommended       | See [correspondence](#correspondence)                 |
-| `skos:closeMatch`  | recommended       | See [correspondence](#correspondence)                 |
-| `skos:broadMatch`  | recommended       | See [correspondence](#correspondence)                 |
-| `skos:altLabel`    | optional          |                                                       |
-| `skos:hiddenLabel` | optional          |                                                       |
+| Property           | Requirement level | Notes                                                                     |
+| ------------------ | ----------------- | ------------------------------------------------------------------------- |
+| `skos:inScheme`    | mandatory         | See [codelists](#codelists)                                               |
+| `rdfs:label`       | mandatory         | See [titles](#titles)                                                     |
+| `skos:prefLabel`   | mandatory         | See [titles](#titles)                                                     |
+| `skos:notation`    | mandatory         |                                                                           |
+| `skos:broader`     | recommended       | See [hierarchical codelists](#hierarchical-codelists)                     |
+| `skos:narrower`    | recommended       | See [hierarchical codelists](#hierarchical-codelists)                     |
+| `skos:related`     | recommended       | See [correspondence between codelists](#correspondence-between-codelists) |
+| `skos:exactMatch`  | recommended       | See [correspondence between codelists](#correspondence-between-codelists) |
+| `skos:closeMatch`  | recommended       | See [correspondence between codelists](#correspondence-between-codelists) |
+| `skos:broadMatch`  | recommended       | See [correspondence between codelists](#correspondence-between-codelists) |
+| `skos:altLabel`    | optional          |                                                                           |
+| `skos:hiddenLabel` | optional          |                                                                           |
 
 ### Hierarchical codelists
 
@@ -1347,9 +1500,9 @@ flowchart TD
 
 ### Extending codelists
 
-Wherever possible, statisticians should aim to reuse codes from common codelists, however, statisticians may wish to combine or alter codes within a codelist for reasons of statistical suppression or quality. They create a variant of some official codelist which is customised to suit their needs.
+Wherever possible, statisticians should aim to reuse codes from common codelists, however, they may wish to combine or alter codes within a codelist for reasons of statistical suppression or quality. In doing so, they create a variant of some official codelist which is customised to suit their needs.
 
-Codelists created for this purpose should 
+Codelists should be related to their variants using the `xkos:variant` property.
 
 For example, some statistics which make use of the Standard Industrial Classification (SIC) have changed some categories and included the following notations for these codes within their statistical output:
 
@@ -1428,9 +1581,9 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
 ```json
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://data.gov.uk/dataset/sitc-rev-4.csv",
+    "@id": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4.csv",
     "@type": "Table",
-    "url": "http://data.gov.uk/dataset/sitc-rev-4.csv",
+    "url": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4.csv",
     "tableSchema": {
         "columns": [
             {
@@ -1446,22 +1599,22 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
                 "propertyUrl": "rdfs:label"
             },
             {
-                "titles": "parent_notation",
-                "name": "parent_notation",
-                "required": false,
-                "propertyUrl": "skos:broader",
-                "valueUrl": "http://data.gov.uk/codelist/sitc-rev-4/{+parent_notation}"
-            },
-            {
-                "titles": "description",
-                "name": "description",
+                "titles": "comment",
+                "name": "comment",
                 "required": false,
                 "propertyUrl": "rdfs:comment"
             },
             {
+                "titles": "parent_notation",
+                "name": "parent_notation",
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/{+parent_notation}"
+            },
+            {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://data.gov.uk/codelist/sitc-rev-4"
+                "valueUrl": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4"
             },
             {
                 "virtual": true,
@@ -1469,7 +1622,7 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
                 "valueUrl": "skos:Concept"
             }
         ],
-        "aboutUrl": "http://data.gov.uk/codelist/sitc-rev-4/{+notation}"
+        "aboutUrl": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/{+notation}"
     }
 }
 ```
@@ -1477,19 +1630,19 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
 Performing `csv2rdf` on this CSVW produces RDF like:
 
 ```ttl
-http://data.gov.uk/codelist/sitc-rev-4/0 a skos:Concept ;
+<http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/0> a skos:Concept ;
     skos:notation "0" ;
     rdfs:label "Food and live animals" ;
     rdfs:comment "..." ;
-    skos:inScheme <http://data.gov.uk/codelist/sitc-rev-4> ;
+    skos:inScheme <http://data.gov.uk/codelist/standard-international-trade-classification/revision-4> ;
     .
 
-<http://data.gov.uk/codelist/sitc-rev-4/00> a skos:Concept ;
+<http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/00> a skos:Concept ;
     skos:notation "00" ;
     rdfs:label "Live animals other than animals of division 03" ;
     rdfs:comment "..." ;
-    skos:broader <http://data.gov.uk/codelist/sitc-rev-4/0> ;
-    skos:inScheme <http://data.gov.uk/codelist/sitc-rev-4> ;
+    skos:broader <http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/0> ;
+    skos:inScheme <http://data.gov.uk/codelist/standard-international-trade-classification/revision-4> ;
     .
 
 # etc...
@@ -1610,6 +1763,37 @@ This would result in the following RDF:
 
 > TODO: https://rdf-vocabulary.ddialliance.org/xkos.html
 
+For example, the Combined Nonclementure (CN8) is a classification of commodities of trade. These get updated in legislation each year.
+
+HMRC publishes each annual edition of CN8 and [provides correspondence tables](https://www.trade-tariff.service.gov.uk/help/cn2021_cn2022) between the different year's editions.
+
+| 2021 code  | 2022 code  |
+| ---------- | ---------- |
+| 0208 90 98 | 0208 90 98 |
+| 0208 90 98 | 0410 10 10 |
+| 0210 99 39 | 0210 99 39 |
+| 0210 99 39 | 0410 10 99 |
+| 0210 99 90 | 0210 99 90 |
+| 0210 99 90 | 0410 10 91 |
+
+```
+<> a xkos:Correspondence ;
+    xkos:compares 
+        <http://data.gov.uk/codelist/combined-nonclementure/2022>,
+        <http://data.gov.uk/codelist/combined-nonclementure/2021> ;
+    xkos:madeOf <> ;
+    .
+
+<> a xkos:ConceptAssociation ;
+    xkos:sourceConcept <http://data.gov.uk/codelist/combined-nonclementure/02089098> ;
+    xkos:targetConcept 
+        <http://data.gov.uk/codelist/combined-nonclementure/02089098> ,
+        <http://data.gov.uk/codelist/combined-nonclementure/04101010> ;
+    .
+```
+
+https://www.uktradeinfo.com/find-commodity-data/help-with-classifying-goods/
+
 ## Provenance
 
 > TODO: http://www.w3.org/TR/prov-o/
@@ -1635,7 +1819,6 @@ This would result in the following RDF:
 #### Geography
 
 Prefer using IRIs from the `http://statistics.data.gov.uk` vocabulary, based on ONS geography codes.
-
 
 | Label             | IRI                                                                |
 | ----------------- | ------------------------------------------------------------------ |
@@ -1665,7 +1848,6 @@ Prefer using IRIs from the [Dublin core collection description frequency vocabul
 
 Common options include:
 
-
 | Label     | IRI                                  |
 | --------- | ------------------------------------ |
 | Annual    | `http://purl.org/cld/freq/annual`    |
@@ -1675,7 +1857,6 @@ Common options include:
 | Daily     | `http://purl.org/cld/freq/daily`     |
 
 #### Licenses
-
 
 | Label                        | IRI                                                                         |
 | ---------------------------- | --------------------------------------------------------------------------- |
@@ -1693,7 +1874,6 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 
 > TODO: IRIs for official/national/experimental stats classifications.
 
-
 | Label                   | IRI                                          |
 | ----------------------- | -------------------------------------------- |
 | National Statistics     | `http://data.gov.uk/national-statistics`     |
@@ -1705,7 +1885,6 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 > TODO: [Recently updated guidance exists](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/). We may need to update our markers codelist.
 
 See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
-
 
 | Label                       | Notation | IRI                                                          |
 | --------------------------- | -------- | ------------------------------------------------------------ |
@@ -1730,23 +1909,21 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 
 > TODO: OSR have [domains](https://osr.statisticsauthority.gov.uk/what-we-do/our-domains/). Might be similar to the statistics authority themes.
 
-
-| Label                                         | IRI                                                                                      |
-| --------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Business, Trade and International Development | `http://osr.statisticsauthority.gov.uk/themes/business-trade-international-development/` |
-| Children, Education and Skills                | `http://osr.statisticsauthority.gov.uk/themes/children-education-skills/`                |
-| Crime and Security                            | `http://osr.statisticsauthority.gov.uk/themes/crime-security/`                           |
-| Economy                                       | `http://osr.statisticsauthority.gov.uk/themes/economy/`                                  |
-| Health and Social Care                        | `http://osr.statisticsauthority.gov.uk/themes/health-social-care/`                       |
-| Housing, Planning and Local Services          | `http://osr.statisticsauthority.gov.uk/themes/housing-planning-local-services/`          |
-| Labour Market and Welfare                     | `http://osr.statisticsauthority.gov.uk/themes/labour-market-welfare/`                    |
-| Population and Society                        | `http://osr.statisticsauthority.gov.uk/themes/population-society/`                       |
-| Transport, Environment and Climate Change     | `http://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change/`     |
+| Label                                         | IRI                                                                                     |
+| --------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Business, Trade and International Development | `http://osr.statisticsauthority.gov.uk/themes/business-trade-international-development` |
+| Children, Education and Skills                | `http://osr.statisticsauthority.gov.uk/themes/children-education-skills`                |
+| Crime and Security                            | `http://osr.statisticsauthority.gov.uk/themes/crime-security`                           |
+| Economy                                       | `http://osr.statisticsauthority.gov.uk/themes/economy`                                  |
+| Health and Social Care                        | `http://osr.statisticsauthority.gov.uk/themes/health-social-care`                       |
+| Housing, Planning and Local Services          | `http://osr.statisticsauthority.gov.uk/themes/housing-planning-local-services`          |
+| Labour Market and Welfare                     | `http://osr.statisticsauthority.gov.uk/themes/labour-market-welfare`                    |
+| Population and Society                        | `http://osr.statisticsauthority.gov.uk/themes/population-society`                       |
+| Transport, Environment and Climate Change     | `http://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change`     |
 
 #### Media types
 
 https://www.w3.org/ns/iana/media-types/
-
 
 | Label  | IRI                                                                |
 | ------ | ------------------------------------------------------------------ |
@@ -1797,6 +1974,8 @@ https://www.w3.org/ns/iana/media-types/
 
 > TODO: Language string example for Welsh
 
+### Hash or slash IRIs
+
 ### `rdfs` vs `dcterms`
 
 > TODO: When do we use `rdfs:label`, `rdfs:comment` vs. `dcterms:title`, `dcterms:description`?
@@ -1833,3 +2012,61 @@ https://www.w3.org/ns/iana/media-types/
 [^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
     
 [^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
+
+### Class diagram
+
+```mermaid
+classDiagram
+    class `Table` {
+        a csvw:Table, dcat:Distribution
+    }
+    class `Table Schema` {
+        a csvw:TableSchema
+    }
+    class `Column` {
+        a csvw:Column
+    }
+    class `Dataset` {
+        a dcat:Dataset
+    }
+    class `RDF Data Cube` {
+        a qb:DataSet, dcat:Distribution
+    }
+    class `Data Structure Definition` {
+        a qb:DataStructureDefinition
+    }
+    class Component {
+        a qb:ComponentSpecification
+    }
+    class Dimension {
+        a qb:DimensionProperty
+    }
+    class Measure {
+        a qb:MeasureProperty
+    }
+    class Attribute {
+        a qb:AttributeProperty
+    }
+    class Codelist {
+        a skos:ConceptScheme
+    }
+    class Code {
+        a skos:Concept
+    }
+
+    Table --> "1" `Table Schema`: csvw.tableSchema
+    `Table Schema` --> "1..*" Column: csvw.column
+    Table --> "1" Dataset: dcat.isDistributionOf
+    Table "1" <-- Dataset: dcat.distribution
+    Dataset --> "1" `RDF Data Cube` : dcat.distribution
+    `RDF Data Cube` --> "1" `Data Structure Definition` : qb.structure
+    `Data Structure Definition` --> "1..*" Component: qb.component
+    Component --> "1" Dimension: qb.dimension
+    Component --> "1" Measure: qb.measure
+    Component --> "1" Attribute: qb.attribute
+    Dimension --> "1" Codelist : qb.codeList
+    Codelist --> "1..*" Code : skos.hasTopConcept
+    Code --> "1" Codelist : skos.inScheme
+    Code --> "1..*" Code : skos.narrower
+    Code "1" <--  Code : skos.broader
+```
