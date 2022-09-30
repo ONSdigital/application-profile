@@ -6,7 +6,7 @@ The key words must, must not, required, shall, shall not, should, should not, re
 
 ## Preamble
 
-The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, we recognise there are still barriers and challenges in accessing and using the data we produce:
+The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, there are still barriers and challenges in accessing and using the data:
 
 - Analysts need to wrangle data because data are in unstandardised and presentational formats.
 - A user must locate and navigate through many large spreadsheets to understand what data are available.
@@ -42,6 +42,7 @@ The Application Profile uses terms from various existing specifications. Classes
 | `owl`     | `http://www.w3.org/2002/07/owl#`              | OWL Web Ontology Language                                                            |
 | `prov`    | `http://www.w3.org/ns/prov#`                  | Provenance Vocabulary                                                                |
 | `qb`      | `http://purl.org/linked-data/cube#`           | RDF Data Cube Vocabulary                                                             |
+| `qudt`    | `https://qudt.org/2.1/schema/qudt`            | Main QUDT Ontology                                                                   |
 | `rdfs`    | `http://www.w3.org/2000/01/rdf-schema#`       | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
 | `skos`    | `http://www.w3.org/2004/02/skos/core#`        | SKOS Simple Knowledge Organization System - Reference                                |
 | `spdx`    | `http://spdx.org/rdf/terms#`                  | Software Package Data Exchange                                                       |
@@ -189,7 +190,7 @@ Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), with
 
 ### Adopt common identifiers
 
-We should adopt common and unambiguous identifiers for data items such as ONS geography codes or ISO-8601 time intervals.
+We should adopt common and unambiguous identifiers for data items such as ONS geography codes and ISO-8601 time intervals.
 
 | area      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
@@ -396,6 +397,12 @@ Units of an observation may be specified by including a units column.
 
 In the case of a single-measure dataset (or multiple-measures where those measures share the same units of measurement), the units of an observation may be specified via a CSVW virtual column.
 
+TODO: Secondary observations with different units.
+
+### Representing model components and uncertanty
+
+TODO: Talk about seasonal adjustments, ARIMA and CIs.
+
 ### Different granularity of time periods
 
 Statisticians may wish to report statistics at different time granularities. For example, a single dataset may report statistics by month, quarter, year and financial year.
@@ -457,11 +464,16 @@ classDiagram
     Catalog --> "1..*" CatalogRecord : dcat.record
     CatalogRecord --> "1" DatasetSeries : foaf.primaryTopic
     CatalogRecord --> "1" Dataset : foaf.primaryTopic
+    CatalogRecord ..> "1" Catalog : foaf.primaryTopic
 
     DatasetSeries "1" <-- Dataset : dcat.inSeries
 ```
 
-We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes.
+We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes. 
+
+> Yo dwag, I heard you liked catalogs...
+
+A `dcat:Catalog` should not have a `dcat:CatalogRecord` which points to its parent `dcat:Catalog`. 
 
 ### Catalogue
 
@@ -477,8 +489,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                | Requirement level | Notes                                                                     |
-| ----------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property                | Requirement level | Notes                                                                      |
+| ----------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`         | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`     | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -552,17 +564,17 @@ We recommend standalone datasets have IRIs of the form:
 
 For datasets belonging to a dataset series, we recommend extending the series IRI to form the dataset IRI:
 
-- `http://{domain}/series/{series_slug}/dataset/{edition_year}`
+- `http://{domain}/series/{series_slug}/dataset/{edition_period}`
 
 For example:
 
 - `http://data.gov.uk/dataset/my-dataset`
-- `http://data.gov.uk/series/some-dataset-series/dataset/2018`
+- `http://data.gov.uk/series/some-dataset-series/dataset/2018-Q3`
 
 We recommend the use of the following properties:
 
-| Property                     | Requirement level | Notes                                                                     |
-| ---------------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property                     | Requirement level | Notes                                                                      |
+| ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -583,9 +595,9 @@ We recommend the use of the following properties:
 | `dcat:version`               | recommended       | See [versions](#versions)                                                  |
 | `adms:versionNotes`          | recommended       | See [versions](#versions)                                                  |
 | `dcat:prev`                  | recommended       | See [versions](#versions)                                                  |
-| `dcat:landingPage`           | optional          |                                                                           |
-| `dcterms:identifier`         | optional          |                                                                           |
-| `dcterms:isReferencedBy`     | optional          |                                                                           |
+| `dcat:landingPage`           | optional          |                                                                            |
+| `dcterms:identifier`         | optional          |                                                                            |
+| `dcterms:isReferencedBy`     | optional          |                                                                            |
 
 For example:
 
@@ -633,8 +645,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                     | Requirement level | Notes                                                                     |
-| ---------------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property                     | Requirement level | Notes                                                                      |
+| ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -742,14 +754,14 @@ For example:
 
 | Property                | Requirement level | Notes                                                                          |
 | ----------------------- | ----------------- | ------------------------------------------------------------------------------ |
-| `dcterms:title`         | mandatory         | See [titles](#titles)                                                           |
-| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                               |
-| `dcterms:license`       | mandatory         | See [licenses](#licenses)                                                       |
-| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts)      |
-| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                         |
-| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                         |
-| `dcat:isDistributionOf` | recommended       | See [CSVs as self contained datasets](#csvs-as-self-contained-datasets)         |
-| `dcat:mediaType`        | recommended       | See [media types](#media-types)                                                 |
+| `dcterms:title`         | mandatory         | See [titles](#titles)                                                          |
+| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                              |
+| `dcterms:license`       | mandatory         | See [licenses](#licenses)                                                      |
+| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts)     |
+| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                        |
+| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                        |
+| `dcat:isDistributionOf` | recommended       | See [CSVs as self contained datasets](#csvs-as-self-contained-datasets)        |
+| `dcat:mediaType`        | recommended       | See [media types](#media-types)                                                |
 | `dcat:downloadURL`      | recommended       |                                                                                |
 | `dcat:byteSize`         | recommended       |                                                                                |
 | `spdx:checksum`         | recommended       |                                                                                |
@@ -799,6 +811,8 @@ sequenceDiagram
 
 > `dcat:DatasetSeries` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
 
+TODO: Be clearer of version vs distributions
+
 Many statistics producers publish sets of statistics at a regular frequency as monthly, quarterly, or annual releases.
 
 Previous years of data may be repeated without any changes, though in some instances some previous year's data may be revised or updated to include new data or better estimates.
@@ -827,20 +841,27 @@ For example, the following dataset series has two editions from 2017 and 2018.
 
 ### Scheduled revisions (provisional and final releases)
 
+TODO: Do we put provisionals within a data set series?
+
 Statisticians may wish to release early or provisional estimates of statistics which are later revised as "final" statistics when additional data is available. The Government Statistical Service [refers to these as scheduled revisions](https://analysisfunction.civilservice.gov.uk/policy-store/communicating-quality-uncertainty-and-change/).
 
-The IRIs of provisional and final datasets should contain `provisional` or `final`. Provisional and final statistics can both be attached to the same dataset series and related to one another by the `dcat:prev` property.
+The IRIs of provisional and final datasets should contain `provisional` or `final`. Provisional and final statistics can both be attached to the same dataset series and related to one another by the `dcat:prev` and `dcat:replaces` property. A final release would `dcat:replaces` a provisional release.
 
 ```mermaid
 flowchart LR
 
-    2017/provisional --> 2017/final
-    2017/final --> 2018/provisional
-    2018/provisional --> 2018/final
+		2017p[2017/provisional]
+		2017f[2017/final]
+		2018p[2018/provisional]
+		2018f[2018/final]
 
-    2017/final -->|dcat:prev| 2017/provisional
-    2018/provisional -->|dcat:prev| 2017/final
-    2018/final -->|dcat:prev| 2018/provisional
+    2017p -.->|dcat:replacedBy| 2017f
+    2017f -.->|dcat:next| 2018p
+    2018p -.->|dcat:replacedBy| 2018f
+
+    2017f -->|dcat:replaces| 2017p
+    2018p -->|dcat:prev| 2017f
+    2018f -->|dcat:replaces| 2018p
    
 ```
 
@@ -851,7 +872,7 @@ For example, the following dataset series has two editions from both 2017 and 20
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/final> a dcat:Dataset ;
     dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> ;
+    dcat:replaces <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> ;
     .
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> a dcat:Dataset ;
@@ -866,7 +887,7 @@ For example, the following dataset series has two editions from both 2017 and 20
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> a dcat:Dataset ;
     dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016/final> ;
+    dcat:replaces <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016/final> ;
     .
 ```
 
@@ -880,6 +901,10 @@ Different versions of a dataset are the result of an unscheduled revision or cor
 We recommend the IRI of a `dcat:Dataset` is chosen to be generic and not specific to a particular version. A user should expect that the generic IRI of a dataset refers to the latest version of the dataset.
 
 IRIs should be created to represent each specific version of a dataset. We should assert an equivalence between IRI of the generic dataset and the latest version of the dataset with an `owl:sameAs` relationship, for example:
+
+
+
+TODO: Not happy, need to change this.
 
 ```ttl
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>
@@ -932,7 +957,119 @@ For specific versions, we recommend using the following properties:
     .
 ```
 
-## Publish CSV on the web (CSVW)
+## Dataset Editions, revisions, and versions
+
+1. ASSUMPTION: All datasets are subject to revisions
+
+    All newly published `dcat:datasets` should be included in a `dcat:DatasetSeries` as this provides structure for revision without introducing new resources when a revision becomes necessary; this allows for `dcat:CatalogRecords` to point to a `dcat:DatasetSeries` without needing to be updated should a revision happen..
+
+```turtle
+ex:dataset-series-slug a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion ex:dataset-slug-v1 .
+
+ex:dataset-slug-v1 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug .
+```
+2. ASSUMPTION: We must support editions (i.e. a sequence of releases) of datasets (e.g. 2018, 2019, 2020)
+
+    Adding new editions of datasets should not require the modification of existing datasets within the series; in a simple series of editions defining which dataset it is replacing (via `dcat:previousVersion`) provides all necessary information to ammend the dataset series' membership to include this new dataset, and have the new edition be the current version.
+
+```turtle
+ex:dataset-series-slug a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion ex:dataset-slug-2020 
+    dcat:first ex:dataset-slug-2018 .
+
+ex:dataset-slug-2018 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug .
+
+ex:dataset-slug-2019 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug ;
+    dcat:previousVersion ex:dataset-slug-2018 .
+
+ex:dataset-slug-2020 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug ;
+    dcat:previousVersion ex:dataset-slug-2019 .
+
+```
+
+3.  We must support both scheduled (e.g. previous/final) and unscheduled (e.g. v2-corrected) revisions
+    TODO: RESUME HERE ANDREW 2022-09-30T17:24
+4. The next dataset after 2018/final would be 2019/provisional if 2019/final did not exist
+5. ASSUMPTION: The previous dataset to 2019/final would be 2018/final
+
+### Accomodating scheduled and unscheduled data set revisions through the use of DatasetSeries and Datasets
+
+
+#### Worked example
+The Greenhouse Gas Emissions dataset series is a recurring annual publication, with two scheduled revisions covering the same period. The first edition is released at the end of the first calendar quarter; these data are considered provisional due to limited time for revisions and model correction. The second edition which is released at the end of the second calendar quarter is considered final; these data are subjected to a higher level of scrutiny and the additional time allows for more refined data and additional data streams to be included in the calculations. In rare occurances, there may be unscheduled revisions (i.e. corrections) where a provisional or final release needs to be corrected.
+
+An example set of IRIs of this Greenhouse Gas Emissions dataset series could be as follows:
+
+* `2017/provisional`
+* `2017/final`
+* `2018/provisional/v1`
+* `2018/provisional/v2`
+* `2018/final`
+* `2019/provisional`
+* `2019/final`
+* `2020/provisional`
+* `2020/final/v1`
+* `2020/final/v2`
+
+The years 2017 and 2019 had the expected number of scheduled releases (i.e. a provisional and a final release). In 2018 the provisional release required correction and in 2020 the final release required correction.
+
+
+```mermaid
+flowchart TD
+
+    a[Can the dataset ever be corrected or updated?] -->|no| 1([Dataset])
+    a -->|yes| b[Will there be scheduled releases?]
+    b -->|no| 2(["DatasetSeries &sup; Datasets"])
+    b -->|yes| 3(["DatasetSeries &sup; DatasetSeries &sup; Datasets"])
+```
+
+
+### Workthrough problems
+
+
+```mermaid
+flowchart TD
+	gge[Greenhouse Gas Emissions\na dcat:DatasetSeries]
+	ea[2018 Releases\n a dcat:DatasetSeries]
+	eb[2019 Releases\n a dcat:DatasetSeries]
+
+	
+	gge -->|dcat:hasVersion\ndcat:first| ea
+	gge -->|dcat:hasVersion\ndcat:last\ndcat:hasCurrentVersion| eb
+	
+    subgraph 2018
+    2018p[2018/provisional\na dcat:Dataset\nowl:sameAs 2018/provisional/v1]
+    2018f[2018/final\na dcat:Dataset]
+	ea -->|dcat:hasVersion\ndcat:first| 2018p
+	ea -->|dcat:hasVersion\ndcat:last\ndcat:hasCurrentVersion| 2018f
+	2018f -->|dcat:prev\ndcat:replaces\ndcat:previousVersion|2018p
+    end
+
+    subgraph 2019
+    2019p[2019/provisional\na dcat:Dataset]
+    2019f[2019/final\na dcat:Dataset]
+	eb -->|dcat:hasVersion\ndcat:first| 2019p
+	eb -->|dcat:hasVersion\ndcat:last\ndcat:hasCurrentVersion| 2019f
+	2019f -->|dcat:prev\ndcat:replaces\ndcat:previousVersion|2019p	
+    end
+
+	eb
+	
+	eb -->|dcat:previousVersion| ea
+```
+
+```rdf
+ex:greenhouse-gas-emissions a dcat:DatasetSeries;
+
+```
+
+
+## Publish CSV on the web (CSVW)
 
 Our aim is to publish metadata in a machine readable and structured format alongside the statistical data.
 
@@ -1130,13 +1267,13 @@ ex:measure1 a qb:MeasureProperty ;
     .
 ```
 
-| Property             | Requirement level | Notes                       |
-| -------------------- | ----------------- | --------------------------- |
-| `rdfs:label`         | mandatory         |                             |
-| `rdfs:comment`       | mandatory         |                             |
-| `rdfs:range`         | mandatory         |                             |
-| `qb:concept`         | recommended       |                             |
-| `rdfs:subPropertyOf` | recommended       |                             |
+| Property             | Requirement level | Notes |
+| -------------------- | ----------------- | ----- |
+| `rdfs:label`         | mandatory         |       |
+| `rdfs:comment`       | mandatory         |       |
+| `rdfs:range`         | mandatory         |       |
+| `qb:concept`         | recommended       |       |
+| `rdfs:subPropertyOf` | recommended       |       |
 
 #### Dimension
 
@@ -1184,16 +1321,16 @@ We allow attributes to be attached to a list of of values via `qb:codeList`.
 
 ### Observation
 
-The dimensions form a composite key for each observation in the cube - meaning the combination of dimensions can be used to uniquely identify each observation in the cube.
+The dimensions form a composite key for each observation in the cube - meaning the combination of dimensions can be used to uniquely identify each observation in the cube. Note that a measure is a dimension.
 
 We recommend IRIs for observations be of the form:
 
-- `http://{domain}/obs/{dimension_1}-{...}-{dimension_n}`
-- `http://{domain}#obs/{dimension_1}-{...}-{dimension_n}`
+- `http://{domain}/obs/{dimension_1},{...},{dimension_n}@{measure}`
+- `http://{domain}#obs/{dimension_1},{...},{dimension_n}@{measure}`
 
 For example:
 
-- `http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male`
+- `http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022,2004,01,01T00:00:00,P3Y-Male@count`
 
 ### Using CSVW to create an RDF data cube
 
@@ -1423,8 +1560,8 @@ For example:
 - `http://data.gov.uk/codelist/some-codelist`
 - `http://data.gov.uk/codelist/sitc/2022`
 
-| Property              | Requirement level | Notes                                                                     |
-| --------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property              | Requirement level | Notes                                                                      |
+| --------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`       | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description` | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`   | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -2010,7 +2147,7 @@ https://www.w3.org/ns/iana/media-types/
 > ```
 
 [^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
-    
+
 [^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
 
 ### Class diagram
