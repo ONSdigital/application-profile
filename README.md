@@ -6,7 +6,7 @@ The key words must, must not, required, shall, shall not, should, should not, re
 
 ## Preamble
 
-The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, there are still barriers and challenges in accessing and using the data:
+The UK government often [publishes its statistics](http://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, there are still barriers and challenges in accessing and using the data:
 
 - Analysts need to wrangle data because data are in unstandardised and presentational formats.
 - A user must locate and navigate through many large spreadsheets to understand what data are available.
@@ -14,7 +14,7 @@ The UK government often [publishes its statistics](https://www.gov.uk/search/res
 - Data are in silos, making it difficult to link or relate statistics from different sources.
 - The accessibility and usability of statistics varies from dataset to dataset.
 
-The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describes recommendations for publishing data to the web. If followed, we can enable these benefits:
+The [Data on the Web Best Practices (DWBP)](http://www.w3.org/TR/dwbp/) describes recommendations for publishing data to the web. If followed, we can enable these benefits:
 
 > - **Comprehension**: humans will have a better understanding about the data structure, the data meaning, the metadata and the nature of the dataset.
 > - **Processability**: machines will be able to automatically process and manipulate the data within a dataset.
@@ -42,7 +42,7 @@ The Application Profile uses terms from various existing specifications. Classes
 | `owl`     | `http://www.w3.org/2002/07/owl#`              | OWL Web Ontology Language                                                            |
 | `prov`    | `http://www.w3.org/ns/prov#`                  | Provenance Vocabulary                                                                |
 | `qb`      | `http://purl.org/linked-data/cube#`           | RDF Data Cube Vocabulary                                                             |
-| `qudt`    | `https://qudt.org/2.1/schema/qudt`            | Main QUDT Ontology                                                                   |
+| `qudt`    | `http://qudt.org/2.1/schema/qudt`            | Main QUDT Ontology                                                                   |
 | `rdfs`    | `http://www.w3.org/2000/01/rdf-schema#`       | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
 | `skos`    | `http://www.w3.org/2004/02/skos/core#`        | SKOS Simple Knowledge Organization System - Reference                                |
 | `spdx`    | `http://spdx.org/rdf/terms#`                  | Software Package Data Exchange                                                       |
@@ -58,7 +58,7 @@ The Application Profile uses terms from various existing specifications. Classes
 
 Many of the excel workbooks produced by statisticians are designed to be easily read by humans but typically are difficult for machines to interpret and manipulate.
 
-Consider this example taken from the [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/), extracted from StatsWales report number 003311 which describes life expectancy broken down by region (unitary authority), sex and time:
+Consider this example taken from the [RDF data cube vocabulary](http://www.w3.org/TR/vocab-data-cube/), extracted from StatsWales report number 003311 which describes life expectancy broken down by region (unitary authority), sex and time:
 
 <table id="example-data" style="text-align: left;">
   <tbody>
@@ -157,7 +157,7 @@ Consider this example taken from the [RDF data cube vocabulary](https://www.w3.o
 
 The table is a cross tabulation of the data, with the columns representing the time period of the observation and the sex of the observed population and the rows representing different locations. Having multiple header rows which span multiple columns makes the data difficult to read with software. Downstream users of the data will have to wrangle the data into a usable format.
 
-Importing the above table into a statistical software such as [R](https://www.r-project.org/) produces a result with some problems:
+Importing the above table into a statistical software such as [R](http://www.r-project.org/) produces a result with some problems:
 
 - The header rows are not treated as headers.
 - The header row representing time period is not fully populated.
@@ -178,7 +178,7 @@ Importing the above table into a statistical software such as [R](https://www.r-
 6 "Merthyr Tydfil"  75.5      79.1      75.5      79.4   74.9  79.6  
 ```
 
-Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), with each variable having its own column gives an output which can be instantly read into R, without need for further cleaning.
+Organising the table as [tidy data](http://r4ds.had.co.nz/tidy-data.html), with each variable having its own column gives an output which can be instantly read into R, without need for further cleaning.
 
 | area    | period    | sex    | life_expectancy |
 | ------- | --------- | ------ | --------------- |
@@ -200,7 +200,7 @@ We should adopt common and unambiguous identifiers for data items such as ONS ge
 | W06000015 | 2004-01-01T00:00:00/P3Y | Female | 83.3            |
 | ...       | ...                     | ...    | ...             |
 
-In this example, adopting ISO 8601 time intervals allows machines to provide additional functionality for computing with this type of data. Adopting geography codes allows for linking between data sets.
+In this example, adopting ISO 8601 time intervals allows machines to provide additional functionality for computing with this type of data. Adopting geography codes allows for linking between datasets.
 
 ```r
 # A tibble: 4 x 4
@@ -228,7 +228,7 @@ To adopt common identifiers, there needs to exist a list of identifiers which ca
 
 ### Using symbols and shorthand in tables
 
-Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is statistically significant. The Government Statistical Service (GSS) [has a guide](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) which provides a number of symbols and shorthand for common annotations (see [here](#symbols-and-shorthand-in-tables)).
+Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is statistically significant. The Government Statistical Service (GSS) [has a guide](http://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) which provides a number of symbols and shorthand for common annotations (see [here](#symbols-and-shorthand-in-tables)).
 
 For example, this table indicates that the life expectancy is not available (`[x]`) or provisional (`[p]`) for some entries.
 
@@ -307,16 +307,6 @@ After pivoting with the above code, each of the measures has its own column.
 | W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | 70.3                            |
 | W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | 80.4                            |
 | ...       | ...                     | ...    | ...             |                                 |
-
-> TODO: Is there a need to support a multiple-measure structure instead of a measure-type dimension, e.g.
->
-> | area      | period                  | sex    | life_expectancy | life_expectancy_marker | disability_free_life_expectancy | disability_free_life_expectancy_marker |
-> | ----------- | ------------------------- | -------- | ----------------- | ------------------------ | --------------------------------- | ---------------------------------------- |
-> | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |                        | 70.1                            |                                        |
-> | W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |                        | 80.2                            | [p]                                    |
-> | W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |                        | 70.3                            |                                        |
-> | W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | [x]                    | 80.4                            |                                        |
-> | ...       | ...                     | ...    | ...             |                        |                                 |                                        |
 
 ### Expressing concept hierarchies
 
@@ -419,7 +409,7 @@ Statisticians may wish to report statistics at different time granularities. For
 | 2005-02   | 01       | ...         |
 | ...       | ...      | ...         |
 
-We adopt IRIs from the [reference.data.gov.uk service](https://github.com/epimorphics/IntervalServer/blob/master/interval-uris.md).
+We adopt IRIs from the [reference.data.gov.uk service](http://github.com/epimorphics/IntervalServer/blob/master/interval-uris.md).
 
 `http://reference.data.gov.uk/id/{period_type}/{period}`
 
@@ -556,11 +546,13 @@ For example:
     .
 ```
 
-### Dataset
+### Datasets
 
-We recommend standalone datasets have IRIs of the form:
+We recommend standalone datasets have IRIs in the form of
 
 - `http://{domain}/dataset/{dataset_slug}`
+
+However, in order to support [unscheduled revisions](#versions) (i.e. versions), we recommended that all datasets be a member of a dataset series.
 
 For datasets belonging to a dataset series, we recommend extending the series IRI to form the dataset IRI:
 
@@ -605,7 +597,7 @@ For example:
 <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018> a dcat:Dataset ;
     dcterms:title "Final UK greenhouse gas emissions national statistics: 1990 to 2018"@en ;
     dcterms:description "Final estimates of UK territorial greenhouse gas emissions..."@en ;
-    dcterms:license <https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
     dcterms:publisher <http://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
     dcterms:issued "2020-02-04T09:30:00"^^xsd:dateTime ;
     dcterms:modified "2020-07-30T08:30:06"^^xsd:dateTime ;
@@ -615,7 +607,7 @@ For example:
     dcat:distribution <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/datacube>, 
         <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv>, 
         <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.json> ;
-    dcterms:isReferencedBy <https://www.gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-national-statistics-1990-to-2018> ;
+    dcterms:isReferencedBy <http://www.gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-national-statistics-1990-to-2018> ;
     dcat:landingPage "http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018"^^xsd:anyURI ;
     dcterms:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
     dcterms:spatial <http://statistics.data.gov.uk/id/statistical-geography/K02000001> ;
@@ -664,6 +656,7 @@ We recommend the use of the following properties:
 For example:
 
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
 <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics> a dcat:DatasetSeries ;
     dcterms:title "UK territorial greenhouse gas emissions national statistics"@en ;
     dcterms:description "Final and provisional estimates of UK territorial greenhouse gas emissions from 1990."@en ;
@@ -678,7 +671,7 @@ Many of the properties which apply to dataset series are also applicable to data
 
 Where metadata is stored as RDF, such as being made available via a SPARQL endpoint, DCAT makes a recommendation about the names of graphs to use for catalogue records.
 
-> If a catalog is represented as an RDF Dataset with named graphs (as defined in [[SPARQL11-QUERY]](https://www.w3.org/TR/sparql11-query/)), then it is appropriate to place the description of each dataset (consisting of all RDF triples that mention the dcat:Dataset, dcat:CatalogRecord, and any of its dcat:Distributions) into a separate named graph. The name of that graph SHOULD be the IRI of the catalog record.[^named-graphs]
+> If a catalog is represented as an RDF Dataset with named graphs (as defined in [[SPARQL11-QUERY]](http://www.w3.org/TR/sparql11-query/)), then it is appropriate to place the description of each dataset (consisting of all RDF triples that mention the dcat:Dataset, dcat:CatalogRecord, and any of its dcat:Distributions) into a separate named graph. The name of that graph SHOULD be the IRI of the catalog record.[^named-graphs]
 
 ```ttl
 <http://data.gov.uk/dataset/my-dataset/record> {
@@ -699,6 +692,7 @@ WHERE {
 We also recommend placing catalogue records into a named graph that is the same as the IRI of the catalog.
 
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
 <http://data.gov.uk/catalogue/my-datasets> {
 
     <http://data.gov.uk/catalogue/my-datasets> a dcat:Catalog ;
@@ -770,15 +764,17 @@ For example:
 For example:
 
 ```ttl
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
 <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> a dcat:Distribution ;
     dcterms:title "Final UK greenhouse gas emissions national statistics: 1990 to 2018 (CSV)"@en ;
     dcterms:description "Final estimates of UK territorial greenhouse gas emissions..."@en ;
-    dcterms:license <https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
     dcterms:issued "2020-02-04T09:30:00"^^xsd:dateTime ;
     dcterms:modified "2020-07-30T08:30:06"^^xsd:dateTime ;
     dcterms:title "2018.csv" ;
     wdrs:describedby <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv-metadata.json> ;
-    dcat:mediaType <https://www.w3.org/ns/iana/media-types/text/csv#Resource> ;
+    dcat:mediaType <http://www.w3.org/ns/iana/media-types/text/csv#Resource> ;
     dcat:downloadURL <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> ;
     dcat:byteSize "12345"^^xsd:nonNegativeInteger ;
     spdx:checksum "CE114E4501D2F4E2DCEA3E17B546F339"^^spdx:Checksum ;
@@ -791,37 +787,136 @@ We recommend that data providers implement content negotiation as a method for c
 
 The IRI of the `dcat:Dataset` should be used as the generic IRI which a user can request different formats of the data from.
 
-For example, a `dcat:Dataset` with an IRI of `http://data.gov.uk/dataset/my-dataset` may have a CSV distribution with its own IRI of `http://data.gov.uk/dataset/my-dataset.csv`. A user agent wishing to access the data in CSV format could navigate to `http://data.gov.uk/dataset/my-dataset.csv` directly, or content negotiate against the IRI of the `dcat:Dataset` to find the CSV distribution.
+For example, a `dcat:Dataset` with an IRI of `http://data.gov.uk/dataset/my-dataset/latest` may have a CSV distribution with its own IRI of `http://data.gov.uk/dataset/v2/my-dataset.csv`. A user agent wishing to access the data in CSV format could navigate to `http://data.gov.uk/dataset/latest/my-dataset.csv` directly, or content negotiate against the IRI of the `dcat:Dataset` to find the CSV distribution.
 
 ```sh
-curl http://data.gov.uk/dataset/my-dataset -H "Accept: text/csv"
+curl http://data.gov.uk/dataset/my-dataset/latest -H "Accept: text/csv"
 ```
 
 > What is the flow, do we 303 redirect to the CSV distribution of the dataset?
 
 ```mermaid
 sequenceDiagram
-    User Agent ->> Server: GET http://data.gov.uk/dataset/my-dataset -H "accept: text/csv"
+    User Agent ->> Server: GET http://data.gov.uk/dataset/my-dataset/latest -H "accept: text/csv"
     Server ->> User Agent: 303 See Other
-    User Agent ->> Server: GET http://data.gov.uk/dataset/my-dataset.csv
+    User Agent ->> Server: GET http://data.gov.uk/dataset/v2/my-dataset.csv
     Server ->> User Agent: 200 OK
 ```
 
-## Editions
+## Thinking on Editions, Scheduled Revisions, and Version
 
-> `dcat:DatasetSeries` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+1. ASSUMPTION: All datasets are subject to revisions
 
-TODO: Be clearer of version vs distributions
+    All newly published `dcat:datasets` should be included in a `dcat:DatasetSeries` as this provides structure for revision without introducing new resources when a revision becomes necessary; this allows for `dcat:CatalogRecords` to point to a `dcat:DatasetSeries` without needing to be updated should a revision happen..
 
-Many statistics producers publish sets of statistics at a regular frequency as monthly, quarterly, or annual releases.
+```ttl
+@PREFIX ex: <http://example.org/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 
-Previous years of data may be repeated without any changes, though in some instances some previous year's data may be revised or updated to include new data or better estimates.
+ex:series/dataset-series-slug a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion ex:series/series-slug/dataset-slug/dataset/latest .
 
-We refer to these as _editions_, as opposed to _versions_ which are used to specifically describe changes in a dataset resulting from a revision. Each edition is given its own IRI which typically contains the latest time period for which data is available.
+ex:series/series-slug/dataset-slug/dataset/v1 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug .
+
+ex:series/series-slug/dataset-slug/dataset/v2 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug ;
+    dcat:replaces ex:series/series-slug/dataset-slug/dataset/v1 ;
+    owl:sameAs ex:series/series-slug/dataset-slug/dataset/latest .
+```
+2. ASSUMPTION: We must support editions (i.e. a sequence of releases) of datasets (e.g. 2018, 2019, 2020)
+
+    Adding new editions of datasets should not require the modification of existing datasets within the series; in a simple series of editions defining which dataset it is replacing (via `dcat:previousVersion`) provides all necessary information to ammend the dataset series' membership to include this new dataset, and have the new edition be the current version.
+
+```ttl
+@PREFIX ex: <http://example.org/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+ex:series/dataset-series-slug a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion ex:series/dataset-series-slug/dataset/latest ; 
+    dcat:first ex:series/dataset-series-slug/dataset/2018 .
+
+ex:series/dataset-series-slug/dataset/2018 a dcat:Dataset ;
+    dcat:inSeries ex:series/dataset-series-slug .
+
+ex:series/dataset-series-slug/dataset/2019 a dcat:Dataset ;
+    dcat:inSeries ex:series/dataset-series-slug ;
+    dcat:previousVersion ex:series/dataset-series-slug/dataset/2018 .
+
+ex:series/dataset-series-slug/dataset/2020 a dcat:Dataset ;
+    dcat:inSeries ex:series/dataset-series-slug ;
+    dcat:previousVersion ex:series/dataset-series-slug/dataset/2019 ;
+    owl:sameAs ex:series/dataset-series-slug/dataset/latest .
+```
+
+3.  We must support both scheduled (e.g. provisional/final) and unscheduled (e.g. v2-corrected) revisions
+
+    One of the problems we face in this scenario is "what is the next version of a provisional release which has been re-issued due to an error?" If we have a unscheduled revision of a provisional edition (i.e. 2020/provisional/v2), when the final version (i.e. 2020/final) is published what is the "dcat:next" dataset from the original provisional edition (i.e. 2020/provisional/v1)? Is it 2020/provisional/v2 or 2020/final or even 2021/provisional? By using a combination of `dcat:previousVersion` and `dcat:replaces` the lineage allows the user to separate updated datasets.
+
+## Editions, Scheduled Revisions, and Versions
+> `dcat:DatasetSeries`, `dcat:inSeries`, `dcat:first`, `dcat:currentVersion`, `dcat:previousVersion`, and `dcat:replaces` is recommended as part of [DCAT v3](http://w3c.github.io/dxwg/dcat/), which is still in draft.
+
+Many statistics producers publish sets of statistics at a regular frequency such as monthly, quarterly, or annual releases; we consider these _editions_. An edition typically covers a new time period compared to the previously released edition.
+
+Some statistical releases couple regular editions with multiple scheduled releases of the same period. This statistical publication approach where a draft, provisional, or estimated publication is released earlier than a final edition where the full processes or observations would be possible; we consider these _scheduled revisions_. A _scheduled revision_ for the same edition would typically cover the same time period.
+
+Statistics which are released can corrected outside the regular update process; we consider these unscheduled revisions _versions_. The updated version covers the same scope as the replaced version, and should contain a detailed explaination of the changes necessitating the unscheduled revision.
+
+```mermaid
+flowchart TD
+    d[Dataset release plans]
+    e[Edition]
+    s[Scheduled Revision]
+    v[Version]
+    
+    d -->|recurring publications| e
+
+    d -->|corrections| v
+    e -->|scheduled revisions| s
+    e -->|corrections| v
+    s -->|corrections| v
+```
+
+Statistical publications, and other datasets typically have a release plan including its update cadence which falls into the structure described above. Additionally, all datasets can be subject to correction. As such we recommend that all editions, revisions, and versions of a dataset attach to a `dcat:DatasetSeries` which is in turn attached a `dcat:CatalogEntry`.
+
+```mermaid
+classDiagram
+    class DatasetSeries {
+        a dcat:DatasetSeries
+    }
+    class Dataset{
+        a dcat:Dataset
+    }
+
+    Dataset "*" --> "1" DatasetSeries : dcat.hasSeries   
+```
+
+```ttl
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@PREFIX ex: <http://example.org/> .
+
+ex:DatasetSeries a dcat:DatasetSeries .
+
+ex:Dataset1 a dcat:Dataset ;
+    dcat:inSeries ex:DatasetSeries .
+
+ex:Dataset2 a dcat:Dataset ;
+    dcat:inSeries ex:DatasetSeries .
+```
+
+### Editions
+
+> `dcat:DatasetSeries`, `dcat:inSeries`, and `dcat:previousVersion` are recommended as part of [DCAT v3](http://w3c.github.io/dxwg/dcat/), which is still in draft.
+
+We group regular releases of new data within the same series of statistical publications as _editions_. A new edition of a dataset should cover the new observations from the time period since the previous edition.
+
+In editions, previous years of data may be repeated without any changes, though in some instances some previous edition's data may be revised or updated to include new data or better estimates. Regardless of the updates to previously released data, an editions intent is to release new data for the dataset series.
+
+Each edition is given its own IRI which typically contains the latest time period for which data is available.
 
 For example, `http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018` is the IRI of the 2018 edition of the series `name-of-my-statistical-series`.
 
-Editions should be related to a `dcat:DatasetSeries`. The dataset series should have an IRI which does not reference particular time period and can represent the collection of editions.
+Editions should be related to a `dcat:DatasetSeries` using `dcat:inSeries`. The dataset series should have an IRI which does not reference particular time period and can represent the collection of editions.
 
 For example, the following dataset series has two editions from 2017 and 2018.
 
@@ -830,39 +925,33 @@ For example, the following dataset series has two editions from 2017 and 2018.
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
     dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> ;
-    .
+    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> .
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> a dcat:Dataset ;
     dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016> ;
-    .
+    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016> .
 ```
 
-### Scheduled revisions (provisional and final releases)
 
-TODO: Do we put provisionals within a data set series?
+### Scheduled revisions
 
-Statisticians may wish to release early or provisional estimates of statistics which are later revised as "final" statistics when additional data is available. The Government Statistical Service [refers to these as scheduled revisions](https://analysisfunction.civilservice.gov.uk/policy-store/communicating-quality-uncertainty-and-change/).
+> `dcat:DatasetSeries`, `dcat:inSeries`, and `dcat:previousVersion` are recommended as part of [DCAT v3](http://w3c.github.io/dxwg/dcat/), which is still in draft.
 
-The IRIs of provisional and final datasets should contain `provisional` or `final`. Provisional and final statistics can both be attached to the same dataset series and related to one another by the `dcat:prev` and `dcat:replaces` property. A final release would `dcat:replaces` a provisional release.
+Statisticians may wish to release early or provisional estimates of statistics which are later revised as "final" statistics when additional data is available. The Government Statistical Service refers to these as [scheduled revisions](http://analysisfunction.civilservice.gov.uk/policy-store/communicating-quality-uncertainty-and-change/).
+
+The IRIs of provisional and final datasets should contain their effective status indicator such as `provisional`, `esimated`, or `final`. Provisional and final statistics can both be attached to the same dataset series and related to one another by the `dcat:previousVersion` property.
 
 ```mermaid
-flowchart LR
+flowchart RL
 
 		2017p[2017/provisional]
 		2017f[2017/final]
 		2018p[2018/provisional]
 		2018f[2018/final]
 
-    2017p -.->|dcat:replacedBy| 2017f
-    2017f -.->|dcat:next| 2018p
-    2018p -.->|dcat:replacedBy| 2018f
-
-    2017f -->|dcat:replaces| 2017p
-    2018p -->|dcat:prev| 2017f
-    2018f -->|dcat:replaces| 2018p
-   
+    2017f -->|dcat:previousVersion| 2017p
+    2018p -->|dcat:previousVersion| 2017f
+    2018f -->|dcat:previousVersion| 2018p   
 ```
 
 For example, the following dataset series has two editions from both 2017 and 2018, one provisional and one final.
@@ -870,73 +959,189 @@ For example, the following dataset series has two editions from both 2017 and 20
 ```ttl
 <http://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/final> a dcat:Dataset ;
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> a dcat:Dataset ;
     dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:replaces <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> ;
-    .
-
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> a dcat:Dataset ;
-    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> ;
-    .
+    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016/final> .
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> a dcat:Dataset ;
     dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> ;
-    .
+    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> a dcat:Dataset ;
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> a dcat:Dataset ;
     dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:replaces <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016/final> ;
-    .
+    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/final> a dcat:Dataset ;
+    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> .
 ```
 
-## Versions
+### Versions
 
-> **Note**
-> `dcat:version` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+> `dcat:DatasetSeries`, `dcat:inSeries`, and `dcat:replaces` are recommended as part of [DCAT v3](http://w3c.github.io/dxwg/dcat/), which is still in draft.
 
 Different versions of a dataset are the result of an unscheduled revision or correction.
 
-We recommend the IRI of a `dcat:Dataset` is chosen to be generic and not specific to a particular version. A user should expect that the generic IRI of a dataset refers to the latest version of the dataset.
+We recommend using a generic `dcat:DatasetSeries` name with an unversioned IRI with a versioned `dcat:Dataset` attached to it so that unscheduled revisions can be accomodated with minimal effort. A user should expect that the generic IRI of a dataset series contains the link to the latest version.
+
+As unscheduled revisions intend to replace data, it is important to use the `dcat:replaces` predicate to distinguish this intent to supercede previously thought correct data from new editions and scheduled revisions which uses `dcat:previousVersion` which describes a generic data lineage.
 
 IRIs should be created to represent each specific version of a dataset. We should assert an equivalence between IRI of the generic dataset and the latest version of the dataset with an `owl:sameAs` relationship, for example:
 
-
-
-TODO: Not happy, need to change this.
-
 ```ttl
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>
-    owl:sameAs
-        <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
-    .
+<http://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries;
+    dcat:latest <http://data.gov.uk/series/name-of-my-statistical-series/latest> .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/v1> a dcat:Dataset;
+    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/v2> a dcat:Dataset;
+    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:replaces <http://data.gov.uk/series/name-of-my-statistical-series/dataset/v1> ;
+    owl:sameAs <http://data.gov.uk/series/name-of-my-statistical-series/latest/> .
 ```
 
-| Property                 | Requirement level |
-| ------------------------ | ----------------- |
-| `dcat:hasCurrentVersion` | recommended       |
-| `dcat:hasVersion`        | recommended       |
-| `dcat:version`           | recommended       |
-| `adms:versionNotes`      | recommended       |
-| `dcat:prev`              | recommended       |
+### Combining Editions, Scheduled Revisions, and Versions (an example)
+The Greenhouse Gas Emissions dataset series is a recurring annual publication (i.e. there are annual editions). There are two scheduled revisions each edition. The first scheduled revision of an edition is released at the end of the first calendar quarter; these data are considered provisional due to limited time for review, model validation, and completed data provision. The second scheduled revision of the same edition is released at the end of the second calendar quarter is considered final; these data are subjected to a higher level of scrutiny and the additional time allows for more refined data and additional data streams to be included in the calculations. In rare occurances, there may be unscheduled revisions (i.e. corrections) where a provisional or final release needs to be reissued.
 
-For specific versions, we recommend using the following properties:
+An example set of IRIs of this Greenhouse Gas Emissions dataset series could be as follows:
 
-| Property                | Requirement level |
-| ----------------------- | ----------------- |
-| `dcterms:issued`        | recommended       |
-| `dcat:isVersionOf`      | recommended       |
-| `dcat:previousVersion`  | recommended       |
-| `prov:wasRevisionOf`    | recommended       |
-| `prov:specializationOf` | recommended       |
+* `2018/provisional/v1`
+* `2018/provisional/v2`
+* `2018/final/v1`
+* `2019/provisional/v1`
+* `2019/final/v1`
+* `2020/provisional/v1`
+* `2020/final/v1`
+* `2020/final/v2`
+
+The year 2019 had no unscheduled revisions (i.e. versions) of the scheduled revisions (i.e. a provisional and a final release). In 2018 the provisional release required correction and in 2020 the final release required correction.
+
+#### Greenhouse Gas Emimssions dataset series (RDF)
+
+```ttl
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+<http://example.org/greenhouse-gas-emissions-series> a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion <http://example.org/greenhouse-gas-emissions/dataset/latest> ;
+    dcat:first <http://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> .
+
+<http://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions-series> .
+
+<http://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v2> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions-series> ;
+    dcat:replaces <http://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> ;
+    owl:sameAs <http://example.org/greenhouse-gas-emissions/dataset/2018/provisional/latest> .
+
+<http://example.org/greenhouse-gas-emissions/dataset/2018/final/v1> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <http://example.org/greenhouse-gas-emissions/dataset/2018/provisional/latest> ;
+    owl:sameAs <http://example.org/greenhouse-gas-emissions/dataset/2018/final/latest> ,
+        <http://example.org/greenhouse-gas-emissions/dataset/2018/latest> . 
+
+<http://example.org/greenhouse-gas-emissions/dataset/2019/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <http://example.org/greenhouse-gas-emissions/dataset/2018/final/latest> ;
+    owl:sameAs <http://example.org/greenhouse-gas-emissions/dataset/2019/provisional> .
+
+<http://example.org/greenhouse-gas-emissions/dataset/2019/final/v1> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <http://example.org/greenhouse-gas-emissions/dataset/2019/provisional> ;
+    owl:sameAs <http://example.org/greenhouse-gas-emissions/dataset/2019/final/latest> ,
+        <http://example.org/greenhouse-gas-emissions/dataset/2019/latest> .
+
+<http://example.org/greenhouse-gas-emissions/dataset/2020/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <http://example.org/greenhouse-gas-emissions/dataset/2019/final/latest> ;
+    owl:sameAs <http://example.org/greenhouse-gas-emissions/dataset/2020/provisional/latest> .
+
+<http://example.org/greenhouse-gas-emissions/dataset/2020/final/v1> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions> ;
+    dcat:previousVersion <http://example.org/greenhouse-gas-emissions/dataset/2020/provisional/latest> .
+
+<http://example.org/greenhouse-gas-emissions/dataset/2020/final/v2> a dcat:Dataset ;
+    dcat:inSeries <http://example.org/greenhouse-gas-emissions> ;
+    dcat:replaces <http://example.org/greenhouse-gas-emissions/dataset/2020/final/v1> ;
+    owl:sameAs <http://example.org/greenhouse-gas-emissions/dataset/2020/final/latest>, 
+        <http://example.org/greenhouse-gas-emissions/dataset/2020/latest>,
+        <http://example.org/greenhouse-gas-emissions/dataset/latest> .
+```
+
+#### Greenhouse Gas Emimssions dataset series (Flowchart)
+
+```mermaid
+flowchart LR
+    subgraph series
+
+	gges[gge-series\na dcat:DatasetSeries]
+        subgraph 2018
+            2018p1[dataset/2018/provisional/v1\na dcat:Dataset]
+            2018p2[dataset/2018/provisional/v2\na dcat:Dataset]
+            2018f1[dataset/2018/final/v1\na dcat:Dataset]
+        end
+
+        subgraph 2019
+            2019p1[dataset/2019/provisional/v1\na dcat:Dataset]
+            2019f1[gge/2019/final/v1\na dcat:Dataset]
+        end
+
+        subgraph 2020
+            2020p1[dataset/2020/provisional/v1\na dcat:Dataset]
+            2020f1[dataset/2020/final/v1\na dcat:Dataset]
+            2020f2[dataset/2020/final/v2\na dcat:Dataset]
+        end
+    end
+
+    2018 --> 2019 --> 2020
+
+    2018p1 -->|dcat:inSeries| gges
+    2018p2 -->|dcat:inSeries| gges
+    2018p2 -->|dcat:replaces| 2018p1
+    2018p2 -->|dcat:inSeries| gges
+    2018f1 -->|dcat:previousVersion| 2018p2
+    2018f1 -->|dcat:inSeries| gges
+    2019p1 -->|dcat:previousVersion| 2018f1
+    2019p1 -->|dcat:inSeries| gges
+    2019f1 -->|dcat:previousVersion| 2019p1
+    2019f1 -->|dcat:inSeries| gges
+    2020p1 -->|dcat:previousVersion| 2019f1
+    2020p1 -->|dcat:inSeries| gges
+    2020f1 -->|dcat:previousVersion| 2020p1
+    2020f1 -->|dcat:inSeries| gges
+    2020f2 -->|dcat:replaces| 2020f1
+    2020f2 -->|dcat:inSeries| gges
+```
+
+### Edition, Scheduled Revision, and Version Metadata
+
+Up to now we have focused on the relationships between editions, scheduled revisions, and versions. In addition to the relational structure of datasets within a dataset series, we also need to describe the dataset series and its datasets members so that users can select the appropriate data and navigate the series accurately.
+
+#### Dataset series
+
+| Property          | Requirement level | Notes                                                                      |
+| ----------------- | ----------------- | -------------------------------------------------------------------------- |
+| `dcat:first`      | recommended       | must be linked to the first resources' absolute IRI (i.e. dataset/2017/v1) |
+| `dcat:last`       | recommended       | can be linked to the dataset series' generic IRI (i.e. dataset/latest)     |
+| `dcat:hasVersion` | recommended       | can be set from the incoming `dcat:inSeries` links from a `dcat:Dataset`   |
+
+#### Datasets
+
+| Property               | Requirement level | Notes                                                                                                            |
+| ---------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `dcterms:issued`       | recommended       |                                                                                                                  |
+| `dcat:inSeries`        | recommended       |                                                                                                                  |
+| `dcat:previousVersion` | recommended       | necessary to establish a lineage of datasets within a dataset series                                           |
+| `dcat:replaces`        | optional          | in addition to helping establish a dataset series lineage, distingushes between planned updates and corrections |
+| `prov:wasRevisionOf`   | recommended       |                                                                                                                  |
+| `dcat:versisonNotes`   | optional          | Description of the changes between editions, a `Literal`                                                         |
 
 ```ttl
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
     dcat:hasCurrentVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
     dcat:hasVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>, 
         <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
-    dcat:version 2 ;
     adms:versionNotes "Dataset was corrected following an error being recognised."@en ;
     dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> ;
     .
@@ -944,136 +1149,29 @@ For specific versions, we recommend using the following properties:
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> a dcat:Dataset ;
     dcterms:issued "2018-03-01T00:00:00Z"^^xsd:dateTime ;
     dcat:isVersionOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
-    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>;
-    prov:wasRevisionOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>;
-    prov:specializationOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>;
-    .
+    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1> ;
+    prov:wasRevisionOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1> ;
+    prov:specializationOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> .
 
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1> a dcat:Dataset ;
     dcterms:issued "2018-01-01T00:00:00Z"^^xsd:dateTime ;
     dcat:isVersionOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
-    prov:specializationOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>;
-    prov:invalidatedAtTime "2018-03-01T00:00:00Z"^^xsd:dateTime ;
-    .
+    prov:specializationOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
+    prov:invalidatedAtTime "2018-03-01T00:00:00Z"^^xsd:dateTime .
 ```
 
-## Dataset Editions, revisions, and versions
-
-1. ASSUMPTION: All datasets are subject to revisions
-
-    All newly published `dcat:datasets` should be included in a `dcat:DatasetSeries` as this provides structure for revision without introducing new resources when a revision becomes necessary; this allows for `dcat:CatalogRecords` to point to a `dcat:DatasetSeries` without needing to be updated should a revision happen..
-
-```turtle
-ex:dataset-series-slug a dcat:DatasetSeries ;
-    dcat:hasCurrentVersion ex:dataset-slug-v1 .
-
-ex:dataset-slug-v1 a dcat:Dataset ;
-    dcat:inSeries ex:dataset-series-slug .
-```
-2. ASSUMPTION: We must support editions (i.e. a sequence of releases) of datasets (e.g. 2018, 2019, 2020)
-
-    Adding new editions of datasets should not require the modification of existing datasets within the series; in a simple series of editions defining which dataset it is replacing (via `dcat:previousVersion`) provides all necessary information to ammend the dataset series' membership to include this new dataset, and have the new edition be the current version.
-
-```turtle
-ex:dataset-series-slug a dcat:DatasetSeries ;
-    dcat:hasCurrentVersion ex:dataset-slug-2020 
-    dcat:first ex:dataset-slug-2018 .
-
-ex:dataset-slug-2018 a dcat:Dataset ;
-    dcat:inSeries ex:dataset-series-slug .
-
-ex:dataset-slug-2019 a dcat:Dataset ;
-    dcat:inSeries ex:dataset-series-slug ;
-    dcat:previousVersion ex:dataset-slug-2018 .
-
-ex:dataset-slug-2020 a dcat:Dataset ;
-    dcat:inSeries ex:dataset-series-slug ;
-    dcat:previousVersion ex:dataset-slug-2019 .
-
-```
-
-3.  We must support both scheduled (e.g. previous/final) and unscheduled (e.g. v2-corrected) revisions
-    TODO: RESUME HERE ANDREW 2022-09-30T17:24
-4. The next dataset after 2018/final would be 2019/provisional if 2019/final did not exist
-5. ASSUMPTION: The previous dataset to 2019/final would be 2018/final
-
-### Accomodating scheduled and unscheduled data set revisions through the use of DatasetSeries and Datasets
+## Thinking and worked examples for deletion which lead to the following section
 
 
-#### Worked example
-The Greenhouse Gas Emissions dataset series is a recurring annual publication, with two scheduled revisions covering the same period. The first edition is released at the end of the first calendar quarter; these data are considered provisional due to limited time for revisions and model correction. The second edition which is released at the end of the second calendar quarter is considered final; these data are subjected to a higher level of scrutiny and the additional time allows for more refined data and additional data streams to be included in the calculations. In rare occurances, there may be unscheduled revisions (i.e. corrections) where a provisional or final release needs to be corrected.
-
-An example set of IRIs of this Greenhouse Gas Emissions dataset series could be as follows:
-
-* `2017/provisional`
-* `2017/final`
-* `2018/provisional/v1`
-* `2018/provisional/v2`
-* `2018/final`
-* `2019/provisional`
-* `2019/final`
-* `2020/provisional`
-* `2020/final/v1`
-* `2020/final/v2`
-
-The years 2017 and 2019 had the expected number of scheduled releases (i.e. a provisional and a final release). In 2018 the provisional release required correction and in 2020 the final release required correction.
 
 
-```mermaid
-flowchart TD
-
-    a[Can the dataset ever be corrected or updated?] -->|no| 1([Dataset])
-    a -->|yes| b[Will there be scheduled releases?]
-    b -->|no| 2(["DatasetSeries &sup; Datasets"])
-    b -->|yes| 3(["DatasetSeries &sup; DatasetSeries &sup; Datasets"])
-```
 
 
-### Workthrough problems
-
-
-```mermaid
-flowchart TD
-	gge[Greenhouse Gas Emissions\na dcat:DatasetSeries]
-	ea[2018 Releases\n a dcat:DatasetSeries]
-	eb[2019 Releases\n a dcat:DatasetSeries]
-
-	
-	gge -->|dcat:hasVersion\ndcat:first| ea
-	gge -->|dcat:hasVersion\ndcat:last\ndcat:hasCurrentVersion| eb
-	
-    subgraph 2018
-    2018p[2018/provisional\na dcat:Dataset\nowl:sameAs 2018/provisional/v1]
-    2018f[2018/final\na dcat:Dataset]
-	ea -->|dcat:hasVersion\ndcat:first| 2018p
-	ea -->|dcat:hasVersion\ndcat:last\ndcat:hasCurrentVersion| 2018f
-	2018f -->|dcat:prev\ndcat:replaces\ndcat:previousVersion|2018p
-    end
-
-    subgraph 2019
-    2019p[2019/provisional\na dcat:Dataset]
-    2019f[2019/final\na dcat:Dataset]
-	eb -->|dcat:hasVersion\ndcat:first| 2019p
-	eb -->|dcat:hasVersion\ndcat:last\ndcat:hasCurrentVersion| 2019f
-	2019f -->|dcat:prev\ndcat:replaces\ndcat:previousVersion|2019p	
-    end
-
-	eb
-	
-	eb -->|dcat:previousVersion| ea
-```
-
-```rdf
-ex:greenhouse-gas-emissions a dcat:DatasetSeries;
-
-```
-
-
-## Publish CSV on the web (CSVW)
+## Publish CSV on the web (CSVW)
 
 Our aim is to publish metadata in a machine readable and structured format alongside the statistical data.
 
-Structured data formats, such as JSON-LD can be understood by search engines and are used for [search engine optimisation](https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data), with some search engines offering specific [dataset search functionality](https://developers.google.com/search/docs/advanced/structured-data/dataset) where structured metadata are provided using common vocabularies such as DCAT or [schema.org](https://schema.org/).
+Structured data formats, such as JSON-LD can be understood by search engines and are used for [search engine optimisation](http://developers.google.com/search/docs/advanced/structured-data/intro-structured-data), with some search engines offering specific [dataset search functionality](http://developers.google.com/search/docs/advanced/structured-data/dataset) where structured metadata are provided using common vocabularies such as DCAT or [schema.org](http://schema.org/).
 
 ### Structural CSV metadata
 
@@ -1125,7 +1223,7 @@ Given the above CSV, a fairly basic CSVW metadata file would look as follows:
 ### CSVs as self-contained datasets
 
 > **Note**
-> This method of relating CSVW and DCAT together suggests the use of a DCAT inverse property `dcat:isDistributionOf`. This would need to introduce a new inverse property to the DCAT v3 vocabulary. We have contributed to an open issue [here](https://github.com/w3c/dxwg/issues/1322) which is being considered.
+> This method of relating CSVW and DCAT together suggests the use of a DCAT inverse property `dcat:isDistributionOf`. This would need to introduce a new inverse property to the DCAT v3 vocabulary. We have contributed to an open issue [here](http://github.com/w3c/dxwg/issues/1322) which is being considered.
 
 A CSVW should provide all the necessary metadata that would be needed for a user of the data to feature it in a `dcat:Catalog`. 
 
@@ -1210,7 +1308,7 @@ Publishers may wish to use the `csvw:foreignKey` property to assert relationship
 
 ## RDF data cubes
 
-The [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/) provides a way to provide an explicit linked-data representation of a tabular dataset. 
+The [RDF data cube vocabulary](http://www.w3.org/TR/vocab-data-cube/) provides a way to provide an explicit linked-data representation of a tabular dataset. 
 
 ### Classes
 
@@ -1336,7 +1434,7 @@ For example:
 
 A CSVW provides a way for the rows, cells and column headers of a CSV files to be mapped to RDF resources.
 
-The CSVW specification also describes a method for [transforming CSV files into RDF](https://www.w3.org/TR/csv2rdf/). By doing so, we can generate an RDF data cube. The idea is to use the CSVW `aboutUrl`, `propertyUrl` and `valueUrl` to construct triples from the CSV data.
+The CSVW specification also describes a method for [transforming CSV files into RDF](http://www.w3.org/TR/csv2rdf/). By doing so, we can generate an RDF data cube. The idea is to use the CSVW `aboutUrl`, `propertyUrl` and `valueUrl` to construct triples from the CSV data.
 
 Given a CSVW with a column specification as follows:
 
@@ -1399,7 +1497,7 @@ Our recommended format for a CSVW is as follows. Note the use of virtual columns
         ]
     },
     "dcat:mediaType": {
-        "@id": "https://www.w3.org/ns/iana/media-types/text/csv#Resource"
+        "@id": "http://www.w3.org/ns/iana/media-types/text/csv#Resource"
     },
     "dcat:isDistributionOf": {
         "@id": "http://data.gov.uk/dataset/my-dataset",
@@ -1468,11 +1566,11 @@ classDiagram
   
 ```
 
-We may then generate an RDF representation of the data which describes an RDF data cube, using a CSVW and following the approach as set out in [Generating RDF from Tabular Data on the Web](https://www.w3.org/TR/csv2rdf/).
+We may then generate an RDF representation of the data which describes an RDF data cube, using a CSVW and following the approach as set out in [Generating RDF from Tabular Data on the Web](http://www.w3.org/TR/csv2rdf/).
 
 ### Multiple measures
 
-We adopt the [measure dimension](https://www.w3.org/TR/vocab-data-cube/#dfn-measure-dimension) approach as, unlike the [multi-measure observations](https://www.w3.org/TR/vocab-data-cube/#dsd-mm-obs) approach, this allows us to specify measure- and observation-specific attributes.
+We adopt the [measure dimension](http://www.w3.org/TR/vocab-data-cube/#dfn-measure-dimension) approach as, unlike the [multi-measure observations](http://www.w3.org/TR/vocab-data-cube/#dsd-mm-obs) approach, this allows us to specify measure- and observation-specific attributes.
 
 We include a column in the CSV which specifies the measure for each observation.
 
@@ -1517,9 +1615,9 @@ Within the CSVW metadata, we add a column definition for the measure dimension a
 
 > What is the relationship between a `skos:ConceptScheme` and a `dcat:Dataset`? In the way that we propose `qb:DataSet` is a distribution of a `dcat:Dataset`, maybe a `skos:ConceptScheme` is a distribution of a `dcat:Dataset`. Does the advice on editions/versioning also apply to `skos:ConceptScheme`s?
 
-> TODO: Some stuff [here](https://groups.niso.org/higherlogic/ws/public/download/12591/z39-19-2005r2010.pdf) around the styling of labels used in a taxonomy.
+> TODO: Some stuff [here](http://groups.niso.org/higherlogic/ws/public/download/12591/z39-19-2005r2010.pdf) around the styling of labels used in a taxonomy.
 
-> TODO: Some UN best practices for creating classifications [here](https://unstats.un.org/unsd/classifications/bestpractices/Best_practice_Nov_2013.pdf).
+> TODO: Some UN best practices for creating classifications [here](http://unstats.un.org/unsd/classifications/bestpractices/Best_practice_Nov_2013.pdf).
 
 Every `qb:DimensionConcept` must have a `skos:ConceptScheme` associated with it which is related using the `qb:codeList` property. The `skos:ConceptScheme` is used to define the list of codes used by the dimension.
 
@@ -1898,11 +1996,11 @@ This would result in the following RDF:
 
 ### Correspondence between codelists
 
-> TODO: https://rdf-vocabulary.ddialliance.org/xkos.html
+> TODO: http://rdf-vocabulary.ddialliance.org/xkos.html
 
 For example, the Combined Nonclementure (CN8) is a classification of commodities of trade. These get updated in legislation each year.
 
-HMRC publishes each annual edition of CN8 and [provides correspondence tables](https://www.trade-tariff.service.gov.uk/help/cn2021_cn2022) between the different year's editions.
+HMRC publishes each annual edition of CN8 and [provides correspondence tables](http://www.trade-tariff.service.gov.uk/help/cn2021_cn2022) between the different year's editions.
 
 | 2021 code  | 2022 code  |
 | ---------- | ---------- |
@@ -1929,7 +2027,7 @@ HMRC publishes each annual edition of CN8 and [provides correspondence tables](h
     .
 ```
 
-https://www.uktradeinfo.com/find-commodity-data/help-with-classifying-goods/
+http://www.uktradeinfo.com/find-commodity-data/help-with-classifying-goods/
 
 ## Provenance
 
@@ -1977,11 +2075,11 @@ Prefer using `xsd:date` and `xsd:dateTime` to describe `dcterms:issued` and `dct
 <http://data.gov.uk/dataset/my-dataset> dcterms:issued "2018-01-01"^^xsd:date .
 ```
 
-Prefer using IRIs from the `http://reference.data.gov.uk` vocabulary to describe dates and times within datasets (for example a time dimension). The IRI scheme is described [here](https://github.com/epimorphics/IntervalServer/blob/master/interval-IRIs.md).
+Prefer using IRIs from the `http://reference.data.gov.uk` vocabulary to describe dates and times within datasets (for example a time dimension). The IRI scheme is described [here](http://github.com/epimorphics/IntervalServer/blob/master/interval-IRIs.md).
 
 #### Frequency
 
-Prefer using IRIs from the [Dublin core collection description frequency vocabulary](https://www.dublincore.org/specifications/dublin-core/collection-description/frequency/), `http://purl.org/cld/freq/`.
+Prefer using IRIs from the [Dublin core collection description frequency vocabulary](http://www.dublincore.org/specifications/dublin-core/collection-description/frequency/), `http://purl.org/cld/freq/`.
 
 Common options include:
 
@@ -2003,7 +2101,7 @@ Common options include:
 
 #### Organisations
 
-GOV.UK provides a [list of government organisations](https://www.gov.uk/government/organisations), which can be used to populate the `dcterms:publisher` and `dcterms:creator` properties.
+GOV.UK provides a [list of government organisations](http://www.gov.uk/government/organisations), which can be used to populate the `dcterms:publisher` and `dcterms:creator` properties.
 
 For example: `http://www.gov.uk/government/organisations/office-for-national-statistics`.
 
@@ -2019,7 +2117,7 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 
 #### Symbols and shorthand in tables
 
-> TODO: [Recently updated guidance exists](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/). We may need to update our markers codelist.
+> TODO: [Recently updated guidance exists](http://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/). We may need to update our markers codelist.
 
 See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
 
@@ -2044,7 +2142,7 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 
 #### Themes
 
-> TODO: OSR have [domains](https://osr.statisticsauthority.gov.uk/what-we-do/our-domains/). Might be similar to the statistics authority themes.
+> TODO: OSR have [domains](http://osr.statisticsauthority.gov.uk/what-we-do/our-domains/). Might be similar to the statistics authority themes.
 
 | Label                                         | IRI                                                                                     |
 | --------------------------------------------- | --------------------------------------------------------------------------------------- |
@@ -2060,13 +2158,13 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 
 #### Media types
 
-https://www.w3.org/ns/iana/media-types/
+http://www.w3.org/ns/iana/media-types/
 
 | Label  | IRI                                                                |
 | ------ | ------------------------------------------------------------------ |
-| CSV    | `https://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
-| JSON   | `https://www.w3.org/ns/iana/media-types/application/json#Resource` |
-| Turtle | `https://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
+| CSV    | `http://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
+| JSON   | `http://www.w3.org/ns/iana/media-types/application/json#Resource` |
+| Turtle | `http://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
 
 ### Style
 
@@ -2083,7 +2181,7 @@ https://www.w3.org/ns/iana/media-types/
 > - be unique
 > - use sentence case as this is easier to read, for example: “The quick brown fox"
 >
-> GOV.UK: https://www.gov.uk/guidance/content-design/writing-for-gov-uk#titles
+> GOV.UK: http://www.gov.uk/guidance/content-design/writing-for-gov-uk#titles
 
 #### Descriptions
 
@@ -2101,7 +2199,7 @@ https://www.w3.org/ns/iana/media-types/
 > - have a unique description that is specific to the content, which does not repeat the title
 > - be no more than 160 characters including spaces (search engines ignore any text over this)
 >
-> GOV.UK: https://www.gov.uk/guidance/content-design/writing-for-gov-uk#summaries
+> GOV.UK: http://www.gov.uk/guidance/content-design/writing-for-gov-uk#summaries
 
 #### Keywords
 
@@ -2120,7 +2218,7 @@ https://www.w3.org/ns/iana/media-types/
 > - Do we always specify both?
 > - Should `rdfs:label == dcterms:title`?
 >
-> Some discussion [here](https://jazz.net/wiki/bin/view/LinkedData/UseOfRdfsLabelVersusDctermsTitle).
+> Some discussion [here](http://jazz.net/wiki/bin/view/LinkedData/UseOfRdfsLabelVersusDctermsTitle).
 >
 > `rdfs` offers `rdfs:label` and `rdfs:comment`.
 >
@@ -2146,9 +2244,9 @@ https://www.w3.org/ns/iana/media-types/
 >     .
 > ```
 
-[^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
+[^machine]: http://w3c.github.io/dwbp/bp.html#machine_readable
 
-[^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
+[^named-graphs]: http://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
 
 ### Class diagram
 
