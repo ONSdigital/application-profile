@@ -629,9 +629,9 @@ flowchart LR
     wcr1[Dimension 1 Record\na dcat:CatalogRecord]
     wcr2[Dimension 2 Record\na dcat:CatalogRecord]
     wcr3[Wide Dataset Main Record\na dcat:CatalogRecord]
-    add[Another Dataset\na dcat:Dataset]
-    wd1[Dimension 1 Dataset\na dcat:Dataset]
-    wd2[Dimension 2 Dataset\na dcat:Dataset]
+    add[Another Dataset\na dcat:DatasetSeries]
+    wd1[Dimension 1 Dataset\na dcat:Dataset\na skos:ConceptScheme]
+    wd2[Dimension 2 Dataset\na dcat:Dataset\na skos:ConceptScheme]
     wd3[Wide Dataset\na dcat:Dataset]
 
     pc -->|dcat:record| pcr1
@@ -866,7 +866,7 @@ sequenceDiagram
 
 ## Thinking on Editions, Scheduled Revisions, and Version
 
-1. ASSUMPTION: All datasets are subject to revisions
+1. ASSUMPTION: All datasets are subject to correction
 
     All newly published `dcat:datasets` should be included in a `dcat:DatasetSeries` as this provides structure for revision without introducing new resources when a revision becomes necessary; this allows for `dcat:CatalogRecords` to point to a `dcat:DatasetSeries` without needing to be updated should a revision happen..
 
@@ -1133,7 +1133,7 @@ The year 2019 had no unscheduled revisions (i.e. versions) of the scheduled revi
 #### Greenhouse Gas Emimssions dataset series (Flowchart)
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph series
 
 	gges[gge-series\na dcat:DatasetSeries]
@@ -1673,6 +1673,37 @@ Within the CSVW metadata, we add a column definition for the measure dimension a
 ```
 
 ## Codelists
+
+```mermaid
+classDiagram
+    class Dimension {
+        a qb:DimensionProperty
+    }
+    class Codelist {
+        a skos:ConceptScheme
+        a dcat:Dataset
+    }
+    class Dataset {
+        a dcat:Dataset
+    }
+    class Catalog {
+        a dcat:Catalog
+    }
+    class CatalogRecord {
+        a dcat:CatalogRecord
+    }
+
+    Catalog -->"1" CatalogRecord : 
+    CatalogRecord -->"1" Dataset : foaf.primaryTopic
+    Dataset -->"*" Codelist : dcat.qualifiedRelation
+```
+
+**DECISION WITH ROSS WHICH IS IRREVOKABLE** qualifiedRelation points to both local and Gold Record conceptSchemes
+
+Justification is that when you're reviewing a dataset, the code lists are required for understanding; otherwise you just end up with a bunch of IRIs which may be meaningless to a human reader.
+\
+
+Create the predciate `cogs:hasCodelist`
 
 > What is the relationship between a `skos:ConceptScheme` and a `dcat:Dataset`? In the way that we propose `qb:DataSet` is a distribution of a `dcat:Dataset`, maybe a `skos:ConceptScheme` is a distribution of a `dcat:Dataset`. Does the advice on editions/versioning also apply to `skos:ConceptScheme`s?
 
