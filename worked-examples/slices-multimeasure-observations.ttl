@@ -1,0 +1,36 @@
+
+<http://slice/wales> a <http://purl.org/linked-data/cube#Slice>;
+  <http://purl.org/linked-data/cube#observation> <http://observation/wales/disability-free-years>, <http://observation/wales/life-expectancy>;
+  dcat:title "wales" .
+
+<http://observation/wales/life-expectancy> a <http://purl.org/linked-data/cube#Observation>;
+  <http://dimension/life-expectancy> "80";
+  <http://dimension/region> <http://region/wales>;
+  <http://purl.org/linked-data/cube#dataSet> <http://dataset-uri>;
+  <http://purl.org/linked-data/sdmx/2009/attribute#obsStatus> "estimated";
+  <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> <http://unit/years> .
+
+<http://observation/wales/disability-free-years> a <http://purl.org/linked-data/cube#Observation>;
+  <http://dimension/disability-free-years> "75";
+  <http://dimension/region> <http://region/wales>;
+  <http://purl.org/linked-data/cube#dataSet> <http://dataset-uri>;
+  <http://purl.org/linked-data/sdmx/2009/attribute#obsStatus> "estimated";
+  <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> <http://unit/years> .
+
+<http://slice/fairy-land> a <http://purl.org/linked-data/cube#Slice>;
+  <http://purl.org/linked-data/cube#observation> <http://observation/fairy-land/disability-free-years>, <http://observation/fairy-land/life-expectancy>;
+  dcat:title "fairy-land" .
+
+<http://observation/fairy-land/life-expectancy> a <http://purl.org/linked-data/cube#Observation>;
+  <http://dimension/life-expectancy> "100";
+  <http://dimension/region> <http://region/fairy-land>;
+  <http://purl.org/linked-data/cube#dataSet> <http://dataset-uri>;
+  <http://purl.org/linked-data/sdmx/2009/attribute#obsStatus> "estimated";
+  <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> <http://unit/years> .
+
+<http://observation/fairy-land/disability-free-years> a <http://purl.org/linked-data/cube#Observation>;
+  <http://dimension/disability-free-years> "90";
+  <http://dimension/region> <http://region/fairy-land>;
+  <http://purl.org/linked-data/cube#dataSet> <http://dataset-uri>;
+  <http://purl.org/linked-data/sdmx/2009/attribute#obsStatus> "estimated";
+  <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> <http://unit/years> .
