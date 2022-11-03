@@ -16,6 +16,8 @@ The UK government often [publishes its statistics](https://www.gov.uk/search/res
 
 The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describes recommendations for publishing data to the web. If followed, we can enable these benefits:
 
+TODO: I want to change this to Go Fair's FAIR data.
+
 > - **Comprehension**: humans will have a better understanding about the data structure, the data meaning, the metadata and the nature of the dataset.
 > - **Processability**: machines will be able to automatically process and manipulate the data within a dataset.
 > - **Discoverability** machines will be able to automatically discover a dataset or data within a dataset.
@@ -2375,7 +2377,7 @@ classDiagram
         a qb:AttributeProperty
     }
     class Codelist {
-        a skos:ConceptScheme
+        a skos:ConceptScheme, dcat:Dataset
     }
     class Code {
         a skos:Concept
@@ -2396,4 +2398,48 @@ classDiagram
     Code --> "1" Codelist : skos.inScheme
     Code --> "1..*" Code : skos.narrower
     Code "1" <--  Code : skos.broader
+    Dataset --> Codelist : dcat.qualifiedRelation
 ```
+
+## Additional necessary RDF vocabularlies which do not yet exist
+
+### Statistical representation in RDF
+We need an ontology to describe statistically important characteristics for observations. 
+
+> Confidence intervals upper and lower bounds should be represented as an atttribute; however these two attributes should extend a property
+
+```ttl
+@prefix qb <https://purl.org/linked-data/cube#>
+@prefix sro <example.org/StatRepresentationOntology#> # Proposed new vocab
+
+obs a qb:observation;
+    qb:aMeasure "17.92"^^xsd:double ;
+    sro:lowerBound "17.4"^^xsd:double ;
+    sro:upperBound "18.46"^^xsd:doube .
+```
+
+> Seasonally adjusted and unadjusted observations should be described and matched within the RDF representaiton
+
+```ttl
+@prefix qb <https://purl.org/linked-data/cube#>
+@prefix sro <example.org/StatRepresentationOntology#> # Proposed new vocab
+
+obsSA a qb:observation, sro:SAobs;
+    qb:aMeasure "42"^^xsd:int ;
+    obsSA sro:hasUnadjustedObs obsNSA.
+
+obsNSA a qb:observation, sro:NSAobs ;
+    qb:aMeasure "40"^^xsd:int ;
+    obsSA sro:hasAdjustedObs obsSA .
+```
+
+### A concept scheme extension vocabulary
+We need an ontology to better describe concept schemes to improve quality of life for analysists and machine learning users.
+
+> Concept schemes, and concepts themselves need to be better described so that dataset cubes can actually be treated as cubes (with roll-ups) -- this approach necessitates concepts which describes their MECE status.
+
+This concept scheme will leverage hierarchical concept schemes and an opinionated default (as interpreted by our tooling) that parent is the sum of its children unless otherwise described using OWL.
+
+> Concept schemes should be described in ways which allow for interpretation of a dimension by machine learning techniques so that consumers of data know whether a particular codelist requires one-hot encoding vs ordinal encoding. 
+
+This extension to the concept scheme domain will describe whether a dataset is oridinal or nominal in order to improve the creation of arrays for machine learning or general linear models.
