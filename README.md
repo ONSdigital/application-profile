@@ -27,6 +27,22 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 
 We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
 
+Amalgamating the 5* and thE FAIR data principles provides a means lowering the above mentioned challengesinto the access and use of data.
+5* Open Data is based on the following principles,
+★     data needs to be able to be published on the web
+★★    data needs to be machine-readable
+★★★   data needs to be non-proprietary
+★★★★  identifiers need to be used to denote things, so that people can talk about resources unambiguously
+★★★★★ data needs to able to be linkied to other data to provide context
+
+To aid humans who increasingly rely on computational support to deal with increased volumes of data, complexity, and creation speed of data, The FAIR Principles were conceived.
+The FAIR Principle consist of the following,
+Findability, 
+Accessibility, 
+Interoperability, 
+and Reuse of digital assets.
+Merging these two similar concepts requires data publishers and users to shift their perspective from a tabular view of the world with its rows, columns and cells to one of graphs, nodes and edges. CSV as a starting point is useful, however learning a new set of technologies like RDF ontologies and SPARQL queries is important to get things into context.
+
 ## Specifications used
 
 The Application Profile uses terms from various existing specifications. Classes and properties specified in the following sections come from the following namespaces.
