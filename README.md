@@ -29,11 +29,11 @@ Amalgamating the 5* and the FAIR data principles provides a means understanding 
 
 5* Open Data is based on the following principles,
 
-★     data needs to be able to be published on the web
-★★    data needs to be machine-readable
-★★★   data needs to be non-proprietary
-★★★★  identifiers need to be used to denote things, so that people can talk about resources unambiguously
-★★★★★ data needs to able to be linkied to other data to provide context
+★     data needs to be able to be published on the web,
+★★    data needs to be machine-readable,
+★★★   data needs to be non-proprietary,
+★★★★  identifiers need to be used to denote things, so that people can talk about resources unambiguously,
+★★★★★ data needs to able to be linkied to other data to provide context.
 
 To aid humans who increasingly rely on computational support to deal with increased volumes of data, complexity, and creation speed of data, The FAIR Principles were conceived.
 
@@ -67,7 +67,7 @@ This brings into focus the FAIR Guiding Principles for scientific data managemen
 
 ★★★★  CSV does not conform to a ★★★★ Web data format. Identifiers cannot be used to denote things, and people cannot talk about resources unambiguously. Overlapping with the FAIR Guiding Principles, CSV data is not Findable. The first step in (re)using data is to find them. Metadata and data should be easy to find for both humans and computers, CSV does not have Metadata capabilities. Machine-readable metadata are essential for automatic discovery of datasets and services,
 
-★★★★★ CSV data needs to able to be linkied to other data to provide context, which is not the case. CSV data need to be Interoperable in order to be integrated with other data. In addition, the data need to interoperate with applications or workflows for analysis, storage, and processing. Interoperability is the third principle, the I part of the FAIR Guiding Principles. With the help of the W3C standards and Linked Data principles, data publishers link their data to other people’s data to provide context. This is the prerequisite for getting the fifth star for Linked Open Data, according to Sir Berners-Lee. In order for data to provide context it needs to be linked.
+★★★★★ CSV data needs to able to be linkied to other data to provide context, which is not the case. CSV data need to be Interoperable in order to be integrated with other data. In addition, the data need to interoperate with applications or workflows for analysis, storage, and processing. Interoperability is the third principle, the "I" part of the FAIR Guiding Principles. With the help of the W3C standards and Linked Data principles, data publishers link their data to other people’s data to provide context. This is the prerequisite for getting the fifth star for Linked Open Data, according to Sir Berners-Lee. In order for data to provide context it needs to be linked.
 
 ## Specifications used
 
