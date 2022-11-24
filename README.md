@@ -25,9 +25,7 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 > - **Access**: humans and machines will be able to access up to date data in a variety of forms.
 > - **Interoperability**: it will be easier to reach consensus among data publishers and consumers.
 
-We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
-
-Amalgamating the 5* and thE FAIR data principles provides a means lowering the above mentioned challengesinto the access and use of data.
+Amalgamating the 5* and the FAIR data principles provides a means understanding and lowering the above mentioned challenges relating to the access and use of data.
 5* Open Data is based on the following principles,
 ★     data needs to be able to be published on the web
 ★★    data needs to be machine-readable
@@ -42,6 +40,18 @@ Accessibility,
 Interoperability, 
 and Reuse of digital assets.
 Merging these two similar concepts requires data publishers and users to shift their perspective from a tabular view of the world with its rows, columns and cells to one of graphs, nodes and edges. CSV as a starting point is useful, however learning a new set of technologies like RDF ontologies and SPARQL queries is important to get things into context.
+
+We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
+
+The CSV on the Web “CSVW” standard provides a way to resolve shortcomings that arise with CSV. This includes standardising dialects and expressing types. Furthermore it extends CSV with identifiers to make 5 star linked-data in CSV format. In essence, a CSV file is linked with a JSON document to provide 
+some addition metadata to describe and clarify the content of the CSV file.
+
+The CSV format has been proved to be highly effective for machine-readability.In spite of this, the following shortcomings restrict the CSV data format attaining 5* Open Data Status
+
+These shortcomings include
+1. Different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
+2. Multiple differences are possible in encoding, thus creating confusion within any text format.
+3. Ther inability to say in advance how the fields in CSV file ought to be interpreted 
 
 ## Specifications used
 
