@@ -26,7 +26,9 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 > - **Interoperability**: it will be easier to reach consensus among data publishers and consumers.
 
 Amalgamating the 5* and the FAIR data principles provides a means understanding and lowering the above mentioned challenges relating to the access and use of data.
+
 5* Open Data is based on the following principles,
+
 ★     data needs to be able to be published on the web
 ★★    data needs to be machine-readable
 ★★★   data needs to be non-proprietary
@@ -34,7 +36,9 @@ Amalgamating the 5* and the FAIR data principles provides a means understanding 
 ★★★★★ data needs to able to be linkied to other data to provide context
 
 To aid humans who increasingly rely on computational support to deal with increased volumes of data, complexity, and creation speed of data, The FAIR Principles were conceived.
+
 The FAIR Principle consist of the following,
+
 Findability, 
 Accessibility, 
 Interoperability, 
@@ -52,6 +56,18 @@ These shortcomings include
 1. Different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
 2. Multiple differences are possible in encoding, thus creating confusion within any text format.
 3. Ther inability to say in advance how the fields in CSV file ought to be interpreted 
+
+This brings into focus the FAIR Guiding Principles for scientific data management and stewardship. The  CSV format is an incredibly simple way to reach the third star of the 5 star deployment scheme for open data:
+
+★ you can publish CSV on the web (with an open license) This means you can make CSV data available on the web, in whatever format, but with an open license, so as to be Open Data. Consumers can look, search, store, change data and share the data with anyone they like. As a data publisher, an organization knows that CSV is simple to publish and does not need to constantly explain to others that they can use the data.
+
+★★ CSV is a machine-readable table. CSV can be madeavailable as machine-readable structured data, for example, an excel spreadsheet instead of an image scan of a table. The users of 2-star open data can do anything they do with a 1-star data plus directly processing it with proprietary software and exporting it into another structured format. However, that type of data is still locked up because users depend on proprietary software to be able to get the data out of a document.
+
+★★★ CSV is non-proprietary. Users don’t require proprietary software package in order to analyze CSV, (CSV) format that stores tabular data in plain text.
+
+★★★★  CSV does not conform to a ★★★★ Web data format. Identifiers cannot be used to denote things, and people cannot talk about resources unambiguously. Overlapping with the FAIR Guiding Principles, CSV data is not Findable. The first step in (re)using data is to find them. Metadata and data should be easy to find for both humans and computers, CSV does not have Metadata capabilities. Machine-readable metadata are essential for automatic discovery of datasets and services,
+
+★★★★★ CSV data needs to able to be linkied to other data to provide context, which is not the case. CSV data need to be Interoperable in order to be integrated with other data. In addition, the data need to interoperate with applications or workflows for analysis, storage, and processing. Interoperability is the third principle, the I part of the FAIR Guiding Principles. With the help of the W3C standards and Linked Data principles, data publishers link their data to other people’s data to provide context. This is the prerequisite for getting the fifth star for Linked Open Data, according to Sir Berners-Lee. In order for data to provide context it needs to be linked.
 
 ## Specifications used
 
