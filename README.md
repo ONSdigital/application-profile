@@ -30,9 +30,13 @@ Amalgamating the 5* and the FAIR data principles provides a means understanding 
 5* Open Data is based on the following principles,
 
 ★     data needs to be able to be published on the web,
+
 ★★    data needs to be machine-readable,
+
 ★★★   data needs to be non-proprietary,
+
 ★★★★  identifiers need to be used to denote things, so that people can talk about resources unambiguously,
+
 ★★★★★ data needs to able to be linkied to other data to provide context.
 
 To aid humans who increasingly rely on computational support to deal with increased volumes of data, complexity, and creation speed of data, The FAIR Principles were conceived.
@@ -43,14 +47,14 @@ Findability,
 Accessibility, 
 Interoperability, 
 and Reuse of digital assets.
+
 Merging these two similar concepts requires data publishers and users to shift their perspective from a tabular view of the world with its rows, columns and cells to one of graphs, nodes and edges. CSV as a starting point is useful, however learning a new set of technologies like RDF ontologies and SPARQL queries is important to get things into context.
 
 We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
 
-The CSV on the Web “CSVW” standard provides a way to resolve shortcomings that arise with CSV. This includes standardising dialects and expressing types. Furthermore it extends CSV with identifiers to make 5 star linked-data in CSV format. In essence, a CSV file is linked with a JSON document to provide 
-some addition metadata to describe and clarify the content of the CSV file.
+The CSV format has been proved to be highly effective for machine-readability, and needs to be mapped to to RDF resources, and CSVW (CSV for the Web) provides a means for the rows, cells, column headers of a CSV to be mapped. This standard provides a way to resolve shortcomings that arise with CSV. This includes standardising dialects and expressing types. Furthermore it extends CSV with identifiers to make 5 star linked-data in CSV format. In essence, a CSV file is linked with a JSON document to provide some addition metadata to describe and clarify the content of the CSV file.
 
-The CSV format has been proved to be highly effective for machine-readability.In spite of this, the following shortcomings restrict the CSV data format attaining 5* Open Data Status
+In spite al the above, the following shortcomings restrict the CSV data format attaining 5* Open Data Status
 
 These shortcomings include
 1. Different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
@@ -61,13 +65,20 @@ This brings into focus the FAIR Guiding Principles for scientific data managemen
 
 ★ you can publish CSV on the web (with an open license) This means you can make CSV data available on the web, in whatever format, but with an open license, so as to be Open Data. Consumers can look, search, store, change data and share the data with anyone they like. As a data publisher, an organization knows that CSV is simple to publish and does not need to constantly explain to others that they can use the data.
 
-★★ CSV is a machine-readable table. CSV can be madeavailable as machine-readable structured data, for example, an excel spreadsheet instead of an image scan of a table. The users of 2-star open data can do anything they do with a 1-star data plus directly processing it with proprietary software and exporting it into another structured format. However, that type of data is still locked up because users depend on proprietary software to be able to get the data out of a document.
+★★ CSV is a machine-readable format. CSV can be made available as machine-readable structured data, for example, an excel spreadsheet instead of an image scan of a table. The users of 2-star open data can do anything they do with a 1-star data plus directly processing it with proprietary software and exporting it into another structured format. However, that type of data is still locked up because users depend on proprietary software to be able to get the data out of a document.
 
 ★★★ CSV is non-proprietary. Users don’t require proprietary software package in order to analyze CSV, (CSV) format that stores tabular data in plain text.
 
-★★★★  CSV does not conform to a ★★★★ Web data format. Identifiers cannot be used to denote things, and people cannot talk about resources unambiguously. Overlapping with the FAIR Guiding Principles, CSV data is not Findable. The first step in (re)using data is to find them. Metadata and data should be easy to find for both humans and computers, CSV does not have Metadata capabilities. Machine-readable metadata are essential for automatic discovery of datasets and services,
+★★★★  CSV does not conform to a 4th star Web data format. Identifiers cannot be used to denote things, and people cannot talk about resources unambiguously. Overlapping with the FAIR Guiding Principles, CSV data is not Findable. The first step in (re)using data is to find them. Metadata and data should be easy to find for both humans and computers, CSV does not have Metadata capabilities. Machine-readable metadata are essential for automatic discovery of datasets and services,
 
 ★★★★★ CSV data needs to able to be linkied to other data to provide context, which is not the case. CSV data need to be Interoperable in order to be integrated with other data. In addition, the data need to interoperate with applications or workflows for analysis, storage, and processing. Interoperability is the third principle, the "I" part of the FAIR Guiding Principles. With the help of the W3C standards and Linked Data principles, data publishers link their data to other people’s data to provide context. This is the prerequisite for getting the fifth star for Linked Open Data, according to Sir Berners-Lee. In order for data to provide context it needs to be linked.
+
+The shortcomings of CSV mentioned above prompted a W3C working group set out to provide recommendations for working with CSV on the Web. This “CSVW” standard provides a way to resolve the problems with CSV. CSVW is a standard for describing and clarifying the content of CSV tables. 
+
+CSVW metadata can be used to drive a user interface for users to discover metadata. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web, in applications.
+
+Linked data is powered by technologies such as RDF,OWL,SKOS, and SPARQL. CSVW standard is used to make a machine-readable definition of how to interpret the a CSV file, this is done by a JSON file.
+.
 
 ## Specifications used
 
