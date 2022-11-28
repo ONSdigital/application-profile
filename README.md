@@ -77,7 +77,7 @@ The shortcomings of CSV mentioned above prompted a W3C working group set out to 
 
 CSVW metadata can be used to drive a user interface for users to discover metadata. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web, in applications.
 
-Linked data is powered by technologies such as RDF,OWL,SKOS, and SPARQL. CSVW standard is used to make a machine-readable definition of how to interpret the a CSV file, this is done by a JSON file.
+Linked data is powered by technologies such as RDF, OWL, SKOS, and SPARQL. CSVW standard is used to make a machine-readable definition of how to interpret the a CSV file, this is done by a JSON file.
 .
 
 ## Specifications used
