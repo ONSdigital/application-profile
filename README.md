@@ -7,7 +7,6 @@ The key words must, must not, required, shall, shall not, should, should not, re
 ## Preamble
 
 The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, we recognise there are still barriers and challenges in accessing and using the data we produce:
-
 - Analysts need to wrangle data because data are in unstandardised and presentational formats.
 - A user must locate and navigate through many large spreadsheets to understand what data are available.
 - Metadata are provided in an unstructured or unstandardised ways.
