@@ -48,11 +48,6 @@ Interoperability,
 and Reuse of digital assets.
 
 Merging these two similar concepts requires data publishers and users to shift their perspective from a tabular view of the world with its rows, columns and cells to one of graphs, nodes and edges. CSV as a starting point is useful, however learning a new set of technologies like RDF ontologies and SPARQL queries is important to get things into context.
-
-We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
-
-The CSV format has been proved to be highly effective for machine-readability, and needs to be mapped to to RDF resources, and CSVW (CSV for the Web) provides a means for the rows, cells, column headers of a CSV to be mapped. This standard provides a way to resolve shortcomings that arise with CSV. This includes standardising dialects and expressing types. Furthermore it extends CSV with identifiers to make 5 star linked-data in CSV format. In essence, a CSV file is linked with a JSON document to provide some addition metadata to describe and clarify the content of the CSV file.
-
 In spite al the above, the following shortcomings restrict the CSV data format attaining 5* Open Data Status
 
 These shortcomings include
@@ -77,8 +72,10 @@ The shortcomings of CSV mentioned above prompted a W3C working group set out to 
 CSVW metadata can be used to drive a user interface for users to discover metadata. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web, in applications.
 
 Linked data is powered by technologies such as RDF, OWL, SKOS, and SPARQL. CSVW standard is used to make a machine-readable definition of how to interpret a CSV file, this is done by a JSON file.
-.
 
+The CSV format has been proved to be highly effective for machine-readability, and needs to be mapped to to RDF resources, and CSVW (CSV for the Web) provides a means for the rows, cells, column headers of a CSV to be mapped. This standard provides a way to resolve shortcomings that arise with CSV. This includes standardising dialects and expressing types. Furthermore it extends CSV with identifiers to make 5 star linked-data in CSV format. In essence, a CSV file is linked with a JSON document to provide some addition metadata to describe and clarify the content of the CSV file.
+
+We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
 ## Specifications used
 
 The Application Profile uses terms from various existing specifications. Classes and properties specified in the following sections come from the following namespaces.
