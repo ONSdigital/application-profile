@@ -106,6 +106,10 @@ The Application Profile uses terms from various existing specifications. Classes
 
 Many of the excel workbooks produced by statisticians are designed to be easily read by humans but typically are difficult for machines to interpret and manipulate.
 
+As mentioned above, CSV on the Web (CSVW) standard adds metadata to describe the contents and structure of comma-separated values (CSV) data files thus bringing the power of linked-data to the versatile CSV format.
+
+In order to achieve JSON, RDF, and SPARQL formats data has to undergo a transformation. The Semantic Web Project's value proposition is to enable the ability to say anything, about anything, whenever, and from wherever, in a manner that's both machine and human comprehensible.
+
 Consider this example taken from the [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/), extracted from StatsWales report number 003311 which describes life expectancy broken down by region (unitary authority), sex and time:
 
 <table id="example-data" style="text-align: left;">
