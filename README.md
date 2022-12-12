@@ -215,7 +215,6 @@ Importing the above table into a statistical software such as [R](https://www.r-
 - The header row representing time period is not fully populated.
 - The first column contains empty strings.
 - Numbers in the data are treated as strings, due to columns having mixed data types.
-
 ```r
 # An example of how the above table looks once imported into R:
 
@@ -232,6 +231,13 @@ Importing the above table into a statistical software such as [R](https://www.r-
 
 Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), with each variable having its own column gives an output which can be instantly read into R, without need for further cleaning.
 
+For data to be classified as tidy data:
+
+1. Each variable forms a column.
+2. Each observation forms a row.
+3. Each type of observational unit forms a table.
+
+
 | area    | period    | sex    | life_expectancy |
 | ------- | --------- | ------ | --------------- |
 | Newport | 2004-2006 | Male   | 76.7            |
@@ -241,6 +247,8 @@ Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), with
 | ...     | ...       | ...    | ...             |
 
 ### Adopt common identifiers
+
+CSV on the Web (CSVW) standard adds metadata to describe the contents and structure of comma-separated values (CSV) data files thus bringing the power of linked-data to the versatile CSV format.
 
 We should adopt common and unambiguous identifiers for data items such as ONS geography codes or ISO-8601 time intervals.
 
@@ -276,7 +284,9 @@ When [using a CSVW to create an RDF data cube](#using-csvw-to-create-an-rdf-data
 | W06000015 | Cardiff    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 83.3            |
 | ...       | ...        | ...                     | ...          | ...    | ...             |
 
-To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](#codelists).
+CSVW provides a way for values rows, and column headings of a CSV file to be mapped to RDF resources. Some schema fields refer to codelists, to limit and standardize the possible values of the fields, in order to promote data interoperability.
+
+To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](#codelists). 
 
 ### Using symbols and shorthand in tables
 
