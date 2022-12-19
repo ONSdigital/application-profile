@@ -229,7 +229,7 @@ Importing the above table into a statistical software such as [R](https://www.r-
 6 "Merthyr Tydfil"  75.5      79.1      75.5      79.4   74.9  79.6  
 ```
 
-Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), with each variable having its own column gives an output which can be instantly read into R, without need for further cleaning.
+Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), additional information which describes the characteristics of the data in the CSV file with each variable having its own column gives an output which can be instantly read into R, without need for further cleaning. 
 
 For data to be classified as tidy data:
 
@@ -248,7 +248,7 @@ For data to be classified as tidy data:
 
 ### Adopt common identifiers
 
-CSV on the Web (CSVW) standard adds metadata to describe the contents and structure of comma-separated values (CSV) data files thus bringing the power of linked-data to the versatile CSV format.
+CSV on the Web (CSVW) standard adds metadata to describe the contents and structure of comma-separated values (CSV) data files thus bringing the power of linked-data to the versatile CSV format. CSVW  does this by providing a standard for sharing additional information which describes the characteristics of the data in a CSV file. This is what is termed as the metadata of the CSV file,
 
 We should adopt common and unambiguous identifiers for data items such as ONS geography codes or ISO-8601 time intervals.
 
