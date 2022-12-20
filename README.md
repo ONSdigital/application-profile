@@ -51,7 +51,7 @@ The FAIR Principles describe data which is:
 * Interoperable: data and metadata is represented in an appropriate knowledge representation standard
 * Reusable: using common vocabularies for knowledge representation allows for reuse and remixing of data
 
-## Notes on CSV (RFC 4180)
+### Notes on CSV (RFC 4180)
 
 CSVs are inadquate for statistical dissemination with the level of clarity and precision required.
 
@@ -61,7 +61,7 @@ Shortcomings include:
 * Their inability to say in advance how the rows, columns, cells in CSV file ought to be interpreted.
 
 
-## Application of approaches to data principles and standards
+### Application of approaches to data principles and standards
 
 The shortcomings of CSV prompted a W3C working group to build recommendations for working with [CSVW (CSV on the Web)](https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/). This CSVW standard provides a way to resolve the problems with CSVs alone, providing a standard for describing and clarifying the content of CSV tabular data. 
 
