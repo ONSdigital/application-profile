@@ -30,14 +30,15 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 
 ### Five Star Data
 
-5★ Open Data has a five point scale which describes data on the web which increases the utility of said data for each increase from one to five.
+5★ Open Data has a five point scale which describes data on the web which increases the utility of said data for each increase from one to five stars.
 
-|:-:|:---|
-| ★ |    data needs to be able to be published on the web,|
-| ★★  |  data needs to be machine-readable,|
-| ★★★   |data needs to be non-proprietary,|
-| ★★★★  |identifiers need to be used to denote things, so that people can talk about resources unambiguously,|
-| ★★★★★ |data needs to able to be linkied to other data to provide context.|
+| Stars | Requirements                                                                                         |
+| :---: | :--------------------------------------------------------------------------------------------------- |
+| ★☆☆☆☆ | data needs to be able to be published on the web,                                                    |
+| ★★☆☆☆ | data needs to be machine-readable,                                                                   |
+| ★★★☆☆ | data needs to be non-proprietary,                                                                    |
+| ★★★★☆ | identifiers need to be used to denote things, so that people can talk about resources unambiguously, |
+| ★★★★★ | data needs to able to be linkied to other data to provide context.                                   |
 
 ### FAIR data principles
 
@@ -50,27 +51,30 @@ The FAIR Principles describe data which is:
 * Interoperable: data and metadata is represented in an appropriate knowledge representation standard
 * Reusable: using common vocabularies for knowledge representation allows for reuse and remixing of data
 
-## Notes on CSV (RFC 4180)
+## Notes on CSV (RFC 4180)
 
-CSVs are inadquate for statistical dissemination.
+CSVs are inadquate for statistical dissemination with the level of clarity and precision required.
 
-Shortcomings include
-1. Different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
-2. Multiple differences are possible in encoding, thus creating confusion within any text format.
-3. Ther inability to say in advance how the fields in CSV file ought to be interpreted 
+Shortcomings include:
+* There are different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
+* Multiple differences are possible in encoding, thus creating confusion within any text format.
+* Their inability to say in advance how the rows, columns, cells in CSV file ought to be interpreted.
 
 
 ## Application of approaches to data principles and standards
 
-The shortcomings of CSV mentioned above prompted a W3C working group set out to provide recommendations for working with CSV on the Web. This “CSVW” standard provides a way to resolve the problems with CSV. CSVW is a standard for describing and clarifying the content of CSV tables. 
+The shortcomings of CSV prompted a W3C working group to build recommendations for working with [CSVW (CSV on the Web)](https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/). This CSVW standard provides a way to resolve the problems with CSVs alone, providing a standard for describing and clarifying the content of CSV tabular data. 
 
-The CSV format has been proved to be highly effective for machine-readability, and needs to be mapped to to RDF resources, and CSVW (CSV for the Web) provides a means for the rows, cells, column headers of a CSV to be mapped to resources. This standard provides a way to resolve shortcomings that arise with CSV, including standardising dialects and expressing types. Furthermore CSVW permits using identifiers to express 5 star linked-data in CSV format. In essence, a CSV file is paired with a JSON document to provide additional metadata to describe the content of the CSV file.
+The CSV format is at its best when machine readable. Improving machine-readability by providing metadata by mapping of  rows, columns, and cells of a CSV to internal or external resources adds considerable value to data users. One such improvement is providing data type information for cells contents so they can be mapped as decimals, integers, dates, etc. without ambiguity. Furthermore, CSVW is extensible to fully 5-star linked-data in CSV format. In essence, a CSV file is paired with a JSON document to provide additional metadata to describe the content of the CSV file.
+
+> CSVW (CSV on the Web)
+> 
+> CSVWs are the combination of CSV (RFC 4180) with known constraints plus a paired JSON file which provides additional metadata describing the CSV's contents.
 
 CSVW metadata can be used to drive a user interface for discoverability. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web in applications.
 
-Linked data is powered by technologies such as RDF, OWL, SKOS, and SPARQL. CSVW standard is used to make a machine-readable definition of how to interpret a CSV file, this is done by a JSON file.
+The Integrated Data Service's Disseminiation Service has explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices, 5-star data, and the FAIR data principles.
 
-We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
 ## Specifications used
 
 The Application Profile uses terms from various existing specifications. Classes and properties specified in the following sections come from the following namespaces.
@@ -535,8 +539,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                | Requirement level | Notes                                                                     |
-| ----------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property                | Requirement level | Notes                                                                      |
+| ----------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`         | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`     | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -619,8 +623,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                     | Requirement level | Notes                                                                     |
-| ---------------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property                     | Requirement level | Notes                                                                      |
+| ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -641,9 +645,9 @@ We recommend the use of the following properties:
 | `dcat:version`               | recommended       | See [versions](#versions)                                                  |
 | `adms:versionNotes`          | recommended       | See [versions](#versions)                                                  |
 | `dcat:prev`                  | recommended       | See [versions](#versions)                                                  |
-| `dcat:landingPage`           | optional          |                                                                           |
-| `dcterms:identifier`         | optional          |                                                                           |
-| `dcterms:isReferencedBy`     | optional          |                                                                           |
+| `dcat:landingPage`           | optional          |                                                                            |
+| `dcterms:identifier`         | optional          |                                                                            |
+| `dcterms:isReferencedBy`     | optional          |                                                                            |
 
 For example:
 
@@ -691,8 +695,8 @@ For example:
 
 We recommend the use of the following properties:
 
-| Property                     | Requirement level | Notes                                                                     |
-| ---------------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property                     | Requirement level | Notes                                                                      |
+| ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
@@ -800,14 +804,14 @@ For example:
 
 | Property                | Requirement level | Notes                                                                          |
 | ----------------------- | ----------------- | ------------------------------------------------------------------------------ |
-| `dcterms:title`         | mandatory         | See [titles](#titles)                                                           |
-| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                               |
-| `dcterms:license`       | mandatory         | See [licenses](#licenses)                                                       |
-| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts)      |
-| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                         |
-| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                         |
-| `dcat:isDistributionOf` | recommended       | See [CSVs as self contained datasets](#csvs-as-self-contained-datasets)         |
-| `dcat:mediaType`        | recommended       | See [media types](#media-types)                                                 |
+| `dcterms:title`         | mandatory         | See [titles](#titles)                                                          |
+| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                              |
+| `dcterms:license`       | mandatory         | See [licenses](#licenses)                                                      |
+| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts)     |
+| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                        |
+| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                        |
+| `dcat:isDistributionOf` | recommended       | See [CSVs as self contained datasets](#csvs-as-self-contained-datasets)        |
+| `dcat:mediaType`        | recommended       | See [media types](#media-types)                                                |
 | `dcat:downloadURL`      | recommended       |                                                                                |
 | `dcat:byteSize`         | recommended       |                                                                                |
 | `spdx:checksum`         | recommended       |                                                                                |
@@ -1188,13 +1192,13 @@ ex:measure1 a qb:MeasureProperty ;
     .
 ```
 
-| Property             | Requirement level | Notes                       |
-| -------------------- | ----------------- | --------------------------- |
-| `rdfs:label`         | mandatory         |                             |
-| `rdfs:comment`       | mandatory         |                             |
-| `rdfs:range`         | mandatory         |                             |
-| `qb:concept`         | recommended       |                             |
-| `rdfs:subPropertyOf` | recommended       |                             |
+| Property             | Requirement level | Notes |
+| -------------------- | ----------------- | ----- |
+| `rdfs:label`         | mandatory         |       |
+| `rdfs:comment`       | mandatory         |       |
+| `rdfs:range`         | mandatory         |       |
+| `qb:concept`         | recommended       |       |
+| `rdfs:subPropertyOf` | recommended       |       |
 
 #### Dimension
 
@@ -1481,8 +1485,8 @@ For example:
 - `http://data.gov.uk/codelist/some-codelist`
 - `http://data.gov.uk/codelist/sitc/2022`
 
-| Property              | Requirement level | Notes                                                                     |
-| --------------------- | ----------------- | ------------------------------------------------------------------------- |
+| Property              | Requirement level | Notes                                                                      |
+| --------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `dcterms:title`       | mandatory         | See [titles](#titles)                                                      |
 | `dcterms:description` | mandatory         | See [descriptions](#descriptions)                                          |
 | `dcterms:publisher`   | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
