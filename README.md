@@ -32,11 +32,12 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 
 5★ Open Data has a five point scale which describes data on the web which increases the utility of said data for each increase from one to five.
 
-★     data needs to be able to be published on the web,
-★★    data needs to be machine-readable,
-★★★   data needs to be non-proprietary,
-★★★★  identifiers need to be used to denote things, so that people can talk about resources unambiguously,
-★★★★★ data needs to able to be linkied to other data to provide context.
+|:-:|:---|
+| ★ |    data needs to be able to be published on the web,|
+| ★★  |  data needs to be machine-readable,|
+| ★★★   |data needs to be non-proprietary,|
+| ★★★★  |identifiers need to be used to denote things, so that people can talk about resources unambiguously,|
+| ★★★★★ |data needs to able to be linkied to other data to provide context.|
 
 ### FAIR data principles
 
@@ -44,12 +45,12 @@ To aid humans who increasingly rely on computational support to deal with increa
 
 The FAIR Principles describe data which is:
 
-* Findable: data and metadata for machines and humans
-* Accessible: using standard protocols for access and authentication
+* Findable: data and metadata encoded for machines and humans
+* Accessible: using standard protocols for access and authentication of data
 * Interoperable: data and metadata is represented in an appropriate knowledge representation standard
 * Reusable: using common vocabularies for knowledge representation allows for reuse and remixing of data
 
-## Why not just CSV (RFC 4180)?
+## Notes on CSV (RFC 4180)
 
 CSVs are inadquate for statistical dissemination.
 
@@ -63,9 +64,9 @@ Shortcomings include
 
 The shortcomings of CSV mentioned above prompted a W3C working group set out to provide recommendations for working with CSV on the Web. This “CSVW” standard provides a way to resolve the problems with CSV. CSVW is a standard for describing and clarifying the content of CSV tables. 
 
-The CSV format has been proved to be highly effective for machine-readability, and needs to be mapped to to RDF resources, and CSVW (CSV for the Web) provides a means for the rows, cells, column headers of a CSV to be mapped. This standard provides a way to resolve shortcomings that arise with CSV. This includes standardising dialects and expressing types. Furthermore it extends CSV with identifiers to make 5 star linked-data in CSV format. In essence, a CSV file is linked with a JSON document to provide some addition metadata to describe and clarify the content of the CSV file.
+The CSV format has been proved to be highly effective for machine-readability, and needs to be mapped to to RDF resources, and CSVW (CSV for the Web) provides a means for the rows, cells, column headers of a CSV to be mapped to resources. This standard provides a way to resolve shortcomings that arise with CSV, including standardising dialects and expressing types. Furthermore CSVW permits using identifiers to express 5 star linked-data in CSV format. In essence, a CSV file is paired with a JSON document to provide additional metadata to describe the content of the CSV file.
 
-CSVW metadata can be used to drive a user interface for users to discover metadata. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web, in applications.
+CSVW metadata can be used to drive a user interface for discoverability. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web in applications.
 
 Linked data is powered by technologies such as RDF, OWL, SKOS, and SPARQL. CSVW standard is used to make a machine-readable definition of how to interpret a CSV file, this is done by a JSON file.
 
