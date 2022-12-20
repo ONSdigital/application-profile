@@ -2443,3 +2443,7 @@ This concept scheme will leverage hierarchical concept schemes and an opinionate
 > Concept schemes should be described in ways which allow for interpretation of a dimension by machine learning techniques so that consumers of data know whether a particular codelist requires one-hot encoding vs ordinal encoding. 
 
 This extension to the concept scheme domain will describe whether a dataset is oridinal or nominal in order to improve the creation of arrays for machine learning or general linear models.
+
+### A cube is not quite a distribution
+
+A cube is not just a distribution, it is also RDF. We need to be able to describe with another triple beyond `dcat:distribution`.
