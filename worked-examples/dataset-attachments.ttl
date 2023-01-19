@@ -1,0 +1,9 @@
+@prefix ex: <example.com/>
+@prefix dcat: <purl.org/dcat#>
+
+ex:dataset a dcat:dataset;
+    dcat:distribution ex:datasetCube .
+
+ex:datasetCube a dcat:Dataset, qb:Dataset . # This is what analysts want, the "data" in tabular format
+
+ex:conceptscheme a dcat:Dataset, skos:ConceptScheme .

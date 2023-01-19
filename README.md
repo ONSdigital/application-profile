@@ -7,6 +7,7 @@ The key words must, must not, required, shall, shall not, should, should not, re
 ## Preamble
 
 The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, we recognise there are still barriers and challenges in accessing and using the data we produce:
+
 - Analysts need to wrangle data because data are in unstandardised and presentational formats.
 - A user must locate and navigate through many large spreadsheets to understand what data are available.
 - Metadata are provided in an unstructured or unstandardised ways.
@@ -18,6 +19,8 @@ There are three main lenses for approaching statistical dissemination best pract
 ### Data on the Web Best Practises 
 
 The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describes recommendations for publishing data to the web. If followed, we can enable these benefits:
+
+TODO: I want to change this to Go Fair's FAIR data.
 
 > - **Comprehension**: humans will have a better understanding about the data structure, the data meaning, the metadata and the nature of the dataset.
 > - **Processability**: machines will be able to automatically process and manipulate the data within a dataset.
@@ -79,23 +82,23 @@ The Integrated Data Service's Disseminiation Service has explored how to follow 
 
 The Application Profile uses terms from various existing specifications. Classes and properties specified in the following sections come from the following namespaces.
 
-
-| Namespace | Namespace IRI                                 | Specification name                                                                   |
-| --------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `adms`    | `http://www.w3.org/ns/adms#`                  | Asset Description Metadata Schema                                                    |
-| `dcat`    | `http://www.w3.org/ns/dcat#`                  | Data Catalog Vocabulary                                                              |
-| `dcterms` | `http://purl.org/dc/terms/`                   | DCMI (Dublin Core Metadata Initiative) Metadata Terms                                |
-| `dpv`     | `http://www.w3.org/ns/dpv#`                   | Data Privacy Vocabulary (DPV)                                                        |
-| `foaf`    | `http://xmlns.com/foaf/0.1/`                  | FOAF (Friend of a friend) Vocabulary                                                 |
-| `owl`     | `http://www.w3.org/2002/07/owl#`              | OWL Web Ontology Language                                                            |
-| `prov`    | `http://www.w3.org/ns/prov#`                  | Provenance Vocabulary                                                                |
-| `qb`      | `http://purl.org/linked-data/cube#`           | RDF Data Cube Vocabulary                                                             |
-| `rdfs`    | `http://www.w3.org/2000/01/rdf-schema#`       | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
-| `skos`    | `http://www.w3.org/2004/02/skos/core#`        | SKOS Simple Knowledge Organization System - Reference                                |
-| `spdx`    | `http://spdx.org/rdf/terms#`                  | Software Package Data Exchange                                                       |
-| `xkos`    | `http://rdf-vocabulary.ddialliance.org/xkos#` | XKOS: an SKOS extension for representing statistical classifications                 |
-| `xsd`     | `http://www.w3.org/2001/XMLSchema#`           | XML Schema Part 2: Datatypes Second Edition                                          |
-| `vcard`   | `http://www.w3.org/2006/vcard/ns#`            | File format standard for electronic business cards                                   |
+| Namespace | Namespace IRI                                  | Specification name                                                                   |
+| --------- | ---------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `adms`    | `https://www.w3.org/ns/adms#`                  | Asset Description Metadata Schema                                                    |
+| `dcat`    | `https://www.w3.org/ns/dcat#`                  | Data Catalog Vocabulary                                                              |
+| `dcterms` | `https://purl.org/dc/terms/`                   | DCMI (Dublin Core Metadata Initiative) Metadata Terms                                |
+| `dpv`     | `https://www.w3.org/ns/dpv#`                   | Data Privacy Vocabulary (DPV)                                                        |
+| `foaf`    | `https://xmlns.com/foaf/0.1/`                  | FOAF (Friend of a friend) Vocabulary                                                 |
+| `owl`     | `https://www.w3.org/2002/07/owl#`              | OWL Web Ontology Language                                                            |
+| `prov`    | `https://www.w3.org/ns/prov#`                  | Provenance Vocabulary                                                                |
+| `qb`      | `https://purl.org/linked-data/cube#`           | RDF Data Cube Vocabulary                                                             |
+| `qudt`    | `https://qudt.org/2.1/schema/qudt`             | Main QUDT Ontology                                                                   |
+| `rdfs`    | `https://www.w3.org/2000/01/rdf-schema#`       | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
+| `skos`    | `https://www.w3.org/2004/02/skos/core#`        | SKOS Simple Knowledge Organization System - Reference                                |
+| `spdx`    | `https://spdx.org/rdf/terms#`                  | Software Package Data Exchange                                                       |
+| `xkos`    | `https://rdf-vocabulary.ddialliance.org/xkos#` | XKOS: an SKOS extension for representing statistical classifications                 |
+| `xsd`     | `https://www.w3.org/2001/XMLSchema#`           | XML Schema Part 2: Datatypes Second Edition                                          |
+| `vcard`   | `https://www.w3.org/2006/vcard/ns#`            | File format standard for electronic business cards                                   |
 
 ## Data structure
 
@@ -251,6 +254,7 @@ CSV on the Web (CSVW) standard adds metadata to describe the contents and struct
 
 We should adopt common and unambiguous identifiers for data items such as ONS geography codes or ISO-8601 time intervals.
 
+
 | area      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
@@ -259,7 +263,7 @@ We should adopt common and unambiguous identifiers for data items such as ONS ge
 | W06000015 | 2004-01-01T00:00:00/P3Y | Female | 83.3            |
 | ...       | ...                     | ...    | ...             |
 
-In this example, adopting ISO 8601 time intervals allows machines to provide additional functionality for computing with this type of data. Adopting geography codes allows for linking between data sets.
+In this example, adopting ISO 8601 time intervals allows machines to provide additional functionality for computing with this type of data. Adopting geography codes allows for linking between datasets.
 
 ```r
 # A tibble: 4 x 4
@@ -369,16 +373,6 @@ After pivoting with the above code, each of the measures has its own column.
 | W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | 80.4                            |
 | ...       | ...                     | ...    | ...             |                                 |
 
-> TODO: Is there a need to support a multiple-measure structure instead of a measure-type dimension, e.g.
->
-> | area      | period                  | sex    | life_expectancy | life_expectancy_marker | disability_free_life_expectancy | disability_free_life_expectancy_marker |
-> | ----------- | ------------------------- | -------- | ----------------- | ------------------------ | --------------------------------- | ---------------------------------------- |
-> | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |                        | 70.1                            |                                        |
-> | W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |                        | 80.2                            | [p]                                    |
-> | W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |                        | 70.3                            |                                        |
-> | W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | [x]                    | 80.4                            |                                        |
-> | ...       | ...                     | ...    | ...             |                        |                                 |                                        |
-
 ### Expressing concept hierarchies
 
 Statistics publishers may wish to indicate that their data includes a hierarchy. A typical approach may be to include multiple columns, one for each level of the hierarchy, though this can sometimes be ambiguous and difficult to interpret.
@@ -458,7 +452,52 @@ Units of an observation may be specified by including a units column.
 
 In the case of a single-measure dataset (or multiple-measures where those measures share the same units of measurement), the units of an observation may be specified via a CSVW virtual column.
 
-### Different granularity of time periods
+### Secondary observations with different units
+
+It is possible to capture secondary observations of the same measure. In order to do so, the secondary observation is treated as an attribute of the primary observation. We recommend that the primary observation unit be selected by the units used in the initial observation; however in composite datasets (i.e. an aggregation of study results) such as the one below the most precise unit should be selected.
+
+| Country     | Sex    | Study Period | Height in cm | Height in inches |
+| ----------- | ------ | :----------: | :----------: | :--------------: |
+| Nepal       | Male   |  2012-2013   |    161.7     |       63.5       |
+| Nepal       | Female |  2012-2013   |    150.4     |        59        |
+| Netherlands | Male   |     2009     |    183.8     |       72.5       |
+| Netherlands | Female |     2009     |    170.7     |        67        |
+
+> Source: https://en.wikipedia.org/wiki/Average_human_height_by_country
+
+In this case, `country`, `sex`, `study period` are dimensions, `height` is the measure dimension, `height in cm` is the observation column with cm as units, and `height in inches` is a decimal literal attribute of the `height in cm` observation with unit inches.
+
+TODO: For representation using CSVW or RDF of this construction see a section in the RDF Cube Vocabulary bit at the end
+
+### Representing model components and uncertanty
+
+Similarly to [secondary observations with different units](#secondary-observations-with-different-units), model components and uncertainty should be expressed using literal attributes. An extension of the average human height by country dataset containing additional information about the observations provide information including the age range and count of study participants, and the standard deviation of the observation.
+
+| Country     | Sex    | Study Period | Height in cm | Height in inches | age range | participants |  std  |
+| ----------- | ------ | :----------: | :----------: | :--------------: | :-------: | :----------: | :---: |
+| Nepal       | Male   |  2012-2013   |    161.7     |       63.5       |   15-69   |     1326     |       |
+| Nepal       | Female |  2012-2013   |    150.4     |        59        |   15-69   |     2798     |       |
+| Netherlands | Male   |     2009     |    183.8     |       72.5       |    21     |      74      |  7.1  |
+| Netherlands | Female |     2009     |    170.7     |        67        |    21     |      50      |  6.3  |
+
+> Source: https://en.wikipedia.org/wiki/Average_human_height_by_country
+
+For datasets with confidence internals, we recommend attaching the upper and lower bounds to the primary observation as individiual literal attributes and not as a range.
+
+#### Seasonal adjustments and unadjusted values
+
+Seasonally adjusted and non-seasonally adjusted figures are frequently contained within the same dataset. In this case, although Seasonally Adjusted figures are a model component/output, we recommend that the measure used be extended so that SA and NSA both are captured as primary observations. In the example below the units are a number in thousands, and the column `All aged 16 & over` are a model component treated as a literal attribute.
+
+| Period  | Measure                                   | Value | All aged 16 & over |
+| ------- | ----------------------------------------- | :---: | :----------------: |
+| 2022-Q2 | economically active (unadjusted)          | 33945 |       53900        |
+| 2022-Q3 | economically active (unadjusted)          | 33999 |       53935        |
+| 2022-Q2 | economically active (seasonally adjusted) | 33970 |       53900        |
+| 2022-Q3 | economically active (seasonally adjusted) | 33942 |       53935        |
+
+> Combined datasets from ONS [A02 SA: Employment, ... (seasonally adjusted)](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/employmentunemploymentandeconomicinactivityforpeopleaged16andoverandagedfrom16to64seasonallyadjusteda02sa) and [A02 NSA: Employment, ... (not seasonally adjusted)](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/nsaemploymentunemploymentandeconomicinactivityforpeopleaged16andoverandagedfrom16to64a02).
+
+### Mixing time periods
 
 Statisticians may wish to report statistics at different time granularities. For example, a single dataset may report statistics by month, quarter, year and financial year.
 
@@ -476,7 +515,7 @@ Statisticians may wish to report statistics at different time granularities. For
 
 We adopt IRIs from the [reference.data.gov.uk service](https://github.com/epimorphics/IntervalServer/blob/master/interval-uris.md).
 
-`http://reference.data.gov.uk/id/{period_type}/{period}`
+`https://reference.data.gov.uk/id/{period_type}/{period}`
 
 | period_type     | period    | industry | trade_value |
 | --------------- | --------- | -------- | ----------- |
@@ -580,46 +619,22 @@ For example:
 - `http://data.gov.uk/dataset/my-dataset/record`
 - `http://data.gov.uk/dataset/my-dataset#record`
 
-We recommend the use of the following properties:
+## Datasets
 
-| Property               | Requirement level | Notes                                                                          |
-| ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
-| `dcterms:issued`       | mandatory         | See [dates and times](#dates-and-times)                                        |
-| `foaf:primaryTopic`    | mandatory         | This points to the IRI of the `dcat:Dataset` described by the catalogue record |
-| `prov:wasAttributedTo` | recommended       |                                                                                |
-| `dcterms:modified`     | recommended       | See [dates and times](#dates-and-times)                                        |
+We recommend standalone datasets have IRIs in the form of
 
-We may use `prov:wasAttributedTo` to attribute the creation of the catalogue record to a specific entity, such as the person who added the dataset to the catalogue.
+- `https://{domain}/dataset/{dataset_slug}`
 
-For example:
-
-```ttl
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-
-<http://data.gov.uk/dataset/my-dataset/record> a dcat:CatalogRecord ;
-    dcterms:issued "2015-01-01"^^xsd:date ;
-    foaf:primaryTopic <http://data.gov.uk/dataset/my-dataset> ;
-    prov:wasAttributedTo <mailto:joe.bloggs@ons.gov.uk> ;
-    .
-```
-
-### Dataset
-
-We recommend standalone datasets have IRIs of the form:
-
-- `http://{domain}/dataset/{dataset_slug}`
+However, in order to support [unscheduled revisions](#versions) (i.e. versions), we recommended that all datasets be a member of a dataset series.
 
 For datasets belonging to a dataset series, we recommend extending the series IRI to form the dataset IRI:
 
-- `http://{domain}/series/{series_slug}/dataset/{edition_year}`
+- `https://{domain}/series/{series_slug}/dataset/{edition_period}`
 
 For example:
 
-- `http://data.gov.uk/dataset/my-dataset`
-- `http://data.gov.uk/series/some-dataset-series/dataset/2018`
+- `https://data.gov.uk/dataset/my-dataset`
+- `https://data.gov.uk/series/some-dataset-series/dataset/2018-Q3`
 
 We recommend the use of the following properties:
 
@@ -652,46 +667,46 @@ We recommend the use of the following properties:
 For example:
 
 ```ttl
-<http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018> a dcat:Dataset ;
+<https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018> a dcat:Dataset ;
     dcterms:title "Final UK greenhouse gas emissions national statistics: 1990 to 2018"@en ;
     dcterms:description "Final estimates of UK territorial greenhouse gas emissions..."@en ;
     dcterms:license <https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
-    dcterms:publisher <http://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
+    dcterms:publisher <https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
     dcterms:issued "2020-02-04T09:30:00"^^xsd:dateTime ;
     dcterms:modified "2020-07-30T08:30:06"^^xsd:dateTime ;
     dcat:keyword "greenhouse gases"@en, "carbon emissions"@en, "greenhouse gas emissions"@en ;
-    dcat:theme <http://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change/> ;
-    dcat:contactPoint <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/contact> ;
-    dcat:distribution <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/datacube>, 
-        <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv>, 
-        <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.json> ;
+    dcat:theme <https://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change/> ;
+    dcat:contactPoint <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/contact> ;
+    dcat:distribution <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/datacube>, 
+        <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv>, 
+        <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.json> ;
     dcterms:isReferencedBy <https://www.gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-national-statistics-1990-to-2018> ;
-    dcat:landingPage "http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018"^^xsd:anyURI ;
-    dcterms:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
-    dcterms:spatial <http://statistics.data.gov.uk/id/statistical-geography/K02000001> ;
-    dcterms:temporal <http://reference.data.gov.uk/id/gregorian-interval/1990-01-01T00:00:00/P28Y> ;
-    dcat:inSeries <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics> ;
-    dcat:hasCurrentVersion <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/version/2> ;
-    dcat:hasVersion <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/version/1>, 
-        <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/version/2> ;
+    dcat:landingPage "https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018"^^xsd:anyURI ;
+    dcterms:accrualPeriodicity <https://purl.org/cld/freq/annual> ;
+    dcterms:spatial <https://statistics.data.gov.uk/id/statistical-geography/K02000001> ;
+    dcterms:temporal <https://reference.data.gov.uk/id/gregorian-interval/1990-01-01T00:00:00/P28Y> ;
+    dcat:inSeries <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics> ;
+    dcat:hasCurrentVersion <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/version/2> ;
+    dcat:hasVersion <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/version/1>, 
+        <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018/version/2> ;
     dcat:version 2 ;
     adms:versionNotes "Dataset was corrected following an error being recognised."@en ;
-    dcat:prev <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2017> ;
+    dcat:prev <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2017> ;
     dcterms:identifier "ghg-2018" ;
     .
 ```
 
-### Dataset series
+## Dataset series
 
 Our use of dataset series is described in [editions](#editions).
 
 We recommend dataset series have IRIs of the form:
 
-- `http://{domain}/series/{series_slug}`
+- `https://{domain}/series/{series_slug}`
 
 For example:
 
-- `http://data.gov.uk/series/some-dataset-series`
+- `https://data.gov.uk/series/some-dataset-series`
 
 We recommend the use of the following properties:
 
@@ -714,7 +729,8 @@ We recommend the use of the following properties:
 For example:
 
 ```ttl
-<http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics> a dcat:DatasetSeries ;
+@prefix dcterms: <https://purl.org/dc/terms/> .
+<https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics> a dcat:DatasetSeries ;
     dcterms:title "UK territorial greenhouse gas emissions national statistics"@en ;
     dcterms:description "Final and provisional estimates of UK territorial greenhouse gas emissions from 1990."@en ;
     dcterms:issued "2015-02-11T09:30:00"^^xsd:dateTime ;
@@ -724,6 +740,149 @@ For example:
 
 Many of the properties which apply to dataset series are also applicable to datasets within that series. We recommend specifying properties for both resources.
 
+## Cataloguing
+
+A catalogue is a collection of metadata about datasets which has been gathered and curated. For smaller or more simple dataset collections, it makes sense to attach `DatasetSeries` and `Datasets` directly to a `CatalogRecord`.
+
+### Classes
+
+```mermaid
+classDiagram
+    class Catalog {
+        a dcat:Catalog
+    }
+    class CatalogRecord {
+        a dcat:CatalogRecord
+    }
+    class DatasetSeries{
+        a dcat:DatasetSeries
+    }
+    class Dataset {
+        a dcat:Dataset
+    }
+
+    Catalog --> "1..*" CatalogRecord : dcat.record
+    CatalogRecord --> "1" DatasetSeries : foaf.primaryTopic
+    CatalogRecord --> "1" Dataset : foaf.primaryTopic
+    CatalogRecord ..> "1" Catalog : foaf.primaryTopic
+
+    DatasetSeries "1" <-- Dataset : dcat.inSeries
+```
+
+We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes. 
+
+> Yo dawg, I heard you liked catalogs...
+
+In some serialisations, more complicated datasets with many local dimensions a dataset is created for each dimension as a representation of its `ConceptScheme`. If each of these dimenion datasets end up on the primary `Catalog` it may complicate the primary `Dataset`'s discovery, by creating a child `Catalog` to encapsulate `CatalogRecord`s for the each dimension and the primary dataset creates a more streamlined primary `Catalog`.
+
+```mermaid
+flowchart LR
+    pc[Main Catalog\na dcat:Catalog]
+    pcr1[Wide Dataset Catalog Record\na dcat:CatalogRecord]
+    pcr2[Another Dataset Catalog Record\na dcat:CatalogRecord]
+    wc[Wide Dataset Catalog\na dcat:Catalog]
+    wcr1[Dimension 1 Record\na dcat:CatalogRecord]
+    wcr2[Dimension 2 Record\na dcat:CatalogRecord]
+    wcr3[Wide Dataset Main Record\na dcat:CatalogRecord]
+    add[Another Dataset\na dcat:DatasetSeries]
+    wd1[Dimension 1 Dataset\na dcat:Dataset\na skos:ConceptScheme]
+    wd2[Dimension 2 Dataset\na dcat:Dataset\na skos:ConceptScheme]
+    wd3[Wide Dataset\na dcat:Dataset]
+
+    pc -->|dcat:record| pcr1
+    pc -->|dcat:record| pcr2
+    pcr1 -->|foaf:primaryTopic| wc
+    wc -->|dcat:record| wcr1 & wcr2 & wcr3
+    pcr2 -->|foaf:primaryTopic| add
+    wcr1 -->|foaf:primaryTopic| wd1
+    wcr2 -->|foaf:primaryTopic| wd2
+    wcr3 -->|foaf:primaryTopic| wd3
+```
+
+**NOTE** A `dcat:Catalog` should not have a `dcat:CatalogRecord` which points to its parent `dcat:Catalog`. 
+
+### Catalogue
+
+We recommend catalogues have IRIs of the form:
+
+- ```https://{domain}/catalogue```
+- ```https://{domain}/catalogue/{catalogue_slug}```
+
+For example:
+
+- ```https://data.gov.uk/catalogue```
+- ```https://data.gov.uk/catalogue/climate-change```
+
+We recommend the use of the following properties:
+
+| Property                | Requirement level | Notes                                                                      |
+| ----------------------- | ----------------- | -------------------------------------------------------------------------- |
+| `dcterms:title`         | mandatory         | See [titles](#titles)                                                      |
+| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                          |
+| `dcterms:publisher`     | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcat:contactPoint`     | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcterms:themeTaxonomy` | optional          | See [themes](#themes)                                                      |
+
+For example:
+
+```ttl
+@prefix dcat: <https://www.w3.org/ns/dcat#> .
+@prefix dcterms: <https://purl.org/dc/terms/> .
+
+<https://data.gov.uk/catalogue/climate-change> a dcat:Catalog ;
+    dcterms:title "Climate change datasets"@en ;
+    dcterms:description "A catalogue of datasets about climate change"@en ;
+    dcterms:publisher <https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
+    dcterms:creator <https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
+    dcat:contactPoint <https://data.gov.uk/catalogue/climate-change/contact> ;
+    dcterms:issued "2015-01-01"^^xsd:date ;
+    dcterms:modified "2015-01-01"^^xsd:date ;
+    dcterms:themeTaxonomy <https://data.gov.uk/themes> ;
+    .
+```
+
+### Catalog Record
+
+We recommend creaing a IRI for catalogue records by appending `/record` or `#record` to the IRI of the resource being described by the catalogue record:
+
+- `{dataset_iri}/record`
+- `{dataset_iri}#record`
+
+For example:
+
+- `https://data.gov.uk/dataset/my-dataset/record`
+- `https://data.gov.uk/dataset/my-dataset#record`
+
+We recommend the use of the following properties:
+
+| Property               | Requirement level | Notes                                                                                |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------------ |
+| `dcterms:issued`       | mandatory         | See [dates and times](#dates-and-times)                                              |
+| `foaf:primaryTopic`    | mandatory         | This points to the IRI of the `dcat:DatasetSeries` described by the catalogue record |
+| `prov:wasAttributedTo` | recommended       |                                                                                      |
+| `dcterms:modified`     | recommended       | See [dates and times](#dates-and-times)                                              |
+
+We may use `prov:wasAttributedTo` to attribute the creation of the catalogue record to a specific entity, such as the person who added the dataset to the catalogue.
+
+For example:
+
+```ttl
+@prefix dcat: <https://www.w3.org/ns/dcat#> .
+@prefix dcterms: <https://purl.org/dc/terms/> .
+@prefix foaf: <https://xmlns.com/foaf/0.1/> .
+@prefix prov: <https://www.w3.org/ns/prov#> .
+
+<https://data.gov.uk/dataset/my-dataset/record> a dcat:CatalogRecord ;
+    dcterms:issued "2015-01-01"^^xsd:date ;
+    foaf:primaryTopic <https://data.gov.uk/series/my-dataset-series> ;
+    prov:wasAttributedTo <mailto:joe.bloggs@ons.gov.uk> ;
+    .
+```
+
+
 ### Named graphs for catalogue metadata
 
 Where metadata is stored as RDF, such as being made available via a SPARQL endpoint, DCAT makes a recommendation about the names of graphs to use for catalogue records.
@@ -731,7 +890,7 @@ Where metadata is stored as RDF, such as being made available via a SPARQL endpo
 > If a catalog is represented as an RDF Dataset with named graphs (as defined in [[SPARQL11-QUERY]](https://www.w3.org/TR/sparql11-query/)), then it is appropriate to place the description of each dataset (consisting of all RDF triples that mention the dcat:Dataset, dcat:CatalogRecord, and any of its dcat:Distributions) into a separate named graph. The name of that graph SHOULD be the IRI of the catalog record.[^named-graphs]
 
 ```ttl
-<http://data.gov.uk/dataset/my-dataset/record> {
+<https://data.gov.uk/dataset/my-dataset/record> {
     ...
 }
 ```
@@ -740,7 +899,7 @@ Doing this results in a neat ability to query for dataset metadata by limiting a
 
 ```sparql
 SELECT * 
-FROM <http://data.gov.uk/dataset/my-dataset/record> 
+FROM <https://data.gov.uk/dataset/my-dataset/record> 
 WHERE {
     ?s ?p ?o .
 }
@@ -749,21 +908,22 @@ WHERE {
 We also recommend placing catalogue records into a named graph that is the same as the IRI of the catalog.
 
 ```ttl
-<http://data.gov.uk/catalogue/my-datasets> {
+@prefix dcterms: <https://purl.org/dc/terms/> .
+<https://data.gov.uk/catalogue/my-datasets> {
 
-    <http://data.gov.uk/catalogue/my-datasets> a dcat:Catalog ;
+    <https://data.gov.uk/catalogue/my-datasets> a dcat:Catalog ;
         dcterms:title "My datasets"@en ;
         dcterms:description "A description of my catalogue."@en ;
-        dcterms:publisher <http://www.gov.uk/government/organisations/office-for-national-statistics> ;
+        dcterms:publisher <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dcterms:issued "2015-01-01"^^xsd:date ;
         dcterms:modified "2018-01-01"^^xsd:date ;
-        dcat:record <http://data.gov.uk/dataset/my-dataset/record> ;
+        dcat:record <https://data.gov.uk/dataset/my-dataset/record> ;
         .
 
-    <http://data.gov.uk/dataset/my-dataset/record> a dcat:CatalogRecord ;
+    <https://data.gov.uk/dataset/my-dataset/record> a dcat:CatalogRecord ;
         dcterms:title "My Dataset" ;
         dcterms:description "A description of my dataset."@en ;
-        dcterms:publisher <http://www.gov.uk/government/organisations/office-for-national-statistics> ;
+        dcterms:publisher <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dcterms:issued "2018-01-01"^^xsd:date ;
         .
 
@@ -788,19 +948,19 @@ classDiagram
 
 We recommend distributions have IRIs which are identical to the dataset IRI, with file extension appended.
 
-- `http://{dataset_iri}.{extension}`
+- `https://{dataset_iri}.{extension}`
 
 The exception is when representing an RDF data cube as a distribution, for which there is no physical file and therefore no extension. In that instance, we recommend appending `/datacube` or `#datacube` to the dataset IRI.
 
-- `http://{dataset_iri}/datacube`
-- `http://{dataset_iri}#datacube`
+- `https://{dataset_iri}/datacube`
+- `https://{dataset_iri}#datacube`
 
 For example:
 
-- `http://data.gov.uk/dataset/my-dataset.csv`
-- `http://data.gov.uk/dataset/my-dataset.ttl`
-- `http://data.gov.uk/dataset/my-dataset.json`
-- `http://data.gov.uk/dataset/my-dataset/datacube`
+- `https://data.gov.uk/dataset/my-dataset.csv`
+- `https://data.gov.uk/dataset/my-dataset.ttl`
+- `https://data.gov.uk/dataset/my-dataset.json`
+- `https://data.gov.uk/dataset/my-dataset/datacube`
 
 | Property                | Requirement level | Notes                                                                          |
 | ----------------------- | ----------------- | ------------------------------------------------------------------------------ |
@@ -820,16 +980,18 @@ For example:
 For example:
 
 ```ttl
-<http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> a dcat:Distribution ;
+@prefix dcterms: <https://purl.org/dc/terms/> .
+
+<https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> a dcat:Distribution ;
     dcterms:title "Final UK greenhouse gas emissions national statistics: 1990 to 2018 (CSV)"@en ;
     dcterms:description "Final estimates of UK territorial greenhouse gas emissions..."@en ;
     dcterms:license <https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
     dcterms:issued "2020-02-04T09:30:00"^^xsd:dateTime ;
     dcterms:modified "2020-07-30T08:30:06"^^xsd:dateTime ;
     dcterms:title "2018.csv" ;
-    wdrs:describedby <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv-metadata.json> ;
+    wdrs:describedby <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv-metadata.json> ;
     dcat:mediaType <https://www.w3.org/ns/iana/media-types/text/csv#Resource> ;
-    dcat:downloadURL <http://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> ;
+    dcat:downloadURL <https://data.gov.uk/series/uk-territorial-greenhouse-gas-emissions-national-statistics/dataset/2018.csv> ;
     dcat:byteSize "12345"^^xsd:nonNegativeInteger ;
     spdx:checksum "CE114E4501D2F4E2DCEA3E17B546F339"^^spdx:Checksum ;
     .
@@ -841,158 +1003,385 @@ We recommend that data providers implement content negotiation as a method for c
 
 The IRI of the `dcat:Dataset` should be used as the generic IRI which a user can request different formats of the data from.
 
-For example, a `dcat:Dataset` with an IRI of `http://data.gov.uk/dataset/my-dataset` may have a CSV distribution with its own IRI of `http://data.gov.uk/dataset/my-dataset.csv`. A user agent wishing to access the data in CSV format could navigate to `http://data.gov.uk/dataset/my-dataset.csv` directly, or content negotiate against the IRI of the `dcat:Dataset` to find the CSV distribution.
+For example, a `dcat:Dataset` with an IRI of `https://data.gov.uk/dataset/my-dataset/latest` may have a CSV distribution with its own IRI of `https://data.gov.uk/dataset/v2/my-dataset.csv`. A user agent wishing to access the data in CSV format could navigate to `https://data.gov.uk/dataset/latest/my-dataset.csv` directly, or content negotiate against the IRI of the `dcat:Dataset` to find the CSV distribution.
 
 ```sh
-curl http://data.gov.uk/dataset/my-dataset -H "Accept: text/csv"
+curl https://data.gov.uk/dataset/my-dataset/latest -H "Accept: text/csv"
 ```
 
 > What is the flow, do we 303 redirect to the CSV distribution of the dataset?
 
 ```mermaid
 sequenceDiagram
-    User Agent ->> Server: GET http://data.gov.uk/dataset/my-dataset -H "accept: text/csv"
+    User Agent ->> Server: GET https://data.gov.uk/dataset/my-dataset/latest -H "accept: text/csv"
     Server ->> User Agent: 303 See Other
-    User Agent ->> Server: GET http://data.gov.uk/dataset/my-dataset.csv
+    User Agent ->> Server: GET https://data.gov.uk/dataset/v2/my-dataset.csv
     Server ->> User Agent: 200 OK
 ```
 
-## Editions
+## Thinking on Editions, Scheduled Revisions, and Version
 
-> `dcat:DatasetSeries` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+1. ASSUMPTION: All datasets are subject to correction
 
-Many statistics producers publish sets of statistics at a regular frequency as monthly, quarterly, or annual releases.
+    All newly published `dcat:datasets` should be included in a `dcat:DatasetSeries` as this provides structure for revision without introducing new resources when a revision becomes necessary; this allows for `dcat:CatalogRecords` to point to a `dcat:DatasetSeries` without needing to be updated should a revision happen..
 
-Previous years of data may be repeated without any changes, though in some instances some previous year's data may be revised or updated to include new data or better estimates.
+```ttl
+@PREFIX ex: <https://example.org/> .
+@prefix dcat: <https://www.w3.org/ns/dcat#> .
 
-We refer to these as _editions_, as opposed to _versions_ which are used to specifically describe changes in a dataset resulting from a revision. Each edition is given its own IRI which typically contains the latest time period for which data is available.
+ex:series/dataset-series-slug a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion ex:series/series-slug/dataset-slug/dataset/latest .
 
-For example, `http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018` is the IRI of the 2018 edition of the series `name-of-my-statistical-series`.
+ex:series/series-slug/dataset-slug/dataset/v1 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug .
 
-Editions should be related to a `dcat:DatasetSeries`. The dataset series should have an IRI which does not reference particular time period and can represent the collection of editions.
+ex:series/series-slug/dataset-slug/dataset/v2 a dcat:Dataset ;
+    dcat:inSeries ex:dataset-series-slug ;
+    dcat:replaces ex:series/series-slug/dataset-slug/dataset/v1 ;
+    owl:sameAs ex:series/series-slug/dataset-slug/dataset/latest .
+```
+2. ASSUMPTION: We must support editions (i.e. a sequence of releases) of datasets (e.g. 2018, 2019, 2020)
+
+    Adding new editions of datasets should not require the modification of existing datasets within the series; in a simple series of editions defining which dataset it is replacing (via `dcat:previousVersion`) provides all necessary information to ammend the dataset series' membership to include this new dataset, and have the new edition be the current version.
+
+```ttl
+@PREFIX ex: <https://example.org/> .
+@prefix dcat: <https://www.w3.org/ns/dcat#> .
+
+ex:series/dataset-series-slug a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion ex:series/dataset-series-slug/dataset/latest ; 
+    dcat:first ex:series/dataset-series-slug/dataset/2018 .
+
+ex:series/dataset-series-slug/dataset/2018 a dcat:Dataset ;
+    dcat:inSeries ex:series/dataset-series-slug .
+
+ex:series/dataset-series-slug/dataset/2019 a dcat:Dataset ;
+    dcat:inSeries ex:series/dataset-series-slug ;
+    dcat:previousVersion ex:series/dataset-series-slug/dataset/2018 .
+
+ex:series/dataset-series-slug/dataset/2020 a dcat:Dataset ;
+    dcat:inSeries ex:series/dataset-series-slug ;
+    dcat:previousVersion ex:series/dataset-series-slug/dataset/2019 ;
+    owl:sameAs ex:series/dataset-series-slug/dataset/latest .
+```
+
+3.  We must support both scheduled (e.g. provisional/final) and unscheduled (e.g. v2-corrected) revisions
+
+    One of the problems we face in this scenario is "what is the next version of a provisional release which has been re-issued due to an error?" If we have a unscheduled revision of a provisional edition (i.e. 2020/provisional/v2), when the final version (i.e. 2020/final) is published what is the "dcat:next" dataset from the original provisional edition (i.e. 2020/provisional/v1)? Is it 2020/provisional/v2 or 2020/final or even 2021/provisional? By using a combination of `dcat:previousVersion` and `dcat:replaces` the lineage allows the user to separate updated datasets.
+
+## Editions, Scheduled Revisions, and Versions
+> `dcat:DatasetSeries`, `dcat:inSeries`, `dcat:first`, `dcat:currentVersion`, `dcat:previousVersion`, and `dcat:replaces` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+
+Many statistics producers publish sets of statistics at a regular frequency such as monthly, quarterly, or annual releases; we consider these _editions_. An edition typically covers a new time period compared to the previously released edition.
+
+Some statistical releases couple regular editions with multiple scheduled releases of the same period. This statistical publication approach where a draft, provisional, or estimated publication is released earlier than a final edition where the full processes or observations would be possible; we consider these _scheduled revisions_. A _scheduled revision_ for the same edition would typically cover the same time period.
+
+Statistics which are released can corrected outside the regular update process; we consider these unscheduled revisions _versions_. The updated version covers the same scope as the replaced version, and should contain a detailed explaination of the changes necessitating the unscheduled revision.
+
+```mermaid
+flowchart TD
+    d[Dataset release plans]
+    e[Edition]
+    s[Scheduled Revision]
+    v[Version]
+    
+    d -->|recurring publications| e
+
+    d -->|corrections| v
+    e -->|scheduled revisions| s
+    e -->|corrections| v
+    s -->|corrections| v
+```
+
+Statistical publications, and other datasets typically have a release plan including its update cadence which falls into the structure described above. Additionally, all datasets can be subject to correction. As such we recommend that all editions, revisions, and versions of a dataset attach to a `dcat:DatasetSeries` which is in turn attached a `dcat:CatalogEntry`.
+
+```mermaid
+classDiagram
+    class DatasetSeries {
+        a dcat:DatasetSeries
+    }
+    class Dataset{
+        a dcat:Dataset
+    }
+
+    Dataset "*" --> "1" DatasetSeries : dcat.hasSeries   
+```
+
+```ttl
+@prefix dcat: <https://www.w3.org/ns/dcat#> .
+@PREFIX ex: <https://example.org/> .
+
+ex:DatasetSeries a dcat:DatasetSeries .
+
+ex:Dataset1 a dcat:Dataset ;
+    dcat:inSeries ex:DatasetSeries .
+
+ex:Dataset2 a dcat:Dataset ;
+    dcat:inSeries ex:DatasetSeries .
+```
+
+### Editions
+
+> `dcat:DatasetSeries`, `dcat:inSeries`, and `dcat:previousVersion` are recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+
+We group regular releases of new data within the same series of statistical publications as _editions_. A new edition of a dataset should cover the new observations from the time period since the previous edition.
+
+In editions, previous years of data may be repeated without any changes, though in some instances some previous edition's data may be revised or updated to include new data or better estimates. Regardless of the updates to previously released data, an editions intent is to release new data for the dataset series.
+
+Each edition is given its own IRI which typically contains the latest time period for which data is available.
+
+For example, `https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018` is the IRI of the 2018 edition of the series `name-of-my-statistical-series`.
+
+Editions should be related to a `dcat:DatasetSeries` using `dcat:inSeries`. The dataset series should have an IRI which does not reference particular time period and can represent the collection of editions.
 
 For example, the following dataset series has two editions from 2017 and 2018.
 
 ```ttl
-<http://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries .
+<https://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
-    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> ;
-    .
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:previousVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> a dcat:Dataset ;
-    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016> ;
-    .
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> a dcat:Dataset ;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:previousVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2016> .
 ```
 
-### Scheduled revisions (provisional and final releases)
 
-Statisticians may wish to release early or provisional estimates of statistics which are later revised as "final" statistics when additional data is available. The Government Statistical Service [refers to these as scheduled revisions](https://analysisfunction.civilservice.gov.uk/policy-store/communicating-quality-uncertainty-and-change/).
+### Scheduled revisions
 
-The IRIs of provisional and final datasets should contain `provisional` or `final`. Provisional and final statistics can both be attached to the same dataset series and related to one another by the `dcat:prev` property.
+> `dcat:DatasetSeries`, `dcat:inSeries`, and `dcat:previousVersion` are recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+
+Statisticians may wish to release early or provisional estimates of statistics which are later revised as "final" statistics when additional data is available. The Government Statistical Service refers to these as [scheduled revisions](https://analysisfunction.civilservice.gov.uk/policy-store/communicating-quality-uncertainty-and-change/).
+
+The IRIs of provisional and final datasets should contain their effective status indicator such as `provisional`, `esimated`, or `final`. Provisional and final statistics can both be attached to the same dataset series and related to one another by the `dcat:previousVersion` property.
 
 ```mermaid
-flowchart LR
+flowchart RL
 
-    2017/provisional --> 2017/final
-    2017/final --> 2018/provisional
-    2018/provisional --> 2018/final
+		2017p[2017/provisional]
+		2017f[2017/final]
+		2018p[2018/provisional]
+		2018f[2018/final]
 
-    2017/final -->|dcat:prev| 2017/provisional
-    2018/provisional -->|dcat:prev| 2017/final
-    2018/final -->|dcat:prev| 2018/provisional
-   
+    2017f -->|dcat:previousVersion| 2017p
+    2018p -->|dcat:previousVersion| 2017f
+    2018f -->|dcat:previousVersion| 2018p   
 ```
 
 For example, the following dataset series has two editions from both 2017 and 2018, one provisional and one final.
 
 ```ttl
-<http://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries .
+<https://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/final> a dcat:Dataset ;
-    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> ;
-    .
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> a dcat:Dataset ;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:previousVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2016/final> .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> a dcat:Dataset ;
-    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> ;
-    .
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> a dcat:Dataset ;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:previousVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> a dcat:Dataset ;
-    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> ;
-    .
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> a dcat:Dataset ;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:previousVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/final> .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017/provisional> a dcat:Dataset ;
-    dcat:inSeries <http://data.gov.uk/series/name-of-my-statistical-series> ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2016/final> ;
-    .
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/final> a dcat:Dataset ;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:previousVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/provisional> .
 ```
 
-## Versions
+### Versions
 
-> **Note**
-> `dcat:version` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
+> `dcat:DatasetSeries`, `dcat:inSeries`, and `dcat:replaces` are recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is still in draft.
 
 Different versions of a dataset are the result of an unscheduled revision or correction.
 
-We recommend the IRI of a `dcat:Dataset` is chosen to be generic and not specific to a particular version. A user should expect that the generic IRI of a dataset refers to the latest version of the dataset.
+We recommend using a generic `dcat:DatasetSeries` name with an unversioned IRI with a versioned `dcat:Dataset` attached to it so that unscheduled revisions can be accomodated with minimal effort. A user should expect that the generic IRI of a dataset series contains the link to the latest version.
+
+As unscheduled revisions intend to replace data, it is important to use the `dcat:replaces` predicate to distinguish this intent to supercede previously thought correct data from new editions and scheduled revisions which uses `dcat:previousVersion` which describes a generic data lineage.
 
 IRIs should be created to represent each specific version of a dataset. We should assert an equivalence between IRI of the generic dataset and the latest version of the dataset with an `owl:sameAs` relationship, for example:
 
 ```ttl
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>
-    owl:sameAs
-        <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
-    .
+<https://data.gov.uk/series/name-of-my-statistical-series> a dcat:DatasetSeries;
+    dcat:latest <https://data.gov.uk/series/name-of-my-statistical-series/latest> .
+
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/v1> a dcat:Dataset;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> .
+
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/v2> a dcat:Dataset;
+    dcat:inSeries <https://data.gov.uk/series/name-of-my-statistical-series> ;
+    dcat:replaces <https://data.gov.uk/series/name-of-my-statistical-series/dataset/v1> ;
+    owl:sameAs <https://data.gov.uk/series/name-of-my-statistical-series/latest/> .
 ```
 
-| Property                 | Requirement level |
-| ------------------------ | ----------------- |
-| `dcat:hasCurrentVersion` | recommended       |
-| `dcat:hasVersion`        | recommended       |
-| `dcat:version`           | recommended       |
-| `adms:versionNotes`      | recommended       |
-| `dcat:prev`              | recommended       |
+### Combining Editions, Scheduled Revisions, and Versions (an example)
+The Greenhouse Gas Emissions dataset series is a recurring annual publication (i.e. there are annual editions). There are two scheduled revisions each edition. The first scheduled revision of an edition is released at the end of the first calendar quarter; these data are considered provisional due to limited time for review, model validation, and completed data provision. The second scheduled revision of the same edition is released at the end of the second calendar quarter is considered final; these data are subjected to a higher level of scrutiny and the additional time allows for more refined data and additional data streams to be included in the calculations. In rare occurances, there may be unscheduled revisions (i.e. corrections) where a provisional or final release needs to be reissued.
 
-For specific versions, we recommend using the following properties:
+An example set of IRIs of this Greenhouse Gas Emissions dataset series could be as follows:
 
-| Property                | Requirement level |
-| ----------------------- | ----------------- |
-| `dcterms:issued`        | recommended       |
-| `dcat:isVersionOf`      | recommended       |
-| `dcat:previousVersion`  | recommended       |
-| `prov:wasRevisionOf`    | recommended       |
-| `prov:specializationOf` | recommended       |
+* `2018/provisional/v1`
+* `2018/provisional/v2`
+* `2018/final/v1`
+* `2019/provisional/v1`
+* `2019/final/v1`
+* `2020/provisional/v1`
+* `2020/final/v1`
+* `2020/final/v2`
+
+The year 2019 had no unscheduled revisions (i.e. versions) of the scheduled revisions (i.e. a provisional and a final release). In 2018 the provisional release required correction and in 2020 the final release required correction.
+
+#### Greenhouse Gas Emimssions dataset series (RDF)
 
 ```ttl
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
-    dcat:hasCurrentVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
-    dcat:hasVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>, 
-        <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
-    dcat:version 2 ;
-    adms:versionNotes "Dataset was corrected following an error being recognised."@en ;
-    dcat:prev <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> ;
-    .
+@prefix owl: <https://www.w3.org/2002/07/owl#> .
+@prefix dcat: <https://www.w3.org/ns/dcat#> .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> a dcat:Dataset ;
-    dcterms:issued "2018-03-01T00:00:00Z"^^xsd:dateTime ;
-    dcat:isVersionOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
-    dcat:previousVersion <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>;
-    prov:wasRevisionOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>;
-    prov:specializationOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>;
-    .
+<https://example.org/greenhouse-gas-emissions-series> a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion <https://example.org/greenhouse-gas-emissions/dataset/latest> ;
+    dcat:first <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> .
 
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1> a dcat:Dataset ;
-    dcterms:issued "2018-01-01T00:00:00Z"^^xsd:dateTime ;
-    dcat:isVersionOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
-    prov:specializationOf <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018>;
-    prov:invalidatedAtTime "2018-03-01T00:00:00Z"^^xsd:dateTime ;
-    .
+<https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v2> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:replaces <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2018/final/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/latest> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2018/final/latest> ,
+        <https://example.org/greenhouse-gas-emissions/dataset/2018/latest> . 
+
+<https://example.org/greenhouse-gas-emissions/dataset/2019/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2018/final/latest> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2019/provisional> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2019/final/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2019/provisional> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2019/final/latest> ,
+        <https://example.org/greenhouse-gas-emissions/dataset/2019/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2020/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2019/final/latest> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2020/provisional/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2020/final/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2020/provisional/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2020/final/v2> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions> ;
+    dcat:replaces <https://example.org/greenhouse-gas-emissions/dataset/2020/final/v1> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2020/final/latest>, 
+        <https://example.org/greenhouse-gas-emissions/dataset/2020/latest>,
+        <https://example.org/greenhouse-gas-emissions/dataset/latest> .
 ```
+
+#### Greenhouse Gas Emimssions dataset series (Flowchart)
+
+```mermaid
+flowchart TD
+    subgraph series
+
+	gges[gge-series\na dcat:DatasetSeries]
+        subgraph 2018
+            2018p1[dataset/2018/provisional/v1\na dcat:Dataset]
+            2018p2[dataset/2018/provisional/v2\na dcat:Dataset]
+            2018f1[dataset/2018/final/v1\na dcat:Dataset]
+        end
+
+        subgraph 2019
+            2019p1[dataset/2019/provisional/v1\na dcat:Dataset]
+            2019f1[gge/2019/final/v1\na dcat:Dataset]
+        end
+
+        subgraph 2020
+            2020p1[dataset/2020/provisional/v1\na dcat:Dataset]
+            2020f1[dataset/2020/final/v1\na dcat:Dataset]
+            2020f2[dataset/2020/final/v2\na dcat:Dataset]
+        end
+    end
+
+    2018 --> 2019 --> 2020
+
+    2018p1 -->|dcat:inSeries| gges
+    2018p2 -->|dcat:inSeries| gges
+    2018p2 -->|dcat:replaces| 2018p1
+    2018p2 -->|dcat:inSeries| gges
+    2018f1 -->|dcat:previousVersion| 2018p2
+    2018f1 -->|dcat:inSeries| gges
+    2019p1 -->|dcat:previousVersion| 2018f1
+    2019p1 -->|dcat:inSeries| gges
+    2019f1 -->|dcat:previousVersion| 2019p1
+    2019f1 -->|dcat:inSeries| gges
+    2020p1 -->|dcat:previousVersion| 2019f1
+    2020p1 -->|dcat:inSeries| gges
+    2020f1 -->|dcat:previousVersion| 2020p1
+    2020f1 -->|dcat:inSeries| gges
+    2020f2 -->|dcat:replaces| 2020f1
+    2020f2 -->|dcat:inSeries| gges
+```
+
+### Edition, Scheduled Revision, and Version Metadata
+
+Up to now we have focused on the relationships between editions, scheduled revisions, and versions. In addition to the relational structure of datasets within a dataset series, we also need to describe the dataset series and its datasets members so that users can select the appropriate data and navigate the series accurately.
+
+#### Dataset series
+
+| Property          | Requirement level | Notes                                                                      |
+| ----------------- | ----------------- | -------------------------------------------------------------------------- |
+| `dcat:first`      | recommended       | must be linked to the first resources' absolute IRI (i.e. dataset/2017/v1) |
+| `dcat:last`       | recommended       | can be linked to the dataset series' generic IRI (i.e. dataset/latest)     |
+| `dcat:hasVersion` | recommended       | can be set from the incoming `dcat:inSeries` links from a `dcat:Dataset`   |
+
+#### Datasets
+
+| Property               | Requirement level | Notes                                                                                                           |
+| ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------- |
+| `dcterms:issued`       | recommended       |                                                                                                                 |
+| `dcat:inSeries`        | recommended       |                                                                                                                 |
+| `dcat:previousVersion` | recommended       | necessary to establish a lineage of datasets within a dataset series                                            |
+| `dcat:replaces`        | optional          | in addition to helping establish a dataset series lineage, distingushes between planned updates and corrections |
+| `prov:wasRevisionOf`   | recommended       |                                                                                                                 |
+| `dcat:versisonNotes`   | optional          | Description of the changes between editions, a `Literal`                                                        |
+
+```ttl
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> a dcat:Dataset ;
+    dcat:hasCurrentVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
+    dcat:hasVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1>, 
+        <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> ;
+    adms:versionNotes "Dataset was corrected following an error being recognised."@en ;
+    dcat:prev <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2017> ;
+    .
+
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/2> a dcat:Dataset ;
+    dcterms:issued "2018-03-01T00:00:00Z"^^xsd:dateTime ;
+    dcat:isVersionOf <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
+    dcat:previousVersion <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1> ;
+    prov:wasRevisionOf <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1> ;
+    prov:specializationOf <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> .
+
+<https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/version/1> a dcat:Dataset ;
+    dcterms:issued "2018-01-01T00:00:00Z"^^xsd:dateTime ;
+    dcat:isVersionOf <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
+    prov:specializationOf <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> ;
+    prov:invalidatedAtTime "2018-03-01T00:00:00Z"^^xsd:dateTime .
+```
+
+## Thinking and worked examples for deletion which lead to the following section
+
+
+
+
+
 
 ## Publish CSV on the web (CSVW)
 
@@ -1018,8 +1407,8 @@ Given the above CSV, a fairly basic CSVW metadata file would look as follows:
 
 ```json
 {
-    "@context": "http://www.w3.org/ns/csvw",
-    "url": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
+    "@context": "https://www.w3.org/ns/csvw",
+    "url": "https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
     "tableSchema": {
         "columns": [
             {
@@ -1083,13 +1472,13 @@ A example of a CSVW metadata file containing the relevant relationship with a `d
 
 ```json
 {
-    "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
-    "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
-    "url": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
+    "@context": ["https://www.w3.org/ns/csvw", {"@language": "en"}],
+    "@id": "https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
+    "url": "https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
     "dcterms:title": "Life expectancy by local authority and sex (CSV)",
     "dcterms:description": "A CSV version of the life expectancy by local authority and sex dataset.",
     "dcat:isDistributionOf": {
-        "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time",
+        "@id": "https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time",
         "@type": "dcat:Dataset",
         "dcterms:title": "Life expectancy by local authority and sex",
         "dcterms:description": "The figures in this table are constructed from the estimated population and total deaths by single year / quinary age each year, based on a three year average. The expected years of life is the lifetime of a newborn person if they were subject throughout their lives to the average recorded death rate of the three year period. Such a calculation excludes future improvements to mortality rates."
@@ -1178,9 +1567,9 @@ The components of a data cube (dimensions/measures/attributes).
 
 IRI schemes which follow this idea are:
 
-- `http://{domain}/dimension/{dimension_name}` (example of a general IRI)
-- `http://{domain}/series/name-of-my-statistical-series/dimension/{dimension_name}` (example of an IRI which is local to a dataset series)
-- `http://{domain}/dataset/name-of-my-dataset/dimension/{dimension_name}` (example of an IRI which is local to a dataset)
+- `https://{domain}/dimension/{dimension_name}` (example of a general IRI)
+- `https://{domain}/series/name-of-my-statistical-series/dimension/{dimension_name}` (example of an IRI which is local to a dataset series)
+- `https://{domain}/dataset/name-of-my-dataset/dimension/{dimension_name}` (example of an IRI which is local to a dataset)
 
 #### Measure
 
@@ -1228,7 +1617,7 @@ ex:attribute1 a qb:AttributeProperty ;
     rdfs:label "Attribute 1"@en ;
     rdfs:comment "An attribute property"@en ;
     rdfs:range skos:Concept ;
-    qb:codeList <http://data.gov.uk/codelist/statistical-markers> ;
+    qb:codeList <https://data.gov.uk/codelist/statistical-markers> ;
     .
 ```
 
@@ -1246,16 +1635,16 @@ We allow attributes to be attached to a list of of values via `qb:codeList`.
 
 ### Observation
 
-The dimensions form a composite key for each observation in the cube - meaning the combination of dimensions can be used to uniquely identify each observation in the cube.
+The dimensions form a composite key for each observation in the cube - meaning the combination of dimensions can be used to uniquely identify each observation in the cube. Note that a measure is a dimension.
 
 We recommend IRIs for observations be of the form:
 
-- `http://{domain}/obs/{dimension_1}-{...}-{dimension_n}`
-- `http://{domain}#obs/{dimension_1}-{...}-{dimension_n}`
+- `https://{domain}/obs/{dimension_1},{...},{dimension_n}@{measure}`
+- `https://{domain}#obs/{dimension_1},{...},{dimension_n}@{measure}`
 
 For example:
 
-- `http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male`
+- `https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022,2004,01,01T00:00:00,P3Y-Male@count`
 
 ### Using CSVW to create an RDF data cube
 
@@ -1273,20 +1662,20 @@ Given a CSVW with a column specification as follows:
                 "name": "area",
                 "titles": "area",
                 "datatype": "string",
-                "propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area",
-                "valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+                "propertyUrl": "https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area",
+                "valueUrl": "https://statistics.data.gov.uk/id/statistical-geography/{area}"
             },
             // ...
         ],
-        "aboutUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+area}-{+period}-{+sex}"
+        "aboutUrl": "https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+area}-{+period}-{+sex}"
 ```
 
 The `aboutUrl`, `propertyUrl` and `valueUrl` and the CSV data produce triples as follows:
 
 ```ttl
-<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male>
-  <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area>
-    <http://statistics.data.gov.uk/id/statistical-geography/W06000022> ;
+<https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male>
+  <https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area>
+    <https://statistics.data.gov.uk/id/statistical-geography/W06000022> ;
     # ...
     .
 ```
@@ -1295,18 +1684,18 @@ Within a single CSVW metadata file we are able to describe a dataset and define 
 
 For example, we can represent the relationships between the following resources within a single CSVW metadata file:
 
-- a dataset: `<http://data.gov.uk/dataset/my-dataset>`
-- a CSV distribution of that dataset: `<http://data.gov.uk/dataset/my-dataset.csv>`
-- an RDF data cube distribution of a dataset: `<http://data.gov.uk/dataset/my-dataset/datacube>`
+- a dataset: `<https://data.gov.uk/dataset/my-dataset>`
+- a CSV distribution of that dataset: `<https://data.gov.uk/dataset/my-dataset.csv>`
+- an RDF data cube distribution of a dataset: `<https://data.gov.uk/dataset/my-dataset/datacube>`
 
 Our recommended format for a CSVW is as follows. Note the use of virtual columns within the CSVW `columns` definition to assert additional RDF relationships when converting CSV to RDF.
 
 ```jsonc
 {
-    "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://data.gov.uk/dataset/my-dataset.csv",
+    "@context": "https://www.w3.org/ns/csvw",
+    "@id": "https://data.gov.uk/dataset/my-dataset.csv",
     "@type": "Table",
-    "url": "http://data.gov.uk/dataset/my-dataset.csv",
+    "url": "https://data.gov.uk/dataset/my-dataset.csv",
     "tableSchema": {
         "columns": [
             // CSVW column definitions,
@@ -1319,7 +1708,7 @@ Our recommended format for a CSVW is as follows. Note the use of virtual columns
             {
                 "virtual": true,
                 "propertyUrl": "qb:dataSet",
-                "valueUrl": "http://data.gov.uk/dataset/my-dataset/datacube"
+                "valueUrl": "https://data.gov.uk/dataset/my-dataset/datacube"
             }
         ]
     },
@@ -1327,21 +1716,21 @@ Our recommended format for a CSVW is as follows. Note the use of virtual columns
         "@id": "https://www.w3.org/ns/iana/media-types/text/csv#Resource"
     },
     "dcat:isDistributionOf": {
-        "@id": "http://data.gov.uk/dataset/my-dataset",
+        "@id": "https://data.gov.uk/dataset/my-dataset",
         "@type": "dcat:Dataset",
         "dcat:distribution": [
             {
-                "@id": "http://data.gov.uk/dataset/my-dataset.csv",
+                "@id": "https://data.gov.uk/dataset/my-dataset.csv",
                 "@type": "dcat:Distribution"
             },
             {
-                "@id": "http://data.gov.uk/dataset/my-dataset/datacube",
+                "@id": "https://data.gov.uk/dataset/my-dataset/datacube",
                 "@type": [
                     "qb:DataSet",
                     "dcat:Distribution"
                 ],
                 "qb:structure": {
-                    "@id": "http://data.gov.uk/dataset/my-dataset/datacube/structure",
+                    "@id": "https://data.gov.uk/dataset/my-dataset/datacube/structure",
                     "@type": "qb:DataStructureDefinition",
                     "qb:component": [
                         // dimension, measures, attributes...
@@ -1419,26 +1808,57 @@ Within the CSVW metadata, we add a column definition for the measure dimension a
     "titles": "measure_type",
     "name": "measure_type",
     "propertyUrl": "qb:measureType",
-    "valueUrl": "http://{domain}/dataset/name-of-my-dataset/measure/{measure_type}"
+    "valueUrl": "https://{domain}/dataset/name-of-my-dataset/measure/{measure_type}"
 },
 {
     "titles": "value",
     "name": "value",
-    "propertyUrl": "http://{domain}/dataset/name-of-my-dataset/measure/{measure_type}"
+    "propertyUrl": "https://{domain}/dataset/name-of-my-dataset/measure/{measure_type}"
 }
 ```
 
 ```ttl
-<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male> a qb:Observation ;
+<https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male> a qb:Observation ;
     # area, period, sex, ...
     qb:measureType
-        <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy> ;
-    <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy>
+        <https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy> ;
+    <https://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy>
         76.7 ;
     .
 ```
 
 ## Codelists
+
+```mermaid
+classDiagram
+    class Dimension {
+        a qb:DimensionProperty
+    }
+    class Codelist {
+        a skos:ConceptScheme
+        a dcat:Dataset
+    }
+    class Dataset {
+        a dcat:Dataset
+    }
+    class Catalog {
+        a dcat:Catalog
+    }
+    class CatalogRecord {
+        a dcat:CatalogRecord
+    }
+
+    Catalog -->"1" CatalogRecord : 
+    CatalogRecord -->"1" Dataset : foaf.primaryTopic
+    Dataset -->"*" Codelist : dcat.qualifiedRelation
+```
+
+**DECISION WITH ROSS WHICH IS IRREVOKABLE** qualifiedRelation points to both local and Gold Record conceptSchemes
+
+Justification is that when you're reviewing a dataset, the code lists are required for understanding; otherwise you just end up with a bunch of IRIs which may be meaningless to a human reader.
+\
+
+Create the predciate `cogs:hasCodelist`
 
 > What is the relationship between a `skos:ConceptScheme` and a `dcat:Dataset`? In the way that we propose `qb:DataSet` is a distribution of a `dcat:Dataset`, maybe a `skos:ConceptScheme` is a distribution of a `dcat:Dataset`. Does the advice on editions/versioning also apply to `skos:ConceptScheme`s?
 
@@ -1477,13 +1897,13 @@ We recommend the use of `skos:ConceptScheme`, `skos:Concept`.
 
 We recommend dataset series have IRIs of the form:
 
-- `http://{domain}/codelist/{codelist_slug}`
-- `http://{domain}/codelist/{codelist_slug}/{edition_year}`
+- `https://{domain}/codelist/{codelist_slug}`
+- `https://{domain}/codelist/{codelist_slug}/{edition_year}`
 
 For example:
 
-- `http://data.gov.uk/codelist/some-codelist`
-- `http://data.gov.uk/codelist/sitc/2022`
+- `https://data.gov.uk/codelist/some-codelist`
+- `https://data.gov.uk/codelist/sitc/2022`
 
 | Property              | Requirement level | Notes                                                                      |
 | --------------------- | ----------------- | -------------------------------------------------------------------------- |
@@ -1502,12 +1922,12 @@ For example:
 
 ### Concept
 
-- `http://{domain}/codelist/{codelist_slug}/code/{code_slug}`
+- `https://{domain}/codelist/{codelist_slug}/code/{code_slug}`
 
 For example:
 
-- `http://data.gov.uk/codelist/some-codelist`
-- `http://data.gov.uk/codelist/sitc/rev4`
+- `https://data.gov.uk/codelist/some-codelist`
+- `https://data.gov.uk/codelist/sitc/rev4`
 
 
 | Property           | Requirement level | Notes                                                                     |
@@ -1642,10 +2062,10 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
 
 ```json
 {
-    "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4.csv",
+    "@context": "https://www.w3.org/ns/csvw",
+    "@id": "https://data.gov.uk/codelist/standard-international-trade-classification/revision-4.csv",
     "@type": "Table",
-    "url": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4.csv",
+    "url": "https://data.gov.uk/codelist/standard-international-trade-classification/revision-4.csv",
     "tableSchema": {
         "columns": [
             {
@@ -1671,12 +2091,12 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
                 "name": "parent_notation",
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/{+parent_notation}"
+                "valueUrl": "https://data.gov.uk/codelist/standard-international-trade-classification/revision-4/{+parent_notation}"
             },
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4"
+                "valueUrl": "https://data.gov.uk/codelist/standard-international-trade-classification/revision-4"
             },
             {
                 "virtual": true,
@@ -1684,7 +2104,7 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
                 "valueUrl": "skos:Concept"
             }
         ],
-        "aboutUrl": "http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/{+notation}"
+        "aboutUrl": "https://data.gov.uk/codelist/standard-international-trade-classification/revision-4/{+notation}"
     }
 }
 ```
@@ -1692,19 +2112,19 @@ We are able to create a CSVW file which can be used to create a codelist. Note t
 Performing `csv2rdf` on this CSVW produces RDF like:
 
 ```ttl
-<http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/0> a skos:Concept ;
+<https://data.gov.uk/codelist/standard-international-trade-classification/revision-4/0> a skos:Concept ;
     skos:notation "0" ;
     rdfs:label "Food and live animals" ;
     rdfs:comment "..." ;
-    skos:inScheme <http://data.gov.uk/codelist/standard-international-trade-classification/revision-4> ;
+    skos:inScheme <https://data.gov.uk/codelist/standard-international-trade-classification/revision-4> ;
     .
 
-<http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/00> a skos:Concept ;
+<https://data.gov.uk/codelist/standard-international-trade-classification/revision-4/00> a skos:Concept ;
     skos:notation "00" ;
     rdfs:label "Live animals other than animals of division 03" ;
     rdfs:comment "..." ;
-    skos:broader <http://data.gov.uk/codelist/standard-international-trade-classification/revision-4/0> ;
-    skos:inScheme <http://data.gov.uk/codelist/standard-international-trade-classification/revision-4> ;
+    skos:broader <https://data.gov.uk/codelist/standard-international-trade-classification/revision-4/0> ;
+    skos:inScheme <https://data.gov.uk/codelist/standard-international-trade-classification/revision-4> ;
     .
 
 # etc...
@@ -1715,7 +2135,7 @@ A limitation of using CSVW to produce a `skos:ConceptScheme` is the inability to
 The following SPARQL query produces `skos:narrower` relationships:
 
 ```sparql
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX skos: <https://www.w3.org/2004/02/skos/core#>
 
 CONSTRUCT {
     ?broaderConcept skos:narrower ?concept.
@@ -1734,7 +2154,7 @@ WHERE {
 The following SPARQL query produces `skos:hasTopConcept` relationships:
 
 ```sparql
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX skos: <https://www.w3.org/2004/02/skos/core#>
 
 CONSTRUCT {
     ?conceptScheme skos:hasTopConcept ?concept.
@@ -1765,15 +2185,15 @@ For example, consider a dataset which mixes codes from the NUTS geography codeli
 | UKD       | North West, England | ...   |
 | E92000001 | England             | ...   |
 
-The NUTS codes have IRIs which are maintained by Eurostat, such as `http://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `http://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
+The NUTS codes have IRIs which are maintained by Eurostat, such as `https://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `https://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
 
-We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
+We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `https://data.europa.eu/nuts/code/{geography}` would result in a non-existant identifier `https://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
 
 We address this by creating new identifiers for each of the codes under a shared namespace, and using `owl:sameAs` relations to relate these new identifiers to the more commonly used identifiers. For example, 
 
 ```ttl
-<http://data.gov.uk/dataset/some-dataset/codelist/geography/code/E92000001>
-    owl:sameAs <http://statistics.data.gov.uk/id/statistical-geography/E92000001> ;
+<https://data.gov.uk/dataset/some-dataset/codelist/geography/code/E92000001>
+    owl:sameAs <https://statistics.data.gov.uk/id/statistical-geography/E92000001> ;
     .
 ```
 
@@ -1781,11 +2201,11 @@ We address this by creating new identifiers for each of the codes under a shared
 
 If [using a CSVW to create a codelist](#using-csvw-to-create-a-codelist), then the `owl:sameAs` relationships can be expressed by adding an additional column to the CSV:
 
-| notation  | label               | same_as                                                            |     |
-| --------- | ------------------- | ------------------------------------------------------------------ | --- |
-| UKC       | North East, England | `http://data.europa.eu/nuts/code/UKC`                              | ... |
-| UKD       | North West, England | `http://data.europa.eu/nuts/code/UKD`                              | ... |
-| E92000001 | England             | `http://statistics.data.gov.uk/id/statistical-geography/E92000001` | ... |
+| notation  | label               | same_as                                                             |     |
+| --------- | ------------------- | ------------------------------------------------------------------- | --- |
+| UKC       | North East, England | `https://data.europa.eu/nuts/code/UKC`                              | ... |
+| UKD       | North West, England | `https://data.europa.eu/nuts/code/UKD`                              | ... |
+| E92000001 | England             | `https://statistics.data.gov.uk/id/statistical-geography/E92000001` | ... |
 
 The additional column would have the following specification inside the CSVW:
 
@@ -1802,22 +2222,22 @@ The additional column would have the following specification inside the CSVW:
 This would result in the following RDF:
 
 ```ttl
-<http://data.gov.uk/dataset/some-dataset/codelist/geography/code/UKC> a skos:Concept ;
+<https://data.gov.uk/dataset/some-dataset/codelist/geography/code/UKC> a skos:Concept ;
     skos:notation "UKC" ;
     rdfs:label "North East, England" ;
     skos:prefLabel "North East, England" ;
-    skos:inScheme <http://data.gov.uk/dataset/some-dataset/codelist/geography> ;
-    owl:sameAs <http://data.europa.eu/nuts/code/UKC> ;
+    skos:inScheme <https://data.gov.uk/dataset/some-dataset/codelist/geography> ;
+    owl:sameAs <https://data.europa.eu/nuts/code/UKC> ;
     .
 
 # ...
 
-<http://data.gov.uk/dataset/some-dataset/codelist/geography/code/E92000001> a skos:Concept ;
+<https://data.gov.uk/dataset/some-dataset/codelist/geography/code/E92000001> a skos:Concept ;
     skos:notation "E92000001" ;
     rdfs:label "England" ;
     skos:prefLabel "England" ;
-    skos:inScheme <http://data.gov.uk/dataset/some-dataset/codelist/geography> ;
-    owl:sameAs <http://statistics.data.gov.uk/id/statistical-geography/E92000001> ;
+    skos:inScheme <https://data.gov.uk/dataset/some-dataset/codelist/geography> ;
+    owl:sameAs <https://statistics.data.gov.uk/id/statistical-geography/E92000001> ;
     .
 ```
 
@@ -1841,16 +2261,16 @@ HMRC publishes each annual edition of CN8 and [provides correspondence tables](h
 ```
 <> a xkos:Correspondence ;
     xkos:compares 
-        <http://data.gov.uk/codelist/combined-nonclementure/2022>,
-        <http://data.gov.uk/codelist/combined-nonclementure/2021> ;
+        <https://data.gov.uk/codelist/combined-nonclementure/2022>,
+        <https://data.gov.uk/codelist/combined-nonclementure/2021> ;
     xkos:madeOf <> ;
     .
 
 <> a xkos:ConceptAssociation ;
-    xkos:sourceConcept <http://data.gov.uk/codelist/combined-nonclementure/02089098> ;
+    xkos:sourceConcept <https://data.gov.uk/codelist/combined-nonclementure/02089098> ;
     xkos:targetConcept 
-        <http://data.gov.uk/codelist/combined-nonclementure/02089098> ,
-        <http://data.gov.uk/codelist/combined-nonclementure/04101010> ;
+        <https://data.gov.uk/codelist/combined-nonclementure/02089098> ,
+        <https://data.gov.uk/codelist/combined-nonclementure/04101010> ;
     .
 ```
 
@@ -1858,21 +2278,21 @@ https://www.uktradeinfo.com/find-commodity-data/help-with-classifying-goods/
 
 ## Provenance
 
-> TODO: http://www.w3.org/TR/prov-o/
+> TODO: https://www.w3.org/TR/prov-o/
 
 ### Datasets derived from other datasets
 
 ## Data quality
 
-> TODO: http://www.w3.org/TR/vocab-dqv/
+> TODO: https://www.w3.org/TR/vocab-dqv/
 
 ## Data usage
 
-> TODO: http://www.w3.org/TR/vocab-duv/
+> TODO: https://www.w3.org/TR/vocab-duv/
 
 ## Data privacy
 
-> TODO: http://dpvcg.github.io/dpv/
+> TODO: https://dpvcg.github.io/dpv/
 
 ## Appendicies
 
@@ -1880,17 +2300,17 @@ https://www.uktradeinfo.com/find-commodity-data/help-with-classifying-goods/
 
 #### Geography
 
-Prefer using IRIs from the `http://statistics.data.gov.uk` vocabulary, based on ONS geography codes.
+Prefer using IRIs from the `https://statistics.data.gov.uk` vocabulary, based on ONS geography codes.
 
-| Label             | IRI                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| United Kingdom    | `http://statistics.data.gov.uk/id/statistical-geography/K02000001` |
-| Great Britain     | `http://statistics.data.gov.uk/id/statistical-geography/K03000001` |
-| England and Wales | `http://statistics.data.gov.uk/id/statistical-geography/K04000001` |
-| England           | `http://statistics.data.gov.uk/id/statistical-geography/E92000001` |
-| Northern Ireland  | `http://statistics.data.gov.uk/id/statistical-geography/N92000002` |
-| Scotland          | `http://statistics.data.gov.uk/id/statistical-geography/S92000002` |
-| Wales             | `http://statistics.data.gov.uk/id/statistical-geography/W92000002` |
+| Label             | IRI                                                                 |
+| ----------------- | ------------------------------------------------------------------- |
+| United Kingdom    | `https://statistics.data.gov.uk/id/statistical-geography/K02000001` |
+| Great Britain     | `https://statistics.data.gov.uk/id/statistical-geography/K03000001` |
+| England and Wales | `https://statistics.data.gov.uk/id/statistical-geography/K04000001` |
+| England           | `https://statistics.data.gov.uk/id/statistical-geography/E92000001` |
+| Northern Ireland  | `https://statistics.data.gov.uk/id/statistical-geography/N92000002` |
+| Scotland          | `https://statistics.data.gov.uk/id/statistical-geography/S92000002` |
+| Wales             | `https://statistics.data.gov.uk/id/statistical-geography/W92000002` |
 
 #### Dates and times
 
@@ -1899,48 +2319,48 @@ Prefer using IRIs from the `http://statistics.data.gov.uk` vocabulary, based on 
 Prefer using `xsd:date` and `xsd:dateTime` to describe `dcterms:issued` and `dcterms:modified`, for example:
 
 ```
-<http://data.gov.uk/dataset/my-dataset> dcterms:issued "2018-01-01"^^xsd:date .
+<https://data.gov.uk/dataset/my-dataset> dcterms:issued "2018-01-01"^^xsd:date .
 ```
 
-Prefer using IRIs from the `http://reference.data.gov.uk` vocabulary to describe dates and times within datasets (for example a time dimension). The IRI scheme is described [here](https://github.com/epimorphics/IntervalServer/blob/master/interval-IRIs.md).
+Prefer using IRIs from the `https://reference.data.gov.uk` vocabulary to describe dates and times within datasets (for example a time dimension). The IRI scheme is described [here](https://github.com/epimorphics/IntervalServer/blob/master/interval-IRIs.md).
 
 #### Frequency
 
-Prefer using IRIs from the [Dublin core collection description frequency vocabulary](https://www.dublincore.org/specifications/dublin-core/collection-description/frequency/), `http://purl.org/cld/freq/`.
+Prefer using IRIs from the [Dublin core collection description frequency vocabulary](https://www.dublincore.org/specifications/dublin-core/collection-description/frequency/), `https://purl.org/cld/freq/`.
 
 Common options include:
 
-| Label     | IRI                                  |
-| --------- | ------------------------------------ |
-| Annual    | `http://purl.org/cld/freq/annual`    |
-| Quarterly | `http://purl.org/cld/freq/quarterly` |
-| Monthly   | `http://purl.org/cld/freq/monthly`   |
-| Weekly    | `http://purl.org/cld/freq/weekly`    |
-| Daily     | `http://purl.org/cld/freq/daily`     |
+| Label     | IRI                                   |
+| --------- | ------------------------------------- |
+| Annual    | `https://purl.org/cld/freq/annual`    |
+| Quarterly | `https://purl.org/cld/freq/quarterly` |
+| Monthly   | `https://purl.org/cld/freq/monthly`   |
+| Weekly    | `https://purl.org/cld/freq/weekly`    |
+| Daily     | `https://purl.org/cld/freq/daily`     |
 
 #### Licenses
 
-| Label                        | IRI                                                                         |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| Open Government Licence v3.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/` |
-| Open Government Licence v2.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/` |
-| Open Government Licence v1.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/1/` |
+| Label                        | IRI                                                                          |
+| ---------------------------- | ---------------------------------------------------------------------------- |
+| Open Government Licence v3.0 | `https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/` |
+| Open Government Licence v2.0 | `https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/` |
+| Open Government Licence v1.0 | `https://www.nationalarchives.gov.uk/doc/open-government-licence/version/1/` |
 
 #### Organisations
 
 GOV.UK provides a [list of government organisations](https://www.gov.uk/government/organisations), which can be used to populate the `dcterms:publisher` and `dcterms:creator` properties.
 
-For example: `http://www.gov.uk/government/organisations/office-for-national-statistics`.
+For example: `https://www.gov.uk/government/organisations/office-for-national-statistics`.
 
 #### Statistics designations
 
 > TODO: IRIs for official/national/experimental stats classifications.
 
-| Label                   | IRI                                          |
-| ----------------------- | -------------------------------------------- |
-| National Statistics     | `http://data.gov.uk/national-statistics`     |
-| Official Statistics     | `http://data.gov.uk/official-statistics`     |
-| Experimental Statistics | `http://data.gov.uk/experimental-statistics` |
+| Label                   | IRI                                           |
+| ----------------------- | --------------------------------------------- |
+| National Statistics     | `https://data.gov.uk/national-statistics`     |
+| Official Statistics     | `https://data.gov.uk/official-statistics`     |
+| Experimental Statistics | `https://data.gov.uk/experimental-statistics` |
 
 #### Symbols and shorthand in tables
 
@@ -1948,40 +2368,40 @@ For example: `http://www.gov.uk/government/organisations/office-for-national-sta
 
 See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
 
-| Label                       | Notation | IRI                                                          |
-| --------------------------- | -------- | ------------------------------------------------------------ |
-| Break in time series        | `[b]`    | `http://data.gov.uk/codelist/statistical-markers/code/[b]`   |
-| Confidential                | `[c]`    | `http://data.gov.uk/codelist/statistical-markers/code/[c]`   |
-| Estimated                   | `[e]`    | `http://data.gov.uk/codelist/statistical-markers/code/[e]`   |
-| Earliest revision           | `[er]`   | `http://data.gov.uk/codelist/statistical-markers/code/[er]`  |
-| Forecast                    | `[f]`    | `http://data.gov.uk/codelist/statistical-markers/code/[f]`   |
-| Low                         | `[low]`  | `http://data.gov.uk/codelist/statistical-markers/code/[low]` |
-| Not significant             | `[ns]`   | `http://data.gov.uk/codelist/statistical-markers/code/[ns]`  |
-| Provisional                 | `[p]`    | `http://data.gov.uk/codelist/statistical-markers/code/[p]`   |
-| Revised                     | `[r]`    | `http://data.gov.uk/codelist/statistical-markers/code/[r]`   |
-| Significance level of 0.05  | `[s]`    | `http://data.gov.uk/codelist/statistical-markers/code/[s]`   |
-| Significance level of 0.01  | `[ss]`   | `http://data.gov.uk/codelist/statistical-markers/code/[ss]`  |
-| Significance level of 0.001 | `[sss]`  | `http://data.gov.uk/codelist/statistical-markers/code/[sss]` |
-| Low reliability             | `[u]`    | `http://data.gov.uk/codelist/statistical-markers/code/[u]`   |
-| None recorded in survey     | `[w]`    | `http://data.gov.uk/codelist/statistical-markers/code/[w]`   |
-| Not available               | `[x]`    | `http://data.gov.uk/codelist/statistical-markers/code/[x]`   |
-| Not applicable              | `[z]`    | `http://data.gov.uk/codelist/statistical-markers/code/[z]`   |
+| Label                       | Notation | IRI                                                           |
+| --------------------------- | -------- | ------------------------------------------------------------- |
+| Break in time series        | `[b]`    | `https://data.gov.uk/codelist/statistical-markers/code/[b]`   |
+| Confidential                | `[c]`    | `https://data.gov.uk/codelist/statistical-markers/code/[c]`   |
+| Estimated                   | `[e]`    | `https://data.gov.uk/codelist/statistical-markers/code/[e]`   |
+| Earliest revision           | `[er]`   | `https://data.gov.uk/codelist/statistical-markers/code/[er]`  |
+| Forecast                    | `[f]`    | `https://data.gov.uk/codelist/statistical-markers/code/[f]`   |
+| Low                         | `[low]`  | `https://data.gov.uk/codelist/statistical-markers/code/[low]` |
+| Not significant             | `[ns]`   | `https://data.gov.uk/codelist/statistical-markers/code/[ns]`  |
+| Provisional                 | `[p]`    | `https://data.gov.uk/codelist/statistical-markers/code/[p]`   |
+| Revised                     | `[r]`    | `https://data.gov.uk/codelist/statistical-markers/code/[r]`   |
+| Significance level of 0.05  | `[s]`    | `https://data.gov.uk/codelist/statistical-markers/code/[s]`   |
+| Significance level of 0.01  | `[ss]`   | `https://data.gov.uk/codelist/statistical-markers/code/[ss]`  |
+| Significance level of 0.001 | `[sss]`  | `https://data.gov.uk/codelist/statistical-markers/code/[sss]` |
+| Low reliability             | `[u]`    | `https://data.gov.uk/codelist/statistical-markers/code/[u]`   |
+| None recorded in survey     | `[w]`    | `https://data.gov.uk/codelist/statistical-markers/code/[w]`   |
+| Not available               | `[x]`    | `https://data.gov.uk/codelist/statistical-markers/code/[x]`   |
+| Not applicable              | `[z]`    | `https://data.gov.uk/codelist/statistical-markers/code/[z]`   |
 
 #### Themes
 
 > TODO: OSR have [domains](https://osr.statisticsauthority.gov.uk/what-we-do/our-domains/). Might be similar to the statistics authority themes.
 
-| Label                                         | IRI                                                                                     |
-| --------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Business, Trade and International Development | `http://osr.statisticsauthority.gov.uk/themes/business-trade-international-development` |
-| Children, Education and Skills                | `http://osr.statisticsauthority.gov.uk/themes/children-education-skills`                |
-| Crime and Security                            | `http://osr.statisticsauthority.gov.uk/themes/crime-security`                           |
-| Economy                                       | `http://osr.statisticsauthority.gov.uk/themes/economy`                                  |
-| Health and Social Care                        | `http://osr.statisticsauthority.gov.uk/themes/health-social-care`                       |
-| Housing, Planning and Local Services          | `http://osr.statisticsauthority.gov.uk/themes/housing-planning-local-services`          |
-| Labour Market and Welfare                     | `http://osr.statisticsauthority.gov.uk/themes/labour-market-welfare`                    |
-| Population and Society                        | `http://osr.statisticsauthority.gov.uk/themes/population-society`                       |
-| Transport, Environment and Climate Change     | `http://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change`     |
+| Label                                         | IRI                                                                                      |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Business, Trade and International Development | `https://osr.statisticsauthority.gov.uk/themes/business-trade-international-development` |
+| Children, Education and Skills                | `https://osr.statisticsauthority.gov.uk/themes/children-education-skills`                |
+| Crime and Security                            | `https://osr.statisticsauthority.gov.uk/themes/crime-security`                           |
+| Economy                                       | `https://osr.statisticsauthority.gov.uk/themes/economy`                                  |
+| Health and Social Care                        | `https://osr.statisticsauthority.gov.uk/themes/health-social-care`                       |
+| Housing, Planning and Local Services          | `https://osr.statisticsauthority.gov.uk/themes/housing-planning-local-services`          |
+| Labour Market and Welfare                     | `https://osr.statisticsauthority.gov.uk/themes/labour-market-welfare`                    |
+| Population and Society                        | `https://osr.statisticsauthority.gov.uk/themes/population-society`                       |
+| Transport, Environment and Climate Change     | `https://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change`     |
 
 #### Media types
 
@@ -2062,9 +2482,9 @@ https://www.w3.org/ns/iana/media-types/
 > TODO: Should we use `vcard`?
 >
 > ```ttl
-> <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> dcat:contactPoint <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> .
+> <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> dcat:contactPoint <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> .
 >
-> <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> a vcard:Individual ;
+> <https://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> a vcard:Individual ;
 >     vcard:hasEmail <mailto:joe.bloggs@ons.gov.uk> ;
 >     vcard:hasTelephone <tel:+441234123456> ;
 >     vcard:fn "Joe Bloggs" ;
@@ -2072,7 +2492,7 @@ https://www.w3.org/ns/iana/media-types/
 > ```
 
 [^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
-    
+
 [^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
 
 ### Class diagram
@@ -2110,7 +2530,7 @@ classDiagram
         a qb:AttributeProperty
     }
     class Codelist {
-        a skos:ConceptScheme
+        a skos:ConceptScheme, dcat:Dataset
     }
     class Code {
         a skos:Concept
@@ -2131,4 +2551,52 @@ classDiagram
     Code --> "1" Codelist : skos.inScheme
     Code --> "1..*" Code : skos.narrower
     Code "1" <--  Code : skos.broader
+    Dataset --> Codelist : dcat.qualifiedRelation
 ```
+
+## Additional necessary RDF vocabularlies which do not yet exist
+
+### Statistical representation in RDF
+We need an ontology to describe statistically important characteristics for observations. 
+
+> Confidence intervals upper and lower bounds should be represented as an atttribute; however these two attributes should extend a property
+
+```ttl
+@prefix qb <https://purl.org/linked-data/cube#>
+@prefix sro <example.org/StatRepresentationOntology#> # Proposed new vocab
+
+obs a qb:observation;
+    qb:aMeasure "17.92"^^xsd:double ;
+    sro:lowerBound "17.4"^^xsd:double ;
+    sro:upperBound "18.46"^^xsd:doube .
+```
+
+> Seasonally adjusted and unadjusted observations should be described and matched within the RDF representaiton
+
+```ttl
+@prefix qb <https://purl.org/linked-data/cube#>
+@prefix sro <example.org/StatRepresentationOntology#> # Proposed new vocab
+
+obsSA a qb:observation, sro:SAobs;
+    qb:aMeasure "42"^^xsd:int ;
+    obsSA sro:hasUnadjustedObs obsNSA.
+
+obsNSA a qb:observation, sro:NSAobs ;
+    qb:aMeasure "40"^^xsd:int ;
+    obsSA sro:hasAdjustedObs obsSA .
+```
+
+### A concept scheme extension vocabulary
+We need an ontology to better describe concept schemes to improve quality of life for analysists and machine learning users.
+
+> Concept schemes, and concepts themselves need to be better described so that dataset cubes can actually be treated as cubes (with roll-ups) -- this approach necessitates concepts which describes their MECE status.
+
+This concept scheme will leverage hierarchical concept schemes and an opinionated default (as interpreted by our tooling) that parent is the sum of its children unless otherwise described using OWL.
+
+> Concept schemes should be described in ways which allow for interpretation of a dimension by machine learning techniques so that consumers of data know whether a particular codelist requires one-hot encoding vs ordinal encoding. 
+
+This extension to the concept scheme domain will describe whether a dataset is oridinal or nominal in order to improve the creation of arrays for machine learning or general linear models.
+
+### A cube is not quite a distribution
+
+A cube is not just a distribution, it is also RDF. We need to be able to describe with another triple beyond `dcat:distribution`.

@@ -1,0 +1,47 @@
+@prefix owl: <https://www.w3.org/2002/07/owl#> .
+@prefix dcat: <https://www.w3.org/ns/dcat#> .
+
+<https://example.org/greenhouse-gas-emissions-series> a dcat:DatasetSeries ;
+    dcat:hasCurrentVersion <https://example.org/greenhouse-gas-emissions/dataset/latest> ;
+    dcat:first <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v2> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:replaces <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/v1> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2018/final/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2018/provisional/latest> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2018/final/latest> ,
+        <https://example.org/greenhouse-gas-emissions/dataset/2018/latest> . 
+
+<https://example.org/greenhouse-gas-emissions/dataset/2019/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2018/final/latest> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2019/provisional> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2019/final/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2019/provisional> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2019/final/latest> ,
+        <https://example.org/greenhouse-gas-emissions/dataset/2019/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2020/provisional/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions-series> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2019/final/latest> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2020/provisional/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2020/final/v1> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions> ;
+    dcat:previousVersion <https://example.org/greenhouse-gas-emissions/dataset/2020/provisional/latest> .
+
+<https://example.org/greenhouse-gas-emissions/dataset/2020/final/v2> a dcat:Dataset ;
+    dcat:inSeries <https://example.org/greenhouse-gas-emissions> ;
+    dcat:replaces <https://example.org/greenhouse-gas-emissions/dataset/2020/final/v1> ;
+    owl:sameAs <https://example.org/greenhouse-gas-emissions/dataset/2020/final/latest>, 
+        <https://example.org/greenhouse-gas-emissions/dataset/2020/latest>,
+        <https://example.org/greenhouse-gas-emissions/dataset/latest> .
