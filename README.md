@@ -6,13 +6,17 @@ The key words must, must not, required, shall, shall not, should, should not, re
 
 ## Preamble
 
-The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, there are still barriers and challenges in accessing and using the data:
+The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, we recognise there are still barriers and challenges in accessing and using the data we produce:
 
 - Analysts need to wrangle data because data are in unstandardised and presentational formats.
 - A user must locate and navigate through many large spreadsheets to understand what data are available.
 - Metadata are provided in an unstructured or unstandardised ways.
 - Data are in silos, making it difficult to link or relate statistics from different sources.
 - The accessibility and usability of statistics varies from dataset to dataset.
+
+There are three main lenses for approaching statistical dissemination best practises. Data on the Web Best Practises, 5-Star Data, and FAIR data principles.
+
+### Data on the Web Best Practises 
 
 The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describes recommendations for publishing data to the web. If followed, we can enable these benefits:
 
@@ -27,7 +31,52 @@ TODO: I want to change this to Go Fair's FAIR data.
 > - **Access**: humans and machines will be able to access up to date data in a variety of forms.
 > - **Interoperability**: it will be easier to reach consensus among data publishers and consumers.
 
-We have explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices.
+### Five Star Data
+
+5★ Open Data has a five point scale which describes data on the web which increases the utility of said data for each increase from one to five stars.
+
+| Stars | Requirements                                                                                         |
+| :---: | :--------------------------------------------------------------------------------------------------- |
+| ★☆☆☆☆ | data needs to be able to be published on the web,                                                    |
+| ★★☆☆☆ | data needs to be machine-readable,                                                                   |
+| ★★★☆☆ | data needs to be non-proprietary,                                                                    |
+| ★★★★☆ | identifiers need to be used to denote things, so that people can talk about resources unambiguously, |
+| ★★★★★ | data needs to able to be linkied to other data to provide context.                                   |
+
+### FAIR data principles
+
+To aid humans who increasingly rely on computational support to deal with increased volumes of data, complexity, and creation speed of data, The FAIR Principles were conceived.
+
+The FAIR Principles describe data which is:
+
+* Findable: data and metadata encoded for machines and humans
+* Accessible: using standard protocols for access and authentication of data
+* Interoperable: data and metadata is represented in an appropriate knowledge representation standard
+* Reusable: using common vocabularies for knowledge representation allows for reuse and remixing of data
+
+### Notes on CSV (RFC 4180)
+
+CSVs are inadquate for statistical dissemination with the level of clarity and precision required.
+
+Shortcomings include:
+* There are different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
+* Multiple differences are possible in encoding, thus creating confusion within any text format.
+* Their inability to say in advance how the rows, columns, cells in CSV file ought to be interpreted.
+
+
+### Application of approaches to data principles and standards
+
+The shortcomings of CSV prompted a W3C working group to build recommendations for working with [CSVW (CSV on the Web)](https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/). This CSVW standard provides a way to resolve the problems with CSVs alone, providing a standard for describing and clarifying the content of CSV tabular data. 
+
+The CSV format is at its best when machine readable. Improving machine-readability by providing metadata by mapping of  rows, columns, and cells of a CSV to internal or external resources adds considerable value to data users. One such improvement is providing data type information for cells contents so they can be mapped as decimals, integers, dates, etc. without ambiguity. Furthermore, CSVW is extensible to fully 5-star linked-data in CSV format. In essence, a CSV file is paired with a JSON document to provide additional metadata to describe the content of the CSV file.
+
+> CSVW (CSV on the Web)
+> 
+> CSVWs are the combination of CSV (RFC 4180) with known constraints plus a paired JSON file which provides additional metadata describing the CSV's contents.
+
+CSVW metadata can be used to drive a user interface for discoverability. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web in applications.
+
+The Integrated Data Service's Disseminiation Service has explored how to follow the best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices, 5-star data, and the FAIR data principles.
 
 ## Specifications used
 
@@ -58,6 +107,10 @@ The Application Profile uses terms from various existing specifications. Classes
 > Machine-readable data is data in a standard format that can be read and processed automatically by a computing system. Traditional word processing documents and portable document format (PDF) files are easily read by humans but typically are difficult for machines to interpret and manipulate. Formats such as XML, JSON, HDF5, RDF and CSV are machine-readable data formats [^machine]
 
 Many of the excel workbooks produced by statisticians are designed to be easily read by humans but typically are difficult for machines to interpret and manipulate.
+
+As mentioned above, CSV on the Web (CSVW) standard adds metadata to describe the contents and structure of comma-separated values (CSV) data files thus bringing the power of linked-data to the versatile CSV format.
+
+In order to achieve JSON, RDF, and SPARQL formats data has to undergo a transformation. The Semantic Web Project's value proposition is to enable the ability to say anything, about anything, whenever, and from wherever, in a manner that's both machine and human comprehensible.
 
 Consider this example taken from the [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/), extracted from StatsWales report number 003311 which describes life expectancy broken down by region (unitary authority), sex and time:
 
@@ -164,7 +217,6 @@ Importing the above table into a statistical software such as [R](https://www.r-
 - The header row representing time period is not fully populated.
 - The first column contains empty strings.
 - Numbers in the data are treated as strings, due to columns having mixed data types.
-
 ```r
 # An example of how the above table looks once imported into R:
 
@@ -181,6 +233,13 @@ Importing the above table into a statistical software such as [R](https://www.r-
 
 Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), with each variable having its own column gives an output which can be instantly read into R, without need for further cleaning.
 
+For data to be classified as tidy data:
+
+1. Each variable forms a column.
+2. Each observation forms a row.
+3. Each type of observational unit forms a table.
+
+
 | area    | period    | sex    | life_expectancy |
 | ------- | --------- | ------ | --------------- |
 | Newport | 2004-2006 | Male   | 76.7            |
@@ -191,7 +250,10 @@ Organising the table as [tidy data](https://r4ds.had.co.nz/tidy-data.html), with
 
 ### Adopt common identifiers
 
-We should adopt common and unambiguous identifiers for data items such as ONS geography codes and ISO-8601 time intervals.
+CSV on the Web (CSVW) standard adds metadata to describe the contents and structure of comma-separated values (CSV) data files thus bringing the power of linked-data to the versatile CSV format.
+
+We should adopt common and unambiguous identifiers for data items such as ONS geography codes or ISO-8601 time intervals.
+
 
 | area      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
@@ -225,7 +287,9 @@ When [using a CSVW to create an RDF data cube](#using-csvw-to-create-an-rdf-data
 | W06000015 | Cardiff    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 83.3            |
 | ...       | ...        | ...                     | ...          | ...    | ...             |
 
-To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](#codelists).
+CSVW provides a way for values rows, and column headings of a CSV file to be mapped to RDF resources. Some schema fields refer to codelists, to limit and standardize the possible values of the fields, in order to promote data interoperability.
+
+To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](#codelists). 
 
 ### Using symbols and shorthand in tables
 
@@ -465,6 +529,95 @@ We adopt IRIs from the [reference.data.gov.uk service](https://github.com/epimor
 | month           | 2005-01   | 001      | ...         |
 | month           | 2005-02   | 01       | ...         |
 | ...             | ...       | ...      | ...         |
+
+## Cataloguing
+
+> TODO: Should we support dcat:DatasetSeries?
+
+> TODO: Do we support cataloguing catalogues?
+
+A catalogue is a collection of metadata about datasets which has been gathered and curated.
+
+### Classes
+
+```mermaid
+classDiagram
+    class Catalog {
+        a dcat:Catalog
+    }
+    class CatalogRecord {
+        a dcat:CatalogRecord
+    }
+    class DatasetSeries{
+        a dcat:DatasetSeries
+    }
+    class Dataset {
+        a dcat:Dataset
+    }
+
+    Catalog --> "1..*" CatalogRecord : dcat.record
+    CatalogRecord --> "1" DatasetSeries : foaf.primaryTopic
+    CatalogRecord --> "1" Dataset : foaf.primaryTopic
+
+    DatasetSeries "1" <-- Dataset : dcat.inSeries
+```
+
+We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes.
+
+### Catalogue
+
+We recommend catalogues have IRIs of the form:
+
+- ```http://{domain}/catalogue```
+- ```http://{domain}/catalogue/{catalogue_slug}```
+
+For example:
+
+- ```http://data.gov.uk/catalogue```
+- ```http://data.gov.uk/catalogue/climate-change```
+
+We recommend the use of the following properties:
+
+| Property                | Requirement level | Notes                                                                      |
+| ----------------------- | ----------------- | -------------------------------------------------------------------------- |
+| `dcterms:title`         | mandatory         | See [titles](#titles)                                                      |
+| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                          |
+| `dcterms:publisher`     | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcat:contactPoint`     | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
+| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcterms:themeTaxonomy` | optional          | See [themes](#themes)                                                      |
+
+For example:
+
+```ttl
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<http://data.gov.uk/catalogue/climate-change> a dcat:Catalog ;
+    dcterms:title "Climate change datasets"@en ;
+    dcterms:description "A catalogue of datasets about climate change"@en ;
+    dcterms:publisher <http://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
+    dcterms:creator <http://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy> ;
+    dcat:contactPoint <http://data.gov.uk/catalogue/climate-change/contact> ;
+    dcterms:issued "2015-01-01"^^xsd:date ;
+    dcterms:modified "2015-01-01"^^xsd:date ;
+    dcterms:themeTaxonomy <http://data.gov.uk/themes> ;
+    .
+```
+
+### Catalog Record
+
+We recommend creaing a IRI for catalogue records by appending `/record` or `#record` to the IRI of the resource being described by the catalogue record:
+
+- `{dataset_iri}/record`
+- `{dataset_iri}#record`
+
+For example:
+
+- `http://data.gov.uk/dataset/my-dataset/record`
+- `http://data.gov.uk/dataset/my-dataset#record`
 
 ## Datasets
 
