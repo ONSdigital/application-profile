@@ -14,13 +14,13 @@ The UK government often [publishes its statistics](https://www.gov.uk/search/res
 - Data are in silos, making it difficult to link or relate statistics from different sources.
 - The accessibility and usability of statistics varies from dataset to dataset.
 
-There are three main lenses for approaching statistical dissemination best practises. Data on the Web Best Practises, 5-Star Data, and FAIR data principles.
+There are several main lenses for approaching statistical dissemination best practises: Data on the Web Best Practises, 5-Star Data, FAIR data principles, and our personal experiences with the shortcomings of stand-alone CSV. Through the combination of best practise and our experiences we have come up with a coherent approach to statistical dissemination in the form of this application profile.
+
+_Skip the rest of this section if you just want the technical details._
 
 ### Data on the Web Best Practises 
 
 The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describes recommendations for publishing data to the web. If followed, we can enable these benefits:
-
-TODO: I want to change this to Go Fair's FAIR data.
 
 > - **Comprehension**: humans will have a better understanding about the data structure, the data meaning, the metadata and the nature of the dataset.
 > - **Processability**: machines will be able to automatically process and manipulate the data within a dataset.
@@ -59,20 +59,22 @@ The FAIR Principles describe data which is:
 CSVs are inadquate for statistical dissemination with the level of clarity and precision required.
 
 Shortcomings include:
-* There are different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
-* Multiple differences are possible in encoding, thus creating confusion within any text format.
-* Their inability to say in advance how the rows, columns, cells in CSV file ought to be interpreted.
 
+* There are different dialects of CSV, which require different approaches to quoting fields and escaping special characters.
+* Multiple interpretations are possible when decoding, thus creating confusion within any text format.
+* Their inability to say in advance how the rows, columns, cells in CSV file ought to be interpreted.
 
 ### Application of approaches to data principles and standards
 
 The shortcomings of CSV prompted a W3C working group to build recommendations for working with [CSVW (CSV on the Web)](https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/). This CSVW standard provides a way to resolve the problems with CSVs alone, providing a standard for describing and clarifying the content of CSV tabular data. 
 
-The CSV format is at its best when machine readable. Improving machine-readability by providing metadata by mapping of  rows, columns, and cells of a CSV to internal or external resources adds considerable value to data users. One such improvement is providing data type information for cells contents so they can be mapped as decimals, integers, dates, etc. without ambiguity. Furthermore, CSVW is extensible to fully 5-star linked-data in CSV format. In essence, a CSV file is paired with a JSON document to provide additional metadata to describe the content of the CSV file.
+The CSV format is at its best when machine readable. Improving machine-readability by providing metadata by mapping of  rows, columns, and cells of a CSV to internal or external resources adds considerable value to data users.
 
-> CSVW (CSV on the Web)
-> 
-> CSVWs are the combination of CSV (RFC 4180) with known constraints plus a paired JSON file which provides additional metadata describing the CSV's contents.
+One such improvement to CSVs is providing data type information for cells contents so they can be mapped as decimals, integers, dates, etc. without ambiguity. Furthermore, CSVW is extensible to fully 5-star linked-data in CSV format. In essence, a CSV file is paired with a JSON document to provide additional metadata to describe the content of the CSV file.
+
+### CSV on the Web
+
+> CSVW extends standard CSV with the ingredients for a reliable, flexible and extensible data exchange format. Most importantly, CSVW accommodates metadata. [^csvw-intro]
 
 CSVW metadata can be used to drive a user interface for discoverability. Linked data is not a specification, it is a set of practices for providing a data infrastructure of shared data across the web. Linked data provides us with the opportunity to exploit open data on the web in applications.
 
@@ -84,10 +86,8 @@ The Application Profile uses terms from various existing specifications. Classes
 
 | Namespace | Namespace IRI                                  | Specification name                                                                   |
 | --------- | ---------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `adms`    | `https://www.w3.org/ns/adms#`                  | Asset Description Metadata Schema                                                    |
 | `dcat`    | `https://www.w3.org/ns/dcat#`                  | Data Catalog Vocabulary                                                              |
 | `dcterms` | `https://purl.org/dc/terms/`                   | DCMI (Dublin Core Metadata Initiative) Metadata Terms                                |
-| `dpv`     | `https://www.w3.org/ns/dpv#`                   | Data Privacy Vocabulary (DPV)                                                        |
 | `foaf`    | `https://xmlns.com/foaf/0.1/`                  | FOAF (Friend of a friend) Vocabulary                                                 |
 | `owl`     | `https://www.w3.org/2002/07/owl#`              | OWL Web Ontology Language                                                            |
 | `prov`    | `https://www.w3.org/ns/prov#`                  | Provenance Vocabulary                                                                |
@@ -95,10 +95,8 @@ The Application Profile uses terms from various existing specifications. Classes
 | `qudt`    | `https://qudt.org/2.1/schema/qudt`             | Main QUDT Ontology                                                                   |
 | `rdfs`    | `https://www.w3.org/2000/01/rdf-schema#`       | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
 | `skos`    | `https://www.w3.org/2004/02/skos/core#`        | SKOS Simple Knowledge Organization System - Reference                                |
-| `spdx`    | `https://spdx.org/rdf/terms#`                  | Software Package Data Exchange                                                       |
 | `xkos`    | `https://rdf-vocabulary.ddialliance.org/xkos#` | XKOS: an SKOS extension for representing statistical classifications                 |
 | `xsd`     | `https://www.w3.org/2001/XMLSchema#`           | XML Schema Part 2: Datatypes Second Edition                                          |
-| `vcard`   | `https://www.w3.org/2006/vcard/ns#`            | File format standard for electronic business cards                                   |
 
 ## Data structure
 
@@ -106,13 +104,15 @@ The Application Profile uses terms from various existing specifications. Classes
 
 > Machine-readable data is data in a standard format that can be read and processed automatically by a computing system. Traditional word processing documents and portable document format (PDF) files are easily read by humans but typically are difficult for machines to interpret and manipulate. Formats such as XML, JSON, HDF5, RDF and CSV are machine-readable data formats [^machine]
 
-Many of the excel workbooks produced by statisticians are designed to be easily read by humans but typically are difficult for machines to interpret and manipulate.
+Many of the Excel workbooks produced by statisticians are designed to be easily read by humans but typically are difficult for machines to interpret and manipulate.
 
 As mentioned above, CSV on the Web (CSVW) standard adds metadata to describe the contents and structure of comma-separated values (CSV) data files thus bringing the power of linked-data to the versatile CSV format.
 
-In order to achieve JSON, RDF, and SPARQL formats data has to undergo a transformation. The Semantic Web Project's value proposition is to enable the ability to say anything, about anything, whenever, and from wherever, in a manner that's both machine and human comprehensible.
+In order to achieve JSON, RDF, and SPARQL formats data has to undergo a transformation. The [Semantic Web Project](https://www.w3.org/standards/semanticweb/)'s value proposition is to enable the ability to say anything, about anything, whenever, and from wherever, in a manner that's both machine and human comprehensible.
 
 Consider this example taken from the [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/), extracted from StatsWales report number 003311 which describes life expectancy broken down by region (unitary authority), sex and time:
+
+
 
 <table id="example-data" style="text-align: left;">
   <tbody>
@@ -467,6 +467,37 @@ It is possible to capture secondary observations of the same measure. In order t
 
 In this case, `country`, `sex`, `study period` are dimensions, `height` is the measure dimension, `height in cm` is the observation column with cm as units, and `height in inches` is a decimal literal attribute of the `height in cm` observation with unit inches.
 
+```ttl
+@Prefix qb: <http://purl.org/linked-data/cube#> .
+@Prefix ex: <http://example.com/> .
+@Prefix sdmx-d: <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@Prefix sdmx-a: <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@Prefix sdmx-m: <http://purl.org/linked-data/sdmx/2009/measure#> .
+@Prefix sdmx-c: <http://purl.org/linked-data/sdmx/2009/code#> .
+@Prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@Prefix qudt-u: <https://qudt.org/2.1/vocab/unit#> .
+
+ex:heightInInches a qb:MeasureProperty ;
+    rdfs:label "Height in inches" ;
+    sdmx-a:unitMeasure qudt-u:IN ;
+    rdfs:subPropertyOf sdmx-m:obsValue .
+
+ex:heightInCm a qb:MeasureProperty;
+    rdfs:label "Height in cm" ;
+    sdmx-a:unitMeasure qudt-u:CentiM ;
+    rdfs:subPropertyOf sdmx-m:obsValue .
+
+ex
+
+ex:obs1 a qb:Observation ;
+    ex:country "Nepal" ;
+    sdmx-d:sex sdmx-c:sex-M ;
+    ex:studyPeriod <https://reference.data.gov.uk/id/government-year/2012-2013> ;
+    sdmx-a:unitMeasure qudt-u:CentiM ;
+    ex:height 161.7 ;
+    ex:heightInInches 63.5 .
+```
+
 TODO: For representation using CSVW or RDF of this construction see a section in the RDF Cube Vocabulary bit at the end
 
 ### Representing model components and uncertanty
@@ -483,6 +514,8 @@ Similarly to [secondary observations with different units](#secondary-observatio
 > Source: https://en.wikipedia.org/wiki/Average_human_height_by_country
 
 For datasets with confidence internals, we recommend attaching the upper and lower bounds to the primary observation as individiual literal attributes and not as a range.
+
+TODO: This is the confidence/credible interval level section/plug
 
 #### Seasonal adjustments and unadjusted values
 
@@ -506,39 +539,35 @@ Statisticians may wish to report statistics at different time granularities. For
 | 2004      | 0        | ...         |
 | 2004-2005 | 0        | ...         |
 | 2004-01   | 0        | ...         |
-| 2004-02   | 0        | ...         |
+| 2004-W34  | 0        | ...         |
 | ...       | ...      | ...         |
 | 2005      | 00       | ...         |
 | 2005-01   | 001      | ...         |
-| 2005-02   | 01       | ...         |
+| 2004-W34  | 01       | ...         |
 | ...       | ...      | ...         |
 
 We adopt IRIs from the [reference.data.gov.uk service](https://github.com/epimorphics/IntervalServer/blob/master/interval-uris.md).
 
-`https://reference.data.gov.uk/id/{period_type}/{period}`
+`https://reference.data.gov.uk/id/{period_type}/{period_notation}`
 
-| period_type     | period    | industry | trade_value |
-| --------------- | --------- | -------- | ----------- |
-| year            | 2004      | 0        | ...         |
-| government-year | 2004-2005 | 0        | ...         |
-| month           | 2004-01   | 0        | ...         |
-| month           | 2004-02   | 0        | ...         |
-| ...             | ...       | ...      | ...         |
-| year            | 2005      | 00       | ...         |
-| government-year | 2005-2006 | 00       | ...         |
-| month           | 2005-01   | 001      | ...         |
-| month           | 2005-02   | 01       | ...         |
-| ...             | ...       | ...      | ...         |
+| period_type     | period_notation | industry | trade_value |
+| --------------- | --------------- | -------- | ----------- |
+| year            | 2004            | 0        | ...         |
+| government-year | 2004-2005       | 0        | ...         |
+| month           | 2004-01         | 0        | ...         |
+| week            | 2004-W34        | 0        | ...         |
+| ...             | ...             | ...      | ...         |
+| year            | 2005            | 00       | ...         |
+| government-year | 2005-2006       | 00       | ...         |
+| month           | 2005-01         | 001      | ...         |
+| week            | 2004-W34        | 01       | ...         |
+| ...             | ...             | ...      | ...         |
 
-## Cataloguing
+## Catalogues
 
-> TODO: Should we support dcat:DatasetSeries?
+A catalogue is a collection of metadata about datasets which has been gathered and curated. For smaller or more simple dataset collections, it makes sense to attach `DatasetSeries` and `Datasets` directly to a `CatalogRecord`.
 
-> TODO: Do we support cataloguing catalogues?
-
-A catalogue is a collection of metadata about datasets which has been gathered and curated.
-
-### Classes
+### Classes used
 
 ```mermaid
 classDiagram
@@ -564,7 +593,37 @@ classDiagram
 
 We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes.
 
-### Catalogue
+> Yo dawg, I heard you liked catalogs...
+
+In some serialisations, more complicated datasets with many local dimensions a dataset is created for each dimension as a representation of its `ConceptScheme`. If each of these dimenion datasets end up on the primary `Catalog` it may complicate the primary `Dataset`'s discovery, by creating a child `Catalog` to encapsulate `CatalogRecord`s for the each dimension and the primary dataset creates a more streamlined primary `Catalog`.
+
+```mermaid
+flowchart LR
+    pc[Main Catalog\na dcat:Catalog]
+    pcr1[Wide Dataset Catalog Record\na dcat:CatalogRecord]
+    pcr2[Another Dataset Catalog Record\na dcat:CatalogRecord]
+    wc[Wide Dataset Catalog\na dcat:Catalog]
+    wcr1[Dimension 1 Record\na dcat:CatalogRecord]
+    wcr2[Dimension 2 Record\na dcat:CatalogRecord]
+    wcr3[Wide Dataset Main Record\na dcat:CatalogRecord]
+    add[Another Dataset\na dcat:DatasetSeries]
+    wd1[Dimension 1 Dataset\na dcat:Dataset\na skos:ConceptScheme]
+    wd2[Dimension 2 Dataset\na dcat:Dataset\na skos:ConceptScheme]
+    wd3[Wide Dataset\na dcat:Dataset]
+
+    pc -->|dcat:record| pcr1
+    pc -->|dcat:record| pcr2
+    pcr1 -->|foaf:primaryTopic| wc
+    wc -->|dcat:record| wcr1 & wcr2 & wcr3
+    pcr2 -->|foaf:primaryTopic| add
+    wcr1 -->|foaf:primaryTopic| wd1
+    wcr2 -->|foaf:primaryTopic| wd2
+    wcr3 -->|foaf:primaryTopic| wd3
+```
+
+**NOTE** A `dcat:Catalog` should not have a `dcat:CatalogRecord` which points back to its parent `dcat:Catalog`. 
+
+### `dcat:catalog`
 
 We recommend catalogues have IRIs of the form:
 
@@ -607,7 +666,7 @@ For example:
     .
 ```
 
-### Catalog Record
+### `dcat:catalogRecord`
 
 We recommend creaing a IRI for catalogue records by appending `/record` or `#record` to the IRI of the resource being described by the catalogue record:
 
@@ -621,19 +680,32 @@ For example:
 
 ## Datasets
 
+The way datasets and dataset series are related determines the kind of versioning that is possible. Datasets can be stand alone or a member of a dataset series.
+
+```{mermaid}
+flowchart LR
+    sads[Stand alone dataset\na dcat:Dataset]
+
+    A[dcat:CatalogEntry] -->|foaf.primaryTopic| sads
+
+```
+
 We recommend standalone datasets have IRIs in the form of
 
 - `https://{domain}/dataset/{dataset_slug}`
+
+For example:
+
+- `https://data.gov.uk/dataset/my-dataset`
 
 However, in order to support [unscheduled revisions](#versions) (i.e. versions), we recommended that all datasets be a member of a dataset series.
 
 For datasets belonging to a dataset series, we recommend extending the series IRI to form the dataset IRI:
 
-- `https://{domain}/series/{series_slug}/dataset/{edition_period}`
+- `https://{domain}/series/{series_slug}/dataset/{edition_slug}`
 
 For example:
 
-- `https://data.gov.uk/dataset/my-dataset`
 - `https://data.gov.uk/series/some-dataset-series/dataset/2018-Q3`
 
 We recommend the use of the following properties:
@@ -739,67 +811,6 @@ For example:
 ```
 
 Many of the properties which apply to dataset series are also applicable to datasets within that series. We recommend specifying properties for both resources.
-
-## Cataloguing
-
-A catalogue is a collection of metadata about datasets which has been gathered and curated. For smaller or more simple dataset collections, it makes sense to attach `DatasetSeries` and `Datasets` directly to a `CatalogRecord`.
-
-### Classes
-
-```mermaid
-classDiagram
-    class Catalog {
-        a dcat:Catalog
-    }
-    class CatalogRecord {
-        a dcat:CatalogRecord
-    }
-    class DatasetSeries{
-        a dcat:DatasetSeries
-    }
-    class Dataset {
-        a dcat:Dataset
-    }
-
-    Catalog --> "1..*" CatalogRecord : dcat.record
-    CatalogRecord --> "1" DatasetSeries : foaf.primaryTopic
-    CatalogRecord --> "1" Dataset : foaf.primaryTopic
-    CatalogRecord ..> "1" Catalog : foaf.primaryTopic
-
-    DatasetSeries "1" <-- Dataset : dcat.inSeries
-```
-
-We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes. 
-
-> Yo dawg, I heard you liked catalogs...
-
-In some serialisations, more complicated datasets with many local dimensions a dataset is created for each dimension as a representation of its `ConceptScheme`. If each of these dimenion datasets end up on the primary `Catalog` it may complicate the primary `Dataset`'s discovery, by creating a child `Catalog` to encapsulate `CatalogRecord`s for the each dimension and the primary dataset creates a more streamlined primary `Catalog`.
-
-```mermaid
-flowchart LR
-    pc[Main Catalog\na dcat:Catalog]
-    pcr1[Wide Dataset Catalog Record\na dcat:CatalogRecord]
-    pcr2[Another Dataset Catalog Record\na dcat:CatalogRecord]
-    wc[Wide Dataset Catalog\na dcat:Catalog]
-    wcr1[Dimension 1 Record\na dcat:CatalogRecord]
-    wcr2[Dimension 2 Record\na dcat:CatalogRecord]
-    wcr3[Wide Dataset Main Record\na dcat:CatalogRecord]
-    add[Another Dataset\na dcat:DatasetSeries]
-    wd1[Dimension 1 Dataset\na dcat:Dataset\na skos:ConceptScheme]
-    wd2[Dimension 2 Dataset\na dcat:Dataset\na skos:ConceptScheme]
-    wd3[Wide Dataset\na dcat:Dataset]
-
-    pc -->|dcat:record| pcr1
-    pc -->|dcat:record| pcr2
-    pcr1 -->|foaf:primaryTopic| wc
-    wc -->|dcat:record| wcr1 & wcr2 & wcr3
-    pcr2 -->|foaf:primaryTopic| add
-    wcr1 -->|foaf:primaryTopic| wd1
-    wcr2 -->|foaf:primaryTopic| wd2
-    wcr3 -->|foaf:primaryTopic| wd3
-```
-
-**NOTE** A `dcat:Catalog` should not have a `dcat:CatalogRecord` which points to its parent `dcat:Catalog`. 
 
 ### Catalogue
 
@@ -2364,7 +2375,9 @@ For example: `https://www.gov.uk/government/organisations/office-for-national-st
 
 #### Symbols and shorthand in tables
 
-> TODO: [Recently updated guidance exists](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/). We may need to update our markers codelist.
+Often in statistical publications tables will contain symbols and shorthand to indicate certain exceptions or notable considerations when using the data. Instead of including the notation within the observation value, we recommend using an attribute column of observation status type to contain these markers for each impacted observation.
+
+The Analyst Function of the Civil Service has published [guidance on symbols and shorthand in tables](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/), the symbols and shorthand are reproduced below. Please note though using their extension notation is not immediately supported and requires the creation of a custom code list should you wish to use codes like "u1" or "u2" to signify differences in low reliability of the attached observations.
 
 See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
 
@@ -2389,19 +2402,111 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 
 #### Themes
 
-> TODO: OSR have [domains](https://osr.statisticsauthority.gov.uk/what-we-do/our-domains/). Might be similar to the statistics authority themes.
-
-| Label                                         | IRI                                                                                      |
-| --------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Business, Trade and International Development | `https://osr.statisticsauthority.gov.uk/themes/business-trade-international-development` |
-| Children, Education and Skills                | `https://osr.statisticsauthority.gov.uk/themes/children-education-skills`                |
-| Crime and Security                            | `https://osr.statisticsauthority.gov.uk/themes/crime-security`                           |
-| Economy                                       | `https://osr.statisticsauthority.gov.uk/themes/economy`                                  |
-| Health and Social Care                        | `https://osr.statisticsauthority.gov.uk/themes/health-social-care`                       |
-| Housing, Planning and Local Services          | `https://osr.statisticsauthority.gov.uk/themes/housing-planning-local-services`          |
-| Labour Market and Welfare                     | `https://osr.statisticsauthority.gov.uk/themes/labour-market-welfare`                    |
-| Population and Society                        | `https://osr.statisticsauthority.gov.uk/themes/population-society`                       |
-| Transport, Environment and Climate Change     | `https://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change`     |
+We recommend aligning your dataset with a theme from the list of ONS topics to help better situate your dataset within a specific context; datasets should only have one theme but may have many [keywords].
+| Topic                                           | Identifier                                                                                                            | Parent                                |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| "Business, industry and trade"                  | https://www.ons.gov.uk/businessindustryandtrade                                                                       |                                       |
+| Economy                                         | https://www.ons.gov.uk/economy                                                                                        |                                       |
+| Employment and labour market                    | https://www.ons.gov.uk/employmentandlabourmarket                                                                      |                                       |
+| "People, population and community"              | https://www.ons.gov.uk/peoplepopulationandcommunity                                                                   |                                       |
+| Business                                        | https://www.ons.gov.uk/businessindustryandtrade/business                                                              | "Business, industry and trade"        |
+| Changes to business                             | https://www.ons.gov.uk/businessindustryandtrade/changestobusiness                                                     | "Business, industry and trade"        |
+| Construction industry                           | https://www.ons.gov.uk/businessindustryandtrade/constructionindustry                                                  | "Business, industry and trade"        |
+| International trade                             | https://www.ons.gov.uk/businessindustryandtrade/internationaltrade                                                    | "Business, industry and trade"        |
+| IT and internet industry                        | https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry                                                 | "Business, industry and trade"        |
+| Manufacturing and production industry           | https://www.ons.gov.uk/businessindustryandtrade/manufacturingandproductionindustry                                    | "Business, industry and trade"        |
+| Retail industry                                 | https://www.ons.gov.uk/businessindustryandtrade/retailindustry                                                        | "Business, industry and trade"        |
+| Tourism industry                                | https://www.ons.gov.uk/businessindustryandtrade/tourismindustry                                                       | "Business, industry and trade"        |
+| Economic output and productivity                | https://www.ons.gov.uk/economy/economicoutputandproductivity                                                          | Economy                               |
+| Environmental accounts                          | https://www.ons.gov.uk/economy/environmentalaccounts                                                                  | Economy                               |
+| "Government, public sector and taxes"           | https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes                                                         | Economy                               |
+| Gross Domestic Product (GDP)                    | https://www.ons.gov.uk/economy/grossdomesticproductgdp                                                                | Economy                               |
+| Gross Value Added (GVA)                         | https://www.ons.gov.uk/economy/grossvalueaddedgva                                                                     | Economy                               |
+| Inflation and price indices                     | https://www.ons.gov.uk/economy/inflationandpriceindices                                                               | Economy                               |
+| "Investments, pensions and trusts"              | https://www.ons.gov.uk/economy/investmentspensionsandtrusts                                                           | Economy                               |
+| National accounts                               | https://www.ons.gov.uk/economy/nationalaccounts                                                                       | Economy                               |
+| Regional accounts                               | https://www.ons.gov.uk/economy/regionalaccounts                                                                       | Economy                               |
+| People in work                                  | https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork                                                         | Employment and labour market          |
+| People not in work                              | https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork                                                      | Employment and labour market          |
+| "Births, deaths and marriages"                  | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages                                          | "People, population and community"    |
+| Crime and justice                               | https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice                                                   | "People, population and community"    |
+| Cultural identity                               | https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity                                                  | "People, population and community"    |
+| Education and childcare                         | https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare                                             | "People, population and community"    |
+| Elections                                       | https://www.ons.gov.uk/peoplepopulationandcommunity/elections                                                         | "People, population and community"    |
+| Health and social care                          | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare                                               | "People, population and community"    |
+| Household characteristics                       | https://www.ons.gov.uk/peoplepopulationandcommunity/householdcharacteristics                                          | "People, population and community"    |
+| Housing                                         | https://www.ons.gov.uk/peoplepopulationandcommunity/housing                                                           | "People, population and community"    |
+| Leisure and tourism                             | https://www.ons.gov.uk/peoplepopulationandcommunity/leisureandtourism                                                 | "People, population and community"    |
+| Personal and household finances                 | https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances                                      | "People, population and community"    |
+| Population and migration                        | https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration                                            | "People, population and community"    |
+| Well-being                                      | https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing                                                         | "People, population and community"    |
+| "Activity, size and location"                   | https://www.ons.gov.uk/businessindustryandtrade/business/activitysizeandlocation                                      | Business                              |
+| Business innovation                             | https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation                                           | Business                              |
+| Business services                               | https://www.ons.gov.uk/businessindustryandtrade/business/businessservices                                             | Business                              |
+| Bankruptcy/insolvency                           | https://www.ons.gov.uk/businessindustryandtrade/changestobusiness/bankruptcyinsolvency                                | Changes to business                   |
+| "Business births, deaths and survival rates"    | https://www.ons.gov.uk/businessindustryandtrade/changestobusiness/businessbirthsdeathsandsurvivalrates                | Changes to business                   |
+| Mergers and acquisitions                        | https://www.ons.gov.uk/businessindustryandtrade/changestobusiness/mergersandacquisitions                              | Changes to business                   |
+| Output                                          | https://www.ons.gov.uk/economy/economicoutputandproductivity/output                                                   | Economic output and productivity      |
+| Productivity measures                           | https://www.ons.gov.uk/economy/economicoutputandproductivity/productivitymeasures                                     | Economic output and productivity      |
+| Public services productivity                    | https://www.ons.gov.uk/economy/economicoutputandproductivity/publicservicesproductivity                               | Economic output and productivity      |
+| Local government finance                        | https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/localgovernmentfinance                                  | "Government, public sector and taxes" |
+| Public sector finance                           | https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance                                     | "Government, public sector and taxes" |
+| Public spending                                 | https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicspending                                          | "Government, public sector and taxes" |
+| Research and development expenditure            | https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/researchanddevelopmentexpenditure                       | "Government, public sector and taxes" |
+| Taxes and revenue                               | https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/taxesandrevenue                                         | "Government, public sector and taxes" |
+| Balance of payments                             | https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments                                                     | National accounts                     |
+| Satellite accounts                              | https://www.ons.gov.uk/economy/nationalaccounts/satelliteaccounts                                                     | National accounts                     |
+| Supply and use tables                           | https://www.ons.gov.uk/economy/nationalaccounts/supplyandusetables                                                    | National accounts                     |
+| UK sector accounts                              | https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts                                                      | National accounts                     |
+| Gross disposable household income               | https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome                                        | Regional accounts                     |
+| Earnings and working hours                      | https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours                                 | People in work                        |
+| Employment and employee types                   | https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes                              | People in work                        |
+| Labour productivity                             | https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity                                      | People in work                        |
+| Public sector personnel                         | https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/publicsectorpersonnel                                   | People in work                        |
+| Workplace disputes and working conditions       | https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/workplacedisputesandworkingconditions                   | People in work                        |
+| Workplace pensions                              | https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/workplacepensions                                       | People in work                        |
+| Economic inactivity                             | https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/economicinactivity                                   | People not in work                    |
+| Out of work benefits                            | https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/outofworkbenefits                                    | People not in work                    |
+| Redundancies                                    | https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/redundancies                                         | People not in work                    |
+| Unemployment                                    | https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment                                         | People not in work                    |
+| Adoption                                        | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/adoption                                 | "Births, deaths and marriages"        |
+| Ageing                                          | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/ageing                                   | "Births, deaths and marriages"        |
+| Conception and fertility rates                  | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/conceptionandfertilityrates              | "Births, deaths and marriages"        |
+| Deaths                                          | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths                                   | "Births, deaths and marriages"        |
+| Divorce                                         | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/divorce                                  | "Births, deaths and marriages"        |
+| Families                                        | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/families                                 | "Births, deaths and marriages"        |
+| Life expectancies                               | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies                         | "Births, deaths and marriages"        |
+| Live births                                     | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths                               | "Births, deaths and marriages"        |
+| "Marriage, cohabitation and civil partnerships" | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/marriagecohabitationandcivilpartnerships | "Births, deaths and marriages"        |
+| Maternities                                     | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/maternities                              | "Births, deaths and marriages"        |
+| Stillbirths                                     | https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/stillbirths                              | "Births, deaths and marriages"        |
+| Ethnicity                                       | https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity/ethnicity                                        | Cultural identity                     |
+| Language                                        | https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity/language                                         | Cultural identity                     |
+| Religion                                        | https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity/religion                                         | Cultural identity                     |
+| Sexual identity                                 | https://www.ons.gov.uk/peoplepopulationandcommunity/culturalidentity/sexuality                                        | Cultural identity                     |
+| Electoral registration                          | https://www.ons.gov.uk/peoplepopulationandcommunity/elections/electoralregistration                                   | Elections                             |
+| General elections                               | https://www.ons.gov.uk/peoplepopulationandcommunity/elections/generalelections                                        | Elections                             |
+| Local government elections                      | https://www.ons.gov.uk/peoplepopulationandcommunity/elections/localgovernmentelections                                | Elections                             |
+| Causes of death                                 | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath                                 | Health and social care                |
+| Child health                                    | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/childhealth                                   | Health and social care                |
+| Coronavirus (COVID-19)                          | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/conditionsanddiseases                         | Health and social care                |
+| Disability                                      | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/disability                                    | Health and social care                |
+| "Drug use, alcohol and smoking"                 | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/drugusealcoholandsmoking                      | Health and social care                |
+| Health care system                              | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthcaresystem                              | Health and social care                |
+| Health inequalities                             | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthinequalities                            | Health and social care                |
+| Health and life expectancies                    | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies                     | Health and social care                |
+| Health and well-being                           | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandwellbeing                            | Health and social care                |
+| Mental health                                   | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/mentalhealth                                  | Health and social care                |
+| Social care                                     | https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/socialcare                                    | Health and social care                |
+| Home internet and social media usage            | https://www.ons.gov.uk/peoplepopulationandcommunity/householdcharacteristics/homeinternetandsocialmediausage          | Household characteristics             |
+| Debt                                            | https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/debt                                 | Personal and household finances       |
+| Expenditure                                     | https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/expenditure                          | Personal and household finances       |
+| Income and wealth                               | https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth                      | Personal and household finances       |
+| "Pensions, savings and investments"             | https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/pensionssavingsandinvestments        | Personal and household finances       |
+| International migration                         | https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/internationalmigration                     | Population and migration              |
+| Migration within the UK                         | https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk                       | Population and migration              |
+| Population estimates                            | https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates                        | Population and migration              |
+| Population projections                          | https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationprojections                      | Population and migration              |
 
 #### Media types
 
@@ -2490,10 +2595,6 @@ https://www.w3.org/ns/iana/media-types/
 >     vcard:fn "Joe Bloggs" ;
 >     .
 > ```
-
-[^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
-
-[^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
 
 ### Class diagram
 
@@ -2597,6 +2698,45 @@ This concept scheme will leverage hierarchical concept schemes and an opinionate
 
 This extension to the concept scheme domain will describe whether a dataset is oridinal or nominal in order to improve the creation of arrays for machine learning or general linear models.
 
+### Missing units
+We need an ontology to describe units which are not yet in the QUDT ontology. The fraction unit should be extended beyond its current definition:
+
+```ttl
+<http://qudt.org/vocab/unit/FRACTION>
+  a <http://qudt.org/schema/qudt/CountingUnit> ;
+  a <http://qudt.org/schema/qudt/Unit> ;
+  <http://qudt.org/schema/qudt/conversionMultiplier> "1"^^xsd:double ;
+  <http://qudt.org/schema/qudt/conversionOffset> "0"^^xsd:double ;
+  <http://qudt.org/schema/qudt/hasDimensionVector> <http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H0T0D1> ;
+  <http://qudt.org/schema/qudt/hasQuantityKind> <http://qudt.org/vocab/quantitykind/DimensionlessRatio> ;
+  <http://qudt.org/schema/qudt/plainTextDescription> "Fraction is a unit for 'Dimensionless Ratio' expressed as the value of the ratio itself." ;
+  <http://qudt.org/schema/qudt/symbol> "Ã·" ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:isDefinedBy <http://qudt.org/vocab/unit> ;
+  rdfs:label "Fraction"@en ;
+```
+
+What we want to be able to do is describe the fractions based off of set populations, as a lot of statistical publications would have units like "per 1000 people" or "per 1000 households". The problem was one of our data engineers misappropriated the scaling_factor component of unit definitions, and accidentally made a statistic which read that there were 5 million murders per million people in the UK.
+
+```json
+{
+  "label": "per 100,000 population",
+  "from_existing": "http://qudt.org/vocab/unit/NUM",
+  "scaling_factor": 100000
+},
+{
+  "label": "per million population",
+  "from_existing": "http://qudt.org/vocab/unit/NUM",
+  "scaling_factor": 1000000
+},
+```
+
 ### A cube is not quite a distribution
 
 A cube is not just a distribution, it is also RDF. We need to be able to describe with another triple beyond `dcat:distribution`.
+
+[^csvw-intro]: https://hilton.org.uk/blog/csvw
+
+[^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
+
+[^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record

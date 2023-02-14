@@ -1,0 +1,28 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "columns": {
+        "Height in cm": {
+            "type": "observations",
+            "unit": {
+                "label": "centimeter",
+                "from_existing": "http://qudt.org/vocab/unit/CentiM"
+            },
+            "measure": {
+                "label": "height",
+                "definition_uri": "http://dbpedia.org/resource/Height"
+            }
+        },
+        "Height in inches": {
+            "type": "observations",
+            "unit": {
+                "label": "inches",
+                "from_existing": "http://qudt.org/vocab/unit/IN"
+            },
+            "measure": {
+                "label": "height",
+                "definition_uri": "http://dbpedia.org/resource/Height"
+            }
+        }
+    }
+
+}
