@@ -8,7 +8,7 @@
                 "from_existing": "http://qudt.org/vocab/unit/CentiM"
             },
             "measure": {
-                "label": "height",
+                "label": "height cm",
                 "definition_uri": "http://dbpedia.org/resource/Height"
             }
         },
@@ -19,7 +19,7 @@
                 "from_existing": "http://qudt.org/vocab/unit/IN"
             },
             "measure": {
-                "label": "height",
+                "label": "height inches",
                 "definition_uri": "http://dbpedia.org/resource/Height"
             }
         }

@@ -30,16 +30,16 @@
                     {
                         "titles": "Height in cm",
                         "name": "height_in_cm",
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
-                        "propertyUrl": "height-example.csv#measure/height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
+                        "propertyUrl": "height-example.csv#measure/height-cm",
                         "datatype": "decimal",
                         "required": true
                     },
                     {
                         "titles": "Height in inches",
                         "name": "height_in_inches",
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
-                        "propertyUrl": "height-example.csv#measure/height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
+                        "propertyUrl": "height-example.csv#measure/height-inches",
                         "datatype": "decimal",
                         "required": true
                     },
@@ -58,110 +58,110 @@
                     {
                         "name": "virt_obs_height_in_cm",
                         "virtual": true,
-                        "propertyUrl": "qb:Observation",
-                        "valueUrl": "height-example.csv#obs/{country},{sex},{study_period}@height"
+                        "propertyUrl": "qb:observation",
+                        "valueUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm"
                     },
                     {
                         "name": "virt_obs_height_in_cm_meas",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
                         "propertyUrl": "qb:measureType",
-                        "valueUrl": "height-example.csv#measure/height"
+                        "valueUrl": "height-example.csv#measure/height-cm"
                     },
                     {
                         "name": "virt_obs_height_in_cm_unit",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
                         "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
                         "valueUrl": "height-example.csv#unit/centimeter"
                     },
                     {
                         "name": "virt_dim_height_in_cm_country",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
                         "propertyUrl": "height-example.csv#dimension/country",
                         "valueUrl": "country.csv#{+country}"
                     },
                     {
                         "name": "virt_dim_height_in_cm_sex",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
                         "propertyUrl": "height-example.csv#dimension/sex",
                         "valueUrl": "sex.csv#{+sex}"
                     },
                     {
                         "name": "virt_dim_height_in_cm_study_period",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
                         "propertyUrl": "height-example.csv#dimension/study-period",
                         "valueUrl": "study-period.csv#{+study_period}"
                     },
                     {
                         "name": "virt_obs_height_in_cm_type",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
                         "propertyUrl": "rdf:type",
                         "valueUrl": "qb:Observation"
                     },
                     {
                         "name": "virt_dataSet_height_in_cm",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-cm",
                         "propertyUrl": "qb:dataSet",
                         "valueUrl": "height-example.csv#dataset"
                     },
                     {
                         "name": "virt_obs_height_in_inches",
                         "virtual": true,
-                        "propertyUrl": "qb:Observation",
-                        "valueUrl": "height-example.csv#obs/{country},{sex},{study_period}@height"
+                        "propertyUrl": "qb:observation",
+                        "valueUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches"
                     },
                     {
                         "name": "virt_obs_height_in_inches_meas",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
                         "propertyUrl": "qb:measureType",
-                        "valueUrl": "height-example.csv#measure/height"
+                        "valueUrl": "height-example.csv#measure/height-inches"
                     },
                     {
                         "name": "virt_obs_height_in_inches_unit",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
                         "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
                         "valueUrl": "height-example.csv#unit/inches"
                     },
                     {
                         "name": "virt_dim_height_in_inches_country",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
                         "propertyUrl": "height-example.csv#dimension/country",
                         "valueUrl": "country.csv#{+country}"
                     },
                     {
                         "name": "virt_dim_height_in_inches_sex",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
                         "propertyUrl": "height-example.csv#dimension/sex",
                         "valueUrl": "sex.csv#{+sex}"
                     },
                     {
                         "name": "virt_dim_height_in_inches_study_period",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
                         "propertyUrl": "height-example.csv#dimension/study-period",
                         "valueUrl": "study-period.csv#{+study_period}"
                     },
                     {
                         "name": "virt_obs_height_in_inches_type",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
                         "propertyUrl": "rdf:type",
                         "valueUrl": "qb:Observation"
                     },
                     {
                         "name": "virt_dataSet_height_in_inches",
                         "virtual": true,
-                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height",
+                        "aboutUrl": "height-example.csv#obs/{country},{sex},{study_period}@height-inches",
                         "propertyUrl": "qb:dataSet",
                         "valueUrl": "height-example.csv#dataset"
                     }
@@ -215,114 +215,121 @@
     ],
     "rdfs:seeAlso": [
         {
-            "@id": "height-example.csv#component/measure-type",
+            "@id": "height-example.csv#dimension/sex",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
-            "http://purl.org/linked-data/cube#componentProperty": [
+            "http://purl.org/linked-data/cube#codeList": [
                 {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 4
-                },
-                {
-                    "@value": 7
-                }
-            ]
-        },
-        {
-            "@id": "height-example.csv#component/height",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "height-example.csv#measure/height"
-                }
-            ],
-            "http://purl.org/linked-data/cube#measure": [
-                {
-                    "@id": "height-example.csv#measure/height"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 9
-                },
-                {
-                    "@value": 6
-                }
-            ]
-        },
-        {
-            "@id": "height-example.csv#dataset",
-            "@type": [
-                "http://www.w3.org/ns/dcat#Resource",
-                "http://purl.org/linked-data/cube#Attachable",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DataSet",
-                "http://www.w3.org/ns/dcat#Dataset"
-            ],
-            "http://purl.org/dc/terms/identifier": [
-                {
-                    "@value": "Height Example"
-                }
-            ],
-            "http://purl.org/dc/terms/issued": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-02-14T16:40:30.522886"
-                }
-            ],
-            "http://purl.org/dc/terms/modified": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
-                    "@value": "2023-02-14T16:40:30.522886"
-                }
-            ],
-            "http://purl.org/dc/terms/title": [
-                {
-                    "@language": "en",
-                    "@value": "Height Example"
-                }
-            ],
-            "http://purl.org/linked-data/cube#structure": [
-                {
-                    "@id": "height-example.csv#structure"
+                    "@id": "sex.csv#code-list"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "Height Example"
+                    "@value": "Sex"
                 }
             ],
-            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+            "http://www.w3.org/2000/01/rdf-schema#range": [
                 {
-                    "@id": "height-example.csv#csvcubed-build-activity"
+                    "@id": "height-example.csv#class/sex"
+                }
+            ]
+        },
+        {
+            "@id": "height-example.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataStructureDefinition",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "height-example.csv#component/height-inches"
+                },
+                {
+                    "@id": "height-example.csv#component/height-cm"
+                },
+                {
+                    "@id": "height-example.csv#component/country"
+                },
+                {
+                    "@id": "height-example.csv#component/sex"
+                },
+                {
+                    "@id": "height-example.csv#component/unit"
+                },
+                {
+                    "@id": "height-example.csv#component/measure-type"
+                },
+                {
+                    "@id": "height-example.csv#component/study-period"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "height-example.csv#dimension/sex"
+                },
+                {
+                    "@id": "height-example.csv#dimension/study-period"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "height-example.csv#dimension/country"
+                },
+                {
+                    "@id": "height-example.csv#measure/height-inches"
+                },
+                {
+                    "@id": "height-example.csv#measure/height-cm"
+                }
+            ],
+            "http://purl.org/linked-data/cube#sliceKey": [
+                {
+                    "@id": "height-example.csv#slice/cross-measures"
+                }
+            ]
+        },
+        {
+            "@id": "height-example.csv#component/sex",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "height-example.csv#dimension/sex"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "height-example.csv#dimension/sex"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 2
                 }
             ]
         },
         {
             "@id": "height-example.csv#dimension/study-period",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -344,16 +351,16 @@
         {
             "@id": "height-example.csv#class/study-period",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "height-example.csv#component/study-period",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
@@ -372,11 +379,37 @@
             ]
         },
         {
+            "@id": "height-example.csv#component/measure-type",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 7
+                },
+                {
+                    "@value": 4
+                }
+            ]
+        },
+        {
             "@id": "height-example.csv#component/unit",
             "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
             ],
             "http://purl.org/linked-data/cube#attribute": [
                 {
@@ -405,48 +438,22 @@
         {
             "@id": "height-example.csv#csvcubed-build-activity",
             "@type": [
-                "http://www.w3.org/ns/prov#Activity",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/prov#Activity"
             ],
             "http://www.w3.org/ns/prov#used": [
                 {
-                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.2.1"
+                    "@id": "https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.2.3"
                 }
             ]
         },
         {
-            "@id": "height-example.csv#dimension/sex",
+            "@id": "height-example.csv#measure/height-cm",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DimensionProperty",
-                "http://purl.org/linked-data/cube#CodedProperty",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
-            ],
-            "http://purl.org/linked-data/cube#codeList": [
-                {
-                    "@id": "sex.csv#code-list"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "Sex"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#range": [
-                {
-                    "@id": "height-example.csv#class/sex"
-                }
-            ]
-        },
-        {
-            "@id": "height-example.csv#measure/height",
-            "@type": [
-                "http://purl.org/linked-data/cube#MeasureProperty",
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty"
             ],
             "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
                 {
@@ -456,7 +463,7 @@
             "http://www.w3.org/2000/01/rdf-schema#label": [
                 {
                     "@language": "en",
-                    "@value": "height"
+                    "@value": "height cm"
                 }
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
@@ -466,126 +473,20 @@
             ]
         },
         {
-            "@id": "height-example.csv#structure",
-            "@type": [
-                "http://purl.org/linked-data/cube#DataStructureDefinition",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#component": [
-                {
-                    "@id": "height-example.csv#component/unit"
-                },
-                {
-                    "@id": "height-example.csv#component/study-period"
-                },
-                {
-                    "@id": "height-example.csv#component/height"
-                },
-                {
-                    "@id": "height-example.csv#component/country"
-                },
-                {
-                    "@id": "height-example.csv#component/sex"
-                },
-                {
-                    "@id": "height-example.csv#component/measure-type"
-                }
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
-                },
-                {
-                    "@id": "height-example.csv#measure/height"
-                },
-                {
-                    "@id": "height-example.csv#dimension/country"
-                },
-                {
-                    "@id": "http://purl.org/linked-data/cube#measureType"
-                },
-                {
-                    "@id": "height-example.csv#dimension/sex"
-                },
-                {
-                    "@id": "height-example.csv#dimension/study-period"
-                }
-            ],
-            "http://purl.org/linked-data/cube#sliceKey": [
-                {
-                    "@id": "height-example.csv#slice/cross-measures"
-                }
-            ]
-        },
-        {
             "@id": "height-example.csv#class/sex",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "height-example.csv#component/country",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "height-example.csv#dimension/country"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "height-example.csv#dimension/country"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 1
-                }
-            ]
-        },
-        {
-            "@id": "height-example.csv#class/country",
-            "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Class",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ]
-        },
-        {
-            "@id": "height-example.csv#component/sex",
-            "@type": [
-                "http://purl.org/linked-data/cube#ComponentSpecification",
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#ComponentSet"
-            ],
-            "http://purl.org/linked-data/cube#componentProperty": [
-                {
-                    "@id": "height-example.csv#dimension/sex"
-                }
-            ],
-            "http://purl.org/linked-data/cube#dimension": [
-                {
-                    "@id": "height-example.csv#dimension/sex"
-                }
-            ],
-            "http://purl.org/linked-data/cube#order": [
-                {
-                    "@value": 2
-                }
+                "http://www.w3.org/2000/01/rdf-schema#Class"
             ]
         },
         {
             "@id": "height-example.csv#dimension/country",
             "@type": [
-                "http://www.w3.org/2000/01/rdf-schema#Resource",
-                "http://purl.org/linked-data/cube#DimensionProperty",
                 "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-                "http://purl.org/linked-data/cube#ComponentProperty"
+                "http://purl.org/linked-data/cube#DimensionProperty"
             ],
             "http://purl.org/linked-data/cube#codeList": [
                 {
@@ -605,6 +506,29 @@
             ]
         },
         {
+            "@id": "height-example.csv#component/height-cm",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "height-example.csv#measure/height-cm"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "height-example.csv#measure/height-cm"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 6
+                }
+            ]
+        },
+        {
             "@id": "height-example.csv#slice/cross-measures",
             "@type": [
                 "http://www.w3.org/2000/01/rdf-schema#Resource",
@@ -613,10 +537,10 @@
             ],
             "http://purl.org/linked-data/cube#componentProperty": [
                 {
-                    "@id": "height-example.csv#dimension/country"
+                    "@id": "height-example.csv#dimension/study-period"
                 },
                 {
-                    "@id": "height-example.csv#dimension/study-period"
+                    "@id": "height-example.csv#dimension/country"
                 },
                 {
                     "@id": "height-example.csv#dimension/sex"
@@ -624,10 +548,137 @@
             ]
         },
         {
+            "@id": "height-example.csv#measure/height-inches",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://purl.org/linked-data/cube#MeasureProperty"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                    "@id": "http://dbpedia.org/resource/Height"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "height inches"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                }
+            ]
+        },
+        {
+            "@id": "height-example.csv#class/country",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "height-example.csv#component/country",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "height-example.csv#dimension/country"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "height-example.csv#dimension/country"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 1
+                }
+            ]
+        },
+        {
+            "@id": "height-example.csv#component/height-inches",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "height-example.csv#measure/height-inches"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "height-example.csv#measure/height-inches"
+                }
+            ],
+            "http://purl.org/linked-data/cube#order": [
+                {
+                    "@value": 9
+                }
+            ]
+        },
+        {
+            "@id": "height-example.csv#dataset",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://purl.org/linked-data/cube#Attachable"
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Height Example"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-02-14T16:52:12.243356"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2023-02-14T16:52:12.243356"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Height Example"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "height-example.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Height Example"
+                }
+            ],
+            "http://www.w3.org/ns/prov#wasGeneratedBy": [
+                {
+                    "@id": "height-example.csv#csvcubed-build-activity"
+                }
+            ]
+        },
+        {
             "@id": "height-example.csv#dependency/country",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -643,8 +694,8 @@
         {
             "@id": "height-example.csv#dependency/sex",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -660,8 +711,8 @@
         {
             "@id": "height-example.csv#dependency/study-period",
             "@type": [
-                "http://rdfs.org/ns/void#Dataset",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://rdfs.org/ns/void#Dataset"
             ],
             "http://rdfs.org/ns/void#dataDump": [
                 {
@@ -675,46 +726,11 @@
             ]
         },
         {
-            "@id": "height-example.csv#unit/centimeter",
-            "@type": [
-                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://qudt.org/schema/qudt/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
-            ],
-            "http://qudt.org/schema/qudt/isScalingOf": [
-                {
-                    "@id": "http://qudt.org/vocab/unit/CentiM"
-                }
-            ],
-            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": [
-                {
-                    "@type": "http://www.w3.org/2001/XMLSchema#float",
-                    "@value": "1.0"
-                }
-            ],
-            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": [
-                {
-                    "@id": "http://qudt.org/vocab/unit/CentiM"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
-                {
-                    "@id": "http://qudt.org/vocab/unit/CentiM"
-                }
-            ],
-            "http://www.w3.org/2000/01/rdf-schema#label": [
-                {
-                    "@language": "en",
-                    "@value": "centimeter"
-                }
-            ]
-        },
-        {
             "@id": "height-example.csv#unit/inches",
             "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
                 "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
-                "http://qudt.org/schema/qudt/Unit",
-                "http://www.w3.org/2000/01/rdf-schema#Resource"
+                "http://qudt.org/schema/qudt/Unit"
             ],
             "http://qudt.org/schema/qudt/isScalingOf": [
                 {
@@ -741,6 +757,41 @@
                 {
                     "@language": "en",
                     "@value": "inches"
+                }
+            ]
+        },
+        {
+            "@id": "height-example.csv#unit/centimeter",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.ontology-of-units-of-measure.org/resource/om-2/Unit",
+                "http://qudt.org/schema/qudt/Unit"
+            ],
+            "http://qudt.org/schema/qudt/isScalingOf": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/CentiM"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasFactor": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#float",
+                    "@value": "1.0"
+                }
+            ],
+            "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/CentiM"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                    "@id": "http://qudt.org/vocab/unit/CentiM"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "centimeter"
                 }
             ]
         }
