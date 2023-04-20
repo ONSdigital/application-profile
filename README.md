@@ -796,31 +796,6 @@ WHERE {
 }
 ```
 
-We also recommend placing catalogue records into a named graph that is the same as the IRI of the catalog.
-
-```ttl
-@prefix dcterms: <http://purl.org/dc/terms/> .
-<http://data.gov.uk/catalogue/my-datasets> {
-
-    <http://data.gov.uk/catalogue/my-datasets> a dcat:Catalog ;
-        dcterms:title "My datasets"@en ;
-        dcterms:description "A description of my catalogue."@en ;
-        dcterms:publisher <http://www.gov.uk/government/organisations/office-for-national-statistics> ;
-        dcterms:issued "2015-01-01"^^xsd:date ;
-        dcterms:modified "2018-01-01"^^xsd:date ;
-        dcat:record <http://data.gov.uk/dataset/my-dataset/record> ;
-        .
-
-    <http://data.gov.uk/dataset/my-dataset/record> a dcat:CatalogRecord ;
-        dcterms:title "My Dataset" ;
-        dcterms:description "A description of my dataset."@en ;
-        dcterms:publisher <http://www.gov.uk/government/organisations/office-for-national-statistics> ;
-        dcterms:issued "2018-01-01"^^xsd:date ;
-        .
-
-}
-```
-
 ### Content negotiation of distributions
 
 We recommend that data providers implement content negotiation as a method for clients to access the data in the format they require.
@@ -832,8 +807,6 @@ For example, a `dcat:Dataset` with an IRI of `http://data.gov.uk/dataset/my-data
 ```sh
 curl http://data.gov.uk/dataset/my-dataset -H "Accept: text/csv"
 ```
-
-Previous years of data may be repeated without any changes, though in some instances some previous year's data may be revised or updated to include new data or better estimates.
 
 ### Editions
 
@@ -1967,6 +1940,7 @@ For contact points, we adopt the `vcard` vocabulary.
 ```ttl
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> 
     dcat:contactPoint <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> .
+
 <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> a vcard:Individual ;
     vcard:hasEmail <mailto:joe.bloggs@ons.gov.uk> ;
     vcard:hasTelephone <tel:+441234123456> ;
