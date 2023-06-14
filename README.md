@@ -565,8 +565,8 @@ For example:
 
 We recommend creaing a IRI for catalogue records by appending `/record` or `#record` to the IRI of the resource being described by the catalogue record:
 
-- `{dataset_iri}/record`
-- `{dataset_iri}#record`
+- `http://{dataset_iri}/record`
+- `http://{dataset_iri}#record`
 
 For example:
 
@@ -724,10 +724,7 @@ We recommend distributions have IRIs which are identical to the dataset IRI, wit
 
 - `http://{dataset_iri}.{extension}`
 
-The exception is when representing an RDF data cube as a distribution, for which there is no physical file and therefore no extension. In that instance, we recommend appending `/datacube` or `#datacube` to the dataset IRI.
-
-- `http://{dataset_iri}/datacube`
-- `http://{dataset_iri}#datacube`
+The exception is when representing an RDF data cube as a distribution, for which there is no physical file and therefore no extension. In that instance, we recommend appending `/datacube` or `#datacube` to the dataset IRI (see [Data cube](#data-cube)).
 
 For example:
 
@@ -1118,6 +1115,45 @@ classDiagram
   
 ```
 
+### Datacube
+
+We recommend datacubes have IRIs of the form:
+
+- `http://{dataset_iri}/datacube`
+- `http://{dataset_iri}#datacube`
+
+| Property       | Requirement level | Notes |
+| -------------- | ----------------- | ----- |
+| `qb:structure` | mandatory         |       |
+
+For additional properties see [Distributions](#distributions).
+
+### Data structure definition
+
+We recommend data structure definitions have IRIs of the form:
+
+- `http://{dataset_iri}/datacube/structure`
+- `http://{dataset_iri}#datacube/structure`
+
+| Property       | Requirement level | Notes |
+| -------------- | ----------------- | ----- |
+| `qb:component` | mandatory         |       |
+
+#### Component specification
+
+We recommend component specifications have IRIs of the form:
+
+- `http://{dataset_iri}/datacube/component/{component_name}`
+- `http://{dataset_iri}#datacube/component/{component_name}`
+
+
+| Property       | Requirement level | Notes |
+| -------------- | ----------------- | ----- |
+| `qb:dimension` | mandatory         |       |
+| `qb:measure`   | mandatory         |       |
+| `qb:order`     | recommended       |       |
+| `qb:attribute` | optional          |       |
+
 ### Components
 
 The components of a data cube are its dimensions, measures and attributes.
@@ -1139,7 +1175,6 @@ ex:measure1 a qb:MeasureProperty ;
     rdfs:label "Measure 1"@en ;
     rdfs:comment "A measure property"@en ;
     rdfs:range xsd:decimal ;
-    qb:order 1 ;
     .
 ```
 
@@ -1148,7 +1183,6 @@ ex:measure1 a qb:MeasureProperty ;
 | `rdfs:label`         | mandatory         |       |
 | `rdfs:comment`       | mandatory         |       |
 | `rdfs:range`         | mandatory         |       |
-| `qb:order`           | recommended       |       |
 | `qb:concept`         | recommended       |       |
 | `rdfs:subPropertyOf` | optional          |       |
 
@@ -1160,7 +1194,6 @@ ex:dimension1 a qb:DimensionProperty ;
     rdfs:comment "A dimension property"@en ;
     rdfs:range xsd:string ;
     qb:codeList <http://data.gov.uk/codelist/some-codelist> ;
-    qb:order 2 ;
     .
 ```
 
@@ -1170,7 +1203,6 @@ ex:dimension1 a qb:DimensionProperty ;
 | `rdfs:comment`       | mandatory         |                             |
 | `qb:codelist`        | recommended       | See [codelists](#codelists) |
 | `rdfs:range`         | recommended       | Typically `skos:Concept`    |
-| `qb:order`           | recommended       |                             |
 | `qb:concept`         | recommended       |                             |
 | `rdfs:subPropertyOf` | optional          |                             |
 
@@ -1184,7 +1216,6 @@ ex:attribute1 a qb:AttributeProperty ;
     rdfs:comment "An attribute property"@en ;
     rdfs:range skos:Concept ;
     qb:codeList <http://data.gov.uk/codelist/statistical-markers> ;
-    qb:order 3 ;
     .
 ```
 
@@ -1194,7 +1225,6 @@ ex:attribute1 a qb:AttributeProperty ;
 | `rdfs:comment`       | mandatory         |                             |
 | `qb:codelist`        | recommended       | See [codelists](#codelists) |
 | `rdfs:range`         | recommended       | Typically `skos:Concept`    |
-| `qb:order`           | recommended       |                             |
 | `qb:concept`         | recommended       |                             |
 | `rdfs:subPropertyOf` | optional          |                             |
 
