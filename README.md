@@ -1192,7 +1192,6 @@ ex:measure1 a qb:MeasureProperty ;
 ex:dimension1 a qb:DimensionProperty ;
     rdfs:label "Dimension 1"@en ;
     rdfs:comment "A dimension property"@en ;
-    rdfs:range xsd:string ;
     qb:codeList <http://data.gov.uk/codelist/some-codelist> ;
     .
 ```
