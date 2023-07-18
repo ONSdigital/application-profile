@@ -1,0 +1,52 @@
+{
+    "$schema": "https://purl.org/csv-cubed/qube-config/v1",
+    "columns": {
+        "Sex": {
+            "type": "dimension",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/dimension#sex",
+            "cell_uri_template": "http://purl.org/linked-data/sdmx/2009/code#sex-{+sex}"
+        },
+        "Country": {
+            "type": "dimension",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+            "cell_uri_template": "http://gss-data.org.uk/def/concept/ons-country/{+country}"
+        },
+        "Study Period": {
+            "type": "dimension",
+            "from_template": "mixed-period"
+        },
+        "Height in cm": {
+            "type": "observations",
+            "unit": {
+                "label": "centimeter",
+                "from_existing": "http://qudt.org/vocab/unit/CentiM"
+            },
+            "measure": {
+                "label": "height cm",
+                "definition_uri": "http://dbpedia.org/resource/Height"
+            }
+        },
+        "Height in cm status": {
+            "type": "attribute",
+            "describes_observations": "Height in cm",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+        },
+        "Height in inches": {
+            "type": "observations",
+            "unit": {
+                "label": "inches",
+                "from_existing": "http://qudt.org/vocab/unit/IN"
+            },
+            "measure": {
+                "label": "height inches",
+                "definition_uri": "http://dbpedia.org/resource/Height"
+            }
+        },
+        "Height in inches status": {
+            "type": "attribute",
+            "describes_observations": "Height in inches",
+            "from_existing": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus"
+        }
+    }
+
+}

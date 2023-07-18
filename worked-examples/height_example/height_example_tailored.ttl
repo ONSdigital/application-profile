@@ -1,0 +1,253 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix qudt-s: <http://qudt.org/schema/qudt/> .
+@prefix ns1: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix ns2: <file:/workspace/worked-examples/out/height-example.csv#dimension/> .
+@prefix ns3: <file:/workspace/worked-examples/out/height-example.csv#measure/> .
+@prefix sdmx-a: <http://purl.org/linked-data/sdmx/2009/attribute#> .
+
+<file:/workspace/worked-examples/out/height-example.csv#dataset>
+  rdfs:seeAlso <file:/workspace/worked-examples/out/height-example.csv#class/sex>, <file:/workspace/worked-examples/out/height-example.csv#class/study-period>, <file:/workspace/worked-examples/out/height-example.csv#component/height-cm>, <file:/workspace/worked-examples/out/height-example.csv#component/measure-type>, <file:/workspace/worked-examples/out/height-example.csv#component/sex>, <file:/workspace/worked-examples/out/height-example.csv#component/study-period>, <file:/workspace/worked-examples/out/height-example.csv#component/unit>, <file:/workspace/worked-examples/out/height-example.csv#csvcubed-build-activity>, <file:/workspace/worked-examples/out/height-example.csv#dimension/country>, <file:/workspace/worked-examples/out/height-example.csv#dimension/sex>, <file:/workspace/worked-examples/out/height-example.csv#dimension/study-period>, <file:/workspace/worked-examples/out/height-example.csv#measure/height-cm>, <file:/workspace/worked-examples/out/height-example.csv#measure/height-inches>, <file:/workspace/worked-examples/out/height-example.csv#slice/cross-measures>, <file:/workspace/worked-examples/out/height-example.csv#structure>, <file:/workspace/worked-examples/out/height-example.csv#class/country>, <file:/workspace/worked-examples/out/height-example.csv#component/country>, <file:/workspace/worked-examples/out/height-example.csv#component/height-inches>, <file:/workspace/worked-examples/out/height-example.csv#dataset>, <file:/workspace/worked-examples/out/height-example.csv#dependency/country>, <file:/workspace/worked-examples/out/height-example.csv#dependency/sex>, <file:/workspace/worked-examples/out/height-example.csv#dependency/study-period>, <file:/workspace/worked-examples/out/height-example.csv#unit/centimeter>, <file:/workspace/worked-examples/out/height-example.csv#unit/inches> ;
+  a qb:Attachable, qb:DataSet, rdfs:Resource, dcat:Dataset, dcat:Resource ;
+  dc:identifier "Height Example" ;
+  dc:issued "2023-02-14T16:52:12.243356"^^xsd:dateTime ;
+  dc:modified "2023-02-14T16:52:12.243356"^^xsd:dateTime ;
+  dc:title "Height Example"@en ;
+  qb:structure <file:/workspace/worked-examples/out/height-example.csv#structure> ;
+  rdfs:label "Height Example"@en ;
+  prov:wasGeneratedBy <file:/workspace/worked-examples/out/height-example.csv#csvcubed-build-activity> .
+
+<file:/workspace/worked-examples/out/height-example.csv#dimension/sex>
+  a qb:CodedProperty, qb:ComponentProperty, qb:DimensionProperty, rdf:Property, rdfs:Resource ;
+  qb:codeList <file:/workspace/worked-examples/out/sex.csv#code-list> ;
+  rdfs:label "Sex"@en ;
+  rdfs:range <file:/workspace/worked-examples/out/height-example.csv#class/sex> .
+
+<file:/workspace/worked-examples/out/height-example.csv#structure>
+  a qb:ComponentSet, qb:DataStructureDefinition, rdfs:Resource ;
+  qb:component <file:/workspace/worked-examples/out/height-example.csv#component/country>, <file:/workspace/worked-examples/out/height-example.csv#component/height-cm>, <file:/workspace/worked-examples/out/height-example.csv#component/height-inches>, <file:/workspace/worked-examples/out/height-example.csv#component/measure-type>, <file:/workspace/worked-examples/out/height-example.csv#component/sex>, <file:/workspace/worked-examples/out/height-example.csv#component/study-period>, <file:/workspace/worked-examples/out/height-example.csv#component/unit> ;
+  qb:componentProperty <file:/workspace/worked-examples/out/height-example.csv#dimension/country>, <file:/workspace/worked-examples/out/height-example.csv#dimension/sex>, <file:/workspace/worked-examples/out/height-example.csv#dimension/study-period>, <file:/workspace/worked-examples/out/height-example.csv#measure/height-cm>, <file:/workspace/worked-examples/out/height-example.csv#measure/height-inches>, qb:measureType, <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> ;
+  qb:sliceKey <file:/workspace/worked-examples/out/height-example.csv#slice/cross-measures> .
+
+<file:/workspace/worked-examples/out/height-example.csv#component/sex>
+  a qb:ComponentSet, qb:ComponentSpecification, rdfs:Resource ;
+  qb:componentProperty <file:/workspace/worked-examples/out/height-example.csv#dimension/sex> ;
+  qb:dimension <file:/workspace/worked-examples/out/height-example.csv#dimension/sex> ;
+  qb:order "2" .
+
+<file:/workspace/worked-examples/out/height-example.csv#dimension/study-period>
+  a qb:CodedProperty, qb:ComponentProperty, qb:DimensionProperty, rdf:Property, rdfs:Resource ;
+  qb:codeList <file:/workspace/worked-examples/out/study-period.csv#code-list> ;
+  rdfs:label "Study Period"@en ;
+  rdfs:range <file:/workspace/worked-examples/out/height-example.csv#class/study-period> .
+
+<file:/workspace/worked-examples/out/height-example.csv#class/study-period> a rdfs:Class, rdfs:Resource .
+<file:/workspace/worked-examples/out/height-example.csv#component/study-period>
+  a qb:ComponentSet, qb:ComponentSpecification, rdfs:Resource ;
+  qb:componentProperty <file:/workspace/worked-examples/out/height-example.csv#dimension/study-period> ;
+  qb:dimension <file:/workspace/worked-examples/out/height-example.csv#dimension/study-period> ;
+  qb:order "3" .
+
+<file:/workspace/worked-examples/out/height-example.csv#component/measure-type>
+  a qb:ComponentSet, qb:ComponentSpecification, rdfs:Resource ;
+  qb:componentProperty qb:measureType ;
+  qb:dimension qb:measureType ;
+  qb:order "4", "7" .
+
+<file:/workspace/worked-examples/out/height-example.csv#component/unit>
+  a qb:ComponentSet, qb:ComponentSpecification, rdfs:Resource ;
+  qb:attribute <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> ;
+  qb:componentProperty <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> ;
+  qb:componentRequired "true" ;
+  qb:order "5", "8" .
+
+<file:/workspace/worked-examples/out/height-example.csv#csvcubed-build-activity>
+  a rdfs:Resource, prov:Activity ;
+  prov:used <https://github.com/GSS-Cogs/csvcubed/releases/tag/v0.2.3> .
+
+<file:/workspace/worked-examples/out/height-example.csv#measure/height-cm>
+  a qb:ComponentProperty, qb:MeasureProperty, rdf:Property, rdfs:Resource ;
+  rdfs:isDefinedBy <http://dbpedia.org/resource/Height> ;
+  rdfs:label "height cm"@en ;
+  rdfs:range xsd:decimal .
+
+<file:/workspace/worked-examples/out/height-example.csv#class/sex> a rdfs:Class, rdfs:Resource .
+<file:/workspace/worked-examples/out/height-example.csv#dimension/country>
+  a qb:CodedProperty, qb:ComponentProperty, qb:DimensionProperty, rdf:Property, rdfs:Resource ;
+  qb:codeList <file:/workspace/worked-examples/out/country.csv#code-list> ;
+  rdfs:label "Country"@en ;
+  rdfs:range <file:/workspace/worked-examples/out/height-example.csv#class/country> .
+
+<file:/workspace/worked-examples/out/height-example.csv#component/height-cm>
+  a qb:ComponentSet, qb:ComponentSpecification, rdfs:Resource ;
+  qb:componentProperty <file:/workspace/worked-examples/out/height-example.csv#measure/height-cm> ;
+  qb:measure <file:/workspace/worked-examples/out/height-example.csv#measure/height-cm> ;
+  qb:order "6" .
+
+<file:/workspace/worked-examples/out/height-example.csv#slice/cross-measures>
+  a qb:ComponentSet, qb:SliceKey, rdfs:Resource ;
+  qb:componentProperty <file:/workspace/worked-examples/out/height-example.csv#dimension/country>, <file:/workspace/worked-examples/out/height-example.csv#dimension/sex>, <file:/workspace/worked-examples/out/height-example.csv#dimension/study-period> .
+
+<file:/workspace/worked-examples/out/height-example.csv#measure/height-inches>
+  a qb:ComponentProperty, qb:MeasureProperty, rdf:Property, rdfs:Resource ;
+  rdfs:isDefinedBy <http://dbpedia.org/resource/Height> ;
+  rdfs:label "height inches"@en ;
+  rdfs:range xsd:decimal .
+
+<file:/workspace/worked-examples/out/height-example.csv#class/country> a rdfs:Class, rdfs:Resource .
+<file:/workspace/worked-examples/out/height-example.csv#component/country>
+  a qb:ComponentSet, qb:ComponentSpecification, rdfs:Resource ;
+  qb:componentProperty <file:/workspace/worked-examples/out/height-example.csv#dimension/country> ;
+  qb:dimension <file:/workspace/worked-examples/out/height-example.csv#dimension/country> ;
+  qb:order "1" .
+
+<file:/workspace/worked-examples/out/height-example.csv#component/height-inches>
+  a qb:ComponentSet, qb:ComponentSpecification, rdfs:Resource ;
+  qb:componentProperty <file:/workspace/worked-examples/out/height-example.csv#measure/height-inches> ;
+  qb:measure <file:/workspace/worked-examples/out/height-example.csv#measure/height-inches> ;
+  qb:order "9" .
+
+<file:/workspace/worked-examples/out/height-example.csv#dependency/country>
+  a void:Dataset, rdfs:Resource ;
+  void:dataDump <file:/workspace/worked-examples/out/country.csv-metadata.json> ;
+  void:uriSpace "country.csv#" .
+
+<file:/workspace/worked-examples/out/height-example.csv#dependency/sex>
+  a void:Dataset, rdfs:Resource ;
+  void:dataDump <file:/workspace/worked-examples/out/sex.csv-metadata.json> ;
+  void:uriSpace "sex.csv#" .
+
+<file:/workspace/worked-examples/out/height-example.csv#dependency/study-period>
+  a void:Dataset, rdfs:Resource ;
+  void:dataDump <file:/workspace/worked-examples/out/study-period.csv-metadata.json> ;
+  void:uriSpace "study-period.csv#" .
+
+<file:/workspace/worked-examples/out/height-example.csv#unit/inches>
+  a <http://qudt.org/schema/qudt/Unit>, <http://www.ontology-of-units-of-measure.org/resource/om-2/Unit>, rdfs:Resource ;
+  qudt-s:isScalingOf <http://qudt.org/vocab/unit/IN> ;
+  ns1:hasFactor "1.0"^^xsd:float ;
+  ns1:hasUnit <http://qudt.org/vocab/unit/IN> ;
+  rdfs:isDefinedBy <http://qudt.org/vocab/unit/IN> ;
+  rdfs:label "inches"@en .
+
+<file:/workspace/worked-examples/out/height-example.csv#unit/centimeter>
+  a qudt-s:Unit, ns1:Unit, rdfs:Resource ;
+  qudt-s:isScalingOf <http://qudt.org/vocab/unit/CentiM> ;
+  ns1:hasFactor "1.0"^^xsd:float ;
+  ns1:hasUnit <http://qudt.org/vocab/unit/CentiM> ;
+  rdfs:isDefinedBy <http://qudt.org/vocab/unit/CentiM> ;
+  rdfs:label "centimeter"@en .
+
+<file:/workspace/worked-examples/out/height-example.csv#slice/nepal,male,2012-2013>
+  a qb:Slice ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#nepal> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#male> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2012-2013> ;
+  qb:observation <file:/workspace/worked-examples/out/height-example.csv#obs/nepal,male,2012-2013@height-cm>, <file:/workspace/worked-examples/out/height-example.csv#obs/nepal,male,2012-2013@height-inches> ;
+  qb:sliceStructure <file:/workspace/worked-examples/out/height-example.csv#slice/cross-measures> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/nepal,male,2012-2013@height-inches>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#nepal> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#male> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2012-2013> ;
+  ns3:height-inches 63.5 ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-inches ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/inches> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/nepal,male,2012-2013@height-cm>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#nepal> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#male> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2012-2013> ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-cm ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/centimeter> .
+
+<file:/workspace/worked-examples/out/height-example.csv#slice/nepal,female,2012-2013>
+  a qb:Slice ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#nepal> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#female> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2012-2013> ;
+  qb:observation <file:/workspace/worked-examples/out/height-example.csv#obs/nepal,female,2012-2013@height-cm>, <file:/workspace/worked-examples/out/height-example.csv#obs/nepal,female,2012-2013@height-inches> ;
+  qb:sliceStructure <file:/workspace/worked-examples/out/height-example.csv#slice/cross-measures> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/nepal,female,2012-2013@height-inches>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#nepal> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#female> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2012-2013> ;
+  ns3:height-inches 59.0 ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-inches ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/inches> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/nepal,female,2012-2013@height-cm>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#nepal> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#female> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2012-2013> ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-cm ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/centimeter> .
+
+<file:/workspace/worked-examples/out/height-example.csv#slice/netherlands,male,2009>
+  a qb:Slice ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#netherlands> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#male> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2009> ;
+  qb:observation <file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,male,2009@height-cm>, <file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,male,2009@height-inches> ;
+  qb:sliceStructure <file:/workspace/worked-examples/out/height-example.csv#slice/cross-measures> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,male,2009@height-cm>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#netherlands> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#male> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2009> ;
+  ns3:height-cm 183.8 ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-cm ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/centimeter> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,male,2009@height-inches>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#netherlands> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#male> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2009> ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-inches ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/inches> .
+
+<file:/workspace/worked-examples/out/height-example.csv#slice/netherlands,female,2009>
+  a qb:Slice ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#netherlands> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#female> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2009> ;
+  qb:observation <file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,female,2009@height-cm>, <file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,female,2009@height-inches> ;
+  qb:sliceStructure <file:/workspace/worked-examples/out/height-example.csv#slice/cross-measures> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,female,2009@height-cm>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#netherlands> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#female> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2009> ;
+  ns3:height-cm 170.7 ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-cm ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/centimeter> .
+
+<file:/workspace/worked-examples/out/height-example.csv#obs/netherlands,female,2009@height-inches>
+  a qb:Observation ;
+  ns2:country <file:/workspace/worked-examples/out/country.csv#netherlands> ;
+  ns2:sex <file:/workspace/worked-examples/out/sex.csv#female> ;
+  ns2:study-period <file:/workspace/worked-examples/out/study-period.csv#2009> ;
+  qb:dataSet <file:/workspace/worked-examples/out/height-example.csv#dataset> ;
+  qb:measureType ns3:height-inches ;
+  sdmx-a:unitMeasure <file:/workspace/worked-examples/out/height-example.csv#unit/inches> .

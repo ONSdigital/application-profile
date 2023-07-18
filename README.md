@@ -454,18 +454,18 @@ In the case of a single-measure dataset (or multiple-measures where those measur
 
 ### Secondary observations with different units
 
-It is possible to capture secondary observations of the same measure. In order to do so, the secondary observation is treated as an attribute of the primary observation. We recommend that the primary observation unit be selected by the units used in the initial observation; however in composite datasets (i.e. an aggregation of study results) such as the one below the most precise unit should be selected.
+It is possible to capture secondary observations of the same measure. In order to do so, we use the a pivoted shape where multiple observation columns are created, their measures must be different, but can extend the same existing measure.
 
 | Country     | Sex    | Study Period | Height in cm | Height in inches |
 | ----------- | ------ | :----------: | :----------: | :--------------: |
 | Nepal       | Male   |  2012-2013   |    161.7     |       63.5       |
 | Nepal       | Female |  2012-2013   |    150.4     |        59        |
-| Netherlands | Male   |     2009     |    183.8     |       72.5       |
-| Netherlands | Female |     2009     |    170.7     |        67        |
+| Netherlands | Male   |     2009     |    183.8     |                  |
+| Netherlands | Female |     2009     |    170.7     |                  |
 
 > Source: https://en.wikipedia.org/wiki/Average_human_height_by_country
 
-In this case, `country`, `sex`, `study period` are dimensions, `height` is the measure dimension, `height in cm` is the observation column with cm as units, and `height in inches` is a decimal literal attribute of the `height in cm` observation with unit inches.
+In this case, `country`, `sex`, `study period` are dimensions, `height in cm` is the measure dimension, `height in cm` is the observation column with cm as units, and `height in inches` is a decimal literal attribute of the `height in cm` observation with unit inches.
 
 ```ttl
 @Prefix qb: <http://purl.org/linked-data/cube#> .
@@ -477,17 +477,27 @@ In this case, `country`, `sex`, `study period` are dimensions, `height` is the m
 @Prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @Prefix qudt-u: <https://qudt.org/2.1/vocab/unit#> .
 
-ex:heightInInches a qb:MeasureProperty ;
-    rdfs:label "Height in inches" ;
-    sdmx-a:unitMeasure qudt-u:IN ;
-    rdfs:subPropertyOf sdmx-m:obsValue .
+ex:measure/height-inches
+  a qb:ComponentProperty, qb:MeasureProperty, rdf:Property, rdfs:Resource ;
+  rdfs:isDefinedBy <http://dbpedia.org/resource/Height> ;
+  rdfs:label "height inches"@en ;
+  rdfs:range xsd:decimal .
+
+ex:measure/height-cm
+  a qb:ComponentProperty, qb:MeasureProperty, rdf:Property, rdfs:Resource ;
+  rdfs:isDefinedBy <http://dbpedia.org/resource/Height> ;
+  rdfs:label "height cm"@en ;
+  rdfs:range xsd:decimal .
 
 ex:heightInCm a qb:MeasureProperty;
     rdfs:label "Height in cm" ;
     sdmx-a:unitMeasure qudt-u:CentiM ;
     rdfs:subPropertyOf sdmx-m:obsValue .
 
-ex
+ex:heightInInches a qb:MeasureProperty;
+    rdfs:label "Height in inches" ;
+    sdmx-a:unitMeasure qudt-u:Inch ;
+    rdfs:subPropertyOf sdmx-m:obsValue .
 
 ex:obs1 a qb:Observation ;
     ex:country "Nepal" ;

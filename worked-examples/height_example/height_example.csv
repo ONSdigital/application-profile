@@ -1,0 +1,5 @@
+Country,Sex,Study Period,Height in cm,Heigh in cm status,Height in inches, Height in inches status
+NP,M,gregorian-interval/2012-01-01/P2Y,161.7,converted,63.5,
+NP,F,gregorian-interval/2012-01-01/P2Y,150.4,converted,59,
+NL,M,year/2009,183.8,,,not collected
+NL,F,year/2009,170.7,,,not collected
