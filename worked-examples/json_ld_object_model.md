@@ -107,6 +107,7 @@ class DatasetSeries["DatasetSeries a dcat:DatasetSeries"] {
     +dcterms:modified ∋ rdfs:Literal as xsd:dateTime
     +dcterms:created ∋ rdfs:Literal as xsd:dateTime
     +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
+    +dcterms:accuralPeriodicity ∋ dcterms:Frequency
     +dcat:keyword ∋ [rdfs:Literal as xsd:string]
     +dcat:theme ∋ [skos:Concept]
     +dcterms:license ∋ dcterms:LicenseDocument
