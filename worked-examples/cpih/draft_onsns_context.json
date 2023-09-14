@@ -6,6 +6,7 @@
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "onsns": "https://example.org/ons/ns#",
         "vcard": "http://www.w3.org/2006/vcard/ns#",
+        "time": "http://www.w3.org/2006/time#",
         "identifier": {
             "@id": "dcterms:identifier",
             "@language": null
@@ -20,9 +21,21 @@
             "@id": "dcterms:description",
             "@type": "https://www.iana.org/assignments/media-types/text/markdown"
         },
+        "landingPage": {
+            "@id": "dcat:landingPage",
+            "@type": "@id"
+        },
+        "created": {
+            "@type": "xsd:dateTime",
+            "@id": "dcterms:created"
+        },
         "issued": {
             "@type": "xsd:dateTime",
             "@id": "dcterms:issued"
+        },
+        "modified": {
+            "@type": "xsd:dateTime",
+            "@id": "dcterms:modified"
         },
         "nextRelease": {
             "@type": "xsd:dateTime",
@@ -31,6 +44,13 @@
         "publisher": {
             "@type": "@id",
             "@id": "dcterms:publisher",
+            "@context": {
+                "@base": "https://www.gov.uk/government/organisations/"
+            }
+        },
+        "creator": {
+            "@type": "@id",
+            "@id": "dcterms:creator",
             "@context": {
                 "@base": "https://www.gov.uk/government/organisations/"
             }
@@ -74,6 +94,47 @@
         },
         "keywords": {
             "@id": "dcat:keyword"
+        },
+        "licence": {
+            "@type": "@id",
+            "@id": "dcterms:license"
+        },
+        "temporal_coverage": {
+            "@id": "dcterms:temporal",
+            "@context": {
+                "start": {
+                    "@type": "xsd:dateTime",
+                    "@id": "time:hasBeginning"
+                },
+                "end": {
+                    "@id": "time:hasEnd",
+                    "@type": "xsd:dateTime"
+                }
+            }
+        },
+        "temporal_resolution": {
+            "@type": "@id",
+            "@id": "dcat:temporalResolution",
+            "@context": {
+                "@base": "http://reference.data.gov.uk/def/intervals/"
+            }
+        },
+        "spatial_coverage": {
+            "@type": "@id",
+            "@id": "dcterms:spatial",
+            "@context": {
+                "@base": "http://statistics.data.gov.uk/id/statistical-geography/"
+            }
+        },
+        "spatial_resolution": {
+            "@type": "@id",
+            "@id": "onsns:spatialResolution",
+            "@context": {
+                "@base": "http://statistics.data.gov.uk/id/statistical-entity/"
+            }
+        },
+        "editions": {
+            "@reverse": "dcat:inSeries"
         }
     }
 }
