@@ -4,36 +4,35 @@
 
 
 classDiagram
-
 Distribution <|-- DatasetVersion : dcat.Distribution 
-DatasetVersion <|-- Dataset : dcat.hasVersion
-Dataset --|> DatasetSeries : dcat.inSeries 
+DatasetVersion <|-- Edition : dcat.hasVersion
+Edition --|> DatasetSeries : dcat.inSeries 
 CatalogRecord --|> DatasetSeries : foaf.primaryTopic
 Catalog --|> CatalogRecord : dcat.record
-MethodDataset --|> Dataset : prov.influenced
-AnalysisDataset --|> Dataset : prov.wasDerivedFrom
-VcardKind --|> Dataset : dcat.contactPoint
+MethodDataset --|> Edition : prov.influenced
+AnalysisDataset --|> Edition : prov.wasDerivedFrom
+VcardKind --|> Edition : dcat.contactPoint
 TableSchema <|-- Distribution : csvw.tableSchema
 Column <|-- TableSchema : csvw.column
 
-class Catalog {
+class Catalog["Catalog a dcat:Catalog"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcat:record ∋ [dcat:CatalogRecord]
     +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
 }
 
-class CatalogRecord {
+class CatalogRecord["Record a dcat:CatalogRecord"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +foaf:primaryTopic ∋ dcat:DatasetSeries
     +dcterms:created ∋ rdfs:Literal as xsd:dateTime
 }
 
-class TableSchema {
+class TableSchema["TableSchema a csvw:TableSchema"] {
     +csvw:column ∋ csvw:Column
     +csvw:aboutUrl ∋ rdfs:Literal as xsd:anyURI
 }
 
-class Column {
+class Column["Column a csvw:Column"] {
     +csvw:name ∋ rdfs:Literal as xsd:string
     +csvw:title ∋ rdfs:Literal as xsd:string
     +rdfs:label ∋ rdfs:Literal as xsd:string
@@ -45,7 +44,7 @@ class Column {
     +csvw:aboutUrl ∋ rdfs:Literal as xsd:anyURI
 }
 
-class Dataset {
+class Edition["Edition a dcat:Dataset"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
     +dcterms:creator ∋ foaf:Agent
@@ -54,7 +53,7 @@ class Dataset {
     +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
     +adms:status ∋ skos:Concept
     -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
-    -dc:issued ∋ rdfs:Literal as xsd:dateTime
+    -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
     -dcterms:spatial ∋ dcterms:Location
     -onsns:spatialResolution ∋ [skos:Concept]
     -dcterms:temporal ∋ dcterms:PeriodOfTime
@@ -67,13 +66,13 @@ class Dataset {
     -calculateTemporalCoverage()    
 }
 
-class VcardKind {
+class VcardKind["VcardKind a vcard:Kind"] {
     +vcard:hasEmail ∋ vcard:Email
     +vcard:fn ∋ rdfs:Literal as xsd:string
     +vcard:hasTelephone ∋ vcard:Telephone
 }
 
-class Distribution {
+class Distribution["Distribution a dcat:Distribution"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:created ∋ rdfs:Literal as xsd:dateTime
     +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
@@ -86,7 +85,7 @@ class Distribution {
     +spdx:checksum ∋ spdx:Checksum
 }
 
-class DatasetVersion {
+class DatasetVersion["DatasetVersion a dcat:Dataset"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcat:version ∋ rdfs:Literal as xsd:string
     +adms:versionNotes ∋ rdfs:Literal as xsd:string
@@ -97,7 +96,7 @@ class DatasetVersion {
 
 }
 
-class DatasetSeries {
+class DatasetSeries["DatasetSeries a dcat:DatasetSeries"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
     +onsns:nextRelease ∋ rdfs:Literal as xsd:dateTime
@@ -120,14 +119,14 @@ class DatasetSeries {
 
 }
 
-class MethodDataset~Dataset~ {
+class MethodDataset["MethodDataset a dcat:Dataset"]{
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
     +dcterms:abstract ∋ rdfs:Literal as xsd:string
     +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
 }
 
-class AnalysisDataset~Dataset~ {
+class AnalysisDataset["AnalysisDataset a dcat:Dataset"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
     +dcterms:abstract ∋ rdfs:Literal as xsd:string
