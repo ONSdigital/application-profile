@@ -89,7 +89,7 @@
             "@type": "@id",
             "@id": "dcterms:accuralPeriodicity",
             "@context": {
-                "@base": "http://reference.data.gov.uk/def/intervals/"
+                "@base": "http://purl.org/cld/freq/"
             }
         },
         "keywords": {

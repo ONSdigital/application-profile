@@ -18,7 +18,7 @@ Column <|-- TableSchema : csvw.column
 class Catalog["Catalog a dcat:Catalog"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcat:record ∋ [dcat:CatalogRecord]
-    +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
+    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
 }
 
 class CatalogRecord["Record a dcat:CatalogRecord"] {
@@ -37,8 +37,8 @@ class Column["Column a csvw:Column"] {
     +csvw:title ∋ rdfs:Literal as xsd:string
     +rdfs:label ∋ rdfs:Literal as xsd:string
     +csvw:datatype ∋ xsd:Datatype
-    +csvqb:type ∋ csvqb:ColumnType
-    +rdfs:comment ∋ rdfs:Literal as xsd:string
+    +csvqb:columntype ∋ csvqb:ColumnType
+    +dcterms:description ∋ rdfs:Literal as xsd:string
     +csvw:propertyUrl ∋ rdfs:Literal as xsd:anyURI
     +csvw:valueUrl ∋ rdfs:Literal as xsd:anyURI
     +csvw:aboutUrl ∋ rdfs:Literal as xsd:anyURI
@@ -47,11 +47,14 @@ class Column["Column a csvw:Column"] {
 class Edition["Edition a dcat:Dataset"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
+    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
     +dcterms:creator ∋ foaf:Agent
     +dcat:contactPoint ∋ vcard:Kind
     +dcterms:abstract ∋ rdfs:Literal as xsd:string
     +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
     +adms:status ∋ skos:Concept
+    +dcat:inSeries ∋ dcat:DatasetSeries
+    -dcat:hasVersion ∋ dcat:Dataset
     -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
     -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
     -dcterms:spatial ∋ dcterms:Location
@@ -62,8 +65,8 @@ class Edition["Edition a dcat:Dataset"] {
     -dcat:next ∋ dcat:Dataset
     -calculateTemporalResolution()
     -calculateSpatialResolution()
-    -calculateBoundingBox()
-    -calculateTemporalCoverage()    
+    -calculateTemporalCoverage() 
+    -calculateSpaitialCoverage()   
 }
 
 class VcardKind["VcardKind a vcard:Kind"] {
@@ -75,8 +78,9 @@ class VcardKind["VcardKind a vcard:Kind"] {
 class Distribution["Distribution a dcat:Distribution"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:created ∋ rdfs:Literal as xsd:dateTime
+    +dcterms:creator ∋ foaf:Agent
     +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
-    +prov:wasDerivedFrom ∋ prov:Entity
+    +prov:wasDerivedFrom ∋ [prov:Entity]
     +prov:wasGeneratedBy ∋ prov:Activity
     +dcat:downloadURL ∋ rdf:Resource
     +dcat:byteSize ∋ rdfs:Literal as xsd:nonNegativeInteger
@@ -105,6 +109,7 @@ class DatasetSeries["DatasetSeries a dcat:DatasetSeries"] {
     +dcat:landingPage ∋ foaf:Document
     +dcat:publisher ∋ foaf:Agent
     +dcterms:modified ∋ rdfs:Literal as xsd:dateTime
+    +dcterms:creator ∋ foaf:Agent
     +dcterms:created ∋ rdfs:Literal as xsd:dateTime
     +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
     +dcterms:accuralPeriodicity ∋ dcterms:Frequency
@@ -123,15 +128,22 @@ class DatasetSeries["DatasetSeries a dcat:DatasetSeries"] {
 class MethodDataset["MethodDataset a dcat:Dataset"]{
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
+    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
     +dcterms:abstract ∋ rdfs:Literal as xsd:string
     +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
+    -dcat:prev ∋ dcat:Dataset
+    -dcat:next ∋ dcat:Dataset
 }
 
 class AnalysisDataset["AnalysisDataset a dcat:Dataset"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
+    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
     +dcterms:abstract ∋ rdfs:Literal as xsd:string
     +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
+    +prov:wasDerivedFrom ∋ [prov:Entity]
+    -dcat:prev ∋ dcat:Dataset
+    -dcat:next ∋ dcat:Dataset
 }
 ```
 

@@ -1,6 +1,6 @@
 {
   "@context": "./draft_onsns_context.json",
-  "@id": "https://data.ons.gov.uk/dataset/cpih",
+  "@id": "https://data.ons.gov.uk/datasets/cpih",
   "@type": "dcat:DatasetSeries",
   "identifier": "cpih",
   "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
