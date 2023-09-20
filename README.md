@@ -9,7 +9,6 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Data on the Web Best Practises](#data-on-the-web-best-practises)
     - [Five star data](#five-star-data)
     - [FAIR principles](#fair-principles)
-    - [CSV on the Web](#csv-on-the-web)
   - [Specifications used](#specifications-used)
 
 ## Preamble
@@ -59,16 +58,6 @@ The FAIR principles describe data which is:
 > - **Accessible**: using standard protocols for access and authentication of data
 > - **Interoperable**: data and metadata is represented in an appropriate knowledge representation standard
 > - **Reusable**: using common vocabularies for knowledge representation allows for reuse and remixing of data
-
-### CSV on the Web
-
-> CSVW extends standard CSV with the ingredients for a reliable, flexible and extensible data exchange format. Most importantly, CSVW accommodates metadata. [^csvw-intro]
-
-The [CSV on the Web (CSVW) standard](https://w3c.github.io/csvw/syntax/) provides a method for describing and clarifying the content of CSV tabular data.
-
-The CSV format is at its best when machine readable. CSVW improves machine-readability by pairing CSV with a JSON document to provide additional metadata to describe the content of the CSV file.
-
-One such improvement to CSVs is providing data type information for cells contents so they can be mapped as decimals, integers, dates, etc. without ambiguity. Furthermore, CSVW is extensible to fully 5-star linked-data, providing a mapping to the contents of a CSV file to RDF.
 
 ## Specifications used
 
