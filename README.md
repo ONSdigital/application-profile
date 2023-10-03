@@ -10,6 +10,21 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Five star data](#five-star-data)
     - [FAIR principles](#fair-principles)
   - [Specifications used](#specifications-used)
+  - [Data structure](#data-structure)
+    - [Tidy Data dependencies](#tidy-data-dependencies)
+    - [Using JSON-LD to describe statistical data](#using-json-ld-to-describe-statistical-data)
+      - [Standards divergence from CSV-W](#standards-divergence-from-csv-w)
+    - [Overview Object Model Diagram](#overview-object-model-diagram)
+  - [Our API endpoints](#our-api-endpoints)
+    - [Design decision on object model](#design-decision-on-object-model)
+    - [Draft JSON-LD Context](#draft-json-ld-context)
+    - [HTTP verbs and their applicability to our objects](#http-verbs-and-their-applicability-to-our-objects)
+      - [Datasets (aka dcat:DatasetSeries)](#datasets-aka-dcatdatasetseries)
+        - [GET and POST of a CPIH Dataset](#get-and-post-of-a-cpih-dataset)
+      - [Editions (aka dcat:Dataset)](#editions-aka-dcatdataset)
+      - [Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)](#distributions-dcatdistribution-qbdataset-and-versions-dcatdataset)
+  - [Versioning](#versioning)
+    - [Example of versioning in RDF for CPIH](#example-of-versioning-in-rdf-for-cpih)
 
 ## Preamble
 
@@ -115,9 +130,8 @@ DatasetVersion <|-- Edition : dcat.hasVersion
 Edition --|> DatasetSeries : dcat.inSeries 
 CatalogRecord --|> DatasetSeries : foaf.primaryTopic
 Catalog --|> CatalogRecord : dcat.record
-MethodDataset --|> Edition : prov.influenced
-AnalysisDataset --|> Edition : prov.wasDerivedFrom
-VcardKind --|> Edition : dcat.contactPoint
+Edition --|> VcardKind : dcat.contactPoint
+Edition --|> PeriodOfTime : dcterms.temporal
 TableSchema <|-- Distribution : csvw.tableSchema
 Column <|-- TableSchema : csvw.column
 
@@ -164,7 +178,7 @@ class Edition["Edition a dcat:Dataset"] {
     -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
     -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
     -dcterms:spatial ∋ dcterms:Location
-    -onsns:spatialResolution ∋ [skos:Concept]
+    -ons:spatialResolution ∋ [skos:Concept]
     -dcterms:temporal ∋ dcterms:PeriodOfTime
     -dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
     -dcat:prev ∋ dcat:Dataset
@@ -179,6 +193,11 @@ class VcardKind["VcardKind a vcard:Kind"] {
     +vcard:hasEmail ∋ vcard:Email
     +vcard:fn ∋ rdfs:Literal as xsd:string
     +vcard:hasTelephone ∋ vcard:Telephone
+}
+
+class PeriodOfTime["PeriodOfTime a dcterms:PeriodOfTime"] {
+    +dcat:startDate ∋ rdfs:Literal as xsd:dateTime
+    +dcat:endDate ∋ rdfs:Literal as xsd:dateTime
 }
 
 class Distribution["Distribution a dcat:Distribution"] {
@@ -208,7 +227,7 @@ class DatasetVersion["DatasetVersion a dcat:Dataset"] {
 class DatasetSeries["DatasetSeries a dcat:DatasetSeries"] {
     +dcterms:identifier ∋ rdfs:Literal as xsd:string
     +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
-    +onsns:nextRelease ∋ rdfs:Literal as xsd:dateTime
+    +ons:nextRelease ∋ rdfs:Literal as xsd:dateTime
     +dcterms:abstract ∋ rdfs:Literal as xsd:string
     +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
     +dcat:landingPage ∋ foaf:Document
@@ -222,77 +241,50 @@ class DatasetSeries["DatasetSeries a dcat:DatasetSeries"] {
     +dcat:theme ∋ [skos:Concept]
     +dcterms:license ∋ dcterms:LicenseDocument
     +dcterms:spatial ∋ dcterms:Location
-    +onsns:spatialResolution ∋ [skos:Concept]
+    +ons:spatialResolution ∋ [skos:Concept]
     +dcterms:temporal ∋ dcterms:PeriodOfTime
     +dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
     -dcat:first ∋ dcat:Dataset
     -dcat:last ∋ dcat:Dataset
 }
 
-class MethodDataset["MethodDataset a dcat:Dataset"]{
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
-    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:abstract ∋ rdfs:Literal as xsd:string
-    +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
-    -dcat:prev ∋ dcat:Dataset
-    -dcat:next ∋ dcat:Dataset
-}
-
-class AnalysisDataset["AnalysisDataset a dcat:Dataset"] {
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
-    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:abstract ∋ rdfs:Literal as xsd:string
-    +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
-    +prov:wasDerivedFrom ∋ [prov:Entity]
-    -dcat:prev ∋ dcat:Dataset
-    -dcat:next ∋ dcat:Dataset
-}
 ```
 
 We are heavily reliant on dcat and dcterms to relate our statistical datasets, editions and versions together. In brief:
 
-- We call our statistical publication series _Datasets_, although they are actually dcat:DatasetSeries.
-- We call releases within these Datasets _Editions_, and they are dcat:inSeries of the dcat:DatasetSeries and are of type dcat:Dataset.
-- We call all versions within these Editions _Versions_, and they are the object of the Editions' dcat:hasVersion property and are of type dcat:Dataset.
-- Versions of data are provided as a _Distribution_, which is a dcat:Distribution, and can be of varying types, such as CSV, JSON, RDF, etc; however we are targetting JSON-LD with a CSV-W context representing a qb:DataSet.
-
-### Analysis and method extensions
-
-We plan to extend the model to include analysis and method datasets. These are datasets which are derived from or inform other datasets. Our goal is to make not only the data published by ONS highly structured and machine readable, but also our analysis and methods similarly structured and machine readable.
-
-*This is a post MVP goal.*
+- We call our statistical publication series _Datasets_, although they are actually `dcat:DatasetSeries`.
+- We call releases within these Datasets _Editions_, and they are dcat:inSeries of the `dcat:DatasetSeries` and are of type dcat:Dataset.
+- We call all versions within these Editions _Versions_, and they are the object of the Editions' `dcat:hasVersion` property and are of type `dcat:Dataset`.
+- Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however we are targetting JSON-LD with a CSV-W context representing a qb:DataSet.
 
 ## Our API endpoints
 
-Our primary objective is to establish a URL framework that caters to both user-friendly web browsing and efficient data retrieval (for example in Python using the pd.read_csv(url)). The link should provide users with a comprehensive webpage if visited in a browser, but when consumed using pandas it would provide a csv file.
-
-Currently, there exists an API accessible at 'api.ons.gov.uk/v1/blah.' Our intention is not to disrupt its functionality; however, we seek to implement additional features.
-
-In particular, we aspire to maintain consistency in the placement of DatasetSeries, exemplified by 'CPIH' at 'https://data.ons.gov.uk/dataset/CPIH.' This URL should either direct users to a webpage when accessed through Firefox or promptly retrieve the CSV data when used in conjunction with the accept_type parameter.
-
-Conversely, 'https://api2.ons.gov.uk/dataset/CPIH' should exclusively serve data retrieval via an API. It is crucial to note that opting for 'api.ons.gov.uk/v2/dataset/CPIH' would disrupt the established URL path pattern, which we aim to avoid.
+Our primary objective is to establish a URL framework that caters to both user-friendly web browsing and efficient data retrieval, for example in Python using `pandas.read_csv(url)`. The link should provide users with a comprehensive webpage if visited in a browser, but when consumed using pandas it would provide a csv file - this approach is known as [content negotiation](https://www.w3.org/TR/dwbp/#Conneg).
 
 ### Design decision on object model
 
 Our API will use pluralised nouns to represent collections of objects and the individual objects as well. For example, the following URLs may be used to access the CPIH dataset:
 
-> https://data.ons.gov.uk/datasets/cpih/latest
+> `https://data.ons.gov.uk/datasets/cpih`
 
 - In a browser, this URL will return a webpage with the latest information about the CPIH dataset, a summary of its stucture, a preview of the data, and links to download the data in open formats.
-- In a program, depending on the accept header, this URL will return the latest data in the requested format but defaulting to machine readable CSV
+- When used programatically along with an accept header, this URL will return the latest data in the requested format but defaulting to machine readable CSV.
 
-> https://data.ons.gov.uk/datasets/cpih/editions/2019-03/versions/2
+> `https://data.ons.gov.uk/datasets/cpih/editions/2019-03`
 
-- In a browser, this URL will return a webpage with information about the CPIH dataset for March 2019 version 2, a summary of its stucture, a preview of the data, and links to download the data in open formats.
-- In a program, depending on the accept header, this URL will return the data for March 2019 version 2 in the requested format but defaulting to machine readable CSV
+- In a browser, this URL will redirect to the primary CPIH webpage.
+- When used programatically along with an accept header, this URL will return the data for the most recent version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
+
+> `https://data.ons.gov.uk/datasets/cpih/editions/2019-03/versions/2`
+
+- In a browser, this URL will redirect to the primary CPIH webpage.
+- When used programatically along with an accept header, this URL will return the data for the second version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
 
 ### Draft JSON-LD Context
 
-We are building a series of JSON-LD contexts to support the publication of our statistical data. The draft context is currently in worked-examples/cpih, and we will be improving the context and ensuring conformation to the object model as described earlier.
+We are building a series of JSON-LD contexts to support the publication of our statistical data. The draft context is currently [here](./worked-examples/cpih/draft_onsns_context.json), and we will be improving the context and ensuring conformation to the object model as described earlier.
 
-### HTTP verbs and their applicability to our objects
+### HTTP verbs and their applicability to our objects
 
 We use the standard HTTP verbs to interact with our objects. Not all verbs are applicable to all objects, nor are all accessible publicly. We are still working out the business logic of mandatory and optional fields, and how to curate the namespace available to the ID of objects.
 
@@ -317,18 +309,18 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 | 5 Scope         | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      | ✓             | ✓            | ✓            | ✓                 |                 |
 | 5 Scope         | dcterms:spatial            | dcterms:Location                    | ✓             | ✓            | ✓            | ✓                 |                 |
 | 5 Scope         | dcterms:temporal           | dcterms:PeriodOfTime                | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | onsns:spatialResolution    | [skos:Concept]                      | ✓             | ✓            | ✓            | ✓                 |                 |
+| 5 Scope         | ons:spatialResolution      | [skos:Concept]                      | ✓             | ✓            | ✓            | ✓                 |                 |
 | 6 Management    | dcat:first                 | dcat:Dataset                        |               |              |              | ✓                 |                 |
 | 6 Management    | dcat:last                  | dcat:Dataset                        |               |              |              | ✓                 |                 |
-| 6 Management    | onsns:nextRelease          | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
+| 6 Management    | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
 | 8 Distributions | dcat:landingPage           | foaf:Document                       | ✓             | ✓            |              | ✓                 |                 |
 
-##### Draft GET and POST of CPIH as a Datasets
+##### GET and POST of a CPIH Dataset
 
 **GET**
 ```JSON
 {
-  "@context": "./draft_onsns_context.json",
+  "@context": "https://data.ons.gov.uk/ns#",
   "@id": "https://data.ons.gov.uk/datasets/cpih",
   "@type": "dcat:DatasetSeries",
   "identifier": "cpih",
@@ -336,12 +328,12 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
   "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home.",
   "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home. The CPIH is the most comprehensive measure of inflation.",
   "issued": "2023-06-21T00:07:00+00:00",
-  "nextRelease": "2023-09-20T00:07:00+00:00",
+  "next_release": "2023-09-20T00:07:00+00:00",
   "publisher": "office-for-national-statistics",
   "creator": "office-for-national-statistics",
   "contact_point": {
     "name": "Consumer Price Inflation Enquiries",
-    "email": "cpih@ons.gov.uk"
+    "email": "cpi@ons.gov.uk"
   },
   "theme": [
     "prices",
@@ -381,9 +373,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
     }
   ]
 }
-
 ```
-
 
 **POST**
 
@@ -396,7 +386,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
   "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
   "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home.",
   "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home. The CPIH is the most comprehensive measure of inflation.",
-  "landingPage": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
+  "landing_page": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
   "created": "2023-06-19T00:09:38+00:00",
   "issued": "2023-06-21T00:07:00+00:00",
   "nextRelease": "2023-09-20T00:07:00+00:00",
@@ -404,7 +394,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
   "creator": "office-for-national-statistics",
   "contact_point": {
     "name": "Consumer Price Inflation Enquiries",
-    "email": "cpih@ons.gov.uk",
+    "email": "cpi@ons.gov.uk",
     "telephone": "+441633456900"
   },
   "theme": [
@@ -425,7 +415,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
     "start": "1989-01-01T00:00:00+00:00",
     "end": "2023-08-01T00:00:00+00:00"
   },
-  "temporal_resolution": ["Month", "Year"],
+  "temporal_resolution": "P1M",
   "spatial_coverage": "K02000001",
   "spatial_resolution": ["K02"]
 }
@@ -433,7 +423,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 
 #### Editions (aka dcat:Dataset)
 
-| Type            | Predicate                  | Range                               | POST Datasets | PUT Datasets | GET Datasets | GET Datasets/{ID} | DELETE Datasets |
+| Type            | Predicate                  | Range                               | POST Editions | PUT Editions | GET Editions | GET Editions/{ID} | DELETE Editions |
 |-----------------|----------------------------|-------------------------------------|---------------|--------------|--------------|-------------------|-----------------|
 | 0 Management    | dcterms:identifier         | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 | ✓               |
 | 1 Descriptive   | dcat:publisher             | foaf:Agent                          | ✓             | ✓            | ✓            | ✓                 |                 |
@@ -452,10 +442,10 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 | 5 Scope         | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      | ✓             | ✓            | ✓            | ✓                 |                 |
 | 5 Scope         | dcterms:spatial            | dcterms:Location                    | ✓             | ✓            | ✓            | ✓                 |                 |
 | 5 Scope         | dcterms:temporal           | dcterms:PeriodOfTime                | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | onsns:spatialResolution    | [skos:Concept]                      | ✓             | ✓            | ✓            | ✓                 |                 |
+| 5 Scope         | ons:spatialResolution      | [skos:Concept]                      | ✓             | ✓            | ✓            | ✓                 |                 |
 | 6 Management    | dcat:first                 | dcat:Dataset                        |               |              |              | ✓                 |                 |
 | 6 Management    | dcat:last                  | dcat:Dataset                        |               |              |              | ✓                 |                 |
-| 6 Management    | onsns:nextRelease          | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
+| 6 Management    | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
 | 8 Distributions | dcat:landingPage           | foaf:Document                       | ✓             | ✓            |              | ✓                 |                 |
 
 #### Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)
