@@ -18,7 +18,6 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Dataset](#dataset)
     - [Dataset series](#dataset-series)
     - [Distributions](#distributions)
-    - [Named graphs for catalogue metadata](#named-graphs-for-catalogue-metadata)
     - [Content negotiation of distributions](#content-negotiation-of-distributions)
     - [Editions](#editions)
       - [Scheduled revisions (provisional and final releases)](#scheduled-revisions-provisional-and-final-releases)
@@ -398,27 +397,6 @@ For example:
     .
 ```
 
-### Named graphs for catalogue metadata
-
-Where metadata is stored as RDF, such as being made available via a SPARQL endpoint, DCAT makes a recommendation about the names of graphs to use for catalogue records.
-
-> If a catalog is represented as an RDF Dataset with named graphs (as defined in [[SPARQL11-QUERY]](https://www.w3.org/TR/sparql11-query/)), then it is appropriate to place the description of each dataset (consisting of all RDF triples that mention the dcat:Dataset, dcat:CatalogRecord, and any of its dcat:Distributions) into a separate named graph. The name of that graph SHOULD be the IRI of the catalog record.[^named-graphs]
-
-```ttl
-<http://data.gov.uk/dataset/my-dataset/record> {
-    ...
-}
-```
-
-Doing this results in a neat ability to query for dataset metadata by limiting a SPARQL query to the IRI of the catalogue record.
-
-```sparql
-SELECT * 
-FROM <http://data.gov.uk/dataset/my-dataset/record> 
-WHERE {
-    ?s ?p ?o .
-}
-```
 
 ### Content negotiation of distributions
 
@@ -858,5 +836,3 @@ This section includes links to other vocabularies or ideas we may develop furthe
     ];
     .
 ```
-
-[^named-graphs]: <https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record>
