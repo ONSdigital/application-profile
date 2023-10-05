@@ -38,7 +38,7 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Discoverability of CSVW](#discoverability-of-csvw)
     - [Foreign-key constraints](#foreign-key-constraints)
   - [RDF data cubes](#rdf-data-cubes)
-    - [Classes](#classes-1)
+    - [Classes in RDF](#classes-in-rdf)
     - [Datacube](#datacube)
     - [Data structure definition](#data-structure-definition)
       - [Component specification](#component-specification)
@@ -67,7 +67,6 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Future work](#future-work)
       - [Provenance](#provenance)
 
-
 ## Preamble
 
 The UK government often [publishes its statistics](https://www.gov.uk/search/research-and-statistics?content_store_document_type=statistics_published&order=updated-newest) in presentational spreadsheets. While this succeeds in getting important information into the public domain, we recognise there are still barriers and challenges in accessing and using the data we produce:
@@ -80,7 +79,7 @@ The UK government often [publishes its statistics](https://www.gov.uk/search/res
 
 We have explored how to follow best practices when publishing statistics, in particular through the use of the CSV on the Web (CSVW), Data Catalog (DCAT) and RDF Data Cube (QB) standards and vocabularies. This document is an application profile of these standards, describing a recommendation on how to use these standards together in order to achieve the data on the web best practices, 5-star data, and the FAIR data principles.
 
-### Data on the Web Best Practises 
+### Data on the Web Best Practises
 
 The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describes recommendations for publishing data to the web. If followed, we can enable these benefits:
 
@@ -328,7 +327,7 @@ When [using a CSVW to create an RDF data cube](#using-csvw-to-create-an-rdf-data
 | W06000015 | Cardiff    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 83.3            |
 | ...       | ...        | ...                     | ...          | ...    | ...             |
 
-To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](#codelists). 
+To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](code_lists.md).
 
 ### Using symbols and shorthand in tables
 
@@ -418,7 +417,7 @@ Statistics publishers may wish to indicate that their data includes a hierarchy.
 
 Consider a mock dataset which uses the Standard Industrial Trade Classification (SITC). SITC is a classification system for the trade of goods and services. It has several top level categories then broken down into subcategories.
 
-```
+```txt
 0 Food and live animals
 ├─ 00 Live animals other than animals of division 03
 │  ├─ 001 Live animals other than animals of division 03
@@ -464,7 +463,7 @@ We suggest collapsing the hierarchy into a single column, and using a defined cl
 | 2004   | 011      | Meat of bovine animals, fresh, chilled or frozen | ...         |
 | ...    | ...      | ...                                              | ...         |
 
-It can be helpful to humans to include some information about the hierarchy inside the dataset, for example to make some aggregations simpler to perform. We recommend including a single `parent_x` column where there is a need to do so (a form of denormalisation). A blank entry in the parent column indicates no parent exists. 
+It can be helpful to humans to include some information about the hierarchy inside the dataset, for example to make some aggregations simpler to perform. We recommend including a single `parent_x` column where there is a need to do so (a form of denormalisation). A blank entry in the parent column indicates no parent exists.
 
 When [using a CSVW to create an RDF data cube](#using-csvw-to-create-an-rdf-data-cube), the `parent_x` column must be suppressed by setting `"suppressOutput": "true"`.
 
@@ -502,7 +501,7 @@ Similarly to [secondary observations with different units](#secondary-observatio
 | Netherlands | Male   | 2009         | 183.8        | 72.5             | 21        | 74           | 7.1 |
 | Netherlands | Female | 2009         | 170.7        | 67               | 21        | 50           | 6.3 |
 
-> Source: https://en.wikipedia.org/wiki/Average_human_height_by_country
+> Source: [Wikipedia](https://en.wikipedia.org/wiki/Average_human_height_by_country)
 
 For datasets with confidence internals, we recommend attaching the upper and lower bounds to the primary observation as individiual literal attributes and not as a range.
 
@@ -876,7 +875,7 @@ curl http://data.gov.uk/dataset/my-dataset -H "Accept: text/csv"
 
 Many statistics producers publish sets of statistics at a regular frequency as monthly, quarterly, or annual releases.
 
-We refer to these as _editions_, as opposed to [_versions_](#versions) which are used to specifically describe changes in a dataset resulting from a revision. 
+We refer to these as _editions_, as opposed to [_versions_](#versions) which are used to specifically describe changes in a dataset resulting from a revision.
 
 Each edition is a `dcat:Dataset`, with a unique IRI which typically contains the latest time period for which data is available.
 
@@ -1007,7 +1006,6 @@ For specific versions, we recommend using the following properties:
     .
 ```
 
-
 ## Publish CSV on the web (CSVW)
 
 Our aim is to publish metadata in a machine readable and structured format alongside the statistical data.
@@ -1063,7 +1061,7 @@ Given the above CSV, a minimal CSVW metadata file would look as follows:
 
 ### CSVs as self-contained datasets
 
-A CSVW should provide all the necessary metadata that would be needed for a user of the data to feature it in a `dcat:Catalog`. 
+A CSVW should provide all the necessary metadata that would be needed for a user of the data to feature it in a `dcat:Catalog`.
 
 The subject resource of a CSVW metadata file is typically a `csvw:Table` which corresponds to a CSV file. This CSV file can be considered as a distribution of some `dcat:Dataset`.
 
@@ -1146,9 +1144,9 @@ Publishers may wish to use the `csvw:foreignKey` property to assert relationship
 
 ## RDF data cubes
 
-The [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/) provides a way to provide an explicit linked-data representation of a tabular dataset. 
+The [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/) provides a way to provide an explicit linked-data representation of a tabular dataset.
 
-### Classes
+### Classes in RDF
 
 ```mermaid
 classDiagram
@@ -1209,7 +1207,6 @@ We recommend component specifications have IRIs of the form:
 
 - `http://{dataset_iri}/datacube/component/{component_name}`
 - `http://{dataset_iri}#datacube/component/{component_name}`
-
 
 | Property       | Requirement level | Notes |
 | -------------- | ----------------- | ----- |
@@ -1448,7 +1445,6 @@ We adopt the [measure dimension](https://www.w3.org/TR/vocab-data-cube/#dfn-meas
 
 We include a column in the CSV which specifies the measure for each observation.
 
-
 | area      | period                  | sex    | measure_type                    | value | marker |
 | --------- | ----------------------- | ------ | ------------------------------- | ----- | ------ |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 76.7  |        |
@@ -1485,7 +1481,6 @@ Within the CSVW metadata, we add a column definition for the measure dimension a
     .
 ```
 
-
 ## Appendicies
 
 ### Recommended codelists
@@ -1508,7 +1503,7 @@ Prefer using IRIs from the `http://statistics.data.gov.uk` vocabulary, based on 
 
 Data providers should prefer using `xsd:date` and `xsd:dateTime` literals to describe `dcterms:issued` and `dcterms:modified`, for example:
 
-```
+```ttl
 <http://data.gov.uk/dataset/my-dataset> dcterms:issued "2018-01-01"^^xsd:date .
 <http://data.gov.uk/dataset/my-dataset-2> dcterms:issued "2018-01-01T09:30:00"^^xsd:dateTime .
 ```
@@ -1594,7 +1589,7 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 
 #### Media types
 
-https://www.w3.org/ns/iana/media-types/
+> TODO: Cover media types from [IANA](https://www.w3.org/ns/iana/media-types/)
 
 | Label  | IRI                                                                |
 | ------ | ------------------------------------------------------------------ |
@@ -1724,10 +1719,8 @@ This section includes links to other vocabularies or ideas we may develop furthe
 
 > **Warning**
 > This section needs further work.
-
-> TODO: https://www.w3.org/TR/prov-o/
-
-> TODO: https://ceur-ws.org/Vol-2549/article-08.pdf
+> TODO: <https://www.w3.org/TR/prov-o/>
+> TODO: <https://ceur-ws.org/Vol-2549/article-08.pdf>
 
 ```ttl
 # We have a dcat:Dataset with a CSVW distribution and a qb:DataSet distribution
@@ -1773,6 +1766,6 @@ This section includes links to other vocabularies or ideas we may develop furthe
     .
 ```
 
-[^machine]: https://w3c.github.io/dwbp/bp.html#machine_readable
-    
-[^named-graphs]: https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
+[^machine]: <https://w3c.github.io/dwbp/bp.html#machine_readable>
+
+[^named-graphs]: <https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record>
