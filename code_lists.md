@@ -17,7 +17,7 @@
     - [Licenses](#licenses)
     - [Organisations](#organisations)
     - [Statistics designations](#statistics-designations)
-    - [Symbols and shorthand in tables](#symbols-and-shorthand-in-tables)
+    - [Analysis function guidance on symbols and shorthand in tables](#analysis-function-guidance-on-symbols-and-shorthand-in-tables)
     - [Themes](#themes)
     - [Media types](#media-types)
 
@@ -476,11 +476,9 @@ For example: `https://www.gov.uk/government/organisations/office-for-national-st
 | Official Statistics     | `https://data.gov.uk/official-statistics`     |
 | Experimental Statistics | `https://data.gov.uk/experimental-statistics` |
 
-### Symbols and shorthand in tables
+### Analysis function guidance on symbols and shorthand in tables
 
-Data providers should adopt the [analytical function guidance](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) for statistical markers. See [using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
-
-See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
+Data providers should adopt the [analytical function guidance](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) for statistical markers.
 
 > TODO: This needs to be built.
 
@@ -526,4 +524,3 @@ See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tabl
 | CSV    | `http://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
 | JSON   | `http://www.w3.org/ns/iana/media-types/application/json#Resource` |
 | Turtle | `http://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
-
