@@ -1,4 +1,82 @@
-# RDF data cubes
+# RDF
+
+We represent our metadata and data as RDF. This allows us to represent our data in a way which is machine-readable, and allows us to consepualise how data interrelates easier using existing vocabularies and ontologies.
+
+> TODO: This out out of date
+> 
+## Class diagram
+
+```mermaid
+classDiagram
+    class `Table` {
+        a csvw:Table, dcat:Distribution
+    }
+    class `Table Schema` {
+        a csvw:TableSchema
+    }
+    class `Column` {
+        a csvw:Column
+    }
+    class `Dataset` {
+        a dcat:Dataset
+    }
+    class `RDF Data Cube` {
+        a qb:DataSet, dcat:Distribution
+    }
+    class `Data Structure Definition` {
+        a qb:DataStructureDefinition
+    }
+    class Component {
+        a qb:ComponentSpecification
+    }
+    class Dimension {
+        a qb:DimensionProperty
+    }
+    class Measure {
+        a qb:MeasureProperty
+    }
+    class Attribute {
+        a qb:AttributeProperty
+    }
+    class Codelist {
+        a skos:ConceptScheme, dcat:Dataset
+    }
+    class Code {
+        a skos:Concept
+    }
+    class Catalog {
+        a dcat:Catalog
+    }
+    class CatalogRecord {
+        a dcat:CatalogRecord
+    }
+    class DatasetSeries{
+        a dcat:DatasetSeries
+    }
+
+    Catalog --> "1..*" CatalogRecord : dcat.record
+    CatalogRecord --> "1" DatasetSeries : foaf.primaryTopic
+    CatalogRecord --> "1" Dataset : foaf.primaryTopic
+
+    DatasetSeries "1" <-- Dataset : dcat.inSeries
+
+    Table --> "1" `Table Schema`: csvw.tableSchema
+    `Table Schema` --> "1..*" Column: csvw.column
+    Table --> "1" Dataset: dcat.isDistributionOf
+    Table "1" <-- Dataset: dcat.distribution
+    Dataset --> "1" `RDF Data Cube` : dcat.distribution
+    `RDF Data Cube` --> "1" `Data Structure Definition` : qb.structure
+    `Data Structure Definition` --> "1..*" Component: qb.component
+    Component --> "1" Dimension: qb.dimension
+    Component --> "1" Measure: qb.measure
+    Component --> "1" Attribute: qb.attribute
+    Dimension --> "1" Codelist : qb.codeList
+    Codelist --> "1..*" Code : skos.hasTopConcept
+    Code --> "1" Codelist : skos.inScheme
+    Code --> "1..*" Code : skos.narrower
+    Code "1" <--  Code : skos.broader
+    Dataset --> Codelist : dcat.qualifiedRelation
+```
 
 The [RDF data cube vocabulary](https://www.w3.org/TR/vocab-data-cube/) provides a way to provide an explicit linked-data representation of a tabular dataset.
 
