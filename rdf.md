@@ -3,7 +3,7 @@
 We represent our metadata and data as RDF. This allows us to represent our data in a way which is machine-readable, and allows us to consepualise how data interrelates easier using existing vocabularies and ontologies.
 
 > TODO: This out out of date
-> 
+>
 ## Class diagram
 
 ```mermaid
@@ -122,7 +122,7 @@ We recommend datacubes have IRIs of the form:
 | -------------- | ----------------- | ----- |
 | `qb:structure` | mandatory         |       |
 
-For additional properties see [Distributions](#distributions).
+For additional properties see [Distributions](cataloguing.md#distributions).
 
 ## Data structure definition
 
@@ -192,16 +192,16 @@ ex:dimension1 a qb:DimensionProperty ;
     .
 ```
 
-| Property             | Requirement level | Notes                       |
-| -------------------- | ----------------- | --------------------------- |
-| `rdfs:label`         | mandatory         |                             |
-| `rdfs:comment`       | mandatory         |                             |
-| `qb:codelist`        | recommended       | See [codelists](#codelists) |
-| `rdfs:range`         | recommended       | Typically `skos:Concept`    |
-| `qb:concept`         | recommended       |                             |
-| `rdfs:subPropertyOf` | optional          |                             |
+| Property             | Requirement level | Notes                          |
+| -------------------- | ----------------- | ------------------------------ |
+| `rdfs:label`         | mandatory         |                                |
+| `rdfs:comment`       | mandatory         |                                |
+| `qb:codelist`        | recommended       | See [codelists](code_lists.md) |
+| `rdfs:range`         | recommended       | Typically `skos:Concept`       |
+| `qb:concept`         | recommended       |                                |
+| `rdfs:subPropertyOf` | optional          |                                |
 
-Dimensions should have an associated codelist (see [codelists](#codelists)).
+Dimensions should have an associated codelist (see [codelists](code_lists.md)).
 
 ## Attribute
 
@@ -214,14 +214,14 @@ ex:attribute1 a qb:AttributeProperty ;
     .
 ```
 
-| Property             | Requirement level | Notes                       |
-| -------------------- | ----------------- | --------------------------- |
-| `rdfs:label`         | mandatory         |                             |
-| `rdfs:comment`       | mandatory         |                             |
-| `qb:codelist`        | recommended       | See [codelists](#codelists) |
-| `rdfs:range`         | recommended       | Typically `skos:Concept`    |
-| `qb:concept`         | recommended       |                             |
-| `rdfs:subPropertyOf` | optional          |                             |
+| Property             | Requirement level | Notes                          |
+| -------------------- | ----------------- | ------------------------------ |
+| `rdfs:label`         | mandatory         |                                |
+| `rdfs:comment`       | mandatory         |                                |
+| `qb:codelist`        | recommended       | See [codelists](code_lists.md) |
+| `rdfs:range`         | recommended       | Typically `skos:Concept`       |
+| `qb:concept`         | recommended       |                                |
+| `rdfs:subPropertyOf` | optional          |                                |
 
 We allow attributes to be attached to a list of of values via `qb:codeList`.
 
