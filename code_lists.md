@@ -11,6 +11,15 @@
   - [Using CSVW to create a codelist](#using-csvw-to-create-a-codelist)
     - [Mixing codes from different namespaces](#mixing-codes-from-different-namespaces)
   - [Correspondence between codelists](#correspondence-between-codelists)
+  - [Recommended code lists](#recommended-code-lists)
+    - [Geography](#geography)
+    - [Publication Frequency](#publication-frequency)
+    - [Licenses](#licenses)
+    - [Organisations](#organisations)
+    - [Statistics designations](#statistics-designations)
+    - [Symbols and shorthand in tables](#symbols-and-shorthand-in-tables)
+    - [Themes](#themes)
+    - [Media types](#media-types)
 
 ## Codelists
 
@@ -412,3 +421,109 @@ HMRC publishes each annual edition of CN8 and [provides correspondence tables](h
         <http://data.gov.uk/codelist/combined-nonclementure/04101010> ;
     .
 ```
+
+## Recommended code lists
+
+### Geography
+
+Prefer using IRIs from the `http://statistics.data.gov.uk` vocabulary, based on ONS geography codes.
+
+| Label             | IRI                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| United Kingdom    | `http://statistics.data.gov.uk/id/statistical-geography/K02000001` |
+| Great Britain     | `http://statistics.data.gov.uk/id/statistical-geography/K03000001` |
+| England and Wales | `http://statistics.data.gov.uk/id/statistical-geography/K04000001` |
+| England           | `http://statistics.data.gov.uk/id/statistical-geography/E92000001` |
+| Northern Ireland  | `http://statistics.data.gov.uk/id/statistical-geography/N92000002` |
+| Scotland          | `http://statistics.data.gov.uk/id/statistical-geography/S92000002` |
+| Wales             | `http://statistics.data.gov.uk/id/statistical-geography/W92000002` |
+
+### Publication Frequency
+
+Data providers should prefer using IRIs from the [Dublin core collection description frequency vocabulary](https://www.dublincore.org/specifications/dublin-core/collection-description/frequency/), `http://purl.org/cld/freq/`.
+
+Common options include:
+
+| Label     | IRI                                  |
+| --------- | ------------------------------------ |
+| Annual    | `http://purl.org/cld/freq/annual`    |
+| Quarterly | `http://purl.org/cld/freq/quarterly` |
+| Monthly   | `http://purl.org/cld/freq/monthly`   |
+| Weekly    | `http://purl.org/cld/freq/weekly`    |
+| Daily     | `http://purl.org/cld/freq/daily`     |
+
+### Licenses
+
+| Label                        | IRI                                                                         |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| Open Government Licence v3.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/` |
+| Open Government Licence v2.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/` |
+| Open Government Licence v1.0 | `http://www.nationalarchives.gov.uk/doc/open-government-licence/version/1/` |
+
+### Organisations
+
+GOV.UK provides a [list of government organisations](https://www.gov.uk/government/organisations), which can be used to populate the `dcterms:publisher` and `dcterms:creator` properties.
+
+For example: `https://www.gov.uk/government/organisations/office-for-national-statistics`.
+
+### Statistics designations
+
+> TODO: IRIs for official / national / experimental stats classifications.
+
+| Label                   | IRI                                           |
+| ----------------------- | --------------------------------------------- |
+| National Statistics     | `https://data.gov.uk/national-statistics`     |
+| Official Statistics     | `https://data.gov.uk/official-statistics`     |
+| Experimental Statistics | `https://data.gov.uk/experimental-statistics` |
+
+### Symbols and shorthand in tables
+
+Data providers should adopt the [analytical function guidance](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) for statistical markers. See [using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
+
+See [Using symbols and shorthand in tables](#using-symbols-and-shorthand-in-tables) for usage.
+
+> TODO: This needs to be built.
+
+| Label                       | Notation | IRI                                                          |
+| --------------------------- | -------- | ------------------------------------------------------------ |
+| Break in time series        | `[b]`    | `http://data.gov.uk/codelist/statistical-markers/code/[b]`   |
+| Confidential                | `[c]`    | `http://data.gov.uk/codelist/statistical-markers/code/[c]`   |
+| Estimated                   | `[e]`    | `http://data.gov.uk/codelist/statistical-markers/code/[e]`   |
+| Earliest revision           | `[er]`   | `http://data.gov.uk/codelist/statistical-markers/code/[er]`  |
+| Forecast                    | `[f]`    | `http://data.gov.uk/codelist/statistical-markers/code/[f]`   |
+| Low                         | `[low]`  | `http://data.gov.uk/codelist/statistical-markers/code/[low]` |
+| Not significant             | `[ns]`   | `http://data.gov.uk/codelist/statistical-markers/code/[ns]`  |
+| Provisional                 | `[p]`    | `http://data.gov.uk/codelist/statistical-markers/code/[p]`   |
+| Revised                     | `[r]`    | `http://data.gov.uk/codelist/statistical-markers/code/[r]`   |
+| Significance level of 0.05  | `[s]`    | `http://data.gov.uk/codelist/statistical-markers/code/[s]`   |
+| Significance level of 0.01  | `[ss]`   | `http://data.gov.uk/codelist/statistical-markers/code/[ss]`  |
+| Significance level of 0.001 | `[sss]`  | `http://data.gov.uk/codelist/statistical-markers/code/[sss]` |
+| Low reliability             | `[u]`    | `http://data.gov.uk/codelist/statistical-markers/code/[u]`   |
+| None recorded in survey     | `[w]`    | `http://data.gov.uk/codelist/statistical-markers/code/[w]`   |
+| Not available               | `[x]`    | `http://data.gov.uk/codelist/statistical-markers/code/[x]`   |
+| Not applicable              | `[z]`    | `http://data.gov.uk/codelist/statistical-markers/code/[z]`   |
+
+### Themes
+
+| Label                                         | IRI                                                                                     |
+| --------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Business, Trade and International Development | `http://osr.statisticsauthority.gov.uk/themes/business-trade-international-development` |
+| Children, Education and Skills                | `http://osr.statisticsauthority.gov.uk/themes/children-education-skills`                |
+| Crime and Security                            | `http://osr.statisticsauthority.gov.uk/themes/crime-security`                           |
+| Economy                                       | `http://osr.statisticsauthority.gov.uk/themes/economy`                                  |
+| Health and Social Care                        | `http://osr.statisticsauthority.gov.uk/themes/health-social-care`                       |
+| Housing, Planning and Local Services          | `http://osr.statisticsauthority.gov.uk/themes/housing-planning-local-services`          |
+| Labour Market and Welfare                     | `http://osr.statisticsauthority.gov.uk/themes/labour-market-welfare`                    |
+| Population and Society                        | `http://osr.statisticsauthority.gov.uk/themes/population-society`                       |
+| Transport, Environment and Climate Change     | `http://osr.statisticsauthority.gov.uk/themes/transport-environment-climate-change`     |
+
+### Media types
+
+> TODO: Cover media types from [IANA](https://www.w3.org/ns/iana/media-types/)
+
+| Label  | IRI                                                                |
+| ------ | ------------------------------------------------------------------ |
+| CSV    | `http://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
+| JSON   | `http://www.w3.org/ns/iana/media-types/application/json#Resource` |
+| Turtle | `http://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
+
