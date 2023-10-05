@@ -28,7 +28,6 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Discoverability of CSVW](#discoverability-of-csvw)
     - [Foreign-key constraints](#foreign-key-constraints)
   - [Appendicies](#appendicies)
-    - [Publishers, creators and contacts](#publishers-creators-and-contacts)
     - [Class diagram](#class-diagram)
     - [Future work](#future-work)
       - [Provenance](#provenance)
@@ -113,7 +112,6 @@ The Application Profile uses terms from various existing specifications. Classes
 | `xkos`    | `http://rdf-vocabulary.ddialliance.org/xkos#` | XKOS: an SKOS extension for representing statistical classifications                 |
 | `xsd`     | `http://www.w3.org/2001/XMLSchema#`           | XML Schema Part 2: Datatypes Second Edition                                          |
 
-
 ## Cataloguing
 
 A catalogue is a collection of metadata about datasets which has been gathered and curated. Catalogues are often used to provide a single point of access to a collection of datasets, and to provide a means of discovering datasets. We adopt the [DCAT](https://www.w3.org/TR/vocab-dcat-3/) vocabulary for describing catalogues and their contents.
@@ -160,14 +158,14 @@ We recommend the use of the following properties:
 
 | Property                | Requirement level | Notes                                                                      |
 | ----------------------- | ----------------- | -------------------------------------------------------------------------- |
-| `dcterms:title`         | mandatory         | See [titles](#titles)                                                      |
-| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                          |
-| `dcterms:publisher`     | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcat:contactPoint`     | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                    |
-| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                    |
-| `dcterms:themeTaxonomy` | optional          | See [themes](#themes)                                                      |
+| `dcterms:title`         | mandatory         | See [titles](style.md#titles)                                                      |
+| `dcterms:description`   | mandatory         | See [descriptions](style.md#descriptions)                                          |
+| `dcterms:publisher`     | mandatory         | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcat:contactPoint`     | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcterms:issued`        | recommended       | See [dates and times](style.md#dates-and-times)                                    |
+| `dcterms:modified`      | recommended       | See [dates and times](style.md#dates-and-times)                                     |
+| `dcterms:themeTaxonomy` | optional          | See [themes](code_lists.md#themes)                                                      |
 
 For example:
 
@@ -201,10 +199,10 @@ For example:
 
 | Property               | Requirement level | Notes                                                                          |
 | ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
-| `dcterms:issued`       | mandatory         | See [dates and times](#dates-and-times)                                        |
+| `dcterms:issued`       | mandatory         | See [dates and times](style.md#dates-and-times)                                        |
 | `foaf:primaryTopic`    | mandatory         | This points to the IRI of the `dcat:Dataset` described by the catalogue record |
 | `prov:wasAttributedTo` | recommended       |                                                                                |
-| `dcterms:modified`     | recommended       | See [dates and times](#dates-and-times)                                        |
+| `dcterms:modified`     | recommended       | See [dates and times](style.md#dates-and-times)                                        |
 
 ### Dataset
 
@@ -228,20 +226,20 @@ We recommend the use of the following properties:
 
 | Property                     | Requirement level | Notes                                                                      |
 | ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
-| `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
-| `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
-| `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcterms:license`            | mandatory         | See [licenses](#licenses)                                                  |
+| `dcterms:title`              | mandatory         | See [titles](style.md#titles)                                                      |
+| `dcterms:description`        | mandatory         | See [descriptions](style.md#descriptions)                                          |
+| `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcterms:license`            | mandatory         | See [licenses](style.md#licenses)                                                  |
 | `dcat:distribution`          | recommended       | See [distributions](#distributions)                                        |
-| `dcterms:creator`            | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcat:contactPoint`          | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcterms:issued`             | recommended       | See [dates and times](#dates-and-times)                                    |
-| `dcterms:modified`           | recommended       | See [dates and times](#dates-and-times)                                    |
-| `dcat:keyword`               | recommended       | See [keywords](#keywords)                                                  |
-| `dcat:theme`                 | recommended       | See [themes](#themes)                                                      |
-| `dcterms:accrualPeriodicity` | recommended       | See [frequency](#frequency)                                                |
-| `dcterms:spatial`            | recommended       | See [geography](#geography)                                                |
-| `dcterms:temporal`           | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcterms:creator`            | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcat:contactPoint`          | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcterms:issued`             | recommended       | See [dates and times](style.md#dates-and-times)                                    |
+| `dcterms:modified`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
+| `dcat:keyword`               | recommended       | See [keywords](style.md#keywords)                                                  |
+| `dcat:theme`                 | recommended       | See [themes](code_lists.md#themes)                                                      |
+| `dcterms:accrualPeriodicity` | recommended       | See [frequency](code_lists.md#frequency)                                                |
+| `dcterms:spatial`            | recommended       | See [geography](code_lists.md#geography)                                                |
+| `dcterms:temporal`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 | `dcat:inSeries`              | recommended       | See [editions](#editions)                                                  |
 | `dcat:hasCurrentVersion`     | recommended       | See [versions](#versions)                                                  |
 | `dcat:hasVersion`            | recommended       | See [versions](#versions)                                                  |
@@ -300,19 +298,19 @@ We recommend the use of the following properties:
 
 | Property                     | Requirement level | Notes                                                                      |
 | ---------------------------- | ----------------- | -------------------------------------------------------------------------- |
-| `dcterms:title`              | mandatory         | See [titles](#titles)                                                      |
-| `dcterms:description`        | mandatory         | See [descriptions](#descriptions)                                          |
-| `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcterms:license`            | mandatory         | See [licenses](#licenses)                                                  |
-| `dcterms:creator`            | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcat:contactPoint`          | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts) |
-| `dcterms:issued`             | recommended       | See [dates and times](#dates-and-times)                                    |
-| `dcterms:modified`           | recommended       | See [dates and times](#dates-and-times)                                    |
-| `dcat:keyword`               | recommended       | See [keywords](#keywords)                                                  |
-| `dcat:theme`                 | recommended       | See [themes](#themes)                                                      |
-| `dcterms:accrualPeriodicity` | recommended       | See [frequency](#frequency)                                                |
-| `dcterms:spatial`            | recommended       | See [geography](#geography)                                                |
-| `dcterms:temporal`           | recommended       | See [dates and times](#dates-and-times)                                    |
+| `dcterms:title`              | mandatory         | See [titles](style.md#titles)                                                      |
+| `dcterms:description`        | mandatory         | See [descriptions](style.md#descriptions)                                          |
+| `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcterms:license`            | mandatory         | See [licenses](style.md#licenses)                                                  |
+| `dcterms:creator`            | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcat:contactPoint`          | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
+| `dcterms:issued`             | recommended       | See [dates and times](style.md#dates-and-times)                                    |
+| `dcterms:modified`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
+| `dcat:keyword`               | recommended       | See [keywords](style.md#keywords)                                                  |
+| `dcat:theme`                 | recommended       | See [themes](code_lists.md#themes)                                                      |
+| `dcterms:accrualPeriodicity` | recommended       | See [frequency](code_lists.md#frequency)                                                |
+| `dcterms:spatial`            | recommended       | See [geography](code_lists.md#geography)                                                |
+| `dcterms:temporal`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 
 For example:
 
@@ -350,7 +348,7 @@ We recommend distributions have IRIs which are identical to the dataset IRI, wit
 
 - `http://{dataset_iri}.{extension}`
 
-The exception is when representing an RDF data cube as a distribution, for which there is no physical file and therefore no extension. In that instance, we recommend appending `/datacube` or `#datacube` to the dataset IRI (see [Data cube](#data-cube)).
+The exception is when representing an RDF data cube as a distribution, for which there is no physical file and therefore no extension. In that instance, we recommend appending `/datacube` or `#datacube` to the dataset IRI (see [Data cube](rdf_cube.md)).
 
 For example:
 
@@ -361,17 +359,17 @@ For example:
 
 | Property                | Requirement level | Notes                                                                          |
 | ----------------------- | ----------------- | ------------------------------------------------------------------------------ |
-| `dcterms:title`         | mandatory         | See [titles](#titles)                                                          |
-| `dcterms:description`   | mandatory         | See [descriptions](#descriptions)                                              |
-| `dcterms:license`       | mandatory         | See [licenses](#licenses)                                                      |
-| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](#publishers-creators-and-contacts)     |
-| `dcterms:issued`        | recommended       | See [dates and times](#dates-and-times)                                        |
-| `dcterms:modified`      | recommended       | See [dates and times](#dates-and-times)                                        |
+| `dcterms:title`         | mandatory         | See [titles](style.md#titles)                                                          |
+| `dcterms:description`   | mandatory         | See [descriptions](style.md#descriptions)                                              |
+| `dcterms:license`       | mandatory         | See [licenses](style.md#licenses)                                                      |
+| `dcterms:creator`       | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts)     |
+| `dcterms:issued`        | recommended       | See [dates and times](style.md#dates-and-times)                                        |
+| `dcterms:modified`      | recommended       | See [dates and times](style.md#dates-and-times)                                        |
 | `dcat:isDistributionOf` | recommended       | See [CSVs as self contained datasets](#csvs-as-self-contained-datasets)        |
-| `dcat:mediaType`        | recommended       | See [media types](#media-types)                                                |
+| `dcat:mediaType`        | recommended       | See [media types](code_lists.md#media-types)                                                |
 | `dcat:downloadURL`      | recommended       |                                                                                |
 | `dcat:byteSize`         | recommended       |                                                                                |
-| `spdx:checksum`         | recommended       | See [checksums](#checksums)                                                    |
+| `spdx:checksum`         | recommended       | See [checksums](style.md#checksums)                                                    |
 | `wdrs:describedby`      | optional          | For CSV distributions, we can relate the CSVW metadata using`wdrs:describedby` |
 
 For example:
@@ -396,7 +394,6 @@ For example:
     ] ;
     .
 ```
-
 
 ### Content negotiation of distributions
 
@@ -684,25 +681,7 @@ We recommend CSVW metadata is served with the media type `application/csvm+json`
 
 Publishers may wish to use the `csvw:foreignKey` property to assert relationships between different CSVs.
 
-
 ## Appendicies
-
-### Publishers, creators and contacts
-
-We intend the object of `dcat:publisher` and `dcat:creator` predicates to be an IRI, representing the publishing or creating organisation.
-
-For contact points, we adopt the `vcard` vocabulary.
-
-```ttl
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> 
-    dcat:contactPoint <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> .
-
-<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> a vcard:Individual ;
-    vcard:hasEmail <mailto:joe.bloggs@ons.gov.uk> ;
-    vcard:hasTelephone <tel:+441234123456> ;
-    vcard:fn "Joe Bloggs" ;
-    .
-```
 
 ### Class diagram
 

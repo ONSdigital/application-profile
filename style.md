@@ -4,6 +4,7 @@
   - [Titles](#titles)
   - [Descriptions](#descriptions)
   - [Keywords](#keywords)
+  - [Publishers, creators and contacts](#publishers-creators-and-contacts)
   - [Checksums](#checksums)
   - [Using the appropriate literals](#using-the-appropriate-literals)
     - [Dates and times](#dates-and-times)
@@ -34,6 +35,23 @@ We recommend that descriptions not exceed 160 characters, including spaces.
 ## Keywords
 
 - [ONS keyword guidance](https://style.ons.gov.uk/house-style/keywords-2/)
+
+## Publishers, creators and contacts
+
+We intend the object of `dcat:publisher` and `dcat:creator` predicates to be an IRI, representing the publishing or creating organisation.
+
+For contact points, we adopt the `vcard` vocabulary.
+
+```ttl
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018> 
+    dcat:contactPoint <http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> .
+
+<http://data.gov.uk/series/name-of-my-statistical-series/dataset/2018/contact> a vcard:Individual ;
+    vcard:hasEmail <mailto:joe.bloggs@ons.gov.uk> ;
+    vcard:hasTelephone <tel:+441234123456> ;
+    vcard:fn "Joe Bloggs" ;
+    .
+```
 
 ## Checksums
 
