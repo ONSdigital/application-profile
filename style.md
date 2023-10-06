@@ -81,7 +81,7 @@ Data providers should prefer using IRIs from the `http://reference.data.gov.uk` 
 
 ## Using IRIs
 
-Using IRIs instead of strings allows for better interoperability between datasets and avoids duplication of definitions. For example, use `K02000001` instead of "United Kingdom" to represent the United Kingdom in a dataset. See [code lists](code_lists.md#Recommended code lists) for examples of code lists which can be reused across your publications.
+Using IRIs instead of strings allows for better interoperability between datasets and avoids duplication of definitions. For example, use `K02000001` instead of "United Kingdom" to represent the United Kingdom in a dataset. See [code lists](code-lists.md#Recommended code lists) for examples of code lists which can be reused across your publications.
 
 ### Hash or slash?
 

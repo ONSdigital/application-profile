@@ -51,7 +51,7 @@ We recommend the use of the following properties:
 | `dcat:contactPoint`     | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
 | `dcterms:issued`        | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 | `dcterms:modified`      | recommended       | See [dates and times](style.md#dates-and-times)                                     |
-| `dcterms:themeTaxonomy` | optional          | See [themes](code_lists.md#themes)                                                      |
+| `dcterms:themeTaxonomy` | optional          | See [themes](code-lists.md#themes)                                                      |
 
 For example:
 
@@ -122,9 +122,9 @@ We recommend the use of the following properties:
 | `dcterms:issued`             | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 | `dcterms:modified`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 | `dcat:keyword`               | recommended       | See [keywords](style.md#keywords)                                                  |
-| `dcat:theme`                 | recommended       | See [themes](code_lists.md#themes)                                                      |
-| `dcterms:accrualPeriodicity` | recommended       | See [frequency](code_lists.md#frequency)                                                |
-| `dcterms:spatial`            | recommended       | See [geography](code_lists.md#geography)                                                |
+| `dcat:theme`                 | recommended       | See [themes](code-lists.md#themes)                                                      |
+| `dcterms:accrualPeriodicity` | recommended       | See [frequency](code-lists.md#frequency)                                                |
+| `dcterms:spatial`            | recommended       | See [geography](code-lists.md#geography)                                                |
 | `dcterms:temporal`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 | `dcat:inSeries`              | recommended       | See [editions](#editions)                                                  |
 | `dcat:hasCurrentVersion`     | recommended       | See [versions](#versions)                                                  |
@@ -193,9 +193,9 @@ We recommend the use of the following properties:
 | `dcterms:issued`             | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 | `dcterms:modified`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 | `dcat:keyword`               | recommended       | See [keywords](style.md#keywords)                                                  |
-| `dcat:theme`                 | recommended       | See [themes](code_lists.md#themes)                                                      |
-| `dcterms:accrualPeriodicity` | recommended       | See [frequency](code_lists.md#frequency)                                                |
-| `dcterms:spatial`            | recommended       | See [geography](code_lists.md#geography)                                                |
+| `dcat:theme`                 | recommended       | See [themes](code-lists.md#themes)                                                      |
+| `dcterms:accrualPeriodicity` | recommended       | See [frequency](code-lists.md#frequency)                                                |
+| `dcterms:spatial`            | recommended       | See [geography](code-lists.md#geography)                                                |
 | `dcterms:temporal`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
 
 For example:
@@ -252,7 +252,7 @@ For example:
 | `dcterms:issued`        | recommended       | See [dates and times](style.md#dates-and-times)                                        |
 | `dcterms:modified`      | recommended       | See [dates and times](style.md#dates-and-times)                                        |
 | `dcat:isDistributionOf` | recommended       | See [CSVs as self contained datasets](README.md#csvs-as-self-contained-datasets)        |
-| `dcat:mediaType`        | recommended       | See [media types](code_lists.md#media-types)                                                |
+| `dcat:mediaType`        | recommended       | See [media types](code-lists.md#media-types)                                                |
 | `dcat:downloadURL`      | recommended       |                                                                                |
 | `dcat:byteSize`         | recommended       |                                                                                |
 | `spdx:checksum`         | recommended       | See [checksums](style.md#checksums)                                                    |

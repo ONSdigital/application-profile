@@ -196,12 +196,12 @@ ex:dimension1 a qb:DimensionProperty ;
 | -------------------- | ----------------- | ------------------------------ |
 | `rdfs:label`         | mandatory         |                                |
 | `rdfs:comment`       | mandatory         |                                |
-| `qb:codelist`        | recommended       | See [codelists](code_lists.md) |
+| `qb:codelist`        | recommended       | See [codelists](code-lists.md) |
 | `rdfs:range`         | recommended       | Typically `skos:Concept`       |
 | `qb:concept`         | recommended       |                                |
 | `rdfs:subPropertyOf` | optional          |                                |
 
-Dimensions should have an associated codelist (see [codelists](code_lists.md)).
+Dimensions should have an associated codelist (see [codelists](code-lists.md)).
 
 ## Attribute
 
@@ -218,7 +218,7 @@ ex:attribute1 a qb:AttributeProperty ;
 | -------------------- | ----------------- | ------------------------------ |
 | `rdfs:label`         | mandatory         |                                |
 | `rdfs:comment`       | mandatory         |                                |
-| `qb:codelist`        | recommended       | See [codelists](code_lists.md) |
+| `qb:codelist`        | recommended       | See [codelists](code-lists.md) |
 | `rdfs:range`         | recommended       | Typically `skos:Concept`       |
 | `qb:concept`         | recommended       |                                |
 | `rdfs:subPropertyOf` | optional          |                                |

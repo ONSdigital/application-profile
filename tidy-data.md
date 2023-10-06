@@ -176,11 +176,11 @@ When [using a CSVW to create an RDF data cube](rdf_cubes.md#using-csvw-to-create
 | W06000015 | Cardiff    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 83.3            |
 | ...       | ...        | ...                     | ...          | ...    | ...             |
 
-To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](code_lists.md).
+To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](code-lists.md).
 
 ## Using symbols and shorthand in tables
 
-Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is statistically significant. The Government Statistical Service (GSS) [has a guide](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) which provides a number of symbols and shorthand for common annotations (see [here](code_lists.md#analysis-function-guidance-on-symbols-and-shorthand-in-tables).
+Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is statistically significant. The Government Statistical Service (GSS) [has a guide](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) which provides a number of symbols and shorthand for common annotations (see [here](code-lists.md#analysis-function-guidance-on-symbols-and-shorthand-in-tables).
 
 For example, this table indicates that the life expectancy is not available (`[x]`) or provisional (`[p]`) for some entries.
 
@@ -301,7 +301,7 @@ There may be some difficulties in working with data structured in this way:
 
 By creating codelists such as SITC we can make the hierarchy of categories explicit. By creating codelists and publishing these alongside the statistical data, we remove the need to include hierarchical structure inside the dataset.
 
-We suggest collapsing the hierarchy into a single column, and using a defined classification which indicates the hierarchy of classes. We cover the creation of classifications in [codelists](code_lists.md).
+We suggest collapsing the hierarchy into a single column, and using a defined classification which indicates the hierarchy of classes. We cover the creation of classifications in [codelists](code-lists.md).
 
 | period | industry | industry_label                                   | trade_value |
 | ------ | -------- | ------------------------------------------------ | ----------- |
