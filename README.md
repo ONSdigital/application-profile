@@ -20,7 +20,8 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Draft JSON-LD Context](#draft-json-ld-context)
     - [HTTP verbs and their applicability to our objects](#http-verbs-and-their-applicability-to-our-objects)
       - [Datasets (aka dcat:DatasetSeries)](#datasets-aka-dcatdatasetseries)
-        - [GET and POST of a CPIH Dataset](#get-and-post-of-a-cpih-dataset)
+        - [GET of a CPIH Dataset](#get-of-a-cpih-dataset)
+      - [POST of a CPIH dataset](#post-of-a-cpih-dataset)
       - [Editions (aka dcat:Dataset)](#editions-aka-dcatdataset)
       - [Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)](#distributions-dcatdistribution-qbdataset-and-versions-dcatdataset)
   - [Versioning](#versioning)
@@ -315,9 +316,8 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 | 6 Management    | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
 | 8 Distributions | dcat:landingPage           | foaf:Document                       | ✓             | ✓            |              | ✓                 |                 |
 
-##### GET and POST of a CPIH Dataset
+##### GET of a CPIH Dataset
 
-**GET**
 ```JSON
 {
   "@context": "https://data.ons.gov.uk/ns#",
@@ -375,7 +375,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 }
 ```
 
-**POST**
+#### POST of a CPIH dataset
 
 ```JSON
 {
@@ -480,7 +480,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 
 ## Versioning
 
-We believe publishing data in a versioned manner is important. Every publication of a dataset at a version level cannot be amended, it can only be deleted or superseded by a new version. This is to ensure that the data is immutable. We provide fields in our service to allow producers to provide version notes, specificing the changes between versions of an edition. 
+We believe publishing data in a versioned manner is important. Every publication of a dataset at a version level cannot be amended, it can only be deleted or superseded by a new version. This is to ensure that the data is immutable. We provide fields in our service to allow producers to provide version notes, specificing the changes between versions of an edition.
 
 ### Example of versioning in RDF for CPIH
 
@@ -496,13 +496,13 @@ We believe publishing data in a versioned manner is important. Every publication
 
 <cpih> a dcat:DatasetSeries .
 <cpih/2019-01> a dcat:Dataset ;
-	dcat:inSeries <cpih> ;
-	dcat:hasVersion <cpih/2019-01/version/1>,
-		<cpih/2019-01/version/2>,
-		<cpih/2019-01/version/3> .
+ dcat:inSeries <cpih> ;
+ dcat:hasVersion <cpih/2019-01/version/1>,
+  <cpih/2019-01/version/2>,
+  <cpih/2019-01/version/3> .
 
 <cpih/2019-01/version/1> a dcat:Dataset ;
-	dcat:distribution <cpih-2019-01-version-1.csv> .
+ dcat:distribution <cpih-2019-01-version-1.csv> .
 
 <cpih-2019-01-version-1.csv> a dcat:Distribution ;
   dcat:mediaType datatext:csv ;
@@ -511,7 +511,7 @@ We believe publishing data in a versioned manner is important. Every publication
 <cpih-2019-01-version-1-metadata.json> dcat:mediaType <https://iana.org/assignments/media-types/application/csvm+json> .
 
 <cpih/2019-01/version/2> a dcat:Dataset ;
-	dcat:distribution <cpih-2019-01-version-2.json> .
+ dcat:distribution <cpih-2019-01-version-2.json> .
 
 <cpih-2019-01-version-2.json> a dcat:Distribution ;
   dcat:mediaType <https://iana.org/assignments/media-types/application/ld+json> .
@@ -519,15 +519,15 @@ We believe publishing data in a versioned manner is important. Every publication
 <cpih/2019-01/version/3> a dcat:Dataset .
 
 <cpih/2019-02> a dcat:Dataset ;
-	dcat:inSeries <cpih> ;
-	dcat:hasVersion <cpih/2019-02/version/1> .
+ dcat:inSeries <cpih> ;
+ dcat:hasVersion <cpih/2019-02/version/1> .
 
 <cpih/2019-02/version/1> a dcat:Dataset .
 
 <cpih/2019-03> a dcat:Dataset ;
-	dcat:inSeries <cpih> ;
-	dcat:hasVersion <cpih/2019-01/version/1>,
-		<cpih/2019-01/version/2> .
+ dcat:inSeries <cpih> ;
+ dcat:hasVersion <cpih/2019-01/version/1>,
+  <cpih/2019-01/version/2> .
 
 <cpih/2019-03/version/1> a dcat:Dataset .
 
