@@ -9,8 +9,10 @@ Where metadata is stored as RDF, such as being made available via a SPARQL endpo
 > If a catalog is represented as an RDF Dataset with named graphs (as defined in [[SPARQL11-QUERY]](https://www.w3.org/TR/sparql11-query/)), then it is appropriate to place the description of each dataset (consisting of all RDF triples that mention the dcat:Dataset, dcat:CatalogRecord, and any of its dcat:Distributions) into a separate named graph. The name of that graph SHOULD be the IRI of the catalog record.[^named-graphs]
 
 ```ttl
-<http://data.gov.uk/datasets/my-dataset/record> {
-    ...
+<http://example.org/datasets/my-dataset/record> {
+    <http://example.org/datasets/my-dataset> a dcat:Dataset ;
+        dcat:distribution <http://example.org/datasets/my-dataset/datacube> ;
+        .
 }
 ```
 
@@ -18,7 +20,7 @@ Doing this results in a neat ability to query for dataset metadata by limiting a
 
 ```sparql
 SELECT * 
-FROM <http://data.gov.uk/datasets/my-dataset/record> 
+FROM <http://example.org/datasets/my-dataset/record> 
 WHERE {
     ?s ?p ?o .
 }
@@ -26,13 +28,15 @@ WHERE {
 
 ## Named graphs for RDF Cube distributions
 
-Where dataset distributions are stored as RDF, such as being made available via a SPARQL endpoint, we recommend storing the qb:Dataset in a named graph with the same IRI as the distribution.
+Where a `qb:Dataset` is a `dcat:distribution` is stored in a triplestore, such as being made available via a SPARQL endpoint, we recommend storing the `qb:Dataset` in a named graph with the same IRI as the distribution.
 
 Storing multiple versions and editions of the same dataset is costly for a Triplestore, we recommend only storing a single set of observations which represents the cumulative state of the dataset (i.e. the latest version and edition of the dataset which has all observations).
 
 ```ttl
-<http://data.gov.uk/datasets/my-dataset/editions/latest/versions/latest> {
-    ...
+<http://example.org/datasets/my-dataset/datacube> {
+    <obs> a qb:Observation ;
+        # ... ;
+        .
 }
 ```
 
@@ -40,7 +44,7 @@ Doing this results in a neat ability to query for dataset by limiting a SPARQL q
 
 ```sparql
 SELECT * 
-FROM <http://data.gov.uk/datasets/my-dataset/editions/latest/versions/latest>
+FROM <http://example.org/datasets/my-dataset/datacube>
 WHERE {
     ?s ?p ?o .
 }

@@ -126,7 +126,7 @@ In order to gain the benefits of JSON-LD being directly consumable as RDF, we ad
 
 ```mermaid
 classDiagram
-Distribution <|-- DatasetVersion : dcat.Distribution 
+Distribution <|-- DatasetVersion : dcat.distribution 
 DatasetVersion <|-- Edition : dcat.hasVersion
 Edition --|> DatasetSeries : dcat.inSeries 
 CatalogRecord --|> DatasetSeries : foaf.primaryTopic
