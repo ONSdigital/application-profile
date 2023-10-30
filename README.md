@@ -84,9 +84,8 @@ The Application Profile uses terms from various existing specifications. Classes
 | `adms`    | `http://www.w3.org/ns/adms#`                  | Asset Description Metadata Schema                                                    |
 | `dcat`    | `http://www.w3.org/ns/dcat#`                  | Data Catalog Vocabulary                                                              |
 | `dcterms` | `http://purl.org/dc/terms/`                   | DCMI (Dublin Core Metadata Initiative) Metadata Terms                                |
-| `dpv`     | `http://www.w3.org/ns/dpv#`                   | Data Privacy Vocabulary (DPV)                                                        |
+| `dqv`     | `https://www.w3.org/TR/vocab-dqv/`            | Data Quality Vocabulary                                                              |
 | `foaf`    | `http://xmlns.com/foaf/0.1/`                  | FOAF (Friend of a friend) Vocabulary                                                 |
-| `owl`     | `http://www.w3.org/2002/07/owl#`              | OWL Web Ontology Language                                                            |
 | `prov`    | `http://www.w3.org/ns/prov#`                  | Provenance Vocabulary                                                                |
 | `qb`      | `http://purl.org/linked-data/cube#`           | RDF Data Cube Vocabulary                                                             |
 | `rdfs`    | `http://www.w3.org/2000/01/rdf-schema#`       | RDF (Resource Description Framework) Vocabulary Description Language 1.0: RDF Schema |
@@ -389,7 +388,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
   "landing_page": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
   "created": "2023-06-19T00:09:38+00:00",
   "issued": "2023-06-21T00:07:00+00:00",
-  "nextRelease": "2023-09-20T00:07:00+00:00",
+  "next_release": "2023-09-20T00:07:00+00:00",
   "publisher": "office-for-national-statistics",
   "creator": "office-for-national-statistics",
   "contact_point": {
