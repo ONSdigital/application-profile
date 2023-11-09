@@ -152,16 +152,16 @@ class AnalysisDataset["AnalysisDataset a dcat:Dataset"] {
 
 We make the following assumptions, that a dataset will be created prior to its publications.
 
-For datasetVersion:
+For verions:
 * `dcterms:created` - the date the dataset earliest version was created in system
 * `dcterms:issued` - the date the dataset was published for public consumption
 
-For dataset:
+For editions:
 * `dcterms:created` - the date the earliest dataset version created in system
 * `dcterms:issued` - the date the earliest dataset version was first published for public consumption
 * `dcterms:modified` - the date the newest dataset version created in system
 
-For datasetSeries:
+For datasets:
 * `dcterms:created` - the date the earliest dataset created in system
 * `dcterms:issued` - the date the earliest dataset was first published for public consumption
 * `dcterms:modified` - the date the newest dataset created in system
