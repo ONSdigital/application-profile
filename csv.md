@@ -14,7 +14,16 @@ CSV files used in our service should be saved as UTF-8 encoded text files with a
 
 - Column headers should be in lowercase and snake case (e.g. `column_header`).
 - Column headers should be unique, and should not contain any special characters (e.g. `!@#$%^&*()`).
-- Related columns should have the same prefix (e.g. `geo_code`, `geo_name`, `geo_type` or `millions_gbp` and `millions_gbp_status`, or even `observation` and `observation_status`).
+- Related columns should have the same prefix (e.g. `geo_code`, `geo_name`, `geo_type` or `GBP_millions` and `GBP_millions_obs_status`, or even `observation` and `observation_status`).
+- Dimension columns should be ordered first by time period, then by geography, then in descending order by volume of options in each column
+- The Observation column should come after dimension columns, followed by an observation status column (if necesary) then measure, unit, and finally any attribute columns; this structure is called "tidy data"
+- Measure columns are only required when there are multiple measures within the dataset (i.e. count and per capita)
+- Unit columns are only required when there are multipl emeasures within the dataset (i.e. miles and GBP)
+- Multiple obesrvation columns can exist where the measure type becomes the column title (e.g. a dataset of local authorities with three observation columns `population`, `per_capita_transport_spend`, and `per_capita_health_spend`)
+- Ensure that the concepts used in the CSV files are clear and easily understandable to enhance human readability.
+- Each observation should be uniquely addressable by filtering all columns (except the observation column itself) to one value per column.
+- Columns should be ordered as follows: time period, geographic region, and then by descending count of options in each column.
+- All columns should have values for every observation, except for the observation, observation status, or attribute type columns.
 
 ## Column
 
@@ -48,17 +57,21 @@ A quick way to check if a column only contains related data and not unique ident
 
 For example the three columns prefixed with `geo_` are related in the table below, filtering on any of the three would only ever result in one value for the other two columns. The geo_code column is a unique identifier for the geography.
 
-| geo_code  | geo_name          | geo_type               | value |   |
-|-----------|-------------------|------------------------|-------|---|
-| E08000006 | Salford           | Metropolitan Districts | 42    |   |
-| E92000001 | England           | Country                | 1337  |   |
-| K04000001 | England and Wales | England and Wales      |       |   |
+| geo_code  | geo_name          | geo_type               | value | ... |
+|-----------|-------------------|------------------------|-------|-----|
+| E08000006 | Salford           | Metropolitan Districts | 42    | ... |
+| E92000001 | England           | Country                | 1337  | ... |
+| K04000001 | England and Wales | England and Wales      |       | ... |
 
 **Note:** Dimension columns must contain values for every row in the CSV file and not be blank (i.e. they must be dense)
 
 #### Attributes
 
 Attribute columns are used to describe the observation. They can be used to describe the observation as a whole. Most commonly the attribute columns are used to describe the absence or quality of an observation, these are commonly called "observation status" columns.
+
+##### Observation status columns
+
+When creating observation status columns a naming convetion helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column column should have the same name as the observation column plus `_obs_status` as a suffix. For example an observation column called `gva` should have a corresponding observation status called `gva_obs_status` which should be located to the right of the observation column.
 
 #### Measure columns
 
@@ -76,27 +89,33 @@ Example units include kilograms, miles, numbers, and percentages.
 
 **Note:** Indicies are only comparable to itself, therefore they are "unitless". You can compare miles and kilometres, but you cannot compare the FTSE 100 and the FTSE 250 values directly you can only compare their trends.
 
+The units used should *always* be QUDT units unless no appropriate unit exists, which is exceptionally rare. Again, more often in statistics you're looking at numbers, rates, percentages, fractions, and frequencies.
+
+##### Scaling units
+
+Often in summary statistics publications units need to be scaled in order to control disclosure, or to maintain an appropriate level of granularity. Scaled units are especially common in publications like National Accounts, which contains the caucluated and reported spend of the Government of the United Kingdom and Northern Ireland, which totals over a trillion GBP (i.e. 1000000000000) and those figures are hard to sight read.
+
+When scaling units take the base unit and suffix the multiplication factor preceeded by an underscore. Written and decimal representations are both acceptable For several examples,
+
+- `GBP_millions` for millions of GBP (used in National acounts)
+- `NUM_1000` for thousands (used in SOME PUBLICATION)
+- `PER_tenths` (i.e. `PER`cent * 0.1 a.k.a tenths) for per thousands (used in SOME PUBLICATION)
+- `ratio_0.001` for per thousands (used in SOME PUBLICATION)
+- `L_100` for hectolitres (used in HMRC Alcohol Bulletin)
+
 ### Ordering
 
 Ensuring that users can understand your CSV files is important. This is especially true when the
 
+###
+
 Concept Clarity: Ensure that the concepts used in the CSV files are clear and easily understandable to enhance human readability.
-
-Column Headers: Use snake_case for column headers for consistency and readability.
-
-Measures: Include measures only when there are multiple measures, and always in its own column.
-
-Units: Include units only when there are multiple units, and always in its own column.
-
-Observation Columns: These should only contain numbers. Suppressed or missing values should be left blank.
-
-Missing Values: Any missing value should have a related column explaining the missing value. This is referred to as an observation status column.
 
 Unique Addressability: Each observation should be uniquely addressable by filtering all columns (except the observation column) to a value.
 
 Column Order: Columns should be ordered as follows: time period, geographic region, and then by descending count of options in each column.
 
-Value Completeness: All columns should have values for every observation, except for the observation and observation status columns.
+Value Completeness: All columns should have values for every observation, except for the observation, observation status, or attribute type columns.
 
 Next steps could include:
 
