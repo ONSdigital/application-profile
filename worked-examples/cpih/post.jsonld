@@ -1,0 +1,42 @@
+{
+  "@context": "./draft_ons_context.json",
+  "@id": "https://data.ons.gov.uk/datasets/cpih",
+  "@type": "dcat:DatasetSeries",
+  "identifier": "cpih",
+  "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
+  "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home.",
+  "description": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home. The CPIH is the most comprehensive measure of inflation.",
+  "landingPage": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest",
+  "created": "2023-06-19T00:09:38+00:00",
+  "issued": "2023-06-21T00:07:00+00:00",
+  "nextRelease": "2023-09-20T00:07:00+00:00",
+  "publisher": "office-for-national-statistics",
+  "creator": "office-for-national-statistics",
+  "contact_point": {
+    "@type": "vcard:Contact",
+    "name": "Consumer Price Inflation Enquiries",
+    "email": "cpih@ons.gov.uk",
+    "telephone": "+441633456900"
+  },
+  "theme": [
+    "prices",
+    "economy"
+  ],
+  "frequency": "Month",
+  "keywords": [
+    "cpih",
+    "inflation",
+    "consumer price index",
+    "consumer price inflation",
+    "cpi",
+    "consumer price index including owner occupiers' housing costs"
+  ],
+  "licence": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+  "temporal_coverage": {
+    "start": "1989-01-01T00:00:00+00:00",
+    "end": "2023-08-01T00:00:00+00:00"
+  },
+  "temporal_resolution": ["P1M", "P1Y"],
+  "spatial_coverage": "K02000001",
+  "spatial_resolution": ["K02"]
+}

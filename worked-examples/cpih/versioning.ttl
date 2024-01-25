@@ -1,0 +1,48 @@
+@base <https://data.ons.gov.uk/datasets/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix data: <https://iana.org/assignments/media-types/> .
+@prefix dataapp: <https://iana.org/assignments/media-types/application/> .
+@prefix datatext: <https://iana.org/assignments/media-types/text/> .
+@prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+
+<cpih> a dcat:DatasetSeries .
+<cpih/2019-01> a dcat:Dataset ;
+	dcat:inSeries <cpih> ;
+	dcat:hasVersion <cpih/2019-01/version/1>,
+		<cpih/2019-01/version/2>,
+		<cpih/2019-01/version/3> .
+
+<cpih/2019-01/version/1> a dcat:Dataset ;
+	dcat:distribution <cpih-2019-01-version-1.csv> .
+
+<cpih-2019-01-version-1.csv> a dcat:Distribution ;
+  dcat:mediaType datatext:csv ;
+  wdrs:describedby <cpih-2019-01-version-1-metadata.json>.
+
+<cpih-2019-01-version-1-metadata.json> dcat:mediaType <https://iana.org/assignments/media-types/application/csvm+json> .
+
+<cpih/2019-01/version/2> a dcat:Dataset ;
+	dcat:distribution <cpih-2019-01-version-2.json> .
+
+<cpih-2019-01-version-2.json> a dcat:Distribution ;
+  dcat:mediaType <https://iana.org/assignments/media-types/application/ld+json> .
+
+<cpih/2019-01/version/3> a dcat:Dataset .
+
+<cpih/2019-02> a dcat:Dataset ;
+	dcat:inSeries <cpih> ;
+	dcat:hasVersion <cpih/2019-02/version/1> .
+
+<cpih/2019-02/version/1> a dcat:Dataset .
+
+<cpih/2019-03> a dcat:Dataset ;
+	dcat:inSeries <cpih> ;
+	dcat:hasVersion <cpih/2019-01/version/1>,
+		<cpih/2019-01/version/2> .
+
+<cpih/2019-03/version/1> a dcat:Dataset .
+
+<cpih/2019-03/version/2> a dcat:Dataset .
+
+<cpihQB> a dcat:Distribution , qb:Dataset .

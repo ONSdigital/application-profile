@@ -180,61 +180,61 @@ To adopt common identifiers, there needs to exist a list of identifiers which ca
 
 ## Using symbols and shorthand in tables
 
-Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is statistically significant. The Government Statistical Service (GSS) [has a guide](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) which provides a number of symbols and shorthand for common annotations (see [here](code-lists.md#analysis-function-guidance-on-symbols-and-shorthand-in-tables).
+Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is ommitted to prevent disclosing individual responses. The [Statistical Data and Metadata eXchange (SDMX)](https://sdmx.org/) has defined a code list which supports several data markups, currently at [version 2.2](https://sdmx.org/wp-content/uploads/CL_OBS_STATUS_v2_2.docx).
 
-For example, this table indicates that the life expectancy is not available (`[x]`) or provisional (`[p]`) for some entries.
+For example, this table indicates that the life expectancy is not available (`O`) or provisional (`P`) for some entries.
 
 | area      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7 [p]        |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female | [x]             |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7 P          |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Female | O               |
 | ...       | ...                     | ...    | ...             |
 
-These annotations are usually included inside the table alongside numeric data. When this happens the columns no longer contain a single type. By placing symbols such as `[x]` in the same column as numeric values, statistical software will interpret the column as containing strings and not numbers.
+These annotations are usually included inside the table alongside numeric data. When this happens the columns no longer contain a single type. By placing symbols such as `O` in the same column as numeric values, statistical software will interpret the column as containing strings and not numbers.
 
-To avoid the mixing of types, we recommend that these annotations be placed in their own column. We refer to these annotations as _statistical markers_.
+To avoid the mixing of types, we recommend that these annotations be placed in their own column. We refer to these annotations as _observation statuses_.
 
-| area      | period                  | sex    | life_expectancy | marker |
-| --------- | ----------------------- | ------ | --------------- | ------ |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |        |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |        |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |        |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | [x]    |
-| ...       | ...                     | ...    | ...             |        |
+| area      | period                  | sex    | life_expectancy | observation_status |
+| --------- | ----------------------- | ------ | --------------- | ------------------ |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |                    |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |                    |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | P                  |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | O                  |
+| ...       | ...                     | ...    | ...             |                    |
 
-This adds some complexity when a table has multiple statistical measures as it is unclear which of the columns the marker applies to. In the following example, it is unclear whether the entry for `life_expectancy` or `disability_free_life_expectancy` (or both) is provisional.
+This adds some complexity when a table has multiple statistical measures as it is unclear which of the columns the `observation_status` applies to. In the following example, it is unclear whether the entry for `life_expectancy` or `disability_free_life_expectancy` (or both) is provisional.
 
-| area      | period                  | sex    | life_expectancy | disability_free_life_expectancy | marker |
-| --------- | ----------------------- | ------ | --------------- | ------------------------------- | ------ |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | 70.1                            |        |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            | 80.2                            |        |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | 70.3                            | [p]    |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | 80.4                            | [x]    |
-| ...       | ...                     | ...    | ...             |                                 |        |
+| area      | period                  | sex    | life_expectancy | disability_free_life_expectancy | observation_status |
+| --------- | ----------------------- | ------ | --------------- | ------------------------------- | ------------------ |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | 70.1                            |                    |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            | 80.2                            |                    |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | 70.3                            | P                  |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | 80.4                            | O                  |
+| ...       | ...                     | ...    | ...             |                                 |                    |
 
-We solve this by pivoting the measures into a `measure_type` column, so each row represents a single statistical measure, with a single marker relating specifically to that measure.
+We solve this by pivoting the measures into a `measure_type` column, so each row represents a single statistical measure, with a single observation status relating specifically to that measure.
 
-| area      | period                  | sex    | measure_type                    | value | marker |
-| --------- | ----------------------- | ------ | ------------------------------- | ----- | ------ |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 76.7  |        |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 | 80.7  |        |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | disability-free-life-expectancy | 70.1  |        |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | disability-free-life-expectancy | 80.2  | [p]    |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 78.7  |        |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 |       | [x]    |
-| ...       | ...                     | ...    | ...                             | ...   |        |
+| area      | period                  | sex    | measure_type                    | value | observation_status |
+| --------- | ----------------------- | ------ | ------------------------------- | ----- | ------------------ |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 76.7  |                    |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 | 80.7  |                    |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | disability-free-life-expectancy | 70.1  |                    |
+| W06000022 | 2004-01-01T00:00:00/P3Y | Female | disability-free-life-expectancy | 80.2  | P                  |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 78.7  |                    |
+| W06000015 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 |       | O                  |
+| ...       | ...                     | ...    | ...                             | ...   |                    |
 
 Data in this format allows users to filter and sort based upon annotations. For example, users can filter out results which are provisional or not applicable.
 
-If necessary, the data can be pivoted back into a format which would feel more familiar by discarding the marker column.
+If necessary, the data can be pivoted back into a format which would feel more familiar by discarding the `observation_status` column.
 
 ```python
 # R ----------------------------------------------
 
 df |>
-  dplyr::select(-marker) |>
+  dplyr::select(-observation_status) |>
   tidyr::pivot_wider(names_from = measure_type) |>
   janitor::clean_names()
 
@@ -327,7 +327,7 @@ When [using a CSVW to create an RDF data cube](rdf_cubes#using-csvw-to-create-a-
 
 ## Units of measurement
 
-Units of an observation may be specified by including a units column.
+Units of an observation should be specified by including a units column for readability of the csv.
 
 | area      | period                  | sex    | life_expectancy | units |
 | --------- | ----------------------- | ------ | --------------- | ----- |

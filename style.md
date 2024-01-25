@@ -2,6 +2,7 @@
 
 - [Style](#style)
   - [Titles](#titles)
+  - [Summaries](#summaries)
   - [Descriptions](#descriptions)
   - [Keywords](#keywords)
   - [Publishers, creators and contacts](#publishers-creators-and-contacts)
@@ -14,27 +15,28 @@
 
 ## Titles
 
-- [GOVUK title guidance](https://www.gov.uk/guidance/content-design/writing-for-gov-uk#titles)
-- [ONS title guidance for datasets](https://style.ons.gov.uk/data-visualisation/dataset-titles-and-summaries/)
-- [ONS title guidance for articles](https://style.ons.gov.uk/category/articles/article-titles-and-summaries/)
-- [ONS title guidance for bulletins](https://style.ons.gov.uk/category/statistical-bulletin/bulletin-titles-and-summaries/)
+Titles should be front-loaded with the most important information first. They are the headline to help prospective users select the best dataset for their use. Titles are designed to be scannable by users, helping them to quickly include or exclude datasets from their search results with minimal effort and low error.
 
-We recommend that titles not exceed 65 characters, including spaces.
+Contrary to guidance from ONS on titles geographic information isn't necessary as this information is better captured in the metadata; however it is important to align the titles of datasets in this service to the titles of datasets in other services to prevent unnecessary divergance.
+
+- [GOVUK title guidance](https://www.gov.uk/guidance/content-design/writing-for-gov-uk#titles)
+- [ONS title guidance for datasets](https://service-manual.ons.gov.uk/content/content-types/datasets#dataset-titles-and-summaries)
+
+We recommend that titles not exceed 60 characters, including spaces.
+
+## Summaries
+
+Summaries are designed to support users to further refine their selection of the best dataset for their intended use. They should be written in 160 characters or less, including spaces. They should be written in plain English, avoiding jargon and acronyms. Including intended temporal and spatial coverage and resolution is recommended. Summaries should not contain update or publication dates which are otherwise captured in the metadata.
+
+- [ONS summary guidance for datasets](https://service-manual.ons.gov.uk/content/content-types/datasets#dataset-titles-and-summaries)
 
 ## Descriptions
 
-> TODO: Separate out the guidance for abstracts/sumamries from descriptions.
-
-- [GOVUK description guidance](https://www.gov.uk/guidance/content-design/writing-for-gov-uk#summaries)
-- [ONS description guidance for datasets](https://style.ons.gov.uk/data-visualisation/dataset-titles-and-summaries/)
-- [ONS description guidance for articles](https://style.ons.gov.uk/category/articles/article-titles-and-summaries/)
-- [ONS description guidance for bulletins](https://style.ons.gov.uk/category/statistical-bulletin/bulletin-titles-and-summaries/)
-
-We recommend that descriptions not exceed 160 characters, including spaces.
+> TODO: No guidance covers descriptions right now, so we'll have to write it.
 
 ## Keywords
 
-- [ONS keyword guidance](https://style.ons.gov.uk/house-style/keywords-2/)
+We use the `dcat:keyword` predicate to describe resources in metadata.
 
 ## Publishers, creators and contacts
 
