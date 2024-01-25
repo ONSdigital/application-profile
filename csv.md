@@ -60,7 +60,7 @@ Dimension columns (otherwise known as factors or concepts) are used to identify 
 
 To improve human readability and to ensure machine readability, ensure that codes are separate columns from the related human readable labels or descriptions. While the labels and additional information can be useful for humans, mixing them in the same column with codes requires users to clean the data. It is also important to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find the human readable values.
 
-A quick way to check if a column only contains related data and not unique identifiable is if you filter on a column and for every value you select another column will only ever have the same value for that row it is likely to help human readability.
+A quick way to check if a column only contains related data and unique identifiable is if you filter on a column and for every value you select another column will only ever have the same value for that row it is likely to help human readability.
 
 For example the three columns prefixed with `area_` are related in the table below, filtering on any of the three would only ever result in one value for the other two columns. The area_code column is a unique identifier for the geography.
 
@@ -112,7 +112,7 @@ The units used should *always* be [QUDT units](https://www.qudt.org/doc/DOC_VOCA
 
 Often in summary statistics publications units need to be scaled in order to control disclosure, or to maintain an appropriate level of granularity. Scaled units are especially common in publications like National Accounts, which contains the caucluated and reported spend of the Government of the United Kingdom and Northern Ireland, which totals over a trillion GBP (i.e. 1000000000000) and those figures are hard to sight read.
 
-When scaling units take the base unit and suffix the multiplication factor preceeded by an underscore. Written and decimal representations are both acceptable For several examples,
+When scaling units take the base unit and suffix the multiplication factor preceded by an underscore. Written and decimal representations are both acceptable for several examples,
 
 - `GBP_millions` for millions of GBP (used in National acounts)
 - `NUM_1000` for thousands (used in SOME PUBLICATION)
