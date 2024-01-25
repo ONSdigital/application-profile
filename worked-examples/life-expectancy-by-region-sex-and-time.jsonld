@@ -1,30 +1,68 @@
 {
-    "@context": {
-		"@language": "en",
-		"@import": "http://www.w3.org/2013/json-ld-context/rdfa11"        
-    },
-    "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
+    "@context": [
+        {
+            "@language": "en",
+            "@version": 1.1,
+            "@import": "http://www.w3.org/2013/json-ld-context/rdfa11",
+            "csvqb": "https://example.com/csvqb#",
+            "csvw:url": {
+                "@type": "@id"
+            },
+            "table_schema": {
+                "@id": "csvw:tableSchema",
+                "@type": "@id",
+                "@context": {
+                    "columns": {
+                        "@id": "csvw:columns",
+                        "@type": "@id",
+                        "@container": "@set",
+                        "@context": {
+                            "csvw:propertyUrl": {
+                                "@type": "@id"
+                            },
+                            "csvw:name": {
+                                "@language": null
+                            },
+                            "csvw:datatype": {
+                                "@id": "csvw:datatype",
+                                "@type": "@id",
+                                "@context": {
+                                    "@base": "xsd:"
+                                }
+                            },
+                            "csvw:valueUrl": {
+                                "@language": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time",
     "@type": "dcat:Distribution",
-    "url": "life-expectancy-by-region-sex-and-time.csv",
     "dcterms:title": "Life expectancy by local authority and sex (CSV)",
     "dcterms:description": "A CSV of the life expectancy by local authority and sex dataset.",
     "dcat:mediaType": {
         "@id": "http://www.iana.org/assignments/media-types/text/csv"
     },
-    "csvw:tableSchema": {
-        "csvw:columns": [
+    "csvw:url": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv",
+    "table_schema": {
+        "columns": [
             {
+                "@type": "csvw:Column",
                 "csvw:name": "period",
-                "csvw:titles": "period",
-                "csvw:csvw:datatype": "string",
+                "csvw:titles": "Period",
+                "csvw:datatype": "string",
                 "rdfs:label": "Period",
                 "rdfs:comment": "The period of an observation.",
                 "csvw:propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/period",
                 "csvw:valueUrl": "http://reference.data.gov.uk/id/gregorian-interval/{+period}"
             },
             {
+                "@type": "csvw:Column",
                 "csvw:name": "area",
-                "csvw:titles": "area",
+                "csvw:titles": "Area",
                 "csvw:datatype": "string",
                 "rdfs:label": "Area",
                 "rdfs:comment": "The area of an observation.",
@@ -32,35 +70,9 @@
                 "csvw:valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
             },
             {
-                "csvw:name": "period",
-                "csvw:titles": "period",
-                "csvw:datatype": "string",
-                "rdfs:label": "Period",
-                "rdfs:comment": "The period of an observation.",
-                "csvw:propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/period",
-                "csvw:valueUrl": "http://reference.data.gov.uk/id/gregorian-interval/{+period}"
-            },
-            {
-                "csvw:name": "period",
-                "csvw:titles": "period",
-                "csvw:datatype": "string",
-                "rdfs:label": "Period",
-                "rdfs:comment": "The period of an observation.",
-                "csvw:propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/period",
-                "csvw:valueUrl": "http://reference.data.gov.uk/id/gregorian-interval/{+period}"
-            },
-            {
-                "csvw:name": "period",
-                "csvw:titles": "period",
-                "csvw:datatype": "string",
-                "rdfs:label": "Period",
-                "rdfs:comment": "The period of an observation.",
-                "csvw:propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/period",
-                "csvw:valueUrl": "http://reference.data.gov.uk/id/gregorian-interval/{+period}"
-            },
-            {
+                "@type": "csvw:Column",
                 "csvw:name": "sex",
-                "csvw:titles": "sex",
+                "csvw:titles": "Sex",
                 "csvw:datatype": "string",
                 "rdfs:label": "Sex",
                 "rdfs:comment": "Biological sex of observed individuals.",
@@ -68,19 +80,22 @@
                 "csvw:valueUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/codelist/sex/code/{sex}"
             },
             {
+                "@type": "csvw:Column",
                 "csvw:name": "life_expectancy",
-                "csvw:titles": "life_expectancy",
+                "csvw:titles": "Life Expectancy",
                 "csvw:datatype": "decimal",
                 "rdfs:label": "Average life expectancy",
                 "rdfs:comment": "Mean life expectancy of observed individuals.",
                 "csvw:propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy"
             },
             {
+                "@type": "csvw:Column",
                 "csvw:virtual": true,
                 "csvw:propertyUrl": "rdf:type",
                 "csvw:valueUrl": "qb:Observation"
             },
             {
+                "@type": "csvw:Column",
                 "csvw:virtual": true,
                 "csvw:propertyUrl": "qb:dataSet",
                 "csvw:valueUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube"
