@@ -14,7 +14,7 @@ CSV files used in our service should be saved as UTF-8 encoded text files with a
 
 - Column headers should be in lowercase and snake case (e.g. `column_header`).
 - Column headers should be unique, and should not contain any special characters (e.g. `!@#$%^&*()`).
-- Related columns should have the same prefix (e.g. `geo_code`, `geo_name`, `geo_type` or `GBP_millions` and `GBP_millions_obs_status`, or even `observation` and `observation_status`).
+- Related columns should have the same prefix (e.g. `area_code`, `area_name`, `area_type`, or even `observation` and `observation_status`).
 - Columns should be ordered as follows:
     1. Dimension columns, order first by time period, then by geography, then in descending order by volume of options in each column (i.e. a column with 17 values would come before a column with 3 values).
     2. Obsevation column.
@@ -23,7 +23,6 @@ CSV files used in our service should be saved as UTF-8 encoded text files with a
     5. Literal attribute columns providing model output (e.g. upper confidence level, sample_size, standard deviation).
     6. Observation status column (if necessary).
     7. All other attribute columns.
-- TODO: DO I ACTUALLY WANT THIS? Multiple obesrvation columns can exist where the measure type becomes the column title (e.g. a dataset of local authorities with three observation columns `population`, `per_capita_transport_spend`, and `per_capita_health_spend`). This is not recommended as it as it an advanced representation and makes expressing the data as machine readble more complicated, but it is allowed.
 - Ensure that the concepts used in the CSV files are clear and easily understandable to enhance human readability.
 - Each observation should be uniquely addressable by filtering all dimensions to a given value. If more than one observation is returned, then there needs to be additional dimensions to make the observation addressable.
 - All dimensions, measures, and unit columns should have values for every observation. These columns must be "dense".
@@ -54,7 +53,7 @@ Observation columns must only contain numbers. Suppressed or missing values must
 
 Dimension columns (otherwise known as factors or concepts) are used to identify the observation through a combination of concepts. Where each dimension in a CSV is filtered to a specific value there should only be one observation. In relational databases terminology all dimensions combine to a composite key. Some examples of dimensions are:
 
-- `government_year` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
+- `time_period_code` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
 - `geography_code` with one value being `E09000001` (i.e. the nation of `England`)
 - `sic_2007` with one value being `01.11` (i.e. the concept `Growing of cereals (except rice), leguminous crops and oil seeds`)
 
@@ -62,7 +61,7 @@ To improve human readability and to ensure machine readability, ensure that code
 
 A quick way to check if a column only contains related data and unique identifiable is if you filter on a column and for every value you select another column will only ever have the same value for that row it is likely to help human readability.
 
-For example the three columns prefixed with `area_` are related in the table below, filtering on any of the three would only ever result in one value for the other two columns. The area_code column is a unique identifier for the geography.
+For example the three columns prefixed with `area_` are related in the table below, filtering on any two of the three would only ever result in one value for the remaining column. The area_code column is a unique identifier for each geography.
 
 | area_code | area_label        | Area_type              | value | ... |
 | --------- | ----------------- | ---------------------- | ----- | --- |
