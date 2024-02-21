@@ -4,7 +4,7 @@ There are four main data types that you can use to describe the data in your col
 
 By describing your columns data type, this will help you explicitly state what the types are.
 
-If you do not specify the data type it will use a default. The default datat ype is a string (5.11.2 Derived dataypes - W3.org tabular data). This would mean the data is not being represented correctly.
+If you do not specify the data type it will use a default. The default data type is a string (5.11.2 Derived dataypes - W3.org tabular data). This would mean the data is not being represented correctly.
 
 ## String
 
