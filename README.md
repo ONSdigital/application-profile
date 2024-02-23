@@ -479,7 +479,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 
 ## Versioning
 
-We believe publishing data in a versioned manner is important. Every publication of a dataset at a version level cannot be amended, it can only be deleted or superseded by a new version. This is to ensure that the data is immutable. We provide fields in our service to allow producers to provide version notes, specificing the changes between versions of an edition.
+We believe publishing data in a versioned manner is important. Every publication of a dataset at a version level cannot be amended, it can only be deleted or superseded by a new version. This is to ensure that the data is immutable. We provide fields in our service to allow producers to provide version notes, specificing the changes between versions of an edition. Additionally, there are convenience triples at both the `dcat:DatasetSeries` (datasets) and `dcat:Dataset` (editions) levels which points to the latest version of both entities, this is expressed as `dcat:hasCurrentVersion`.
 
 ### Example of versioning in RDF for CPIH
 
@@ -493,9 +493,11 @@ We believe publishing data in a versioned manner is important. Every publication
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 
-<cpih> a dcat:DatasetSeries .
+<cpih> a dcat:DatasetSeries ;
+  dcat:hasCurrentVersion <cpih/2019-03/version/2> .
 <cpih/2019-01> a dcat:Dataset ;
  dcat:inSeries <cpih> ;
+ dcat:hasCurrentVersion <cpih/2019-01/version/3> .
  dcat:hasVersion <cpih/2019-01/version/1>,
   <cpih/2019-01/version/2>,
   <cpih/2019-01/version/3> .
@@ -519,12 +521,14 @@ We believe publishing data in a versioned manner is important. Every publication
 
 <cpih/2019-02> a dcat:Dataset ;
  dcat:inSeries <cpih> ;
+ dcat:hasCurrentversion <cpih/2019-02/version/1> ;
  dcat:hasVersion <cpih/2019-02/version/1> .
 
 <cpih/2019-02/version/1> a dcat:Dataset .
 
 <cpih/2019-03> a dcat:Dataset ;
  dcat:inSeries <cpih> ;
+ dcat:hasCurrentVersion <cpih/2019-01/version/2> ;
  dcat:hasVersion <cpih/2019-01/version/1>,
   <cpih/2019-01/version/2> .
 
