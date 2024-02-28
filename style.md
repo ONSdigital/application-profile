@@ -17,7 +17,7 @@
 
 Titles should be front-loaded with the most important information first. They are the headline to help prospective users select the best dataset for their use. Titles are designed to be scannable by users, helping them to quickly include or exclude datasets from their search results with minimal effort and low error.
 
-Contrary to guidance from ONS on titles geographic information isn't necessary as this information is better captured in the metadata; however it is important to align the titles of datasets in this service to the titles of datasets in other services to prevent unnecessary divergance.
+Contrary to guidance from ONS on titles geographic information isn't necessary as this information is better captured elsewhere in the metadata; however it is important to align the titles of datasets in this service to the titles of datasets in other services to prevent unnecessary divergance.
 
 - [GOVUK title guidance](https://www.gov.uk/guidance/content-design/writing-for-gov-uk#titles)
 - [ONS title guidance for datasets](https://service-manual.ons.gov.uk/content/content-types/datasets#dataset-titles-and-summaries)
@@ -26,17 +26,41 @@ We recommend that titles not exceed 60 characters, including spaces.
 
 ## Summaries
 
-Summaries are designed to support users to further refine their selection of the best dataset for their intended use. They should be written in 160 characters or less, including spaces. They should be written in plain English, avoiding jargon and acronyms. Including intended temporal and spatial coverage and resolution is recommended. Summaries should not contain update or publication dates which are otherwise captured in the metadata.
+Summaries are designed to support users to further refine their selection of the best dataset for their intended use. They should be written in 160 characters or less, including spaces. They should be written in plain English, avoiding jargon and acronyms. Including intended temporal and spatial coverage and resolution is recommended at the end of the summary. Summaries should not contain update or publication dates which are otherwise captured in the metadata.
+
+A well contstructed summary should cover the topic of measurement, its population, the time period, and its geographic scope in that order. For example, "Egg packing station throughput and prices for the UK, quarterly from 1996."
 
 - [ONS summary guidance for datasets](https://service-manual.ons.gov.uk/content/content-types/datasets#dataset-titles-and-summaries)
 
 ## Descriptions
 
-> TODO: No guidance covers descriptions right now, so we'll have to write it.
+Descriptions are designed to provide users with a more detailed understanding of the dataset. They should be written in plain English, avoiding jargon and acronyms. Descriptions should be concise and informative, providing enough information for a user to understand the purpose and content of the dataset. Descriptions should not contain update or publication dates which are otherwise captured in the metadata.
+
+Our description fields support markdown, which can be used to format text. This can be used to create lists, headings, and links.
+
+We suggest using the description field to provide details of the methodology, data sources, and any limitations of the dataset for now; however we intend on providing a separate field for these components in the future.
+
+When providing a description, follow these guidelines:
+
+- Be concise: Keep your descriptions short and to the point.
+- Be clear: Avoid jargon, abbreviations, and technical terms when possible. If you must use them, provide definitions.
+- Be informative: The description should provide enough information for a user to understand the purpose and content of the dataset.
+- Be consistent: Use a consistent style and tone across all descriptions.
+- Use active voice: Active voice makes your writing stronger and more direct.
+- Include keywords: If there are specific keywords related to the dataset, include them in the description.
 
 ## Keywords
 
-We use the `dcat:keyword` predicate to describe resources in metadata.
+When using `dcat:keyword` to describe resources in metadata, it's important to choose keywords that are relevant, descriptive, and concise. Here are some guidelines:
+
+- Be relevant: Keywords should be closely related to the content of the resource. They should reflect the search words people would use to find it via a search engine.
+- Be descriptive: Keywords should be descriptive enough to give a clear idea of the resource's content. Avoid vague or generic terms.
+- Be concisene: Try to keep keywords short and to the point. Long phrases or sentences are not suitable as keywords.
+- Don't repeat yourself: Place names, or time periods are not appropriate as keywords. This information is better conveyed in the spatial/temporal bounds/resolution of the resource. These fields are also searchable.
+- Use spaces and lowercases: Keywords should be written in lowercase and separated by spaces, unless the keyword is a proper name. For example, "Scotch whiskey" and "imports" are appropriate, but "Alcohol Duties" is not.
+- Proper Names: If a keyword is a proper name, it should be written as it is normally used, including any capitalization. For example, "Scotch whiskey" or "Champagne".
+
+Remember, the goal of using keywords is to help users find and understand your resource. Choose keywords that will make your resource easily discoverable and understandable.
 
 ## Publishers, creators and contacts
 

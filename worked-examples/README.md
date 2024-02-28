@@ -9,4 +9,3 @@ jsonld toRdf post.jsonld -q | rdfpipe -i nquads -o ttl -
 ```
 
 This helps us validate our inheritance and object models while writing directly in jsonld.
-
