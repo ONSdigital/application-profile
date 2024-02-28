@@ -168,7 +168,7 @@ Below are further examples of what needs to be included in the JSON-LD file that
                 }
             ]
         }
-    },
+    }
 ```
 ## Complete Output
 
