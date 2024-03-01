@@ -16,7 +16,6 @@
     - [Publication Frequency](#publication-frequency)
     - [Licenses](#licenses)
     - [Organisations](#organisations)
-    - [Statistics designations](#statistics-designations)
     - [Analysis function guidance on symbols and shorthand in tables](#analysis-function-guidance-on-symbols-and-shorthand-in-tables)
     - [Themes](#themes)
     - [Media types](#media-types)
@@ -466,21 +465,11 @@ GOV.UK provides a [list of government organisations](https://www.gov.uk/governme
 
 For example: `https://www.gov.uk/government/organisations/office-for-national-statistics`.
 
-### Statistics designations
-
-> TODO: IRIs for official / national / experimental stats classifications.
-
-| Label                   | IRI                                           |
-| ----------------------- | --------------------------------------------- |
-| National Statistics     | `https://data.gov.uk/national-statistics`     |
-| Official Statistics     | `https://data.gov.uk/official-statistics`     |
-| Experimental Statistics | `https://data.gov.uk/experimental-statistics` |
-
 ### Analysis function guidance on symbols and shorthand in tables
 
 Data providers should adopt the [analytical function guidance](https://analysisfunction.civilservice.gov.uk/policy-store/symbols-in-tables-definitions-and-help/) for statistical markers.
 
-> TODO: This needs to be built.
+> TODO: realistically change this form Analyst Function to SDMX; as the latter will be around in 10 years guaranteed.
 
 | Label                       | Notation | IRI                                                          |
 | --------------------------- | -------- | ------------------------------------------------------------ |

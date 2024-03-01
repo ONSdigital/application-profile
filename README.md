@@ -23,6 +23,7 @@ The key words must, must not, required, shall, shall not, should, should not, re
         - [GET of a CPIH Dataset](#get-of-a-cpih-dataset)
       - [POST of a CPIH dataset](#post-of-a-cpih-dataset)
       - [Editions (aka dcat:Dataset)](#editions-aka-dcatdataset)
+        - [Statistics quality designations](#statistics-quality-designations)
       - [Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)](#distributions-dcatdistribution-qbdataset-and-versions-dcatdataset)
   - [Versioning](#versioning)
     - [Example of versioning in RDF for CPIH](#example-of-versioning-in-rdf-for-cpih)
@@ -56,13 +57,13 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 
 5★ Open Data has a five point scale which describes data on the web which increases the utility of said data for each increase from one to five stars.
 
-|   Stars    | Requirements                                                                                         |
-| :--------: | :--------------------------------------------------------------------------------------------------- |
-| ★☆☆☆☆      | data needs to be able to be published on the web,                                                    |
-| ★★☆☆☆      | data needs to be machine-readable,                                                                   |
-| ★★★☆☆      | data needs to be non-proprietary,                                                                    |
-| ★★★★☆      | identifiers need to be used to denote things, so that people can talk about resources unambiguously, |
-| ★★★★★      | data needs to able to be linkied to other data to provide context.                                   |
+| Stars | Requirements                                                                                         |
+| :---: | :--------------------------------------------------------------------------------------------------- |
+| ★☆☆☆☆ | data needs to be able to be published on the web,                                                    |
+| ★★☆☆☆ | data needs to be machine-readable,                                                                   |
+| ★★★☆☆ | data needs to be non-proprietary,                                                                    |
+| ★★★★☆ | identifiers need to be used to denote things, so that people can talk about resources unambiguously, |
+| ★★★★★ | data needs to able to be linkied to other data to provide context.                                   |
 
 ### FAIR principles
 
@@ -174,6 +175,7 @@ class Edition["Edition a dcat:Dataset"] {
     +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
     +adms:status ∋ skos:Concept
     +dcat:inSeries ∋ dcat:DatasetSeries
+    +dqv:hasQualityQualityAnnotation ∋ dqv:QualityAnnotation
     -dcat:hasVersion ∋ dcat:Dataset
     -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
     -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
@@ -291,7 +293,7 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 #### Datasets (aka dcat:DatasetSeries)
 
 | Type            | Predicate                  | Range                               | POST Datasets | PUT Datasets | GET Datasets | GET Datasets/{ID} | DELETE Datasets |
-|-----------------|----------------------------|-------------------------------------|---------------|--------------|--------------|-------------------|-----------------|
+| --------------- | -------------------------- | ----------------------------------- | ------------- | ------------ | ------------ | ----------------- | --------------- |
 | 0 Management    | dcterms:identifier         | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 | ✓               |
 | 1 Descriptive   | dcat:publisher             | foaf:Agent                          | ✓             | ✓            | ✓            | ✓                 |                 |
 | 1 Descriptive   | dcterms:created            | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
@@ -422,35 +424,65 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 
 #### Editions (aka dcat:Dataset)
 
-| Type            | Predicate                  | Range                               | POST Editions | PUT Editions | GET Editions | GET Editions/{ID} | DELETE Editions |
-|-----------------|----------------------------|-------------------------------------|---------------|--------------|--------------|-------------------|-----------------|
-| 0 Management    | dcterms:identifier         | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 | ✓               |
-| 1 Descriptive   | dcat:publisher             | foaf:Agent                          | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:created            | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:creator            | foaf:Agent                          | ✓             | ✓            |              | ✓                 |                 |
-| 1 Descriptive   | dcterms:issued             | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:modified           | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:title              | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | rdfs:label                 | rdfs:Literal as xsd:string          | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcat:keyword               | [rdfs:Literal as xsd:string]        | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcat:theme                 | [skos:Concept]                      | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcterms:abstract           | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 |                 |
-| 2 Summary       | dcterms:accuralPeriodicity | dcterms:Frequency                   | ✓             | ✓            | ✓            | ✓                 |                 |
-| 2 Summary       | dcterms:description        | rdfs:Literal as xsd:string/markdown | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcterms:license            | dcterms:LicenseDocument             | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | dcterms:spatial            | dcterms:Location                    | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | dcterms:temporal           | dcterms:PeriodOfTime                | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | ons:spatialResolution      | [skos:Concept]                      | ✓             | ✓            | ✓            | ✓                 |                 |
-| 6 Management    | dcat:first                 | dcat:Dataset                        |               |              |              | ✓                 |                 |
-| 6 Management    | dcat:last                  | dcat:Dataset                        |               |              |              | ✓                 |                 |
-| 6 Management    | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 8 Distributions | dcat:landingPage           | foaf:Document                       | ✓             | ✓            |              | ✓                 |                 |
+| Type            | Predicate                       | Range                               | POST Editions | PUT Editions | GET Editions | GET Editions/{ID} | DELETE Editions |
+| --------------- | ------------------------------- | ----------------------------------- | ------------- | ------------ | ------------ | ----------------- | --------------- |
+| 0 Management    | dcterms:identifier              | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 | ✓               |
+| 1 Descriptive   | dcat:publisher                  | foaf:Agent                          | ✓             | ✓            | ✓            | ✓                 |                 |
+| 1 Descriptive   | dcterms:created                 | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
+| 1 Descriptive   | dcterms:creator                 | foaf:Agent                          | ✓             | ✓            |              | ✓                 |                 |
+| 1 Descriptive   | dcterms:issued                  | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
+| 1 Descriptive   | dcterms:modified                | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
+| 1 Descriptive   | dcterms:title                   | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 |                 |
+| 1 Descriptive   | dqv:hasQualityQualityAnnotation | dqv:QualityAnnotation as blank node | ✓             | ✓            | ✓            | ✓                 |                 |
+| 1 Descriptive   | rdfs:label                      | rdfs:Literal as xsd:string          | ✓             | ✓            |              | ✓                 |                 |
+| 2 Summary       | dcat:keyword                    | [rdfs:Literal as xsd:string]        | ✓             | ✓            |              | ✓                 |                 |
+| 2 Summary       | dcat:theme                      | [skos:Concept]                      | ✓             | ✓            |              | ✓                 |                 |
+| 2 Summary       | dcterms:abstract                | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 |                 |
+| 2 Summary       | dcterms:accuralPeriodicity      | dcterms:Frequency                   | ✓             | ✓            | ✓            | ✓                 |                 |
+| 2 Summary       | dcterms:description             | rdfs:Literal as xsd:string/markdown | ✓             | ✓            |              | ✓                 |                 |
+| 2 Summary       | dcterms:license                 | dcterms:LicenseDocument             | ✓             | ✓            | ✓            | ✓                 |                 |
+| 5 Scope         | dcat:temporalResolution         | [rdfs:Literal as xsd:duration]      | ✓             | ✓            | ✓            | ✓                 |                 |
+| 5 Scope         | dcterms:spatial                 | dcterms:Location                    | ✓             | ✓            | ✓            | ✓                 |                 |
+| 5 Scope         | dcterms:temporal                | dcterms:PeriodOfTime                | ✓             | ✓            | ✓            | ✓                 |                 |
+| 5 Scope         | ons:spatialResolution           | [skos:Concept]                      | ✓             | ✓            | ✓            | ✓                 |                 |
+| 6 Management    | dcat:first                      | dcat:Dataset                        |               |              |              | ✓                 |                 |
+| 6 Management    | dcat:last                       | dcat:Dataset                        |               |              |              | ✓                 |                 |
+| 6 Management    | ons:nextRelease                 | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
+| 8 Distributions | dcat:landingPage                | foaf:Document                       | ✓             | ✓            |              | ✓                 |                 |
+
+##### Statistics quality designations
+
+While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate IRI. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropraite to attach at the Dataset (`dcat:DatasetSeries`) level as quality designations may change over time.
+
+| Label                              | Previous name           | IRI                                                                                                                |
+|------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Accredited Official Statistics     | National Statistics     | `https://osr.statisticsauthority.gov.uk/accredited-official-statistics/`                                           |
+| Official Statistics                | n/a                     | `https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/`                                    |
+| Official Statistics in Development | Experimental Statistics | `https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/` |
+
+For example, the following RDF expresses that a dataset is accredited official statistics:
+
+```ttl
+@prefix ex: <https://example.org/> .
+@prefix dqv: <https://www.w3.org/TR/vocab-dqv/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:myDataset a dcat:Dataset ;
+    dqv:hasQualityAnnotation [
+        a dqv:QualityAnnotation ;
+        rdfs:label "Accredited Official Statistic" ;
+        skos:exactMatch <https://osr.statisticsauthority.gov.uk/accredited-official-statistics/> ;  ]
+    .
+
+```
+
 
 #### Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)
 
 | Type            | Predicate            | Range                                  | dcat:Dataset (Version) | dcat:Distribution | csvw:TableSchema | csvw:Column | POST Versions | GET Versions | GET Versions/{ID} | DELETE Version |
-|-----------------|----------------------|----------------------------------------|------------------------|-------------------|------------------|-------------|---------------|--------------|-------------------|----------------|
+| --------------- | -------------------- | -------------------------------------- | ---------------------- | ----------------- | ---------------- | ----------- | ------------- | ------------ | ----------------- | -------------- |
 | 0 Management    | dcterms:identifier   | rdfs:Literal as xsd:string             | ✓                      | ✓                 |                  |             | ✓             | ✓            | ✓                 | ✓              |
 | 1 Descriptive   | dcterms:created      | rdfs:Literal as xsd:dateTime           | ✓                      | ✓                 |                  |             | ✓             | ✓            | ✓                 |                |
 | 1 Descriptive   | dcterms:creator      | foaf:Agent                             |                        | ✓                 |                  |             | ✓             | ✓            | ✓                 |                |
@@ -539,3 +571,4 @@ We believe publishing data in a versioned manner is important. Every publication
 <cpihQB> a dcat:Distribution , qb:Dataset .
 
 ```
+
