@@ -2,6 +2,29 @@
 
 We represent data in RDF and compartmentalise it into graphs. This is a useful way of organising data, and is a key feature of RDF. It is also a useful way of organising data in a triple store, as it allows us to query for data in a particular graph.
 
+To help visualise these concepts, we're going to be talking about `qb:Datasets` (i.e. tabular data), `skos:ConceptScheme` (i.e. a code list), and `dcat:CatalogRecord`. The `skos:ConceptScheme` is a `dcat:Dataset`, and the tabular dataset has distributions, which could be a `qb:Dataset` or an Excel file via `dcat:distribution`.
+
+```mermaid
+flowchart TD
+
+    cr_a[http://example.org/datasets/my-dataset/record\n a dcat:CatalogRecord]
+    cr_b[http://example.org/codelists/my-codelist/record\n a dcat:CatalogRecord]
+
+    subgraph http://example.org/datasets/my-dataset/record
+        dcatd[http://example.org/datasets/my-dataset\na dcat:Dataset]
+    end
+    subgraph http://example.org/codelists/my-codelist/record
+        skoscs[http://example.org/codelists/my-codelist\na skos:ConceptScheme, dcat:Dataset]
+    end
+    subgraph http://example.org/datasets/my-dataset/datacube
+        qbd[http://example.org/datasets/my-dataset/datacube\na qb:Dataset]
+    end
+
+    cr_a-->|foaf:primaryTopic|dcatd
+    cr_b-->|foaf:primaryTopic|skoscs
+    dcatd-->|dcat:distribution|qbd
+```
+
 ## Named graphs for catalogue metadata
 
 Where metadata is stored as RDF, such as being made available via a SPARQL endpoint, DCAT makes a recommendation about the names of graphs to use for catalogue records.
@@ -34,7 +57,9 @@ Storing multiple versions and editions of the same dataset is costly for a Tripl
 
 ```ttl
 <http://example.org/datasets/my-dataset/datacube> {
-    <obs> a qb:Observation ;
+    <http://example.org/datasets/my-dataset/datacube> a qb:Dataset .
+    _:obs1 a qb:Observation ;
+        qb:dataSet <http://example.org/datasets/my-dataset/datacube> ;
         # ... ;
         .
 }
@@ -45,6 +70,27 @@ Doing this results in a neat ability to query for dataset by limiting a SPARQL q
 ```sparql
 SELECT * 
 FROM <http://example.org/datasets/my-dataset/datacube>
+WHERE {
+    ?s ?p ?o .
+}
+```
+
+## Named graphs for RDF code lists and concept schemes
+
+Where a `skos:ConceptScheme` is stored in a triplestore, such as being made available via a SPARQL endpoint, we recommend storing the `skos:ConceptScheme` in a named graph with the same IRI as the concept scheme. Please note it will also be a `dcat:Dataset`.
+
+```ttl
+<http://example.org/datasets/my-codelist/record> {
+    <http://example.org/codelists/my-codelist> a skos:ConceptScheme, dcat:Dataset ;
+        # ...
+}
+```
+
+Doing this results in a neat ability to query for code lists by limiting a SPARQL query to the IRI of the concept scheme.
+
+```sparql
+SELECT *
+FROM <http://example.org/codelists/my-codelist/record>
 WHERE {
     ?s ?p ?o .
 }
