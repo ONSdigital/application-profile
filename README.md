@@ -114,7 +114,7 @@ Our standards and vocabularies are based on the [Tidy Data](https://vita.had.co.
 
 ### Using JSON-LD to describe statistical data
 
-We use JSON-LD to encode the metadata about statistical publications; metadata includes data which helps discovery, and provides guarantees on strucutre. JSON-LD is a standard for encoding linked data in JSON. JSON-LD is a subset of JSON, so any valid JSON is also valid JSON-LD. This makes using our JSON-LD representation of statistical data easy to use in any JSON application but better in ours.
+We use JSON-LD to encode the metadata about statistical publications; metadata includes data which helps discovery, and provides guarantees on strucutre. JSON-LD is a standard for encoding linked data in JSON. JSON-LD is a subset of JSON, so any valid JSON-LD is also valid JSON. This makes using our JSON-LD representation of statistical data easy to use in any JSON application but better in ours.
 
 #### Standards divergence from CSV-W
 
@@ -478,6 +478,20 @@ ex:myDataset a dcat:Dataset ;
 
 ```
 
+```json
+{
+  "@context": "https://data.ons.gov.uk/ns#",
+  "$id": "https://data.ons.gov.uk/datasets/cpih/2023-09",
+  "@type": "dcat:Dataset",
+  ...
+  "quality_designation": 
+    {
+      "@type": "dqv:QualityAnnotation",
+      "label": "Accredited Official Statistics",
+      "exactMatch": "https://osr.statisticsauthority.gov.uk/accredited-official-statistics/"
+    }
+}
+```
 
 #### Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)
 
@@ -571,4 +585,3 @@ We believe publishing data in a versioned manner is important. Every publication
 <cpihQB> a dcat:Distribution , qb:Dataset .
 
 ```
-
