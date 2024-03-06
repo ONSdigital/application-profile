@@ -91,6 +91,11 @@ This section will look at the period code column. This entry should include a `t
 
 ```JSON
                 {
+                   "title": "Variable Name",
+                    "name": "variable_name",
+                    "data_type": "string",
+                    "suppressOutput": true  
+                },{
                     "title": "Observation",
                     "name": "observation",
                     "datatype": "decimal",
