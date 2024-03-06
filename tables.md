@@ -2,14 +2,27 @@
 
 When writing your JSON-LD file to accompany your csv, you can write it in a way to include multiple csvs.
 
-Below is an extract of csv that will be described in the JSON-LD.
+Below is an extract of two csv that will be described in the JSON-LD.
 
-| period_type     | period_code | period_label | area_code | area_label     | area_type | observation | measure                                               | unit     | lcl_95 | ucl_95 | obs_status |
-| --------------- | ----------- | ------------ | --------- | -------------- | --------- | ----------- | ----------------------------------------------------- | -------- | ------ | ------ | ---------- |
-| government-year | 2011-2012   | 2011-2012    | K02000001 | United Kingdom | Country   | 3.13        | Anxiety mean score (where 10 is 'completely anxious') | Unitless | 3.11   | 3.15   |
-| government-year | 2022-2023   | 2022-2023    | K02000001 | United Kingdom | Country   | 3.23        | Anxiety mean score (where 10 is 'completely anxious') | Unitless | 3.2    | 3.26   |
-| government-year | 2021-2022   | 2021-2022    | K02000001 | United Kingdom | Country   | 3.12        | Anxiety mean score (where 10 is 'completely anxious') | Unitless | 3.1    | 3.15   |
+The first one is called football.csv.
 
+| period_type | period_code | variable_name     | observation | measure | unit       |
+| ----------- | ----------- | ----------------- | ----------- | ------- | ---------- |
+| Year        | 2023        | Manchester United | 6           | billion | U.S dollar |
+| Year        | 2023        | Liverpool         | 5.3         | billion | U.S dollar |
+| Year        | 2023        | Manchester City   | 5           | billion | U.S dollar |
+| Year        | 2023        | Chelsea           | 3.1         | billion | U.S dollar |
+| Year        | 2023        | Tottenham Hotspur | 2.8         | billion | U.S dollar |
+
+The second one is american_football.csv.
+
+| period_type | period_code | variable_name        | observation | measure | unit       |
+| ----------- | ----------- | -------------------- | ----------- | ------- | ---------- |
+| Year        | 2023        | Dallas Cowboys       | 9           | billion | U.S dollar |
+| Year        | 2023        | New England Patriots | 7           | billion | U.S dollar |
+| Year        | 2023        | Los Angeles Rams     | 6.9         | billion | U.S dollar |
+| Year        | 2023        | New York Giants      | 6.8         | billion | U.S dollar |
+| Year        | 2023        | Chicago Bears        | 6.3         | billion | U.S dollar |
 
 There are additional descriptors for human readability that you can add to your column sections. These include:
 
@@ -31,7 +44,7 @@ The second section will go through a step by step process of writing and describ
 ```JSON
 "tables": [
     {
-        "url": "anxiety.csv",
+        "url": "football.csv",
         "tableSchema": {
             "columns": [
 ```                
@@ -74,67 +87,9 @@ This section will look at the period type column. This entry should include a `t
 ```
 This section will look at the period code column. This entry should include a `title`, `name` and `data type` The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
 
-```JSON             
-                {
-                    "title": "Period Label",
-                    "name": "period_label",
-                    "data_type": "string",
-                    "suppressOutput": true
-                },
-```
-This section will look at the period label column. This entry should include a `title`, `name` and `data type`. The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
 
-### Virtual
-
-A virtual entry is used when there is not a column in the original source.
 
 ```JSON
-                {
-                    "virtual": true,
-                    "title": "Period",
-                    "name": "period",
-                    "valueurl": "http://reference.data.gov.uk/id/{period_type}/{period_notation}"
-                },
-```
-Different from the other entries we have seen. You firstly start with `virtual` and set it to true. Next you have a `title` and `name`. The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. Lastly you have `valueurl`. This  allows you to create a url indentifier with the information from a column or multiple columns. In this example we are creating a url with the information that is appearing in the period_type and period_notation column.
-
-
-### Geography
-
-```JSON
-                {
-                    "title": "Area Code",
-                    "description": "ONS code for area",
-                    "name": "area_code",
-                    "data_type": "string",
-                    "valueurl": "http://statistical.data.gov.uk/id/statistical-geography/{area_code}",
-                    "propertyuri": "schema:url"
-                },
-```
-This section will look at the area code column. This should include a `title`,`desciption`, `name` and `data type`. The title provies the human readable name of the column. The description provides extra information. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column.
-
-There is also additional entries called `valueurl` and `properyuri`. The `valueurl` allows you to create a url indentifier with the information from a column or multiple columns. In this example we are creating a url with the information that is appearing in the area_code column.
-
-```JSON
-
-                {
-                    "title": "Area label",
-                    "name": "area_label",
-                    "data_type": "string",
-                    "suppressOutput": true
-                },
-```
-This section will look at the area label column. This entry should include a `title`, `name` and `data type`. The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
-
-Below are further examples of what needs to be included in the JSON-LD file that matches our previous csv.
-
-```JSON
-                {
-                    "title": "Area type",
-                    "name": "area_type",
-                    "data_type": "string",
-                    "suppressOutput": true
-                },
                 {
                     "title": "Observation",
                     "name": "observation",
@@ -151,31 +106,14 @@ Below are further examples of what needs to be included in the JSON-LD file that
                     "name": "unit",
                     "data_type": "string"
                 },
-                {
-                    "title": "Lower Confidence Limit (95%)",
-                    "name": "lcl_95",
-                    "datatype": "decimal"
-                },
-                {
-                    "title": "Upper Confidence Limit (95%)",
-                    "name": "ucl_95",
-                    "datatype": "decimal"
-                },
-                {
-                    "title": "Observation Status",
-                    "name": "obs_status",
-                    "data_type": "string"
-                }
-            ]
-        }
-    }
+                
 ```
 ## Complete Output
 
 ```JSON
 "tables": [
     {
-        "url": "anxiety.csv",
+        "url": "football.csv",
         "tableSchema": {
             "columns": [
                 {
@@ -191,36 +129,10 @@ Below are further examples of what needs to be included in the JSON-LD file that
                     "suppressOutput": true
                 },
                 {
-                    "title": "Period Label",
-                    "name": "period_label",
+                   "title": "Football Team",
+                    "name": "variable_name",
                     "data_type": "string",
-                    "suppressOutput": true
-                },
-                {
-                    "virtual": true,
-                    "title": "Period",
-                    "name": "period",
-                    "valueurl": "http://reference.data.gov.uk/id/{period_type}/{period_notation}"
-                },
-                {
-                    "title": "Area Code",
-                    "description": "ONS code for area",
-                    "name": "area_code",
-                    "data_type": "string",
-                    "valueurl": "http://statistical.data.gov.uk/id/statistical-geography/{area_code}",
-                    "propertyuri": "schema:url"
-                },
-                {
-                    "title": "Area label",
-                    "name": "area_label",
-                    "data_type": "string",
-                    "suppressOutput": true
-                },
-                {
-                    "title": "Area type",
-                    "name": "area_type",
-                    "data_type": "string",
-                    "suppressOutput": true
+                    "suppressOutput": true  
                 },
                 {
                     "title": "Observation",
@@ -238,26 +150,12 @@ Below are further examples of what needs to be included in the JSON-LD file that
                     "name": "unit",
                     "data_type": "string"
                 },
-                {
-                    "title": "Lower Confidence Limit (95%)",
-                    "name": "lcl_95",
-                    "datatype": "decimal"
-                },
-                {
-                    "title": "Upper Confidence Limit (95%)",
-                    "name": "ucl_95",
-                    "datatype": "decimal"
-                },
-                {
-                    "title": "Observation Status",
-                    "name": "obs_status",
-                    "data_type": "string"
-                }
+                
             ]
         }
     },
     {
-        "url": "positive.csv",
+        "url": "american_football.csv",
         "tableSchema": {
             "columns": [
                 {
@@ -273,36 +171,10 @@ Below are further examples of what needs to be included in the JSON-LD file that
                     "suppressOutput": true
                 },
                 {
-                    "title": "Period Label",
-                    "name": "period_label",
+                   "title": "American Football Team",
+                    "name": "variable_name",
                     "data_type": "string",
-                    "suppressOutput": true
-                },
-                {
-                    "virtual": true,
-                    "title": "Period",
-                    "name": "period",
-                    "valueurl": "http://reference.data.gov.uk/id/{period_type}/{period_notation}"
-                },
-                {
-                    "title": "Area Code",
-                    "description": "ONS code for area",
-                    "name": "area_code",
-                    "data_type": "string",
-                    "valueurl": "http://statistical.data.gov.uk/id/statistical-geography/{area_code}",
-                    "propertyuri": "schema:url"
-                },
-                {
-                    "title": "Area label",
-                    "name": "area_label",
-                    "data_type": "string",
-                    "suppressOutput": true
-                },
-                {
-                    "title": "Area type",
-                    "name": "area_type",
-                    "data_type": "string",
-                    "suppressOutput": true
+                    "suppressOutput": true  
                 },
                 {
                     "title": "Observation",
@@ -319,20 +191,9 @@ Below are further examples of what needs to be included in the JSON-LD file that
                     "title": "Unit",
                     "name": "unit",
                     "data_type": "string"
-                },
-                {
-                    "title": "Lower Confidence Limit (95%)",
-                    "name": "lcl_95",
-                    "datatype": "decimal"
-                },
-                {
-                    "title": "Upper Confidence Limit (95%)",
-                    "name": "ucl_95",
-                    "datatype": "decimal"
-                },
-                {
-                    "title": "Observation Status",
-                    "name": "obs_status",
-                    "data_type": "string",
                 }
+            ]
+        }
+    }
+]
 ```
