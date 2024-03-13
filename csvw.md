@@ -220,7 +220,7 @@ Examples include - True and False.
 
 **NOTE** : You need to be aware of whitespace. In both your csv and JSON file.
 
-## How to write muliple csvs in JSON-LD
+## How to write multiple csvs in JSON-LD
 
 When writing your JSON-LD file to accompany your csv, you can write it in a way to include multiple csvs.
 
