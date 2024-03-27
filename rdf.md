@@ -1,6 +1,6 @@
 # RDF
 
-We represent our metadata and data as RDF. This allows us to represent our data in a way which is machine-readable, and allows us to consepualise how data interrelates easier using existing vocabularies and ontologies.
+We represent our metadata and data as RDF. This allows us to represent our data in a way which is machine-readable, and allows us to conceptualise how data interrelates easier using existing vocabularies and ontologies.
 
 
 ## Class diagram
