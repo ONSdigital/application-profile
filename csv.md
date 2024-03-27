@@ -81,7 +81,7 @@ Literal attributes are used to describe the observation. When providing point es
 
 ##### Observation status columns
 
-When creating observation status columns a naming convetion helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column column should have the same name as the observation column plus `_status` as a suffix. For example an observation column called `observation` should have a corresponding observation status called `observation_status`.
+When creating observation status columns a naming convetion helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column should have the same name as the observation column plus `_status` as a suffix. For example an observation column called `observation` should have a corresponding observation status called `observation_status`.
 
 #### Measure columns
 
