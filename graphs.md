@@ -101,3 +101,34 @@ WHERE {
 ```
 
 [^named-graphs]: <https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record>
+
+## Why do we use graphs to represent relationships
+
+Graphs provide a powerful framework for understanding and representing relationships between entities in various domains. Here's how graphs allow us to understand relationships:
+
+1. Graphs offer a visual representation of relationships, making it easier for humans to comprehend complex networks of connections. Nodes represent entities, while edges denote relationships between those entities. By visualising these connections, patterns and insights can be realised more intuitively.
+2. Graphs allow us to understand relationships better by allowing us to determine the shortest path between two nodes or assess the overall connectedness of a network. This capability is valuable in fields such as transportation (finding optimal routes).
+3. Dynamic graphs capture changes in relationships over time, enabling temporal analysis of evolving networks. By tracking how connections evolve, researchers can study the emergence of trends, patterns of influence, and the impact of external events on network dynamics.
+4. Graph-based machine learning techniques, such as graph neural networks, leverage relational information encoded in graphs to make predictions or perform various tasks. By incorporating both node features and graph structure, these models can effectively capture complex relationships, enabling predictive analytics in diverse applications.
+
+Overall, graphs serve as a versatile framework for understanding relationships in complex systems, providing both a conceptual model and a set of analytical tools for exploring the structure, dynamics, and implications of connections between entities.
+
+## What are the advantages of using graphs
+
+Graphs allows us to is custom-built a database to manage highly connected data. As the volume of modern data increases and it all becomes more connected, graphs present an opportunity to utilise and analyse data in a cost-effective way. Here are some advantages of using graphs:
+
+### Flexibility
+
+The schema and structure of graph models can change with your applications. Data analysts can add or modify existing graph structures without impacting existing functions. 
+
+### Performance
+
+Relational database models become less optimal as the volume and depth of relationships increase. This results in data duplication and redundancy, multiple tables need processing to discover query results. In contrast, using graphs improves performance by several orders of magnitude when querying relationships. Performance stays constant even when graph data volume increases.
+
+### Efficiency
+
+Graph queries are shorter and more efficient at generating the same reports compared to relational databases. Graph technologies take advantage of linked nodes. Traversing the joins or relationships is a very fast process, as the relationships between nodes are not calculated at query times but are persisted in the database.
+
+## Back to our implementation
+
+Reason we use graphs for a dataset and a concept scheme is because it makes it easier for us to compartmentalise these things. This makes it easier to update data and delete them in relatively straight forward way. Another benefit is the drafting functionality which allows the ability to share data to specific people (everybody, or select people with credentials), this gives us the ability to experiment with data before making it publicly available.
