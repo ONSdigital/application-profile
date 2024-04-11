@@ -4,7 +4,10 @@ _Working draft._
 
 The key words must, must not, required, shall, shall not, should, should not, recommended, may, and optional are to be interpreted as described in RFC 2119.
 
+## Table of Contents
+
 - [Application Profile](#application-profile)
+  - [Table of Contents](#table-of-contents)
   - [Preamble](#preamble)
     - [Data on the Web Best Practises](#data-on-the-web-best-practises)
     - [Five star data](#five-star-data)
@@ -19,11 +22,11 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Design decision on object model](#design-decision-on-object-model)
     - [Draft JSON-LD Context](#draft-json-ld-context)
     - [HTTP verbs and their applicability to our objects](#http-verbs-and-their-applicability-to-our-objects)
-      - [Datasets (aka dcat:DatasetSeries)](#datasets-aka-dcatdatasetseries)
+      - [Datasets](#datasets)
         - [GET of a CPIH Dataset](#get-of-a-cpih-dataset)
       - [POST of a CPIH dataset](#post-of-a-cpih-dataset)
-      - [Editions (aka dcat:Dataset)](#editions-aka-dcatdataset)
-      - [Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)](#distributions-dcatdistribution-qbdataset-and-versions-dcatdataset)
+      - [Editions](#editions)
+      - [Distributions](#distributions)
   - [Versioning](#versioning)
     - [Example of versioning in RDF for CPIH](#example-of-versioning-in-rdf-for-cpih)
 
@@ -288,7 +291,9 @@ We are building a series of JSON-LD contexts to support the publication of our s
 
 We use the standard HTTP verbs to interact with our objects. Not all verbs are applicable to all objects, nor are all accessible publicly. We are still working out the business logic of mandatory and optional fields, and how to curate the namespace available to the ID of objects.
 
-#### Datasets (aka dcat:DatasetSeries)
+#### Datasets
+
+Datasets are the primary object, and are in fact dcat:DatasetSeries. They are the parent object of Editions, and are the object of the CatalogRecord.
 
 | Type            | Predicate                  | Range                               | POST Datasets | PUT Datasets | GET Datasets | GET Datasets/{ID} | DELETE Datasets |
 |-----------------|----------------------------|-------------------------------------|---------------|--------------|--------------|-------------------|-----------------|
@@ -420,7 +425,9 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 }
 ```
 
-#### Editions (aka dcat:Dataset)
+#### Editions
+
+Editions are the child object of Datasets, and are in fact dcat:Dataset. They are the parent object of Versions.
 
 | Type            | Predicate                  | Range                               | POST Editions | PUT Editions | GET Editions | GET Editions/{ID} | DELETE Editions |
 |-----------------|----------------------------|-------------------------------------|---------------|--------------|--------------|-------------------|-----------------|
@@ -447,7 +454,10 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 | 6 Management    | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
 | 8 Distributions | dcat:landingPage           | foaf:Document                       | ✓             | ✓            |              | ✓                 |                 |
 
-#### Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)
+#### Distributions
+
+TODO: Split this into a table for Versions.
+TODO: Create a new section for Distributions, show how they relate to Excel or CSV or RDF.
 
 | Type            | Predicate            | Range                                  | dcat:Dataset (Version) | dcat:Distribution | csvw:TableSchema | csvw:Column | POST Versions | GET Versions | GET Versions/{ID} | DELETE Version |
 |-----------------|----------------------|----------------------------------------|------------------------|-------------------|------------------|-------------|---------------|--------------|-------------------|----------------|
