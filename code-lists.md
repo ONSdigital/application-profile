@@ -19,6 +19,10 @@
     - [Analysis function guidance on symbols and shorthand in tables](#analysis-function-guidance-on-symbols-and-shorthand-in-tables)
     - [Themes](#themes)
     - [Media types](#media-types)
+    - [Time periods](#time-periods)
+    - [Area code, label and type](#area-code-label-and-type)
+    - [Age code and label](#age-code-and-label)
+    - [Sex code and label](#sex-code-and-label)
 
 ## Codelists
 
@@ -513,3 +517,75 @@ Data providers should adopt the [analytical function guidance](https://analysisf
 | CSV    | `http://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
 | JSON   | `http://www.w3.org/ns/iana/media-types/application/json#Resource` |
 | Turtle | `http://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
+
+
+### Time periods
+
+There are a varieety of different ways that time can be represented in your data. Below are some examples:
+
+| period_type        | period_code             | period_label |
+| ------------------ | ----------------------- | ------------ |
+| gregorian-interval | 2001-04-01 00:00:00/P3M | Apr-Jun 2001 |
+
+Gregorian interval can be used if the time frame of your data does not conform to a standard time frame. This can be used for monthly, quarterly and yearly data. You need to enter the start date of when your dataset starts. Using the example above it is the 1st April 2001. The P3M refers to how much time has been captured. Using the example it is 3 months. You can add P1Y for yearly data to show the data is being captured for a year period.
+
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| month       | 2020-01     | January-2020 |
+
+For monthly data that is from a calendar period we require the `period_type` to be month. In the `period_code` we require the year followed by the specified digit of the month. The `period_label` column is more human readble hence why it is showing the month's full name and the year.
+
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| quarter     | 2020-Q1     | 2020-Q1      |
+
+For quarterly data that is from a calendar period we require the `period_type` to be quarter. In the `period_code` and `period_label` we require the field to be the same. The year followed by which quarter.
+
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| year        | 2020        | 2020         |
+
+For calendar year data we require the `period_type` to be year. In the `period_code` and `period_label` we require the field to be the same. Just the year.
+
+| period_type     | period_code | period_label |
+| --------------- | ----------- | ------------ |
+| government-year | 2020-2021   | 2020-2021    |
+
+For government year which starts in April we require the `period_type` to be government-year. In the `period_code` and `period_label` we require the field to be the same. The year the period starts and the period where it ends.
+
+| period_type | period_code | period_label     |
+| ----------- | ----------- | ---------------- |
+| day         | 1999-12-31  | 31-December-1999 |
+
+For calendar day data we require the `period_type` to be day. In the `period_code` we require the year, the month followed by the day. For `period_label` we require the field to be the day, the month written fully and then the year. This will help with human readability.
+
+### Area code, label and type
+
+| area_code | area_label     | area_type                         |
+| --------- | -------------- | --------------------------------- |
+| K02000001 | United Kingdom | Country                           |
+| E92000001 | England        | Nation                            |
+| E12000001 | North East     | Region                            |
+| E06000047 | County Durham  | County or Unitary Authority       |
+| E08000037 | Gateshead      | Local Authority District          |
+| E47000006 | Tees Valley    | Combined Authority or City Region |
+
+### Age code and label
+
+| age_code | age_label              |
+| -------- | ---------------------- |
+| Y_GE16   | Aged 16 years and over |
+| Y16T24   | Aged 16 to 24          |
+| Y25T34   | Aged 25 to 34          |
+| Y35T44   | Aged 35 to 44          |
+| Y45T54   | Aged 45 to 54          |
+| Y55T74   | Aged 55 to 74          |
+| Y_GE75   | Aged 75 and over       |
+
+
+### Sex code and label
+
+| sex_code | sex_label |
+| -------- | --------- |
+| F        | Female    |
+| M        | Male      |
