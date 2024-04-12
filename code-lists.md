@@ -19,7 +19,8 @@
     - [Analysis function guidance on symbols and shorthand in tables](#analysis-function-guidance-on-symbols-and-shorthand-in-tables)
     - [Themes](#themes)
     - [Media types](#media-types)
-    - [Time periods](#time-periods)
+  - [Reusable concepts in a CSV](#reusable-concepts-in-a-csv)
+    - [Periods of time](#periods-of-time)
     - [Area code, label and type](#area-code-label-and-type)
     - [Age code and label](#age-code-and-label)
     - [Sex code and label](#sex-code-and-label)
@@ -97,8 +98,8 @@ For example:
 | Property           | Requirement level | Notes                                                                     |
 | ------------------ | ----------------- | ------------------------------------------------------------------------- |
 | `skos:inScheme`    | mandatory         | See [codelists](#codelists)                                               |
-| `rdfs:label`       | mandatory         | See [titles](style.md#titles)                                                     |
-| `skos:prefLabel`   | mandatory         | See [titles](style.md#titles)                                                     |
+| `rdfs:label`       | mandatory         | See [titles](style.md#titles)                                             |
+| `skos:prefLabel`   | mandatory         | See [titles](style.md#titles)                                             |
 | `skos:notation`    | mandatory         |                                                                           |
 | `skos:broader`     | recommended       | See [hierarchical codelists](#hierarchical-codelists)                     |
 | `skos:narrower`    | recommended       | See [hierarchical codelists](#hierarchical-codelists)                     |
@@ -328,7 +329,7 @@ Statisticians may wish to report statistics against multiple classifications. Do
 
 For example, consider a dataset which mixes codes from the NUTS geography codelist with codes from the ONS geography codelist.
 
-| geography | geography_label     | value |
+| area_code | area_label          | value |
 | --------- | ------------------- | ----- |
 | UKC       | North East, England | ...   |
 | UKD       | North West, England | ...   |
@@ -336,7 +337,7 @@ For example, consider a dataset which mixes codes from the NUTS geography codeli
 
 The NUTS codes have IRIs which are maintained by Eurostat, such as `http://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `http://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
 
-We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
+We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{area_code}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
 
 We address this by creating new identifiers for each of the codes under a shared namespace, and using `skos:exactMatch` relations to relate these new identifiers to the more commonly used identifiers. For example,
 
@@ -512,14 +513,15 @@ Data providers should adopt the [analytical function guidance](https://analysisf
 
 > TODO: Cover media types from [IANA](https://www.w3.org/ns/iana/media-types/)
 
-| Label  | IRI                                                                |
-| ------ | ------------------------------------------------------------------ |
+| Label  | IRI                                                               |
+| ------ | ----------------------------------------------------------------- |
 | CSV    | `http://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
 | JSON   | `http://www.w3.org/ns/iana/media-types/application/json#Resource` |
 | Turtle | `http://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
 
+## Reusable concepts in a CSV
 
-### Time periods
+### Periods of time
 
 There are a varieety of different ways that time can be represented in your data. Below are some examples:
 
@@ -570,6 +572,8 @@ For calendar day data we require the `period_type` to be day. In the `period_cod
 | E08000037 | Gateshead      | Local Authority District          |
 | E47000006 | Tees Valley    | Combined Authority or City Region |
 
+The table above shows the variety of area types that can be represented in your data. The important thing is that in the area code column each entry has its own identifiable code.
+
 ### Age code and label
 
 | age_code | age_label              |
@@ -582,10 +586,18 @@ For calendar day data we require the `period_type` to be day. In the `period_cod
 | Y55T74   | Aged 55 to 74          |
 | Y_GE75   | Aged 75 and over       |
 
+The examples in the table above show the best way to represent different age categories.
 
 ### Sex code and label
 
-| sex_code | sex_label |
-| -------- | --------- |
-| F        | Female    |
-| M        | Male      |
+| sex_code | sex_label      |
+| -------- | -------------- |
+| F        | Female         |
+| M        | Male           |
+| _N       | Non response   |
+| _O       | Other          |
+| -U       | Unknown        |
+| _Z       | Not applicable |
+
+The examples in the table above show the best way to represent different sex categories.
+
