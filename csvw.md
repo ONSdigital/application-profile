@@ -1,8 +1,17 @@
 # Publish CSV on the web (CSVW)
 
-Our aim is to publish metadata in a machine readable and structured format alongside the statistical tabular data.
+Our aim is to publish metadata in a machine readable and structured format alongside the statistical data.
 
 Structured data formats, such as JSON-LD can be understood by search engines and are used for [search engine optimisation](https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data), with some search engines offering specific [dataset search functionality](https://developers.google.com/search/docs/advanced/structured-data/dataset) where structured metadata are provided using common vocabularies such as DCAT or [schema.org](https://schema.org/).
+
+CSV-Ws are a way to provide structured metadata and tabular data, and are comprised of two parts:
+
+- The CSV file itself, containing the tabular data
+- A JSON file containing the metadata describing the CSV file
+
+For guidance on how to create a high quality tidy data CSV file, see the [csv](./csv.md) guidance.
+
+The JSON file is known as the CSV-W metadata file, and is used to describe the structure of the CSV file, including the columns and their data types. It can also be used to provide additional information about the dataset, such as the title, description, and licensing information.
 
 ## Structural CSV metadata
 
@@ -51,13 +60,112 @@ Given the above CSV, a minimal CSVW metadata file would look as follows:
 }
 ```
 
+### Required properties
+
+- `@context` This is the context in which the JSON-LD is written. It is a URL that points to the context in which the JSON-LD is written. This is a required property.
+- `url` This is the URL of the CSV file that the metadata is describing. This is a required property, it can be a relative URL if the CSV and metadata are in the same location.
+- `tableSchema` This is the schema of the table, and contains the column definitions. This is a required property.
+- `columns` This is an array of column definitions. Each column definition should contain a `name`, `titles`, and `datatype` property. The `name` property is the name of the column in the CSV file, the `titles` property is the human-readable title of the column, and the `datatype` property is the data type of the column.
+
+### Data types
+
+We use four main data types to describe data within our tabular data's columns. These four are strings, decimal, float and boolean.
+
+By describing your columns data type, this will help you explicitly state what the types are.
+
+If you do not specify the data type it will use a default. The default data type is a string (5.11.2 Derived dataypes - W3.org tabular data).
+
+#### String
+
+The string data type represents characters. The value space of string is the set of finite-length sequences of characters.
+
+Examples include:
+
+- `Dimension` columns are always strings. Examples include area (i.e. geographies), period (i.e. time periods), or UK Standard International Classification. Dimensions need to be represented by at least two columns to be human and machine readable. A coded column and a corresponding human readable label.
+- `Measure` column would contain values such as Index, Rate, or Count.
+- `Unit` column would contain values such as Percent, Number, or Unitless.
+
+```JSON
+"columns": [
+    {
+        "title": "Period Type",
+        "name": "period_type",
+        "datatype": "string"
+    }
+]
+```
+
+##### Why use strings for all dimensions?
+
+A dataset is initially published only as annual data; however due to process improvements it can now be released quarterly. By defining the period_code dimension as strings, no changes are required to the schema to accept `2019-Q3` along with `2017`.
+
+#### Decimal
+
+Decimal represents a subset of the real numbers, which can be represented by decimal numerals.
+
+Decimals help with delivering full precision for numerical data.
+
+Examples include – 0.5, 1.7, 100.1.
+
+```JSON
+"columns": [
+    {
+        "title": "Observation",
+        "name": "observation",
+        "datatype": "decimal"
+    }
+]
+```
+
+#### Float
+
+[Float](https://en.wikipedia.org/wiki/Floating-point_arithmetic) is patterned after the IEEE single-precision 32-bit floating point type.
+
+Float helps with high levels of precision.
+
+Examples include – 0.1243, 12.5489 and 1000.63287.
+
+```JSON
+"columns": [
+    {
+        "title": "",
+        "name": "",
+        "datatype": "float"
+    }
+]
+```
+
+**Note** Implementations of float differ between operating systems and computer architectures. Floats are often more space efficient but if precision is required use decimal datatype.
+
+#### Boolean
+
+Boolean has the value space required to support the mathematical concept of binary-valued logic.
+
+Examples include - True and False.
+
+```JSON
+"columns": [
+    {
+        "title": "",
+        "name": "",
+        "datatype": "boolean"
+    }
+]
+```
+
+### Foreign-key constraints
+
+Publishers may wish to use the `foreignKey` property to assert relationships between different CSVs. See the [W3C CSVW specification](https://www.w3.org/TR/tabular-metadata/#foreign-key-reference-between-tables) for more information.
+
 ## CSVs as self-contained datasets
 
-A CSVW should provide all the necessary metadata that would be needed for a user of the data to feature it in a `dcat:Catalog`.
+A CSVW should additionally provide all the necessary metadata that would be needed for a user of the data to feature it in a `dcat:Catalog`.
 
 The subject resource of a CSVW metadata file is typically a `csvw:Table` which corresponds to a CSV file. This CSV file can be considered as a distribution of some `dcat:Dataset`.
 
 When using a CSVW metadata file to describe some CSV, we recommend asserting the distribution relationship between the `csvw:Table` and the `dcat:Dataset`. The CSVW specification prohibits the use of the `@reverse` JSON-LD property, meaning we are unable to use the `dcat:distribution` property to achieve this, and instead rely upon its inverse `dcat:isDistributionOf`.
+
+TODO: from here
 
 ```mermaid
 classDiagram
@@ -122,14 +230,13 @@ An example of a CSVW metadata file containing the relevant relationship with a `
 }
 ```
 
-## Metadata and discoverability
+### Metadata and discoverability
 
 Metadata improves the discoverability of datasets, in CSV-Ws the following properties are recommended. See [cataloguing.md](./cataloguing.md) for more details on how to use these properties. The purpose is to describe your data and provide additional context.
 
 ```JSON
  {
     "@language": "en",
-    "@context": "./draft_ons_context.json",
     "title": "Value of different countries sports teams",
     "creator": "https://www.gov.uk/government/organisations/office-for-national-statistics",
     "summary": "Value of different sports teams from the United Kingdom and the United States.",
@@ -142,7 +249,6 @@ Metadata improves the discoverability of datasets, in CSV-Ws the following prope
 ```
 
 - `@language` You will be able to put the language of your choice.
-- `@context`
 - `title` This is the title of your dataset. You need to keep this brief.
 - `creator` You put the url of the creator of the dataset.
 - `summary` Another area to describe the dataset. This needs to be more detailed than the `title`.
@@ -159,96 +265,6 @@ We recommend naming CSVW metadata files by appending `-metadata.json` to end the
 Where possible, we recommend serving CSV files with a `Link` header within the response with the `rel="describedby"` attribute pointing to the CSVW metadata file.
 
 We recommend CSVW metadata is served with the media type `application/csvm+json`, and the CSV served with media type `text/csv`.
-
-## Foreign-key constraints
-
-Publishers may wish to use the `csvw:foreignKey` property to assert relationships between different CSVs.
-
-## Data types
-
-We use four main data types to describe data within our tabular data's columns. These four are strings, decimal, float and boolean.
-
-By describing your columns data type, this will help you explicitly state what the types are.
-
-If you do not specify the data type it will use a default. The default data type is a string (5.11.2 Derived dataypes - W3.org tabular data).
-
-### String
-
-The string data type represents characters. The value space of string is the set of finite-length sequences of characters.
-
-Examples include:
-
-- `Dimension` columns are always strings. Examples include area (i.e. geographies), period (i.e. time periods), or UK Standard International Classification. Dimensions need to be represented by at least two columns to be human and machine readable. A coded column and a corresponding human readable label.
-- `Measure` column would contain values such as Index, Rate, or Count.
-- `Unit` column would contain values such as Percent, Number, or Unitless.
-
-```JSON
-"columns": [
-    {
-        "title": "Period Type",
-        "name": "period_type",
-        "datatype": "string"
-    }
-]
-```
-
-#### Why use strings for all dimensions?
-
-A dataset is initially published only as annual data; however due to process improvements it can now be released quarterly. By defining the period_code dimension as strings, no changes are required to the schema to accept `2019-Q3` along with `2017`.
-
-### Decimal
-
-Decimal represents a subset of the real numbers, which can be represented by decimal numerals.
-
-Decimals help with delivering full precision for numerical data.
-
-Examples include – 0.5, 1.7, 100.1.
-
-```JSON
-"columns": [
-    {
-        "title": "Observation",
-        "name": "observation",
-        "datatype": "decimal"
-    }
-]
-```
-
-### Float
-
-[Float](https://en.wikipedia.org/wiki/Floating-point_arithmetic) is patterned after the IEEE single-precision 32-bit floating point type.
-
-Float helps with high levels of precision.
-
-Examples include – 0.1243, 12.5489 and 1000.63287.
-
-```JSON
-"columns": [
-    {
-        "title": "",
-        "name": "",
-        "datatype": "float"
-    }
-]
-```
-
-**Note** Implementations of float differ between operating systems and computer architectures. Floats are often more space efficient but if precision is required use decimal datatype.
-
-### Boolean
-
-Boolean has the value space required to support the mathematical concept of binary-valued logic.
-
-Examples include - True and False.
-
-```JSON
-"columns": [
-    {
-        "title": "",
-        "name": "",
-        "datatype": "boolean"
-    }
-]
-```
 
 **NOTE** : You need to be aware of whitespace. In both your csv and JSON file.
 
@@ -286,10 +302,6 @@ For humans, we recommend keeping to a pattern of dimension_code, dimension_label
 - `label` this can be used for additional context.
 
 ### Metadata
-
-
-
-
 
 ### Table Breakdown
 
