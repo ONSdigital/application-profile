@@ -64,7 +64,7 @@ A quick way to check if a column only contains related data and unique identifia
 
 For example the three columns prefixed with `area_` are related in the table below, filtering on any of the three would only ever result in one value for the other two columns. The area_code column is a unique identifier for the geography.
 
-| area_code | area_label        | Area_type              | value | ... |
+| area_code | area_label        | area_type              | value | ... |
 | --------- | ----------------- | ---------------------- | ----- | --- |
 | E08000006 | Salford           | Metropolitan Districts | 42    | ... |
 | E92000001 | England           | Country                | 1337  | ... |
