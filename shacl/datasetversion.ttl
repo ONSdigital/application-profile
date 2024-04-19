@@ -1,0 +1,78 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+
+<#DatasetShape> a sh:NodeShape ;
+    sh:targetClass dcat:Dataset ;
+    sh:property [
+        sh:path dcterms:title ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have at least one dcat:title." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:description ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:description." ;
+    ] ;
+    sh:not [
+        sh:class qb:DataSet ;
+        sh:message "A dcat:Dataset cannot also be a qb:DataSet, a dcat:Dataset has dcat:distributions which can be a qb:DataSet." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:identifier." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:modified ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dterms:modified." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:publisher ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:publisher." ;
+    ];
+    sh:property [
+        sh:path dcat:version ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:version." ;
+    ];
+     sh:property [
+        sh:path dcterms:created ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:created." ; 
+    ];
+    sh:property [
+        sh:path dcterms:issued ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:issued."
+     ];
+     ;
+    sh:property [
+        sh:path dcat:previousVersion ;
+        sh:dcat:DataSet ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:previousVersion."
+    ];
+    ;
+    sh:property [
+        sh:path dcat:nextVersion ;
+        sh:dcat:DataSet ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:version."
+    ]
+
+        .
+
+
+
+
+
+      
