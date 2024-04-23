@@ -17,9 +17,10 @@
         sh:minCount 1 ;
         sh:message "A dcat:Dataset must have a dcat:description." ;
     ] ;
-    #sh:not [
-        #sh:class qb:DataSet ;
-        #sh:message "A dcat:Dataset cannot also be a qb:DataSet, a dcat:Dataset has dcat:distributions which can be a qb:DataSet." ;
+    sh:not [
+        sh:class qb:DataSet ;
+        sh:message "A dcat:Dataset cannot also be a qb:DataSet, a dcat:Dataset has dcat:distributions which can be a qb:DataSet." ;
+    ];
     sh:property [
         sh:path dcterms:identifier ;
         sh:datatype xsd:string ;
