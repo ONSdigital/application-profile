@@ -6,6 +6,8 @@
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix ons: <http://www.https://www.ons.gov.uk/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <#DatasetShape> a sh:NodeShape ;
     sh:targetClass dcat:DatasetSeries ;
