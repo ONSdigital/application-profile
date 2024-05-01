@@ -7,6 +7,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix ons: <http://www.https://www.ons.gov.uk/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
 
 <#DatasetShape> a sh:NodeShape ;
     sh:targetClass dcat:Dataset ;
@@ -46,7 +47,13 @@
         sh:minCount 1 ;
         sh:message "A dcat:Dataset must have a dcat:version." ;
     ];
-     sh:property [
+      sh:property [
+        sh:path adms:versionNotes ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a adms:versionNotes." ;
+    ];
+    sh:property [
         sh:path dcterms:created ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
