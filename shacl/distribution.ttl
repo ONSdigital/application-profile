@@ -1,0 +1,78 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix ons: <http://www.https://www.ons.gov.uk/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<#DatasetShape> a sh:NodeShape ;
+    sh:targetClass dcat:Distribution ;
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcterms:identifier." ;
+    ] ;
+       sh:property [
+        sh:path dcterms:created ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcterms:created." ;
+    ] ;
+       sh:property [
+        sh:path dcterms:creator ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcterms:creator." ;
+    ] ;
+       sh:property [
+        sh:path dcterms:issued ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcterms:issued." ;
+    ] ;
+      sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:path prov:Entity ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one prov:wasDerivedFrom." ;
+    ] ;
+     sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:path prov:Activity ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one prov:wasGeneratedBy." ;
+    ] ;
+       sh:property [
+        sh:path dcterms:downloadURL ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcterms:downloadURL." ;
+    ] ;
+       sh:property [
+        sh:path dcat:byteSize ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcat:byteSize." ;
+    ] ;
+       sh:property [
+        sh:path dcat:mediaType ;
+        sh:path dcterms:MediaType ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcat:mediaType." ;
+    ] ;
+     sh:property [
+        sh:path wdrs:describedBy ;
+        sh:path rdfs:Resource ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one wdrs:describedBy." ;
+    ] ;
+     sh:property [
+        sh:path spdx:checksum ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one spdx:checksum." ;
+     ].
+    
