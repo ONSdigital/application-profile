@@ -1,4 +1,4 @@
-The error message below appear after running this command:
+The error message below appeared after running this command:
 
 pyshacl -s datasetseries.ttl -m -i rdfs -a -j -f human 4g-coverage.ttl
 
