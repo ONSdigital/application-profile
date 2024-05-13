@@ -1,0 +1,27 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix ons: <http://www.https://www.ons.gov.uk/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
+
+<#DatasetShape> a sh:NodeShape ;
+    sh:targetClass dcat:Catalog ;
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Catalog must have at least one dcterms:identifier." ;
+    ] ;
+      sh:property [
+        sh:path dcat:record ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Catalog must have at least one dcat:record." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:created ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Catalog must have at least one dcterms:created." ;
+    ] .
