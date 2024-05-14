@@ -1,0 +1,272 @@
+{
+    "@context": {
+      "csvw": "http://www.w3.org/ns/csvw#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "csvqb": "http://purl.org/csv-schema/csvqb#",
+      "dcterms": "http://purl.org/dc/terms/",
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "wdrs": "http://www.w3.org/2007/05/powder-s#",
+      "spdx": "https://spdx.org/spdx-specification-21-1",
+      "vcard": "http://www.w3.org/2006/vcard/ns#",
+      "adms": "http://www.w3.org/ns/adms#",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "dqv": "http://www.w3.org/ns/dqv#",
+      "ons": "http://example.org/ons#"
+    },
+    "@graph": [
+      {
+        "@id": "csvw:Column",
+        "rdfs:label": {
+          "@value": "Column",
+          "@type": "xsd:string"
+        },
+        "csvw:name": {
+          "@type": "xsd:string"
+        },
+        "csvw:title": {
+          "@type": "xsd:string"
+        },
+        "csvw:data_type": {
+          "@type": "xsd:data_type"
+        },
+        "csvqb:column_type": "csvqb:column_type",
+        "dcterms:description": {
+          "@type": "xsd:string"
+        },
+        "csvw:property_Url": {
+          "@type": "xsd:any_URI"
+        },
+        "csvw:value_Url": {
+          "@type": "xsd:any_URI"
+        },
+        "csvw:about_Url": {
+          "@type": "xsd:any_URI"
+        }
+      },
+      {
+        "@id": "csvw:Table_Schema",
+        "csvw:column": {
+          "@id": "csvw:Column"
+        },
+        "csvw:about_Url": {
+          "@type": "xsd:any_URI"
+        }
+      },
+      {
+        "@id": "dcat:Distribution",
+        "dcterms:identifier": {
+          "@type": "xsd:string"
+        },
+        "dcterms:created": {
+          "@type": "xsd:date_Time"
+        },
+        "dcterms:creator": {
+          "@type": "foaf:Agent"
+        },
+        "dcterms:issued": {
+          "@type": "xsd:date_Time"
+        },
+        "prov:was_Derived_From": {
+          "@type": "prov:Entity"
+        },
+        "prov:was_Generated_By": {
+          "@type": "prov:Activity"
+        },
+        "dcat:download_URL": {
+          "@type": "rdf:Resource"
+        },
+        "dcat:by_teSize": {
+          "@type": "xsd:non_Negative_Integer"
+        },
+        "dcat:media_Type": {
+          "@type": "dcterms:Media_Type"
+        },
+        "wdrs:described_By": {
+          "@type": "rdfs:Resource"
+        },
+        "spdx:check_sum": {
+          "@type": "spdx:Checksum"
+        }
+      },
+      {
+        "@id": "dcat:Dataset_Version",
+        "@type": "dcat:Dataset",
+        "dcterms:identifier": {
+          "@type": "xsd:string"
+        },
+        "dcat:version": {
+          "@type": "xsd:string"
+        },
+        "adms:version_Notes": {
+          "@type": "xsd:string"
+        }
+      },
+      {
+        "@id": "dcat:Edition",
+        "@type": "dcat:Dataset",
+        "dcterms:identifier": {
+          "@type": "xsd:string"
+        },
+        "dcterms:title": {
+          "@type": "xsd:string"
+        },
+        "rdfs:label": {
+          "@type": "xsd:string"
+        },
+        "dcterms:created": {
+          "@type": "xsd:dateTime"
+        },
+        "dcterms:creator": {
+          "@type": "foaf:Agent"
+        },
+        "dcat:contact_Point": {
+          "@type": "vcard:Kind"
+        },
+        "dcterms:abstract": {
+          "@type": "xsd:string"
+        },
+        "dcterms:description": {
+          "@type": "xsd:string",
+          "@language": "markdown"
+        },
+        "adms:status": {
+          "@type": "skos:Concept"
+        },
+        "dcat:inSeries": {
+          "@type": "dcat:DatasetSeries"
+        },
+        "dqv:has_Quality_Quality_Annotation": {
+          "@type": "dqv:Quality_Annotation"
+        }
+      },
+      {
+        "@id": "dcterms:Period_Of_Time",
+        "@type": "dcterms:Period_Of_Time",
+        "dcat:startDate": {
+        "@type": "xsd:date_Time"
+      },
+        "dcat:end_Date": {
+        "@type": "xsd:date_Time"
+        }
+      },
+      {
+        "@id": "dcterms:Period_Of_Time",
+        "@type": "dcterms:Period_Of_Time",
+        "dcat:start_Date": {
+        "@type": "xsd:date_Time"
+      },
+        "dcat:end_Date": {
+        "@type": "xsd:date_Time"
+        }
+      },
+      {
+        "@id": "vcard:Vcard_Kind",
+        "@type": "vcard:Kind",
+        "vcard:has_Email": {
+        "@id": "vcard:Email"
+      },
+        "vcard:fn": {
+        "@type": "xsd:string"
+      },
+        "vcard:has_Telephone": {
+        "@id": "vcard:Telephone"
+         }
+      },
+      {
+        "@id": "dcat:Dataset_Series",
+        "@type": "dcat:Dataset_Series",
+        "dcterms:identifier": {
+        "@type": "xsd:string"
+      },
+        "dcterms:title": {
+        "@type": "xsd:string"
+      },
+        "rdfs:label": {
+        "@type": "xsd:string"
+      },
+        "ons:next_Release": {
+        "@type": "xsd:date_Time"
+      },
+        "dcterms:abstract": {
+        "@type": "xsd:string"
+      },
+        "dcterms:description": {
+        "@type": "xsd:string",
+        "@language": "markdown"
+      },
+        "dcat:landing_Page": {
+        "@type": "foaf:Document"
+      },
+        "dcat:publisher": {
+        "@type": "foaf:Agent"
+      },
+        "dcterms:modified": {
+        "@type": "xsd:dateTime"
+      },
+        "dcterms:creator": {
+        "@type": "foaf:Agent"
+      },
+        "dcterms:created": {
+        "@type": "xsd:dateTime"
+      },
+        "dcterms:issued": {
+        "@type": "xsd:dateTime"
+      },
+        "dcterms:accural_Periodicity": {
+        "@type": "dcterms:Frequency"
+      },
+        "dcat:keyword": {
+        "@type": "xsd:string"
+      },
+        "dcat:theme": {
+        "@type": "skos:Concept"
+      },
+        "dcterms:license": {
+        "@type": "dcterms:License_Document"
+      },
+      "dcterms:spatial": {
+        "@type": "dcterms:Location"
+      },
+      "ons:spatial_Resolution": {
+        "@type": "skos:Concept"
+      },
+        "dcterms:temporal": {
+        "@type": "dcterms:PeriodOfTime"
+      },
+        "dcat:temporal_Resolution": {
+        "@type": "xsd:duration"
+      }
+      },
+      {
+        "@id": "dcat:Catalog_Record",
+        "@type": "dcat:Catalog_Record",
+        "dcterms:identifier": {
+        "@type": "xsd:string"
+      },
+        "foaf:primary_Topic": {
+        "@type": "dcat:Dataset_Series"
+      },
+        "dcterms:created": {
+        "@type": "xsd:dateTime"
+      }
+    },
+    {
+        "@id": "dcat:Catalog",
+        "@type": "dcat:Catalog",
+        "dcterms:identifier": {
+        "@type": "xsd:string"
+      },
+        "dcat:record": {
+        "@type": "dcat:Catalog_Record"
+      },
+        "dcterms:created": {
+        "@type": "xsd:dateTime"
+    }
+}
+    ]
+  }
+  
