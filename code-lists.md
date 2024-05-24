@@ -525,11 +525,11 @@ Data providers should adopt the [analytical function guidance](https://analysisf
 
 There are a varieety of different ways that time can be represented in your data. Below are some examples:
 
-| period_type        | period_code             | period_label |
-| ------------------ | ----------------------- | ------------ |
-| gregorian-interval | 2001-04-01 00:00:00/P3M | Apr-Jun 2001 |
+| period_type | period_code | period_label     |
+| ----------- | ----------- | ---------------- |
+| day         | 1999-12-31  | 31-December-1999 |
 
-Gregorian interval can be used if the time frame of your data does not conform to a standard time frame. This can be used for monthly, quarterly and yearly data. You need to enter the start date of when your dataset starts. Using the example above it is the 1st April 2001. The P3M refers to how much time has been captured. Using the example it is 3 months. You can add P1Y for yearly data to show the data is being captured for a year period.
+For calendar day data we require the `period_type` to be day. In the `period_code` we require the year, the month followed by the day. For `period_label` we require the field to be the day, the month written fully and then the year. This will help with human readability.
 
 | period_type | period_code | period_label |
 | ----------- | ----------- | ------------ |
@@ -555,11 +555,11 @@ For calendar year data we require the `period_type` to be year. In the `period_c
 
 For government year which starts in April we require the `period_type` to be government-year. In the `period_code` and `period_label` we require the field to be the same. The year the period starts and the period where it ends.
 
-| period_type | period_code | period_label     |
-| ----------- | ----------- | ---------------- |
-| day         | 1999-12-31  | 31-December-1999 |
+| period_type        | period_code             | period_label |
+| ------------------ | ----------------------- | ------------ |
+| gregorian-interval | 2001-04-01 00:00:00/P3M | Apr-Jun 2001 |
 
-For calendar day data we require the `period_type` to be day. In the `period_code` we require the year, the month followed by the day. For `period_label` we require the field to be the day, the month written fully and then the year. This will help with human readability.
+Gregorian interval can be used if the time frame of your data does not conform to a standard time frame. This can be used for monthly, quarterly and yearly data. You need to enter the start date of when your dataset starts. Using the example above it is the 1st April 2001. The P3M refers to how much time has been captured. Using the example it is 3 months. You can add P1Y for yearly data to show the data is being captured for a year period.
 
 ### Area code, label and type
 
