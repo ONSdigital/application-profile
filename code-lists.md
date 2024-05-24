@@ -586,7 +586,7 @@ The table above shows the variety of area types that can be represented in your 
 | Y55T74   | Aged 55 to 74          |
 | Y_GE75   | Aged 75 and over       |
 
-The examples in the table above show the best way to represent different age categories. his has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^machine]
+The examples in the table above show the best way to represent different age categories. his has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^1]
 
 ### Sex code and label
 
@@ -599,9 +599,9 @@ The examples in the table above show the best way to represent different age cat
 | -U       | Unknown        |
 | _Z       | Not applicable |
 
-The examples in the table above show the best way to represent different sex categories. This has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^machine]
+The examples in the table above show the best way to represent different sex categories. This has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^2]
 
 
-[^machine]: <https://sdmx.org/?page_id=3215>
-[^machine]: <https://sdmx.org/?page_id=3215>
+[^1]: <https://sdmx.org/?page_id=3215>
+[^2]: <https://sdmx.org/?page_id=3215>
 
