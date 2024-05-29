@@ -34,7 +34,7 @@ CSV files used in our service should be saved as UTF-8 encoded text files with a
 
 Column headers should be in lowercase and snake case (e.g. `column_header`). This is to ensure consistency and readability. Column headers should also be unique, and should not contain any special characters (e.g. `!@#$%^&*()`). This even includes the pound sign (i.e. `£`), which should be replaced with `gbp` when appropriate.
 
-Related columns should have the same prefix (e.g. `area_code`, `area_label`, `area_type` or `time_period_type`, `time_period_code`, `time_period_label`, or even `observation` and `observation_status`), and should be adjancent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
+Related columns should have the same prefix (e.g. `geography_code`, `geography_label`, `geography_type` or `time_period_type`, `time_period_code`, `time_period_label`, or even `observation` and `observation_status`), and should be adjancent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
 
 **Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code. See example [table in Dimension section](^Geography example).
 
@@ -53,21 +53,24 @@ Observation columns must only contain numbers. Suppressed or missing values must
 Dimension columns (otherwise known as factors or concepts) are used to identify the observation through a combination of concepts. Where each dimension in a CSV is filtered to a specific value there should only be one observation. In relational databases terminology all dimensions combine to a composite key. Some examples of dimensions are:
 
 - `government_year` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
-- `area_code` with one value being `E09000001` (i.e. the nation of `England`)
+- `geography_code` with one value being `E09000001` (i.e. the nation of `England`)
 - `sic_2007` with one value being `01.11` (i.e. the concept `Growing of cereals (except rice), leguminous crops and oil seeds`)
 
 To improve human readability and to ensure machine readability, ensure that codes are separate columns from the related human readable labels or descriptions. While the labels and additional information can be useful for humans, mixing them in the same column with codes requires users to clean the data. It is also important to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find the human readable values.
 
 A quick way to check if a column only contains related data and unique identifiable is if you filter on a column and for every value you select another column will only ever have the same value for that row it is likely to help human readability.
 
-For example the three columns prefixed with `area_` are related in the table below, filtering on any of the three would only ever result in one value for the other two columns. The area_code column is a unique identifier for the geography.
+For example the three columns prefixed with `geography_` are related in the table below, filtering on any of the three would only ever result in one value for the other two columns. The geography_code column is a unique identifier for the geography.
 
-| area_code | area_label        | area_type              | value | ... |
-| --------- | ----------------- | ---------------------- | ----- | --- |
-| E08000006 | Salford           | Metropolitan Districts | 42    | ... |
-| E92000001 | England           | Country                | 1337  | ... |
-| K04000001 | England and Wales | England and Wales      |       | ... |
+| geography_code | geography_label        | geography_type           | value | ... |
+| -------------- | ---------------------- | ------------------------ | ----- | --- |
+| E08000006      | Salford                | Metropolitan Districts   | 42    | ... |
+| E14001459      | Salford                | Westminster Constituency | 68    | ... |
+| E92000001      | England                | Country                  | 1337  | ... |
+| K04000001      | England and Wales      | England and Wales        | 1701  | ... |
+
 (^Geography example)
+
 **Note:** Dimension columns must contain values for every row in the CSV file and not be blank (i.e. they must be dense)
 
 #### Attributes

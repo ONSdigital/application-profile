@@ -144,7 +144,7 @@ For data to be classified as tidy data:
 
 We should adopt common and unambiguous identifiers for data items such as ONS geography codes or ISO-8601 time intervals.
 
-| area_code      | period                  | sex    | life_expectancy |
+| geography_code      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
@@ -168,7 +168,7 @@ Producing data which _only_ uses identifiers could reduce usability by humans. I
 
 When [using a CSVW to create an RDF data cube](rdf_cubes.md#using-csvw-to-create-an-rdf-data-cube), any redundant columns must be suppressed by setting `"suppressOutput": "true"`. CSVW provides a way for values rows, and column headings of a CSV file to be mapped to RDF resources. Some schema fields refer to codelists, to limit and standardize the possible values of the fields, in order to promote data interoperability.
 
-| geography      | area_label | period                  | period_label | sex    | life_expectancy |
+| geography      | geography_label | period                  | period_label | sex    | life_expectancy |
 | --------- | ---------- | ----------------------- | ------------ | ------ | --------------- |
 | W06000022 | Newport    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Male   | 76.7            |
 | W06000022 | Newport    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 80.7            |

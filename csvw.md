@@ -63,8 +63,7 @@ Given the above CSV, a minimal CSVW metadata file would look as follows:
 ### Required properties
 
 - `@context` It is a URL that points to the context in which the JSON-LD context for CSV-W is written. This is a required property.
-- TODO: Write this better as above.
-- `@language` is an object property which 
+- `@language` is an object property which describes the default language for all literal strings within the metadata and tabular data.
 - `url` This is the URL of the CSV file that the metadata is describing. This is a required property, it can be a relative URL if the CSV and metadata are in the same location.
 - `tableSchema` This is the schema of the table, and contains the column definitions. This is a required property.
 - `columns` This is an array of column definitions. Each column definition should contain a `name`, `titles`, and `datatype` property. The `name` property is the name of the column in the CSV file, the `titles` property is the human-readable title of the column, and the `datatype` property is the data type of the column.
@@ -171,29 +170,29 @@ CSVs are best serialised so that they can be interpreted by both humans and mach
 
 Consider the pattern often used for geographies:
 
-| area_code | area_label        | area_type              | value | ... |
+| geography_code | geography_label        | geography_type              | value | ... |
 | --------- | ----------------- | ---------------------- | ----- | --- |
 | E08000006 | Salford           | Metropolitan Districts | 42    | ... |
 | E92000001 | England           | Country                | 1337  | ... |
 | K04000001 | England and Wales | England and Wales      |       | ... |
 
-In this case, `area_label` and `area_type` are useful for humans, and `area_code` is useful for machines. In fact, using linked data, the `area_label` and `area_type` values can be looked up from the `area_code` value. In order to have more efficience storage and interpretation of data, data which isn't machine readable should be suppressed.
+In this case, `geography_label` and `geography_type` are useful for humans, and `geography_code` is useful for machines. In fact, using linked data, the `geography_label` and `geography_type` values can be looked up from the `geography_code` value. In order to have more efficience storage and interpretation of data, data which isn't machine readable should be suppressed.
 
 Columns can be suppresse for interpretation by including the optional value `suppressOutput`. If this is true, it suppresses any output that would be generated when converting cells in this column. The default is false. [^column-properties]
 
-In the following example only `area_code` is kept for machine readability, and `area_label`, and `area_type` are suppressed.
+In the following example only `geography_code` is kept for machine readability, and `geography_label`, and `geography_type` are suppressed.
 
 ```json
 [
     {
-        "name": "area_code"
+        "name": "geography_code"
     },
     {
-        "name": "area_label",
+        "name": "geography_label",
         "suppressOutput": true,
     },
     {
-        "name": "area_type",
+        "name": "geography_type",
         "suppressOutput": true
     }
 ]
