@@ -19,7 +19,7 @@ The most basic of CSVW metadata will include the `tableSchema` properties with d
 
 We can consider the following CSV file:
 
-| area      | period                  | sex    | life_expectancy |
+| geography      | period                  | sex    | life_expectancy |
 | --------- | ----------------------- | ------ | --------------- |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
@@ -36,8 +36,8 @@ Given the above CSV, a minimal CSVW metadata file would look as follows:
     "tableSchema": {
         "columns": [
             {
-                "name": "area",
-                "titles": "area",
+                "name": "geography",
+                "titles": "geography",
                 "datatype": "string"
             },
             {
@@ -83,7 +83,7 @@ The string data type represents characters. The value space of string is t
 
 Examples include:
 
-- `Dimension` columns are always strings. Examples include area (i.e. geographies), period (i.e. time periods), or UK Standard International Classification. Dimensions need to be represented by at least two columns to be human and machine readable. A coded column and a corresponding human readable label.
+- `Dimension` columns are always strings. Examples include geography (i.e. geographies), period (i.e. time periods), or UK Standard International Classification. Dimensions need to be represented by at least two columns to be human and machine readable. A coded column and a corresponding human readable label.
 - `Measure` column would contain values such as Index, Rate, or Count.
 - `Unit` column would contain values such as Percent, Number, or Unitless.
 
@@ -169,7 +169,7 @@ CSVs are best serialised so that they can be interpreted by both humans and mach
 
 ### Suppressing Cell Output
 
-Consider the pattern often used for areas:
+Consider the pattern often used for geographies:
 
 | area_code | area_label        | area_type              | value | ... |
 | --------- | ----------------- | ---------------------- | ----- | --- |
@@ -254,8 +254,8 @@ An example of a CSVW metadata file containing the relevant relationship with a `
     "tableSchema": {
         "columns": [
             {
-                "name": "area",
-                "titles": "area",
+                "name": "geography",
+                "titles": "geography",
                 "datatype": "string"
             },
             {
@@ -285,12 +285,12 @@ Metadata improves the discoverability of datasets, in CSV-Ws the following prope
 - `@language` You will be able to put the language of your choice.
 - `dc:title` This is the title of your dataset. You need to keep this brief.
 - `dcat:creator` You put the url of the creator of the dataset.
-- `dc:abstract` Another area to describe the dataset. This needs to be more detailed than the `title`.
+- `dc:abstract` Another geography to describe the dataset. This needs to be more detailed than the `title`.
 - `dc:description` This is used to provide all the information you want to provide for the dataset.
 - `dcat:license` This is where you place which license you are using.
 - `dcat:keywords` You use this provide keywords, that can be used as searcahable terms.
 - `dc:publisher` This is where you put the publisher of the dataset.
-- `dcat:theme` If your dataset is part of an overreaching area. Such as Economy, Business, Industry and Trade. This is where you oput the url of where the dataset is.
+- `dcat:theme` If your dataset is part of an overreaching geography. Such as Economy, Business, Industry and Trade. This is where you oput the url of where the dataset is.
 
 ## Discoverability of CSVW
 
@@ -331,7 +331,7 @@ The second section will go through a step by step process of writing and describ
 
 `tableSchema` An object property that provides a single schema description, used as the default for all the tables in the group. This may be provided as an embedded object within the JSON metadata or as a URL reference to a separate JSON object that is a schema description.(from w.3/org-tabular-metadata)
 
-`columns` This will be the area where you describe each column from your csv.
+`columns` This will be the geography where you describe each column from your csv.
 
 ### How to write the column section
 

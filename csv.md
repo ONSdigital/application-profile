@@ -36,9 +36,7 @@ Column headers should be in lowercase and snake case (e.g. `column_header`). Thi
 
 Related columns should have the same prefix (e.g. `area_code`, `area_label`, `area_type` or `time_period_type`, `time_period_code`, `time_period_label`, or even `observation` and `observation_status`), and should be adjancent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
 
-**Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of area geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code.
-
-TODO: Provide an example of a geography code, geography label, and geography type where the geography type/code is required to disambiguate the geography label.
+**Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code. See example [table in Dimension section](^Geography example).
 
 ### Types
 
@@ -55,7 +53,7 @@ Observation columns must only contain numbers. Suppressed or missing values must
 Dimension columns (otherwise known as factors or concepts) are used to identify the observation through a combination of concepts. Where each dimension in a CSV is filtered to a specific value there should only be one observation. In relational databases terminology all dimensions combine to a composite key. Some examples of dimensions are:
 
 - `government_year` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
-- `geography_code` with one value being `E09000001` (i.e. the nation of `England`)
+- `area_code` with one value being `E09000001` (i.e. the nation of `England`)
 - `sic_2007` with one value being `01.11` (i.e. the concept `Growing of cereals (except rice), leguminous crops and oil seeds`)
 
 To improve human readability and to ensure machine readability, ensure that codes are separate columns from the related human readable labels or descriptions. While the labels and additional information can be useful for humans, mixing them in the same column with codes requires users to clean the data. It is also important to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find the human readable values.
@@ -69,7 +67,7 @@ For example the three columns prefixed with `area_` are related in the table bel
 | E08000006 | Salford           | Metropolitan Districts | 42    | ... |
 | E92000001 | England           | Country                | 1337  | ... |
 | K04000001 | England and Wales | England and Wales      |       | ... |
-
+(^Geography example)
 **Note:** Dimension columns must contain values for every row in the CSV file and not be blank (i.e. they must be dense)
 
 #### Attributes
@@ -78,7 +76,7 @@ Attribute columns are used to qualify the observation. Most commonly the attribu
 
 ##### Literal attributes
 
-Literal attributes are used to describe the observation. When providing point estimates, often there are additional values which help provide context. For example, when providing a point estimate for the number of people in a given area, there may be a confidence interval (of which there are two values, the upper and lower bounds), a sample size, and a standard deviation. These values are all literal attributes.
+Literal attributes are used to describe the observation. When providing point estimates, often there are additional values which help provide context. For example, when providing a point estimate for the number of people in a given geography, there may be a confidence interval (of which there are two values, the upper and lower bounds), a sample size, and a standard deviation. These values are all literal attributes.
 
 ##### Observation status columns
 

@@ -203,22 +203,22 @@ Given a CSVW with a column specification as follows:
     "tableSchema": {
         "columns": [
             {
-                "name": "area",
-                "titles": "area",
+                "name": "geography",
+                "titles": "geography",
                 "datatype": "string",
-                "propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area",
-                "valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+                "propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography",
+                "valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{geography}"
             },
             // ...
         ],
-        "aboutUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+area}-{+period}-{+sex}"
+        "aboutUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+geography}-{+period}-{+sex}"
 ```
 
 The `aboutUrl`, `propertyUrl` and `valueUrl` and the CSV data produce triples as follows:
 
 ```ttl
 <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male>
-  <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area>
+  <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography>
     <http://statistics.data.gov.uk/id/statistical-geography/W06000022> ;
     # ...
     .
@@ -331,7 +331,7 @@ We adopt the [measure dimension](https://www.w3.org/TR/vocab-data-cube/#dfn-meas
 
 We include a column in the CSV which specifies the measure for each observation.
 
-| area      | period                  | sex    | measure_type                    | value | marker |
+| geography      | period                  | sex    | measure_type                    | value | marker |
 | --------- | ----------------------- | ------ | ------------------------------- | ----- | ------ |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 76.7  |        |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 | 80.7  |        |
@@ -359,7 +359,7 @@ Within the CSVW metadata, we add a column definition for the measure dimension a
 
 ```ttl
 <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/W06000022-2004-01-01T00:00:00/P3Y-Male> a qb:Observation ;
-    # area, period, sex, ...
+    # geography, period, sex, ...
     qb:measureType
         <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy> ;
     <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/measure/life-expectancy>
