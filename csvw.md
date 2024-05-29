@@ -4,14 +4,14 @@ Our aim is to publish metadata in a machine readable and structured format along
 
 Structured data formats, such as JSON-LD can be understood by search engines and are used for [search engine optimisation](https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data), with some search engines offering specific [dataset search functionality](https://developers.google.com/search/docs/advanced/structured-data/dataset) where structured metadata are provided using common vocabularies such as DCAT or [schema.org](https://schema.org/).
 
-CSV-Ws are a way to provide structured metadata and tabular data, and are comprised of two parts:
+CSVWs are a way to provide structured metadata and tabular data, and are comprised of two parts:
 
 - The CSV file itself, containing the tabular data
 - A JSON file containing the metadata describing the CSV file
 
 For guidance on how to create a high quality tidy data CSV file, see the [csv](./csv.md) guidance.
 
-The JSON file is known as the CSV-W metadata file, and is used to describe the structure of the CSV file, including the columns and their data types. It can also be used to provide additional information about the dataset, such as the title, description, and licensing information.
+The JSON file is known as the CSVW metadata file, and is used to describe the structure of the CSV file, including the columns and their data types. It can also be used to provide additional information about the dataset, such as the title, description, and licensing information.
 
 ## Structural CSV metadata
 
@@ -20,12 +20,12 @@ The most basic of CSVW metadata will include the `tableSchema` properties with d
 We can consider the following CSV file:
 
 | geography      | period                  | sex    | life_expectancy |
-| --------- | ----------------------- | ------ | --------------- |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female | 83.3            |
-| ...       | ...                     | ...    | ...             |
+| -------------- | ----------------------- | ------ | --------------- |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Female | 83.3            |
+| ...            | ...                     | ...    | ...             |
 
 Given the above CSV, a minimal CSVW metadata file would look as follows:
 
@@ -62,7 +62,7 @@ Given the above CSV, a minimal CSVW metadata file would look as follows:
 
 ### Required properties
 
-- `@context` It is a URL that points to the context in which the JSON-LD context for CSV-W is written. This is a required property.
+- `@context` It is a URL that points to the context in which the JSON-LD context for CSVW is written. This is a required property.
 - `@language` is an object property which describes the default language for all literal strings within the metadata and tabular data.
 - `url` This is the URL of the CSV file that the metadata is describing. This is a required property, it can be a relative URL if the CSV and metadata are in the same location.
 - `tableSchema` This is the schema of the table, and contains the column definitions. This is a required property.
@@ -76,15 +76,15 @@ By describing your columns data type, this will help you explicitly state what t
 
 If you do not specify the data type it will use a default. The default data type is a string (5.11.2 Derived dataypes - W3.org tabular data).
 
-#### String
+#### `string`
 
 The string data type represents characters. The value space of string is the set of finite-length sequences of characters.
 
 Examples include:
 
-- `Dimension` columns are always strings. Examples include geography (i.e. geographies), period (i.e. time periods), or UK Standard International Classification. Dimensions need to be represented by at least two columns to be human and machine readable. A coded column and a corresponding human readable label.
-- `Measure` column would contain values such as Index, Rate, or Count.
-- `Unit` column would contain values such as Percent, Number, or Unitless.
+- `Dimension` columns are always strings. Examples include geography (i.e. geographies), period (i.e. time periods), or UK Standard International Classification (i.e. SIC). Dimensions need to be represented by at least two columns to be human and machine readable. A coded column and a corresponding human readable label.
+- `Measure` column can contain values such as Index, Rate, or Count.
+- `Unit` column must always contain values, e.g. Percent, Number, or Unitless.
 
 ```JSON
 "columns": [
@@ -122,7 +122,7 @@ Examples include – 0.5, 1.7, 100.1.
 
 [Float](https://en.wikipedia.org/wiki/Floating-point_arithmetic) is patterned after the IEEE single-precision 32-bit floating point type.
 
-Float helps with high levels of precision.
+Float helps with high, but not full, levels of precision.
 
 Examples include – 0.1243, 12.5489 and 1000.63287.
 
@@ -156,8 +156,6 @@ Examples include - True and False.
 
 ### Optional Properties
 
-TODO: Get this section up to scratch, merge in Ben's work
-
 #### Foreign-key constraints
 
 Publishers may wish to use the `foreignKey` property to assert relationships between different CSVs. See the [W3C CSVW specification](https://www.w3.org/TR/tabular-metadata/#foreign-key-reference-between-tables) for more information.
@@ -170,15 +168,16 @@ CSVs are best serialised so that they can be interpreted by both humans and mach
 
 Consider the pattern often used for geographies:
 
-| geography_code | geography_label        | geography_type              | value | ... |
-| --------- | ----------------- | ---------------------- | ----- | --- |
-| E08000006 | Salford           | Metropolitan Districts | 42    | ... |
-| E92000001 | England           | Country                | 1337  | ... |
-| K04000001 | England and Wales | England and Wales      |       | ... |
+| geography_code | geography_label        | geography_type           | value | ... |
+| -------------- | ---------------------- | ------------------------ | ----- | --- |
+| E08000006      | Salford                | Metropolitan Districts   | 42    | ... |
+| E14001459      | Salford                | Westminster Constituency | 68    | ... |
+| E92000001      | England                | Country                  | 1337  | ... |
+| K04000001      | England and Wales      | England and Wales        | 1701  | ... |
 
 In this case, `geography_label` and `geography_type` are useful for humans, and `geography_code` is useful for machines. In fact, using linked data, the `geography_label` and `geography_type` values can be looked up from the `geography_code` value. In order to have more efficience storage and interpretation of data, data which isn't machine readable should be suppressed.
 
-Columns can be suppresse for interpretation by including the optional value `suppressOutput`. If this is true, it suppresses any output that would be generated when converting cells in this column. The default is false. [^column-properties]
+Columns can be suppressed for interpretation by including the optional value `suppressOutput`. If this is true, it suppresses any output that would be generated when converting cells in this column into other formats. The default is false. [^column-properties]
 
 In the following example only `geography_code` is kept for machine readability, and `geography_label`, and `geography_type` are suppressed.
 
@@ -198,13 +197,54 @@ In the following example only `geography_code` is kept for machine readability, 
 ]
 ```
 
-### Virtual Columns
-
-In addition to suppressing cells which aren't 
-
 ### Cell Value Templates
 
-In addition to 
+Cell value templates are used to map cell contents with additional information, we use a column's property `valueUrl` to provide machine readability to concepts such as geography codes.
+
+In the example below a value of `E08000006` in the column `geography_code` would expand to <http://statistics.data.gov.uk/id/statistical-geography/E08000006> when interpreted by a CSVW aware client.
+
+```json
+[
+    {
+        "name": "geography_code",
+        "valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}"
+    }
+]
+```
+
+### Virtual Columns
+
+In addition to suppressing cells which aren't required for machine readability, or making them machine readable, you can use virtual columns to create cells which are a combination of values of other cells for more advanced conversions.
+
+In the example below there are three columns to describe time periods: `period_type`, `period_code`, `period_label`. The values are `month`, `2019-10`, and `October 2010` respectively. We use the virtual column `period` to create the machine readable time period. This example configuration resolves to <http://reference.data.gov.uk/id/month/2019-10> for machine readability.
+
+```csv
+period_type,period_code,period_label
+month,2019-10,October 2010
+```
+
+```json
+[
+    {
+        "name": "period_type",
+        "suppressOutput": true
+    },
+    {
+        "name": "period_code",
+        "suppressOutput": true
+    },
+    {
+        "name": "period_label",
+        "suppressOutput": true
+    },
+    {
+        "name": "period",
+        "virtual": true,
+        "valueUrl": "http://reference.data.gov.uk/id/{period_type}/{period_code}"
+    }
+]
+
+
 
 ## CSVs as self-contained datasets
 
@@ -279,7 +319,7 @@ An example of a CSVW metadata file containing the relevant relationship with a `
 
 ### Catalogue Metadata
 
-Metadata improves the discoverability of datasets, in CSV-Ws the following properties are recommended. See [cataloguing.md](./cataloguing.md) for more details on how to use these properties. The purpose is to describe your data and provide additional context.
+Metadata improves the discoverability of datasets, in CSVWs the following properties are recommended. See [cataloguing.md](./cataloguing.md) for more details on how to use these properties. The purpose is to describe your data and provide additional context.
 
 - `@language` You will be able to put the language of your choice.
 - `dc:title` This is the title of your dataset. You need to keep this brief.
@@ -321,10 +361,8 @@ The second section will go through a step by step process of writing and describ
     {
         "url": "football.csv",
         "tableSchema": {
-            "columns": [
+            "columns": [ ...
 ```
-
-``In order to write a JSON-LD to include mulitple csvs. You need to include the csvs column details within a tables [ ] section.``
 
 `url` This link property gives the single URL of the CSV file that the table is held in, relative to the location of the metadata document. (from w.3/org-tabular-metadata)
 
@@ -343,50 +381,49 @@ For example the first entry in the JSON-LD should be the column that appears on 
 #### Time Period
 
 ```JSON
-                {
-                    "title": "Period Type",
-                    "name": "period_type",
-                    "data_type": "string",
-                    "suppressOutput": true
-                },
+{
+    "title": "Period Type",
+    "name": "period_type",
+    "data_type": "string",
+    "suppressOutput": true
+},
 ```  
 
 This section will look at the period type column. This entry should include a `title`, and `data type`. The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
 
 ```JSON
-                {
-                    "title": "Period Code",
-                    "name": "period_notation",
-                    "data_type": "string",
-                    "suppressOutput": true
-                },
+{
+    "title": "Period Code",
+    "name": "period_notation",
+    "data_type": "string",
+    "suppressOutput": true
+},
 ```
 
 This section will look at the period code column. This entry should include a `title`, `name` and `data type` The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
 
 ```JSON
-                {
-                   "title": "Variable Name",
-                    "name": "variable_name",
-                    "data_type": "string",
-                    "suppressOutput": true  
-                },{
-                    "title": "Observation",
-                    "name": "observation",
-                    "datatype": "decimal",
-                    "label": "Score"
-                },
-                {
-                    "title": "Measure",
-                    "name": "measure",
-                    "data_type": "string"
-                },
-                {
-                    "title": "Unit",
-                    "name": "unit",
-                    "data_type": "string"
-                },
-                
+{
+    "title": "Variable Name",
+    "name": "variable_name",
+    "data_type": "string",
+    "suppressOutput": true  
+},{
+    "title": "Observation",
+    "name": "observation",
+    "datatype": "decimal",
+    "label": "Score"
+},
+{
+    "title": "Measure",
+    "name": "measure",
+    "data_type": "string"
+},
+{
+    "title": "Unit",
+    "name": "unit",
+    "data_type": "string"
+}
 ```
 
 ### Putting it together
@@ -444,47 +481,6 @@ In this section, we combine the metadata of the overarching dataset, and its com
                         "name": "unit",
                         "data_type": "string"
                     },
-                ]
-            }
-        },
-        {
-            "url": "american_football.csv",
-            "tableSchema": {
-                "columns": [
-                    {
-                        "title": "Period Type",
-                        "name": "period_type",
-                        "data_type": "string",
-                        "suppressOutput": true
-                    },
-                    {
-                        "title": "Period Code",
-                        "name": "period_notation",
-                        "data_type": "string",
-                        "suppressOutput": true
-                    },
-                    {
-                        "title": "American Football Team",
-                        "name": "variable_name",
-                        "data_type": "string",
-                        "suppressOutput": true
-                    },
-                    {
-                        "title": "Observation",
-                        "name": "observation",
-                        "datatype": "decimal",
-                        "label": "Score"
-                    },
-                    {
-                        "title": "Measure",
-                        "name": "measure",
-                        "data_type": "string"
-                    },
-                    {
-                        "title": "Unit",
-                        "name": "unit",
-                        "data_type": "string"
-                    }
                 ]
             }
         }

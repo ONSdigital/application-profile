@@ -1,6 +1,6 @@
 # CSV Best Practises
 
-This document outlines best practices for creating CSV files for use with JSON-LD and the CSV-W vocabualarly.
+This document outlines best practices for creating CSV files for use with JSON-LD and the CSVW vocabualarly.
 
 CSV files are a common way to share data. They are easy to create and edit, and can be opened in any spreadsheet program. However, they are not a standardised format, and can be difficult to work with programmatically. CSV files are also not self-describing, and require additional documentation to be understood.
 
