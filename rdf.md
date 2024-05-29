@@ -331,7 +331,7 @@ We adopt the [measure dimension](https://www.w3.org/TR/vocab-data-cube/#dfn-meas
 
 We include a column in the CSV which specifies the measure for each observation.
 
-| geography      | period                  | sex    | measure_type                    | value | marker |
+| geography | period                  | sex    | measure_type                    | value | marker |
 | --------- | ----------------------- | ------ | ------------------------------- | ----- | ------ |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 76.7  |        |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 | 80.7  |        |
