@@ -43,12 +43,6 @@ TODO: Provide an example of a geography code, geography label, and geography typ
 
 There are five types of columns, and each CSV file should contain at least two of them.
 
-#### Observation
-
-Observation columns must only contain numbers. Suppressed or missing values must be left blank. If a value is suppressed, there should be a related column explaining the suppressed value. This is referred to as an observation status column (i.e. a special kind of attribute column called "observation status"). When dealing with whole numbers (i.e. counts of people) and where there isn't scaling (i.e. thousands, millions, etc.), the number should be expressed as an integer. When dealing with decimal numbers (i.e. percentages, indexes, scaled currency counts), the number should be expressed as a decimal number.
-
-**Note:** Try and keep the same number of decimal places for all values in a given column. This will make it easier to read, and not imply false precision.
-
 #### Dimension
 
 Dimension columns (otherwise known as factors or concepts) are used to identify the observation through a combination of concepts. Where each dimension in a CSV is filtered to a specific value there should only be one observation. In relational databases terminology all dimensions combine to a composite key. Some examples of dimensions are:
@@ -63,7 +57,7 @@ A quick way to check if a column only contains related data and unique identifia
 
 For example the three columns prefixed with `area_` are related in the table below, filtering on any two of the three would only ever result in one value for the remaining column. The area_code column is a unique identifier for each geography.
 
-| area_code | area_label        | Area_type              | value | ... |
+| area_code | area_label        | area_type              | value | ... |
 | --------- | ----------------- | ---------------------- | ----- | --- |
 | E08000006 | Salford           | Metropolitan Districts | 42    | ... |
 | E92000001 | England           | Country                | 1337  | ... |
@@ -71,17 +65,11 @@ For example the three columns prefixed with `area_` are related in the table bel
 
 **Note:** Dimension columns must contain values for every row in the CSV file and not be blank (i.e. they must be dense)
 
-#### Attributes
+#### Observation
 
-Attribute columns are used to qualify the observation. Most commonly the attribute columns are used to describe the absence or quality of an observation, these are commonly called "observation status" columns. There are two types of attribute columns, literal and resource columns.
+Observation columns must only contain numbers. Suppressed or missing values must be left blank. If a value is suppressed, there should be a related column explaining the suppressed value. This is referred to as an observation status column (i.e. a special kind of attribute column called "observation status"). When dealing with whole numbers (i.e. counts of people) and where there isn't scaling (i.e. thousands, millions, etc.), the number should be expressed as an integer. When dealing with decimal numbers (i.e. percentages, indexes, scaled currency counts), the number should be expressed as a decimal number.
 
-##### Literal attributes
-
-Literal attributes are used to describe the observation. When providing point estimates, often there are additional values which help provide context. For example, when providing a point estimate for the number of people in a given area, there may be a confidence interval (of which there are two values, the upper and lower bounds), a sample size, and a standard deviation. These values are all literal attributes.
-
-##### Observation status columns
-
-When creating observation status columns a naming convention helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column should have the same name as the observation column plus `_status` as a suffix. For example an observation column called `observation` should have a corresponding observation status called `observation_status`.
+**Note:** Try and keep the same number of decimal places for all values in a given column. This will make it easier to read, and not imply false precision.
 
 #### Measure columns
 
@@ -119,6 +107,18 @@ When scaling units take the base unit and suffix the multiplication factor prece
 - `ratio_0.001` for per thousands (used in SOME PUBLICATION)
 - `L_100` for hectolitres (used in HMRC Alcohol Bulletin)
 
+#### Attributes
+
+Attribute columns are used to qualify the observation. Most commonly the attribute columns are used to describe the absence or quality of an observation, these are commonly called "observation status" columns. There are two types of attribute columns, literal and resource columns.
+
+##### Literal attributes
+
+Literal attributes are used to describe the observation. When providing point estimates, often there are additional values which help provide context. For example, when providing a point estimate for the number of people in a given area, there may be a confidence interval (of which there are two values, the upper and lower bounds), a sample size, and a standard deviation. These values are all literal attributes.
+
+##### Observation status columns
+
+When creating observation status columns a naming convention helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column should have the same name as the observation column plus `_status` as a suffix. For example an observation column called `observation` should have a corresponding observation status called `observation_status`.
+
 ### Ordering
 
 Ensuring that users can understand your CSV files is important. To help with this, the columns should be ordered as follows:
@@ -132,6 +132,9 @@ Ensuring that users can understand your CSV files is important. To help with thi
 5. Literal attribute columns providing model output (e.g. upper confidence level, sample_size, standard deviation).
 6. Observation status column (if necessary).
 7. All other attribute columns.
+
+| period_code | period_type | period_label | area_code | area_type | observation | measure | unit | observation_status |
+| ----------- | ----------- | ------------ | --------- | --------- | ----------- | ------- | ---- | ------------------ |
 
 ## Overall principles
 
