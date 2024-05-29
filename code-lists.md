@@ -21,7 +21,7 @@
     - [Media types](#media-types)
   - [Reusable concepts in a CSV](#reusable-concepts-in-a-csv)
     - [Periods of time](#periods-of-time)
-    - [Area code, label and type](#area-code-label-and-type)
+    - [Geography code, label and type](#geography-code-label-and-type)
     - [Age code and label](#age-code-and-label)
     - [Sex code and label](#sex-code-and-label)
 
@@ -329,15 +329,15 @@ Statisticians may wish to report statistics against multiple classifications. Do
 
 For example, consider a dataset which mixes codes from the NUTS geography codelist with codes from the ONS geography codelist.
 
-| area_code | area_label          | value |
-| --------- | ------------------- | ----- |
-| UKC       | North East, England | ...   |
-| UKD       | North West, England | ...   |
-| E92000001 | England             | ...   |
+| geography_code | geography_label     | value |
+| -------------- | ------------------- | ----- |
+| UKC            | North East, England | ...   |
+| UKD            | North West, England | ...   |
+| E92000001      | England             | ...   |
 
 The NUTS codes have IRIs which are maintained by Eurostat, such as `http://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `http://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
 
-We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{area_code}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
+We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geographty_code}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
 
 We address this by creating new identifiers for each of the codes under a shared namespace, and using `skos:exactMatch` relations to relate these new identifiers to the more commonly used identifiers. For example,
 
@@ -561,18 +561,18 @@ For government year which starts in April we require the `period_type` to be gov
 
 Gregorian interval can be used if the time frame of your data does not conform to a standard time frame. This can be used for monthly, quarterly and yearly data. You need to enter the start date of when your dataset starts. Using the example above it is the 1st April 2001. The P3M refers to how much time has been captured. Using the example it is 3 months. You can add P1Y for yearly data to show the data is being captured for a year period.
 
-### Area code, label and type
+### Geography code, label and type
 
-| area_code | area_label     | area_type                         |
-| --------- | -------------- | --------------------------------- |
-| K02000001 | United Kingdom | Country                           |
-| E92000001 | England        | Nation                            |
-| E12000001 | North East     | Region                            |
-| E06000047 | County Durham  | County or Unitary Authority       |
-| E08000037 | Gateshead      | Local Authority District          |
-| E47000006 | Tees Valley    | Combined Authority or City Region |
+| geography_code | geography_label | geography_type                    |
+| -------------- | --------------- | --------------------------------- |
+| K02000001      | United Kingdom  | Country                           |
+| E92000001      | England         | Nation                            |
+| E12000001      | North East      | Region                            |
+| E06000047      | County Durham   | County or Unitary Authority       |
+| E08000037      | Gateshead       | Local Authority District          |
+| E47000006      | Tees Valley     | Combined Authority or City Region |
 
-The table above shows the variety of area types that can be represented in your data. The important thing is that in the area code column each entry has its own identifiable code.
+The table above shows the variety of geography types that can be represented in your data. The important thing is that in the geography code column each entry has its own identifiable code.
 
 ### Age code and label
 
