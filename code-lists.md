@@ -19,6 +19,11 @@
     - [Analysis function guidance on symbols and shorthand in tables](#analysis-function-guidance-on-symbols-and-shorthand-in-tables)
     - [Themes](#themes)
     - [Media types](#media-types)
+  - [Reusable concepts in a CSV](#reusable-concepts-in-a-csv)
+    - [Periods of time](#periods-of-time)
+    - [Geography code, label and type](#geography-code-label-and-type)
+    - [Age code and label](#age-code-and-label)
+    - [Sex code and label](#sex-code-and-label)
 
 ## Codelists
 
@@ -93,8 +98,8 @@ For example:
 | Property           | Requirement level | Notes                                                                     |
 | ------------------ | ----------------- | ------------------------------------------------------------------------- |
 | `skos:inScheme`    | mandatory         | See [codelists](#codelists)                                               |
-| `rdfs:label`       | mandatory         | See [titles](style.md#titles)                                                     |
-| `skos:prefLabel`   | mandatory         | See [titles](style.md#titles)                                                     |
+| `rdfs:label`       | mandatory         | See [titles](style.md#titles)                                             |
+| `skos:prefLabel`   | mandatory         | See [titles](style.md#titles)                                             |
 | `skos:notation`    | mandatory         |                                                                           |
 | `skos:broader`     | recommended       | See [hierarchical codelists](#hierarchical-codelists)                     |
 | `skos:narrower`    | recommended       | See [hierarchical codelists](#hierarchical-codelists)                     |
@@ -324,15 +329,15 @@ Statisticians may wish to report statistics against multiple classifications. Do
 
 For example, consider a dataset which mixes codes from the NUTS geography codelist with codes from the ONS geography codelist.
 
-| geography | geography_label     | value |
-| --------- | ------------------- | ----- |
-| UKC       | North East, England | ...   |
-| UKD       | North West, England | ...   |
-| E92000001 | England             | ...   |
+| geography_code | geography_label     | value |
+| -------------- | ------------------- | ----- |
+| UKC            | North East, England | ...   |
+| UKD            | North West, England | ...   |
+| E92000001      | England             | ...   |
 
 The NUTS codes have IRIs which are maintained by Eurostat, such as `http://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `http://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
 
-We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
+We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography_code}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
 
 We address this by creating new identifiers for each of the codes under a shared namespace, and using `skos:exactMatch` relations to relate these new identifiers to the more commonly used identifiers. For example,
 
@@ -508,8 +513,93 @@ Data providers should adopt the [analytical function guidance](https://analysisf
 
 > TODO: Cover media types from [IANA](https://www.w3.org/ns/iana/media-types/)
 
-| Label  | IRI                                                                |
-| ------ | ------------------------------------------------------------------ |
+| Label  | IRI                                                               |
+| ------ | ----------------------------------------------------------------- |
 | CSV    | `http://www.w3.org/ns/iana/media-types/text/csv#Resource`         |
 | JSON   | `http://www.w3.org/ns/iana/media-types/application/json#Resource` |
 | Turtle | `http://www.w3.org/ns/iana/media-types/text/turtle#Resource`      |
+
+## Reusable concepts in a CSV
+
+### Periods of time
+
+There are a varieety of different ways that time can be represented in your data. Below are some examples:
+
+| period_type | period_code | period_label     |
+| ----------- | ----------- | ---------------- |
+| day         | 1999-12-31  | 31-December-1999 |
+
+For calendar day data we require the `period_type` to be day. In the `period_code` we require the year, the month followed by the day. For `period_label` we require the field to be the day, the month written fully and then the year. This will help with human readability.
+
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| month       | 2020-01     | January-2020 |
+
+For monthly data that is from a calendar period we require the `period_type` to be month. In the `period_code` we require the year followed by the specified digit of the month. The `period_label` column is more human readble hence why it is showing the month's full name and the year.
+
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| quarter     | 2020-Q1     | 2020-Q1      |
+
+For quarterly data that is from a calendar period we require the `period_type` to be quarter. In the `period_code` and `period_label` we require the field to be the same. The year followed by which quarter.
+
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| year        | 2020        | 2020         |
+
+For calendar year data we require the `period_type` to be year. In the `period_code` and `period_label` we require the field to be the same. Just the year.
+
+| period_type     | period_code | period_label |
+| --------------- | ----------- | ------------ |
+| government-year | 2020-2021   | 2020-2021    |
+
+For government year which starts in April we require the `period_type` to be government-year. In the `period_code` and `period_label` we require the field to be the same. The year the period starts and the period where it ends.
+
+| period_type        | period_code             | period_label |
+| ------------------ | ----------------------- | ------------ |
+| gregorian-interval | 2001-04-01 00:00:00/P2M | Apr-Jun 2001 |
+
+Gregorian interval can be used if the time frame of your data does not conform to a standard time frame. This can also be used for monthly, quarterly and yearly data though slightly reduced clarity. We recommend only using the start and period method. Using the example above it is the 1st April 2001 as the start date. The P2M refers to how much time is within the period, the example being 2 months. For further details on how to construct a gregorian interval please refer to the [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) section on Wikipedia.
+
+### Geography code, label and type
+
+| geography_code | geography_label | geography_type              |
+| -------------- | --------------- | --------------------------- |
+| K02000001      | United Kingdom  | Country                     |
+| E92000001      | England         | Nation                      |
+| E12000001      | North East      | Region                      |
+| E06000047      | County Durham   | County or Unitary Authority |
+| E07000088      | Gosport         | Local Authority District    |
+| E14001252      | Gosport         | Westminster Constituency    |
+
+The table above shows the variety of geography types that can be represented in your data. The important thing is that in the geography code column each entry has its own identifiable code.
+
+### Age code and label
+
+| age_code | age_label              |
+| -------- | ---------------------- |
+| Y_GE16   | Aged 16 years and over |
+| Y16T24   | Aged 16 to 24          |
+| Y25T34   | Aged 25 to 34          |
+| Y35T44   | Aged 35 to 44          |
+| Y45T54   | Aged 45 to 54          |
+| Y55T74   | Aged 55 to 74          |
+| Y_GE75   | Aged 75 and over       |
+
+The examples in the table above show the best way to represent different age categories. his has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^1]
+
+### Sex code and label
+
+| sex_code | sex_label      |
+| -------- | -------------- |
+| F        | Female         |
+| M        | Male           |
+| _N       | Non response   |
+| _O       | Other          |
+| -U       | Unknown        |
+| _Z       | Not applicable |
+
+The examples in the table above show the best way to represent different sex categories. This has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^2]
+
+[^1]: <https://sdmx.org/?page_id=3215>
+[^2]: <https://sdmx.org/?page_id=3215>
