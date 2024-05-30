@@ -1,6 +1,6 @@
 # CSV Best Practises
 
-This document outlines best practices for creating CSV files for use with JSON-LD and the CSV-W vocabulary.
+This document outlines best practices for creating CSV files for use with JSON-LD and the CSVW vocabualarly.
 
 CSV files are a common way to share data. They are easy to create and edit, and can be opened in any spreadsheet program. However, they are not a standardised format, and can be difficult to work with programmatically. CSV files are also not self-describing, and require additional documentation to be understood.
 
@@ -33,11 +33,9 @@ CSV files used in our service should be saved as UTF-8 encoded text files with a
 
 Column headers should be in lowercase and snake case (e.g. `column_header`). This is to ensure consistency and readability. Column headers should also be unique, and should not contain any special characters (e.g. `!@#$%^&*()`). This even includes the pound sign (i.e. `£`), which should be replaced with `gbp` when appropriate.
 
-Related columns should have the same prefix (e.g. `area_code`, `area_label`, `area_type` or `time_period_type`, `time_period_code`, `time_period_label`, or even `observation` and `observation_status`), and should be adjacent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
+Related columns should have the same prefix (e.g. `geography_code`, `geography_label`, `geography_type` or `time_period_type`, `time_period_code`, `time_period_label`, or even `observation` and `observation_status`), and should be adjancent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
 
-**Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of area geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code.
-
-TODO: Provide an example of a geography code, geography label, and geography type where the geography type/code is required to disambiguate the geography label.
+**Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code. See example [table in Dimension section](#Geography_example).
 
 ### Types
 
@@ -61,13 +59,16 @@ To improve human readability and to ensure machine readability, ensure that code
 
 A quick way to check if a column only contains related data and unique identifiable is if you filter on a column and for every value you select another column will only ever have the same value for that row it is likely to help human readability.
 
-For example the three columns prefixed with `area_` are related in the table below, filtering on any two of the three would only ever result in one value for the remaining column. The area_code column is a unique identifier for each geography.
+For example the three columns prefixed with `geography_` are related in the table below, filtering on any of the three would only ever result in one value for the other two columns. The geography_code column is a unique identifier for the geography.
 
-| area_code | area_label        | Area_type              | value | ... |
-| --------- | ----------------- | ---------------------- | ----- | --- |
-| E08000006 | Salford           | Metropolitan Districts | 42    | ... |
-| E92000001 | England           | Country                | 1337  | ... |
-| K04000001 | England and Wales | England and Wales      |       | ... |
+| geography_code | geography_label        | geography_type           | value | ... |
+| -------------- | ---------------------- | ------------------------ | ----- | --- |
+| E08000006      | Salford                | Metropolitan Districts   | 42    | ... |
+| E14001459      | Salford                | Westminster Constituency | 68    | ... |
+| E92000001      | England                | Country                  | 1337  | ... |
+| K04000001      | England and Wales      | England and Wales        | 1701  | ... |
+
+<a name="Geography_example"></a>
 
 **Note:** Dimension columns must contain values for every row in the CSV file and not be blank (i.e. they must be dense)
 
@@ -77,7 +78,7 @@ Attribute columns are used to qualify the observation. Most commonly the attribu
 
 ##### Literal attributes
 
-Literal attributes are used to describe the observation. When providing point estimates, often there are additional values which help provide context. For example, when providing a point estimate for the number of people in a given area, there may be a confidence interval (of which there are two values, the upper and lower bounds), a sample size, and a standard deviation. These values are all literal attributes.
+Literal attributes are used to describe the observation. When providing point estimates, often there are additional values which help provide context. For example, when providing a point estimate for the number of people in a given geography, there may be a confidence interval (of which there are two values, the upper and lower bounds), a sample size, and a standard deviation. These values are all literal attributes.
 
 ##### Observation status columns
 

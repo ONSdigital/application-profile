@@ -61,13 +61,13 @@
             },
             {
                 "@type": "csvw:Column",
-                "csvw:name": "area",
-                "csvw:titles": "Area",
+                "csvw:name": "geography",
+                "csvw:titles": "Geography",
                 "csvw:datatype": "string",
-                "rdfs:label": "Area",
-                "rdfs:comment": "The area of an observation.",
-                "csvw:propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area",
-                "csvw:valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{area}"
+                "rdfs:label": "Geography",
+                "rdfs:comment": "The geography of an observation.",
+                "csvw:propertyUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography",
+                "csvw:valueUrl": "http://statistics.data.gov.uk/id/statistical-geography/{geography}"
             },
             {
                 "@type": "csvw:Column",
@@ -101,9 +101,9 @@
                 "csvw:valueUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube"
             }
         ],
-        "csvw:aboutUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+area}-{+period}-{+sex}",
+        "csvw:aboutUrl": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+geography}-{+period}-{+sex}",
         "csvw:primaryKey": [
-            "area",
+            "geography",
             "period",
             "sex"
         ]
@@ -159,15 +159,15 @@
                             }
                         },
                         {
-                            "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/area",
+                            "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/geography",
                             "@type": "qb:ComponentSpecification",
                             "qb:order": 2,
                             "qb:dimension": {
-                                "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area",
+                                "@id": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography",
                                 "@type": "qb:DimensionProperty",
-                                "qb:codeList": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area/codelist",
-                                "rdfs:label": "Area",
-                                "rdfs:comment": "The area of an observation."
+                                "qb:codeList": "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography/codelist",
+                                "rdfs:label": "Geography",
+                                "rdfs:comment": "The geography of an observation."
                             }
                         },
                         {

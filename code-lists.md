@@ -22,7 +22,7 @@
 
 ## Codelists
 
-Whereas a CSVW or a `qb:Dataset` is a distribution of a `dcat:Dataset`, so is a `skos:ConceptScheme`. We recommend that statisticians serialise code lists as CSV-W as their primary distribution, and generate other distributions from that source.
+Whereas a CSVW or a `qb:Dataset` is a distribution of a `dcat:Dataset`, so is a `skos:ConceptScheme`. We recommend that statisticians serialise code lists as CSVW as their primary distribution, and generate other distributions from that source.
 
 > TODO: Versioning of code lists is a hard problem to solve. As ONS doesn't directly control many code lists, we suggest we encourage people to adopt the versioning convention of the code list as the slug. E.g.  To encourage the reuse of code lists, we recommend adopting the naming convention of the competency UKSIC-2007 for the UK Standard Industrial Classification of Economic Activities 2007, or ISIC-4 for the International Standard Industrial Classification Revision 4 published by the United Nations in 2008.
 > TODO: Some stuff [here](https://groups.niso.org/higherlogic/ws/public/download/12591/z39-19-2005r2010.pdf) around the styling of labels used in a taxonomy.
@@ -141,7 +141,7 @@ For example, some statistics which make use of the Standard Industrial Classific
 - `24.4-5 (not 24.42 nor 24.46)`
 - `33 (not 33.15-16)`
 
-> TODO: How to express these sorts of semantics using OWL?
+> TODO: How to express these sorts of semantics using XKOS/SKOS or OWL?
 
 Notations like these, while intending to be descriptive, may be consfusing or not be appropriate to be included in an IRI. When extending a codelist with custom codes, we recommend generating new notations which are:
 
