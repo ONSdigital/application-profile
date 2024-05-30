@@ -337,7 +337,7 @@ For example, consider a dataset which mixes codes from the NUTS geography codeli
 
 The NUTS codes have IRIs which are maintained by Eurostat, such as `http://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `http://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
 
-We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geographty_code}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
+We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography_code}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
 
 We address this by creating new identifiers for each of the codes under a shared namespace, and using `skos:exactMatch` relations to relate these new identifiers to the more commonly used identifiers. For example,
 
@@ -525,52 +525,52 @@ Data providers should adopt the [analytical function guidance](https://analysisf
 
 There are a varieety of different ways that time can be represented in your data. Below are some examples:
 
-| period_code | period_label     | period_type |
-| ----------- | ---------------- | ----------- |
-| 1999-12-31  | 31-December-1999 | day         |
+| period_type | period_code | period_label     |
+| ----------- | ----------- | ---------------- |
+| day         | 1999-12-31  | 31-December-1999 |
 
 For calendar day data we require the `period_type` to be day. In the `period_code` we require the year, the month followed by the day. For `period_label` we require the field to be the day, the month written fully and then the year. This will help with human readability.
 
-| period_code | period_label | period_type |
-| ----------- | ------------ | ----------- |
-| 2020-01     | January-2020 | month       |
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| month       | 2020-01     | January-2020 |
 
 For monthly data that is from a calendar period we require the `period_type` to be month. In the `period_code` we require the year followed by the specified digit of the month. The `period_label` column is more human readble hence why it is showing the month's full name and the year.
 
-| period_code | period_label | period_type |
-| ----------- | ------------ | ----------- |
-| 2020-Q1     | 2020-Q1      | quarter     |
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| quarter     | 2020-Q1     | 2020-Q1      |
 
 For quarterly data that is from a calendar period we require the `period_type` to be quarter. In the `period_code` and `period_label` we require the field to be the same. The year followed by which quarter.
 
-| period_code | period_label | period_type |
-| ----------- | ------------ | ----------- |
-| 2020        | 2020         | year        |
+| period_type | period_code | period_label |
+| ----------- | ----------- | ------------ |
+| year        | 2020        | 2020         |
 
 For calendar year data we require the `period_type` to be year. In the `period_code` and `period_label` we require the field to be the same. Just the year.
 
-| period_code | period_label | period_type     |
-| ----------- | ------------ | --------------- |
-| 2020-2021   | 2020-2021    | government-year |
+| period_type     | period_code | period_label |
+| --------------- | ----------- | ------------ |
+| government-year | 2020-2021   | 2020-2021    |
 
 For government year which starts in April we require the `period_type` to be government-year. In the `period_code` and `period_label` we require the field to be the same. The year the period starts and the period where it ends.
 
-| period_code             | period_label | period_type        |
-| ----------------------- | ------------ | ------------------ |
-| 2001-04-01 00:00:00/P3M | Apr-Jun 2001 | gregorian-interval |
+| period_type        | period_code             | period_label |
+| ------------------ | ----------------------- | ------------ |
+| gregorian-interval | 2001-04-01 00:00:00/P2M | Apr-Jun 2001 |
 
-Gregorian interval can be used if the time frame of your data does not conform to a standard time frame. This can be used for monthly, quarterly and yearly data. You need to enter the start date of when your dataset starts. Using the example above it is the 1st April 2001. The P3M refers to how much time has been captured. Using the example it is 3 months. You can add P1Y for yearly data to show the data is being captured for a year period.
+Gregorian interval can be used if the time frame of your data does not conform to a standard time frame. This can also be used for monthly, quarterly and yearly data though slightly reduced clarity. We recommend only using the start and period method. Using the example above it is the 1st April 2001 as the start date. The P2M refers to how much time is within the period, the example being 2 months. For further details on how to construct a gregorian interval please refer to the [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) section on Wikipedia.
 
 ### Geography code, label and type
 
-| geography_code | geography_label | geography_type                    |
-| -------------- | --------------- | --------------------------------- |
-| K02000001      | United Kingdom  | Country                           |
-| E92000001      | England         | Nation                            |
-| E12000001      | North East      | Region                            |
-| E06000047      | County Durham   | County or Unitary Authority       |
-| E08000037      | Gateshead       | Local Authority District          |
-| E47000006      | Tees Valley     | Combined Authority or City Region |
+| geography_code | geography_label | geography_type              |
+| -------------- | --------------- | --------------------------- |
+| K02000001      | United Kingdom  | Country                     |
+| E92000001      | England         | Nation                      |
+| E12000001      | North East      | Region                      |
+| E06000047      | County Durham   | County or Unitary Authority |
+| E07000088      | Gosport         | Local Authority District    |
+| E14001252      | Gosport         | Westminster Constituency    |
 
 The table above shows the variety of geography types that can be represented in your data. The important thing is that in the geography code column each entry has its own identifiable code.
 
