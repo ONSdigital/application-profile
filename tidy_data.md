@@ -132,31 +132,31 @@ For data to be classified as tidy data:
 2. Each observation forms a row.
 3. Each type of observational unit forms a table.
 
-| area    | period    | sex    | life_expectancy |
-| ------- | --------- | ------ | --------------- |
-| Newport | 2004-2006 | Male   | 76.7            |
-| Newport | 2004-2006 | Female | 80.7            |
-| Cardiff | 2004-2006 | Male   | 78.7            |
-| Cardiff | 2004-2006 | Female | 83.3            |
-| ...     | ...       | ...    | ...             |
+| geography    | period    | sex    | life_expectancy |
+| ------------ | --------- | ------ | --------------- |
+| Newport      | 2004-2006 | Male   | 76.7            |
+| Newport      | 2004-2006 | Female | 80.7            |
+| Cardiff      | 2004-2006 | Male   | 78.7            |
+| Cardiff      | 2004-2006 | Female | 83.3            |
+| ...          | ...       | ...    | ...             |
 
 ## Adopt common identifiers
 
 We should adopt common and unambiguous identifiers for data items such as ONS geography codes or ISO-8601 time intervals.
 
-| area      | period                  | sex    | life_expectancy |
-| --------- | ----------------------- | ------ | --------------- |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female | 83.3            |
-| ...       | ...                     | ...    | ...             |
+| geography_code      | period                  | sex    | life_expectancy |
+| ------------------- | ----------------------- | ------ | --------------- |
+| W06000022           | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
+| W06000022           | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
+| W06000015           | 2004-01-01T00:00:00/P3Y | Male   | 78.7            |
+| W06000015           | 2004-01-01T00:00:00/P3Y | Female | 83.3            |
+| ...                 | ...                     | ...    | ...             |
 
 In this example, adopting ISO 8601 time intervals allows machines to provide additional functionality for computing with this type of data. Adopting geography codes allows for linking between datasets.
 
 ```r
 # A tibble: 4 x 4
-  area      period                         sex    life_expectancy
+  geography period                         sex    life_expectancy
   <chr>     <Interval>                     <chr>            <dbl>
 1 W06000022 2004-01-01 UTC--2007-01-01 UTC Male              76.7
 2 W06000022 2004-01-01 UTC--2007-01-01 UTC Female            80.7
@@ -168,13 +168,13 @@ Producing data which _only_ uses identifiers could reduce usability by humans. I
 
 When [using a CSVW to create an RDF data cube](rdf_cubes.md#using-csvw-to-create-an-rdf-data-cube), any redundant columns must be suppressed by setting `"suppressOutput": "true"`. CSVW provides a way for values rows, and column headings of a CSV file to be mapped to RDF resources. Some schema fields refer to codelists, to limit and standardize the possible values of the fields, in order to promote data interoperability.
 
-| area      | area_label | period                  | period_label | sex    | life_expectancy |
-| --------- | ---------- | ----------------------- | ------------ | ------ | --------------- |
-| W06000022 | Newport    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Male   | 76.7            |
-| W06000022 | Newport    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 80.7            |
-| W06000015 | Cardiff    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Male   | 78.7            |
-| W06000015 | Cardiff    | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 83.3            |
-| ...       | ...        | ...                     | ...          | ...    | ...             |
+| geography_code | geography_label | period_code             | period_label | sex    | life_expectancy |
+| -------------- | --------------- | ----------------------- | ------------ | ------ | --------------- |
+| W06000022      | Newport         | 2004-01-01T00:00:00/P3Y | 2004-2006    | Male   | 76.7            |
+| W06000022      | Newport         | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 80.7            |
+| W06000015      | Cardiff         | 2004-01-01T00:00:00/P3Y | 2004-2006    | Male   | 78.7            |
+| W06000015      | Cardiff         | 2004-01-01T00:00:00/P3Y | 2004-2006    | Female | 83.3            |
+| ...            | ...             | ...                     | ...          | ...    | ...             |
 
 To adopt common identifiers, there needs to exist a list of identifiers which can be shared and reused. We cover the creation of classifications in [codelists](code-lists.md).
 
@@ -184,29 +184,29 @@ Statisticians often need to add metadata and additional context to their tables,
 
 For example, this table indicates that the life expectancy is not available (`O`) or provisional (`P`) for some entries.
 
-| area      | period                  | sex    | life_expectancy |
-| --------- | ----------------------- | ------ | --------------- |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7 P          |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female | O               |
-| ...       | ...                     | ...    | ...             |
+| geography      | period                  | sex    | life_expectancy |
+| -------------- | ----------------------- | ------ | --------------- |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Female | 80.7            |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Male   | 78.7 P          |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Female | O               |
+| ...            | ...                     | ...    | ...             |
 
 These annotations are usually included inside the table alongside numeric data. When this happens the columns no longer contain a single type. By placing symbols such as `O` in the same column as numeric values, statistical software will interpret the column as containing strings and not numbers.
 
 To avoid the mixing of types, we recommend that these annotations be placed in their own column. We refer to these annotations as _observation statuses_.
 
-| area      | period                  | sex    | life_expectancy | observation_status |
-| --------- | ----------------------- | ------ | --------------- | ------------------ |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |                    |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            |                    |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | P                  |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | O                  |
-| ...       | ...                     | ...    | ...             |                    |
+| geography      | period                  | sex    | life_expectancy | observation_status |
+| -------------- | ----------------------- | ------ | --------------- | ------------------ |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Male   | 76.7            |                    |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Female | 80.7            |                    |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | P                  |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Female |                 | O                  |
+| ...            | ...                     | ...    | ...             |                    |
 
 This adds some complexity when a table has multiple statistical measures as it is unclear which of the columns the `observation_status` applies to. In the following example, it is unclear whether the entry for `life_expectancy` or `disability_free_life_expectancy` (or both) is provisional.
 
-| area      | period                  | sex    | life_expectancy | disability_free_life_expectancy | observation_status |
+| geography      | period                  | sex    | life_expectancy | disability_free_life_expectancy | observation_status |
 | --------- | ----------------------- | ------ | --------------- | ------------------------------- | ------------------ |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | 70.1                            |                    |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            | 80.2                            |                    |
@@ -216,7 +216,7 @@ This adds some complexity when a table has multiple statistical measures as it i
 
 We solve this by pivoting the measures into a `measure_type` column, so each row represents a single statistical measure, with a single observation status relating specifically to that measure.
 
-| area      | period                  | sex    | measure_type                    | value | observation_status |
+| geography      | period                  | sex    | measure_type                    | value | observation_status |
 | --------- | ----------------------- | ------ | ------------------------------- | ----- | ------------------ |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Male   | life-expectancy                 | 76.7  |                    |
 | W06000022 | 2004-01-01T00:00:00/P3Y | Female | life-expectancy                 | 80.7  |                    |
@@ -244,7 +244,7 @@ import pandas as pd
 
 df = (
     df
-    .set_index(["area", "period" ,"sex", "measure_type"])["value"]
+    .set_index(["geography", "period" ,"sex", "measure_type"])["value"]
     .unstack()
     .reset_index()
 )
@@ -252,13 +252,13 @@ df = (
 
 After pivoting with the above code, each of the measures has its own column.
 
-| area      | period                  | sex    | life_expectancy | disability_free_life_expectancy |
-| --------- | ----------------------- | ------ | --------------- | ------------------------------- |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | 70.1                            |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            | 80.2                            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | 70.3                            |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female |                 | 80.4                            |
-| ...       | ...                     | ...    | ...             |                                 |
+| geography      | period                  | sex    | life_expectancy | disability_free_life_expectancy |
+| -------------- | ----------------------- | ------ | --------------- | ------------------------------- |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | 70.1                            |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Female | 80.7            | 80.2                            |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | 70.3                            |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Female |                 | 80.4                            |
+| ...            | ...                     | ...    | ...             |                                 |
 
 ## Expressing concept hierarchies
 
@@ -329,13 +329,13 @@ When [using a CSVW to create an RDF data cube](rdf_cubes#using-csvw-to-create-a-
 
 Units of an observation should be specified by including a units column for readability of the csv.
 
-| area      | period                  | sex    | life_expectancy | units |
-| --------- | ----------------------- | ------ | --------------- | ----- |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | years |
-| W06000022 | 2004-01-01T00:00:00/P3Y | Female | 80.7            | years |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | years |
-| W06000015 | 2004-01-01T00:00:00/P3Y | Female | 83.3            | years |
-| ...       | ...                     | ...    | ...             |       |
+| geography      | period                  | sex    | life_expectancy | units |
+| -------------- | ----------------------- | ------ | --------------- | ----- |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Male   | 76.7            | years |
+| W06000022      | 2004-01-01T00:00:00/P3Y | Female | 80.7            | years |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Male   | 78.7            | years |
+| W06000015      | 2004-01-01T00:00:00/P3Y | Female | 83.3            | years |
+| ...            | ...                     | ...    | ...             |       |
 
 In the case of a single-measure dataset (or multiple-measures where those measures share the same units of measurement), the units of an observation may be specified via a CSVW virtual column.
 

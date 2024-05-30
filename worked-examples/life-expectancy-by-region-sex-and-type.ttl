@@ -15,7 +15,7 @@
     dcterms:publisher <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
     dcterms:title "Life expectancy by local authority and sex"@en,
         "Life expectancy by local authority and sex (CSV)"@en ;
-    csvw:tableSchema [ csvw:aboutUrl "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+area}-{+period}-{+sex}"@en ;
+    csvw:tableSchema [ csvw:aboutUrl "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/obs/{+geography}-{+period}-{+sex}"@en ;
             csvw:columns [ a csvw:Column ;
                     rdfs:label "Sex"@en ;
                     rdfs:comment "Biological sex of observed individuals."@en ;
@@ -48,14 +48,14 @@
                     csvw:titles "Period"@en ;
                     csvw:valueUrl "http://reference.data.gov.uk/id/gregorian-interval/{+period}" ],
                 [ a csvw:Column ;
-                    rdfs:label "Area"@en ;
-                    rdfs:comment "The area of an observation."@en ;
+                    rdfs:label "Geography"@en ;
+                    rdfs:comment "The geography of an observation."@en ;
                     csvw:datatype <xsd:string> ;
-                    csvw:name "area" ;
-                    csvw:propertyUrl <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area> ;
-                    csvw:titles "Area"@en ;
-                    csvw:valueUrl "http://statistics.data.gov.uk/id/statistical-geography/{area}" ] ;
-            csvw:primaryKey "area"@en,
+                    csvw:name "geography" ;
+                    csvw:propertyUrl <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography> ;
+                    csvw:titles "Geography"@en ;
+                    csvw:valueUrl "http://statistics.data.gov.uk/id/statistical-geography/{geography}" ] ;
+            csvw:primaryKey "geography"@en,
                 "period"@en,
                 "sex"@en ] ;
     csvw:url <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv> ;
@@ -72,8 +72,8 @@
     dcterms:title "Life expectancy by local authority and sex (RDF Data Cube)"@en ;
     qb:structure <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/structure> .
 
-<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/area> a qb:ComponentSpecification ;
-    qb:dimension <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area> ;
+<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/geography> a qb:ComponentSpecification ;
+    qb:dimension <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography> ;
     qb:order 2 .
 
 <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/life-expectancy> a qb:ComponentSpecification ;
@@ -89,17 +89,17 @@
     qb:order 3 .
 
 <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/structure> a qb:DataStructureDefinition ;
-    qb:component <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/area>,
+    qb:component <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/geography>,
         <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/life-expectancy>,
         <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/period>,
         <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/datacube/component/sex> .
 
 <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time.csv> a dcat:Distribution .
 
-<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area> a qb:DimensionProperty ;
-    rdfs:label "Area"@en ;
-    qb:codeList "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/area/codelist"@en ;
-    rdfs:comment "The area of an observation."@en .
+<http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography> a qb:DimensionProperty ;
+    rdfs:label "Geography"@en ;
+    qb:codeList "http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/geography/codelist"@en ;
+    rdfs:comment "The geography of an observation."@en .
 
 <http://data.gov.uk/dataset/life-expectancy-by-region-sex-and-time/dimension/period> a qb:DimensionProperty ;
     rdfs:label "Period"@en ;

@@ -4,7 +4,10 @@ _Working draft._
 
 The key words must, must not, required, shall, shall not, should, should not, recommended, may, and optional are to be interpreted as described in RFC 2119.
 
+## Table of Contents
+
 - [Application Profile](#application-profile)
+  - [Table of Contents](#table-of-contents)
   - [Preamble](#preamble)
     - [Data on the Web Best Practises](#data-on-the-web-best-practises)
     - [Five star data](#five-star-data)
@@ -13,18 +16,18 @@ The key words must, must not, required, shall, shall not, should, should not, re
   - [Data structure](#data-structure)
     - [Tidy Data dependencies](#tidy-data-dependencies)
     - [Using JSON-LD to describe statistical data](#using-json-ld-to-describe-statistical-data)
-      - [Standards divergence from CSV-W](#standards-divergence-from-csv-w)
+      - [Standards divergence from CSVW](#standards-divergence-from-csvw)
     - [Overview Object Model Diagram](#overview-object-model-diagram)
   - [Our API endpoints](#our-api-endpoints)
     - [Design decision on object model](#design-decision-on-object-model)
     - [Draft JSON-LD Context](#draft-json-ld-context)
     - [HTTP verbs and their applicability to our objects](#http-verbs-and-their-applicability-to-our-objects)
-      - [Datasets (aka dcat:DatasetSeries)](#datasets-aka-dcatdatasetseries)
+      - [Datasets](#datasets)
         - [GET of a CPIH Dataset](#get-of-a-cpih-dataset)
       - [POST of a CPIH dataset](#post-of-a-cpih-dataset)
-      - [Editions (aka dcat:Dataset)](#editions-aka-dcatdataset)
+      - [Editions](#editions)
         - [Statistics quality designations](#statistics-quality-designations)
-      - [Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)](#distributions-dcatdistribution-qbdataset-and-versions-dcatdataset)
+      - [Distributions](#distributions)
   - [Versioning](#versioning)
     - [Example of versioning in RDF for CPIH](#example-of-versioning-in-rdf-for-cpih)
 
@@ -116,11 +119,11 @@ Our standards and vocabularies are based on the [Tidy Data](https://vita.had.co.
 
 We use JSON-LD to encode the metadata about statistical publications; metadata includes data which helps discovery, and provides guarantees on strucutre. JSON-LD is a standard for encoding linked data in JSON. JSON-LD is a subset of JSON, so any valid JSON-LD is also valid JSON. This makes using our JSON-LD representation of statistical data easy to use in any JSON application but better in ours.
 
-#### Standards divergence from CSV-W
+#### Standards divergence from CSVW
 
-In order to gain the benefits of JSON-LD being directly consumable as RDF, we add the CSV-W context which is a violation of the CSV-W specification. CSV-W specfically states that the only acceptable context of a CSV-W document is the CSV-W context, whereas we use the CSV-W namespace in conjunction with other namespaces within our own contexts. This allows us to link our metadata about statistical publications with tabular data and its structure using familiar terms from the CSV on the Web standard.
+In order to gain the benefits of JSON-LD being directly consumable as RDF, we add the CSVW context which is a violation of the CSVW specification. CSVW specfically states that the only acceptable context of a CSVW document is the CSVW context, whereas we use the CSVW namespace in conjunction with other namespaces within our own contexts. This allows us to link our metadata about statistical publications with tabular data and its structure using familiar terms from the CSV on the Web standard.
 
-(Note: We know the drama between JSON-LD and CSV-W was a bit of a mess when both were being developed, but we think the benefits of using JSON-LD outweigh the drawbacks of violating the CSV-W specification.)
+(Note: We know the drama between JSON-LD and CSVW was a bit of a mess when both were being developed, but we think the benefits of using JSON-LD outweigh the drawbacks of violating the CSVW specification.)
 
 ### Overview Object Model Diagram
 
@@ -257,7 +260,7 @@ We are heavily reliant on dcat and dcterms to relate our statistical datasets, e
 - We call our statistical publication series _Datasets_, although they are actually `dcat:DatasetSeries`.
 - We call releases within these Datasets _Editions_, and they are dcat:inSeries of the `dcat:DatasetSeries` and are of type dcat:Dataset.
 - We call all versions within these Editions _Versions_, and they are the object of the Editions' `dcat:hasVersion` property and are of type `dcat:Dataset`.
-- Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however we are targetting JSON-LD with a CSV-W context representing a qb:DataSet.
+- Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however we are targetting JSON-LD with a CSVW context representing a qb:DataSet.
 
 ## Our API endpoints
 
@@ -290,7 +293,9 @@ We are building a series of JSON-LD contexts to support the publication of our s
 
 We use the standard HTTP verbs to interact with our objects. Not all verbs are applicable to all objects, nor are all accessible publicly. We are still working out the business logic of mandatory and optional fields, and how to curate the namespace available to the ID of objects.
 
-#### Datasets (aka dcat:DatasetSeries)
+#### Datasets
+
+Datasets are the primary object, and are in fact dcat:DatasetSeries. They are the parent object of Editions, and are the object of the CatalogRecord.
 
 | Type            | Predicate                  | Range                               | POST Datasets | PUT Datasets | GET Datasets | GET Datasets/{ID} | DELETE Datasets |
 | --------------- | -------------------------- | ----------------------------------- | ------------- | ------------ | ------------ | ----------------- | --------------- |
@@ -422,7 +427,9 @@ We use the standard HTTP verbs to interact with our objects. Not all verbs are a
 }
 ```
 
-#### Editions (aka dcat:Dataset)
+#### Editions
+
+Editions are the child object of Datasets, and are in fact dcat:Dataset. They are the parent object of Versions.
 
 | Type            | Predicate                       | Range                               | POST Editions | PUT Editions | GET Editions | GET Editions/{ID} | DELETE Editions |
 | --------------- | ------------------------------- | ----------------------------------- | ------------- | ------------ | ------------ | ----------------- | --------------- |
@@ -493,7 +500,10 @@ ex:myDataset a dcat:Dataset ;
 }
 ```
 
-#### Distributions (dcat:Distribution, qb:Dataset) and Versions (dcat:Dataset)
+#### Distributions
+
+TODO: Split this into a table for Versions.
+TODO: Create a new section for Distributions, show how they relate to Excel or CSV or RDF.
 
 | Type            | Predicate            | Range                                  | dcat:Dataset (Version) | dcat:Distribution | csvw:TableSchema | csvw:Column | POST Versions | GET Versions | GET Versions/{ID} | DELETE Version |
 | --------------- | -------------------- | -------------------------------------- | ---------------------- | ----------------- | ---------------- | ----------- | ------------- | ------------ | ----------------- | -------------- |
