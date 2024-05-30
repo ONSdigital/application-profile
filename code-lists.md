@@ -601,7 +601,5 @@ The examples in the table above show the best way to represent different age cat
 
 The examples in the table above show the best way to represent different sex categories. This has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^2]
 
-
 [^1]: <https://sdmx.org/?page_id=3215>
 [^2]: <https://sdmx.org/?page_id=3215>
-
