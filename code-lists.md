@@ -142,7 +142,7 @@ For example, some statistics which make use of the Standard Industrial Classific
 - `24.4-5 (not 24.42 nor 24.46)`
 - `33 (not 33.15-16)`
 
-> TODO: How to express these sorts of semantics using OWL?
+> TODO: How to express these sorts of semantics using XKOS/SKOS or OWL?
 
 Notations like these, while intending to be descriptive, may be consfusing or not be appropriate to be included in an IRI. When extending a codelist with custom codes, we recommend generating new notations which are:
 

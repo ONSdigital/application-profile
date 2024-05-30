@@ -36,7 +36,7 @@ Column headers should be in lowercase and snake case (e.g. `column_header`). Thi
 
 Related columns should have the same prefix (e.g. `geography_code`, `geography_label`, `geography_type` or `time_period_type`, `time_period_code`, `time_period_label`, or even `observation` and `observation_status`), and should be adjancent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
 
-**Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code. See example [table in Dimension section](^Geography example).
+**Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code. See example [table in Dimension section](#Geography_example).
 
 ### Types
 
@@ -69,7 +69,7 @@ For example the three columns prefixed with `geography_` are related in the tabl
 | E92000001      | England                | Country                  | 1337  | ... |
 | K04000001      | England and Wales      | England and Wales        | 1701  | ... |
 
-(^Geography example)
+<a name="Geography_example"></a>
 
 **Note:** Dimension columns must contain values for every row in the CSV file and not be blank (i.e. they must be dense)
 
