@@ -180,7 +180,7 @@ To adopt common identifiers, there needs to exist a list of identifiers which ca
 
 ## Using symbols and shorthand in tables
 
-Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is ommitted to prevent disclosing individual responses. The [Statistical Data and Metadata eXchange (SDMX)](https://sdmx.org/) has defined a code list which supports several data markups, currently at [version 2.2](https://sdmx.org/wp-content/uploads/CL_OBS_STATUS_v2_2.docx).
+Statisticians often need to add metadata and additional context to their tables, such as describing that data are not available, an estimate is provisional or an estimate is omitted to prevent disclosing individual responses. The [Statistical Data and Metadata eXchange (SDMX)](https://sdmx.org/) has defined a code list which supports several data markups, currently at [version 2.2](https://sdmx.org/wp-content/uploads/CL_OBS_STATUS_v2_2.docx).
 
 For example, this table indicates that the life expectancy is not available (`O`) or provisional (`P`) for some entries.
 
@@ -352,7 +352,7 @@ Model components and uncertainty should be expressed using literal attributes. A
 
 > Source: [Wikipedia](https://en.wikipedia.org/wiki/Average_human_height_by_country)
 
-For datasets with confidence internals, we recommend attaching the upper and lower bounds to the primary observation as individiual literal attributes and not as a range.
+For datasets with confidence internals, we recommend attaching the upper and lower bounds to the primary observation as individual literal attributes and not as a range.
 
 > TODO: This is the confidence/credible interval level section/plug
 

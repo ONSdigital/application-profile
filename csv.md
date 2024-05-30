@@ -8,22 +8,21 @@ By using the following guidelines, you can create CSV files that are easier to w
 
 ## CSV Basics
 
-CSV files used in our service should be saved as UTF-8 encoded text files with a .csv extension. The first row should contain the column headers in lowecase and snake case (e.g. `column_header`). The following rows should contain the data for each column. Each row should be separated by a new line, and each column should be separated by a comma. When a column contains a comma, the entire column's values should be wrapped in double quotes (i.e. `"`).
+CSV files used in our service should be saved as UTF-8 encoded text files with a .csv extension. The first row should contain the column headers in lower case and snake case (e.g. `column_header`). The following rows should contain the data for each column. Each row should be separated by a new line, and each column should be separated by a comma. When a column contains a comma, the entire column's values should be wrapped in double quotes (i.e. `"`).
 
 ## In brief
 
 - Column headers should be in lowercase and snake case (e.g. `column_header`).
 - Column headers should be unique, and should not contain any special characters (e.g. `!@#$%^&*()`).
-- Related columns should have the same prefix (e.g. `geo_code`, `geo_name`, `geo_type` or `GBP_millions` and `GBP_millions_obs_status`, or even `observation` and `observation_status`).
+- Related columns should have the same prefix (e.g. `area_code`, `area_name`, `area_type`, or even `observation` and `observation_status`).
 - Columns should be ordered as follows:
     1. Dimension columns, order first by time period, then by geography, then in descending order by volume of options in each column (i.e. a column with 17 values would come before a column with 3 values).
-    2. Obsevation column.
+    2. Observation column.
     3. Measure column(s). (e.g. count and spending per capita)
     4. Unit column. (e.g. number, GBP, miles per hour, portion, percent)
     5. Literal attribute columns providing model output (e.g. upper confidence level, sample_size, standard deviation).
     6. Observation status column (if necessary).
     7. All other attribute columns.
-- TODO: DO I ACTUALLY WANT THIS? Multiple obesrvation columns can exist where the measure type becomes the column title (e.g. a dataset of local authorities with three observation columns `population`, `per_capita_transport_spend`, and `per_capita_health_spend`). This is not recommended as it as it an advanced representation and makes expressing the data as machine readble more complicated, but it is allowed.
 - Ensure that the concepts used in the CSV files are clear and easily understandable to enhance human readability.
 - Each observation should be uniquely addressable by filtering all dimensions to a given value. If more than one observation is returned, then there needs to be additional dimensions to make the observation addressable.
 - All dimensions, measures, and unit columns should have values for every observation. These columns must be "dense".
@@ -52,7 +51,7 @@ Observation columns must only contain numbers. Suppressed or missing values must
 
 Dimension columns (otherwise known as factors or concepts) are used to identify the observation through a combination of concepts. Where each dimension in a CSV is filtered to a specific value there should only be one observation. In relational databases terminology all dimensions combine to a composite key. Some examples of dimensions are:
 
-- `government_year` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
+- `time_period_code` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
 - `geography_code` with one value being `E09000001` (i.e. the nation of `England`)
 - `sic_2007` with one value being `01.11` (i.e. the concept `Growing of cereals (except rice), leguminous crops and oil seeds`)
 
@@ -83,11 +82,11 @@ Literal attributes are used to describe the observation. When providing point es
 
 ##### Observation status columns
 
-When creating observation status columns a naming convetion helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column column should have the same name as the observation column plus `_status` as a suffix. For example an observation column called `observation` should have a corresponding observation status called `observation_status`.
+When creating observation status columns a naming convention helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column should have the same name as the observation column plus `_status` as a suffix. For example an observation column called `observation` should have a corresponding observation status called `observation_status`.
 
 #### Measure columns
 
-Measure columns are used to describe the measurement method for the observation when a dataset has multiple meausres. For example, a dataset may have a measure of `spend` and another measure of `spend per person`. In this case, the measure column would contain the measurement method for each observation. In many datasets the measure column is not required as there is only one measure.
+Measure columns are used to describe the measurement method for the observation when a dataset has multiple measures. For example, a dataset may have a measure of `spend` and another measure of `spend per person`. In this case, the measure column would contain the measurement method for each observation. In many datasets the measure column is not required as there is only one measure.
 
 Example measures include counts (e.g. of people, money, companies), indexes, and frequency.
 
@@ -99,23 +98,23 @@ When a dataset contains both seasonal and non-seasonal measures, the two compone
 
 #### Unit columns
 
-Unit columns are used to describe the observation's unit when a dataset employes multiple units. The majority of the time there will be a single unit for each measure, but that is not always the case (i.e. average height might be captured in inches, metres, or centimetres). Units are critical to comparability, allowing for conversions (i.e. between currencies or weights).
+Unit columns are used to describe the observation's unit when a dataset employs multiple units. The majority of the time there will be a single unit for each measure, but that is not always the case (i.e. average height might be captured in inches, metres, or centimetres). Units are critical to comparability, allowing for conversions (i.e. between currencies or weights).
 
 Example units include kilograms, miles, numbers, and percentages.
 
 **Note:** Count is not a unit. It is a measure. The unit you want is "number".
 
-**Note:** Indicies are only comparable to itself, therefore they are "unitless". You can compare miles and kilometres, but you cannot compare the FTSE 100 and the FTSE 250 indices directly you can only compare their trends in relation to eachother, you cannot convert the former index into the latter.
+**Note:** Indices are only comparable to itself, therefore they are "unitless". You can compare miles and kilometres, but you cannot compare the FTSE 100 and the FTSE 250 indices directly you can only compare their trends in relation to each other, you cannot convert the former index into the latter.
 
 The units used should *always* be [QUDT units](https://www.qudt.org/doc/DOC_VOCAB-UNITS.html) unless no appropriate unit exists, which is exceptionally rare. Again, more often in statistics you're looking at numbers, rates, percentages, fractions, frequencies, and unitless.
 
 ##### Scaling units
 
-Often in summary statistics publications units need to be scaled in order to control disclosure, or to maintain an appropriate level of granularity. Scaled units are especially common in publications like National Accounts, which contains the caucluated and reported spend of the Government of the United Kingdom and Northern Ireland, which totals over a trillion GBP (i.e. 1000000000000) and those figures are hard to sight read.
+Often in summary statistics publications units need to be scaled in order to control disclosure, or to maintain an appropriate level of granularity. Scaled units are especially common in publications like National Accounts, which contains the calculated and reported spend of the Government of the United Kingdom and Northern Ireland, which totals over a trillion GBP (i.e. 1000000000000) and those figures are hard to sight read.
 
 When scaling units take the base unit and suffix the multiplication factor preceded by an underscore. Written and decimal representations are both acceptable for several examples,
 
-- `GBP_millions` for millions of GBP (used in National acounts)
+- `GBP_millions` for millions of GBP (used in National accounts)
 - `NUM_1000` for thousands (used in SOME PUBLICATION)
 - `PER_tenths` (i.e. `PER`cent * 0.1 a.k.a tenths) for per thousands (used in SOME PUBLICATION)
 - `ratio_0.001` for per thousands (used in SOME PUBLICATION)
@@ -128,7 +127,7 @@ Ensuring that users can understand your CSV files is important. To help with thi
 1. Dimension columns, order first by time period, then by geography, then in descending order by volume of options in each column (i.e. a column with 17 values would come before a column with 3 values).
   a. Time period columns should be ordered by type, then by code, then by label.
   b. Geography columns should be ordered by code, the label, then by type.
-2. Obsevation column.
+2. Observation column.
 3. Measure column(s). (e.g. count and spending per capita)
 4. Unit column. (e.g. number, GBP, miles per hour, portion, percent)
 5. Literal attribute columns providing model output (e.g. upper confidence level, sample_size, standard deviation).
