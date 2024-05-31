@@ -324,7 +324,7 @@ Metadata improves the discoverability of datasets, in CSVWs the following proper
 - `@language` You will be able to put the language of your choice.
 - `dc:title` This is the title of your dataset. You need to keep this brief.
 - `dcat:creator` You put the url of the creator of the dataset.
-- `dc:abstract` Another geography to describe the dataset. This needs to be more detailed than the `title`.
+- `dc:abstract` Another string used to describe the dataset. This needs to be more detailed than the `title`.
 - `dc:description` This is used to provide all the information you want to provide for the dataset.
 - `dcat:license` This is where you place which license you are using.
 - `dcat:keywords` You use this provide keywords, that can be used as searcahable terms.
