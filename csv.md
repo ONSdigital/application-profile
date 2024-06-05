@@ -33,9 +33,22 @@ CSV files used in our service should be saved as UTF-8 encoded text files with a
 
 Column headers should be in lowercase and snake case (e.g. `column_header`). This is to ensure consistency and readability. Column headers should also be unique, and should not contain any special characters (e.g. `!@#$%^&*()`). This even includes the pound sign (i.e. `£`), which should be replaced with `gbp` when appropriate.
 
-Related columns should have the same prefix (e.g. `area_code`, `area_label`, `area_type` or `time_period_type`, `time_period_code`, `time_period_label`, or even `observation` and `observation_status`), and should be adjacent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
+Related columns should have the same prefix (e.g. `geography_code`, `geography_label`, `geography_type` or `period_type`, `period_code`, `period_label`, or even `observation` and `observation_status`), and should be adjacent. This is to ensure that related columns are grouped together when sorted alphabetically, and to make it easier to find concepts whose values are spread across multiple columns.
 
 **Note** When expressing a dimension which has a label and a code, the code should come first, followed by the label; in the case of area geography, you can add an additional value which helps disambiguates geography labels by providing the geography type which would only be disambiguated by the geography code.
+
+Below is an example of how we would like code, label and type to be represented.
+
+| period_code             | period_label      | period_type        | geography_code | geography_label |
+| ----------------------- | ----------------- | ------------------ | -------------- | --------------- |
+| 1999-12-31              | 31-Decemnber-1999 | day                | K02000001      | United Kingdom  |
+| 2020-01                 | Jaunuary-2020     | month              | E92000001      | England         |
+| 2020-Q1                 | 2020_Q1           | quarter            | E12000001      | North East      |
+| 2020                    | 2020              | year               | E06000047      | County Durham   |
+| 2020-2021               | 2020-2021         | government-year    | E07000088      | Gosport         |
+| 2001-04-01 00:00:00/P2M | Apr-Jun 2001      | gregorian-interval | E14001252      | Gosport         |
+
+
 
 TODO: Provide an example of a geography code, geography label, and geography type where the geography type/code is required to disambiguate the geography label.
 
@@ -47,7 +60,7 @@ There are five types of columns, and each CSV file should contain at least two o
 
 Dimension columns (otherwise known as factors or concepts) are used to identify the observation through a combination of concepts. Where each dimension in a CSV is filtered to a specific value there should only be one observation. In relational databases terminology all dimensions combine to a composite key. Some examples of dimensions are:
 
-- `time_period_code` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
+- `period_code` with one value being `2019-2020` (i.e. the period of `April 2019 to March 2020`)
 - `geography_code` with one value being `E09000001` (i.e. the nation of `England`)
 - `sic_2007` with one value being `01.11` (i.e. the concept `Growing of cereals (except rice), leguminous crops and oil seeds`)
 
@@ -62,6 +75,8 @@ For example the three columns prefixed with `area_` are related in the table bel
 | E08000006 | Salford           | Metropolitan Districts | 42    | ... |
 | E92000001 | England           | Country                | 1337  | ... |
 | K04000001 | England and Wales | England and Wales      |       | ... |
+
+If you need further help on how to configure dimensions such as period, geography, age and sex. Here is a link to help. [^1]
 
 **Note:** Dimension columns must contain values for every row in the CSV file and not be blank (i.e. they must be dense)
 
@@ -119,6 +134,8 @@ Literal attributes are used to describe the observation. When providing point es
 
 When creating observation status columns a naming convention helps users understand how they relate to the observation to the qualification. In this case for a given column name containing observations, the observation status column should have the same name as the observation column plus `_status` as a suffix. For example an observation column called `observation` should have a corresponding observation status called `observation_status`.
 
+**Note:** An `observation_status` column is not required if all the cells in the `observation` column have data.
+
 ### Ordering
 
 Ensuring that users can understand your CSV files is important. To help with this, the columns should be ordered as follows:
@@ -133,8 +150,12 @@ Ensuring that users can understand your CSV files is important. To help with thi
 6. Observation status column (if necessary).
 7. All other attribute columns.
 
-| period_code | period_type | period_label | area_code | area_type | observation | measure | unit | observation_status |
-| ----------- | ----------- | ------------ | --------- | --------- | ----------- | ------- | ---- | ------------------ |
+## Example
+
+Below is a basic example of how the columns should be ordered and shown.
+
+| period_code | period_type | period_label | geography_code | geography_label | observation | measure | unit | observation_status |
+| ----------- | ----------- | ------------ | -------------- | --------------- | ----------- | ------- | ---- | ------------------ |
 
 ## Overall principles
 
@@ -143,3 +164,6 @@ Concept Clarity: Ensure that the concepts used in the CSV files are clear and ea
 Unique Addressability: Each observation should be uniquely addressable by filtering all dimension columns to a value.
 
 Value Completeness: All columns should have values for every observation, except for the observation, observation status, or attribute type columns.
+
+
+[^1]: <https://github.com/GSS-Cogs/application-profile/blob/draft/code-lists.md>
