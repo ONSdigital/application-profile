@@ -12,18 +12,29 @@ classDiagram
     class CatalogRecord {
         a dcat:CatalogRecord
     }
-    class DatasetSeries{
-        a dcat:DatasetSeries
+    class Dataset{
+        a dcat:DatasetSeries, ons:Dataset
     }
-    class Dataset {
-        a dcat:Dataset
+    class Edition {
+        a dcat:Dataset, ons:Edition
+    }
+    class Version {
+        a dcat:Dataset, ons:Version
+    }
+    class Distribution {
+        a dcat:Distribution, ons:Distribution
     }
 
     Catalog --> "1..*" CatalogRecord : dcat.record
-    CatalogRecord --> "1" DatasetSeries : foaf.primaryTopic
     CatalogRecord --> "1" Dataset : foaf.primaryTopic
 
-    DatasetSeries "1" <-- Dataset : dcat.inSeries
+    Edition --> "*" Version : dcat.hasVersion
+    Version --> "*" Distribution : dcat.distribution
+
+    Edition "*" --> "*" Dataset : dcat.inSeries
+    Distribution ..|> "1" Version : dcat.isDistributionOf
+    Version ..|> "1" Edition : dcat.isVersionOf
+    Dataset "*" ..|> "1" Edition : dcat.seriesMember
 ```
 
 We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes.
