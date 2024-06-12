@@ -356,6 +356,40 @@ For datasets with confidence internals, we recommend attaching the upper and low
 
 > TODO: This is the confidence/credible interval level section/plug
 
+Some datasets may contain confidence levels and credible intervals. 
+
+| lcl_95 | ucl_95 |
+| ------ | ------ |
+
+Above is an example of how to show confidence levels in your csv. The `lcl_95 ` refers to the 95% lower confidence level. The `ucl_95` refers to the 95% upper confidence level.
+
+Below is an example of how to write the column in your json file.
+
+```json
+{
+                "name": "lcl_95",
+                "titles": "Lower Confidence Level (95%)",
+                "datatype": "decimal"
+
+}
+```
+
+| lci_95 | uci_95 |
+| ------ | ------ |
+
+Above is an example of how to show credible intervals in your csv. The `lci_95 ` refers to the 95% lower credible interval. The `uci_95` refers to the 95% upper credible interval.
+
+Below is an example of how to write the column in your json file.
+
+```json
+{
+                "name": "lci_95",
+                "titles": "Lower Credible Interval (95%)",
+                "datatype": "decimal"
+
+}
+```
+
 ## Seasonal adjustments and unadjusted values
 
 Seasonally adjusted and non-seasonally adjusted figures are frequently contained within the same dataset. In this case, although Seasonally Adjusted figures are a model component/output, we recommend that the measure used be extended so that SA and NSA both are captured as primary observations. In the example below the units are a number in thousands, and the column `all_aged_16_and_over` are a model component treated as a literal attribute.
