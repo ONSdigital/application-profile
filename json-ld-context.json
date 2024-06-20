@@ -1,5 +1,5 @@
 {
-  "@context": {
+    "@context": {
     "@language": "en",
     "@import": "http://www.w3.org/2013/json-ld-context/rdfa11",
     "column": {
