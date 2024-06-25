@@ -14,13 +14,13 @@ flowchart TD
         cr_b[http://example.org/codelists/my-codelist/record\n a dcat:CatalogRecord]
     end
 
-    subgraph graph: http://example.org/datasets/my-dataset/record
+    subgraph graph: http://example.org/datasets/my-dataset#metadata-graph
         dcatd[http://example.org/datasets/my-dataset\na dcat:Dataset]
     end
-    subgraph graph: http://example.org/codelists/my-codelist/record
+    subgraph graph: http://example.org/codelists/my-codelist#metadata-graph
         skoscs[http://example.org/codelists/my-codelist\na skos:ConceptScheme, dcat:Dataset]
     end
-    subgraph graph: http://example.org/datasets/my-dataset/datacube
+    subgraph graph: http://example.org/datasets/my-dataset#data-graph
         qbd[http://example.org/datasets/my-dataset/datacube\na qb:Dataset]
     end
 
@@ -47,7 +47,7 @@ Doing this results in a neat ability to query for dataset metadata by limiting a
 
 ```sparql
 SELECT * 
-FROM <http://example.org/datasets/my-dataset/record> 
+FROM <http://example.org/datasets/my-dataset#data-graph> 
 WHERE {
     ?s ?p ?o .
 }
