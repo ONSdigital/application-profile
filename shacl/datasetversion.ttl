@@ -14,12 +14,12 @@
     sh:property [
         sh:path dcterms:title ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have at least one dcat:title." ;
+        sh:message "A dcat:Dataset must have at least one dcterms:title." ;
     ] ;
     sh:property [
         sh:path dcterms:description ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcat:description." ;
+        sh:message "A dcat:Dataset must have a dterms:description." ;
     ] ;
     sh:not [
         sh:class qb:DataSet ;
@@ -33,6 +33,7 @@
     ] ;
     sh:property [
         sh:path dcterms:modified ;
+         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
         sh:message "A dcat:Dataset must have a dterms:modified." ;
     ] ;
