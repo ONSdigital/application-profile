@@ -1,0 +1,117 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix ons: <http://www.https://www.ons.gov.uk/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<#DatasetShape> a sh:NodeShape ;
+    sh:targetClass dcat:Dataset ;
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have at least one dcterms:identifier." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:title ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:title." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:created ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:created." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:creator ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:creator." ;
+    ] ;
+      sh:property [
+        sh:path dcat:contactPoint ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:contactPoint." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:abstract ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:abstract." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:description ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:description." ;
+    ] ;
+       sh:property [
+        sh:path adms:status ;
+        sh:path skos:Concept ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a adms:status." ;
+    ] ;
+      sh:property [
+        sh:path dcat:inSeries ;
+        sh:path dcat:DatasetSeries ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:inSeries." ;
+    ] ;
+      sh:property [
+        sh:path dcat:hasVersion ;
+        sh:path dcat:Dataset ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:hasVersion." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:modified ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:modified." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:issued ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:issued." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:spatial ;
+        sh:path dcterms:Location ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:spatial." ;
+    ] ;
+      sh:property [
+        sh:path ons:spatialResolution ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a ons:spatialResolution" ;
+    ] ;
+      sh:property [
+        sh:path dcterms:temporal ;
+        sh:path dcterms:PeriodOfTime ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:temporal." ;
+    ] ;
+      sh:property [
+        sh:path dcterms:temporalResolution ;
+        sh:datatype xsd:duration ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcterms:temporalResolution." ;
+    ] ;
+      sh:property [
+        sh:path dcat:prev ;
+        sh:path dcat:DataSet ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:prev." ;
+    ] ;
+       sh:property [
+        sh:path dcat:next ;
+        sh:path dcat:DataSet ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Dataset must have a dcat:next." ;
+    ] .
