@@ -337,7 +337,7 @@ For example, consider a dataset which mixes codes from the NUTS geography codeli
 
 The NUTS codes have IRIs which are maintained by Eurostat, such as `http://data.europa.eu/nuts/code/UKC`, whereas the ONS geography codes are maintained by the ONS at the `http://statistics.data.gov.uk/id/statistical-geography/E92000001` namespace.
 
-We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography_code}` would result in a non-existant identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
+We map the cells of the dataset to RDF by using the `valueUrl` CSVW property. Only a single `valueUrl` can be applied to all the cells in a column. This is problematic, as the IRIs we wish to map to have different bases. Setting `valueUrl` to `http://data.europa.eu/nuts/code/{geography_code}` would result in a non-existent identifier `http://data.europa.eu/nuts/code/E92000001` appearing in the RDF output.
 
 We address this by creating new identifiers for each of the codes under a shared namespace, and using `skos:exactMatch` relations to relate these new identifiers to the more commonly used identifiers. For example,
 
@@ -523,7 +523,7 @@ Data providers should adopt the [analytical function guidance](https://analysisf
 
 ### Periods of time
 
-There are a varieety of different ways that time can be represented in your data. Below are some examples:
+There are a variety of different ways that time can be represented in your data. Below are some examples:
 
 | period_type | period_code | period_label     |
 | ----------- | ----------- | ---------------- |
@@ -535,7 +535,7 @@ For calendar day data we require the `period_type` to be day. In the `period_cod
 | ----------- | ----------- | ------------ |
 | month       | 2020-01     | January-2020 |
 
-For monthly data that is from a calendar period we require the `period_type` to be month. In the `period_code` we require the year followed by the specified digit of the month. The `period_label` column is more human readble hence why it is showing the month's full name and the year.
+For monthly data that is from a calendar period we require the `period_type` to be month. In the `period_code` we require the year followed by the specified digit of the month. The `period_label` column is more human readable hence why it is showing the month's full name and the year.
 
 | period_type | period_code | period_label |
 | ----------- | ----------- | ------------ |
