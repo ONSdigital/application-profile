@@ -49,7 +49,7 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 
 > - **Comprehension**: humans will have a better understanding about the data structure, the data meaning, the metadata and the nature of the dataset.
 > - **Processability**: machines will be able to automatically process and manipulate the data within a dataset.
-> - **Discoverability** machines will be able to automatically discover a dataset or data within a dataset.
+> - **Discoverability**: machines will be able to automatically discover a dataset or data within a dataset.
 > - **Reuse**: the chances of dataset reuse by different groups of data consumers will increase.
 > - **Trust**: the confidence that consumers have in the dataset will improve.
 > - **Linkability**: it will be possible to create links between data resources (datasets and data items).
@@ -66,7 +66,7 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 | ★★☆☆☆ | data needs to be machine-readable,                                                                   |
 | ★★★☆☆ | data needs to be non-proprietary,                                                                    |
 | ★★★★☆ | identifiers need to be used to denote things, so that people can talk about resources unambiguously, |
-| ★★★★★ | data needs to able to be linkied to other data to provide context.                                   |
+| ★★★★★ | data needs to able to be linked to other data to provide context.                                   |
 
 ### FAIR principles
 
@@ -272,18 +272,18 @@ Our API will use pluralised nouns to represent collections of objects and the in
 
 > `https://data.ons.gov.uk/datasets/cpih`
 
-- In a browser, this URL will return a webpage with the latest information about the CPIH dataset, a summary of its stucture, a preview of the data, and links to download the data in open formats.
-- When used programatically along with an accept header, this URL will return the latest data in the requested format but defaulting to machine readable CSV.
+- In a browser, this URL will return a webpage with the latest information about the CPIH dataset, a summary of its structure, a preview of the data, and links to download the data in open formats.
+- When used programmatically along with an accept header, this URL will return the latest data in the requested format but defaulting to machine readable CSV.
 
 > `https://data.ons.gov.uk/datasets/cpih/editions/2019-03`
 
 - In a browser, this URL will redirect to the primary CPIH webpage.
-- When used programatically along with an accept header, this URL will return the data for the most recent version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
+- When used programmatically along with an accept header, this URL will return the data for the most recent version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
 
 > `https://data.ons.gov.uk/datasets/cpih/editions/2019-03/versions/2`
 
 - In a browser, this URL will redirect to the primary CPIH webpage.
-- When used programatically along with an accept header, this URL will return the data for the second version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
+- When used programmatically along with an accept header, this URL will return the data for the second version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
 
 ### Draft JSON-LD Context
 
@@ -459,7 +459,7 @@ Editions are the child object of Datasets, and are in fact dcat:Dataset. They ar
 
 ##### Statistics quality designations
 
-While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate IRI. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropraite to attach at the Dataset (`dcat:DatasetSeries`) level as quality designations may change over time.
+While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate IRI. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropriate to attach at the Dataset (`dcat:DatasetSeries`) level as quality designations may change over time.
 
 | Label                              | Previous name           | IRI                                                                                                                |
 |------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------|
@@ -535,7 +535,7 @@ TODO: Create a new section for Distributions, show how they relate to Excel or C
 
 ## Versioning
 
-We believe publishing data in a versioned manner is important. Every publication of a dataset at a version level cannot be amended, it can only be deleted or superseded by a new version. This is to ensure that the data is immutable. We provide fields in our service to allow producers to provide version notes, specificing the changes between versions of an edition. Additionally, there are convenience triples at both the `dcat:DatasetSeries` (datasets) and `dcat:Dataset` (editions) levels which points to the latest version of both entities, this is expressed as `dcat:hasCurrentVersion`.
+We believe publishing data in a versioned manner is important. Every publication of a dataset at a version level cannot be amended, it can only be deleted or superseded by a new version. This is to ensure that the data is immutable. We provide fields in our service to allow producers to provide version notes, specifying the changes between versions of an edition. Additionally, there are convenience triples at both the `dcat:DatasetSeries` (datasets) and `dcat:Dataset` (editions) levels which points to the latest version of both entities, this is expressed as `dcat:hasCurrentVersion`.
 
 ### Example of versioning in RDF for CPIH
 
