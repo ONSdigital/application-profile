@@ -4,7 +4,7 @@ We represent data in RDF and compartmentalise it into graphs. This is a useful w
 
 To help visualise these concepts, we're going to be talking about `qb:Datasets` (i.e. tabular data), `skos:ConceptScheme` (i.e. a code list), and `dcat:CatalogRecord`. The `skos:ConceptScheme` is a `dcat:Dataset`, and the tabular dataset has distributions, which could be a `qb:Dataset` or an Excel file via `dcat:distribution`.
 
-We recommend putting all catalog records in a single graph, and all datasets, concept schemes, and distributions in their own graphs. This is a useful way of organising data. It also allows us to query specific objets by limiting the query to a specific graph. With the overarching catalog graph, we can query for all records in the catalog, and with the dataset graph, we can query for all metadata and distributions for a specific dataset by limiting it to the subject of its record in the catalog.
+We recommend putting all catalog records in a single graph, and all datasets, concept schemes, and distributions in their own graphs. This is a useful way of organising data. It also allows us to query specific objects by limiting the query to a specific graph. With the overarching catalog graph, we can query for all records in the catalog, and with the dataset graph, we can query for all metadata and distributions for a specific dataset by limiting it to the subject of its record in the catalog.
 
 ```mermaid
 flowchart TD
