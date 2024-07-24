@@ -329,7 +329,7 @@ Metadata improves the discoverability of datasets, in CSVWs the following proper
 - `dcat:license` This is where you place which license you are using.
 - `dcat:keywords` You use this provide keywords, that can be used as searcahable terms.
 - `dc:publisher` This is where you put the publisher of the dataset.
-- `dcat:theme` If your dataset is part of an overreaching geography. Such as Economy, Business, Industry and Trade. This is where you oput the url of where the dataset is.
+- `dcat:theme` If your dataset is part of an overreaching geography. Such as Economy, Business, Industry and Trade. This is where you output the url of where the dataset is.
 
 ## Discoverability of CSVW
 
@@ -389,7 +389,7 @@ For example the first entry in the JSON-LD should be the column that appears on 
 },
 ```  
 
-This section will look at the period type column. This entry should include a `title`, and `data type`. The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
+This section will look at the period type column. This entry should include a `title`, and `data type`. The title provdies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
 
 ```JSON
 {
