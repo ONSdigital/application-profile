@@ -148,7 +148,7 @@ For example, some statistics which make use of the Standard Industrial Classific
 
 > TODO: How to express these sorts of semantics using XKOS/SKOS or OWL?
 
-Notations like these, while intending to be descriptive, may be consfusing or not be appropriate to be included in an IRI. When extending a codelist with custom codes, we recommend generating new notations which are:
+Notations like these, while intending to be descriptive, may be confusing or not be appropriate to be included in an IRI. When extending a codelist with custom codes, we recommend generating new notations which are:
 
 - Similar in style and convention to the codelist which is being extended.
 - Do not clash with any current (or future) notations which feature in the codelist.
