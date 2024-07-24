@@ -4,7 +4,7 @@ The Office for National Statistics (ONS) RDF namespace is used for statistics, d
 
 ## Official, national, and experimental statistics
 
-The ONS RDF namespace has objects for official, national, and experimental statistics, as well as management information. Use these objects to classify dataset publications from accross UK government.
+The ONS RDF namespace has objects for official, national, and experimental statistics, as well as management information. Use these objects to classify dataset publications from across UK government.
 
 | Object                                                                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
