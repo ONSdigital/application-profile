@@ -1,0 +1,102 @@
+{
+  "@import": "http://www.w3.org/2013/json-ld-context/rdfa11",
+  "@context": {
+    "@language": "en",
+    "edition": {
+      "@id": "dcat:edition",
+      "@type": "dcat:dataset"
+    },
+    "title": {
+      "@id": "dcterms:title"
+    },
+    "created": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    },
+    "publisher": {
+      "@type": "@id",
+      "@id": "dcterms:publisher",
+      "@context": {
+        "@base": "https://www.gov.uk/government/organisations/"
+      }
+    },
+    "creator": {
+      "@type": "@id",
+      "@id": "dcterms:creator",
+      "@context": {
+        "@base": "https://www.gov.uk/government/organisations/"
+      }
+    },
+    "description": {
+      "@id": "dcterms:description",
+      "@type": "xsd:string",
+      "@language": "markdown"
+    },
+    "issued": {
+      "@id": "dcterms:issued",
+      "@type": "xsd:dateTime"
+    },
+    "modified": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    },
+    "keywords": {
+      "@id": "dcterms:keywords"
+    },
+    "theme": {
+      "@type": "@id",
+      "@id": "dcterms:theme",
+      "@context": {
+        "@base": "https://www.gov.uk/government/"
+      }
+    },
+    "license": {
+      "@id": "dcterms:license_document",
+      "@type": "@id"
+    },
+    "identifier": {
+      "@id": "dcterms:identifier",
+      "@type": "@id"
+    },
+    "contact_point": {
+      "@type": "vcard:Individual",
+      "@id": "dcat:contactPoint",
+      "@context": {
+        "email": {
+          "@type": "@id",
+          "@id": "vcard:hasEmail",
+          "@context": {
+            "@base": "mailto:"
+          }
+        },
+        "name": {
+          "@id": "vcard:fn"
+        },
+        "telephone": {
+          "@type": "@id",
+          "@id": "vcard:hasTelephone",
+          "@context": {
+            "@base": "tel:"
+          }
+        }
+      }
+    }
+  },
+  "@type": "edition",
+  "@id": "https://ons.gov.uk/dataset/cpih/edition/2019-10",
+  "title": "Consumer Prices Index for October 2019",
+  "created": "2019-11-15T6:75Z0",
+  "publisher": "office-for-national-statistics",
+  "creator": "office-for-national-statistics",
+  "description": "This dataset...",
+  "issued": "2019-11-15T6:75Z0",
+  "modified": "2019-11-15T6:75Z0",
+  "keywords": "region, local-authority",
+  "theme": "peoplepopulationandcommunity/healthandsocialcare",
+  "license": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+  "identifier": "https://gss-cogs.github.io/family-ess/out/cardiovascular-mortality-considered-preventable-in-persons-aged-under-75-2021-census-population-estimates/cardiovascular-mortality-considered-preventable-in-persons-aged-under-75-2021-census-population-estimates/preventable-circulatory-mortality-england.csv#dataset-catalog-entry",
+  "contact_point": {
+    "email": "prices@ons.gov.uk",
+    "name": "Prices Team"
+  }
+}

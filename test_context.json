@@ -1,0 +1,20 @@
+{
+    "@context": {
+        "@import": "http://www.w3.org/2013/json-ld-context/rdfa11",
+        "ons": "http://ons.gov.uk/ns#",
+        "title": "dcterms:title",
+        "download_url": "dcterms:download_url",
+        "media_type": "dcat:media_type",
+        "abstract": "dcterms:abstract",
+        "description": "dcterms:description",
+        "publisher": "dcterms:publisher",
+        "creator": "dcterms:creator",
+        "licence": "dcterms:license_document",
+        "contact_point": "dcat:contact_point",
+        "issued": "dcterms:issued",
+        "modified": "dcterms:modified",
+        "keyword": "dcterms:keyword",
+        "theme": "dcat:theme",
+        "spatial": "dcterms:location"
+    }
+}
