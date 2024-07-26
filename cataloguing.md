@@ -144,6 +144,7 @@ We recommend the use of the following properties:
 | `dcat:version`               | recommended       | See [versions](#versions)                                                          |
 | `adms:versionNotes`          | recommended       | See [versions](#versions)                                                          |
 | `dcat:prev`                  | recommended       | See [versions](#versions)                                                          |
+| `adms:status`                | recommended       |                                                                                    |
 | `dcat:landingPage`           | optional          |                                                                                    |
 | `dcterms:isReferencedBy`     | optional          |                                                                                    |
 

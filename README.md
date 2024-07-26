@@ -316,6 +316,7 @@ Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://ww
 | temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                | ✓    | ✓   | ✓   | ✓        |        |
 | spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      | ✓    | ✓   | ✓   | ✓        |        |
 | spatial_coverage    | dcterms:spatial            | dcterms:Location                    | ✓    | ✓   | ✓   | ✓        |        |
+| status              | adms:status                | skos:Concept                        | ✓    | ✓   | ✓   | ✓        |        |
 | editions            | dcat:hasVersion            | [dcat:Dataset as ons:Edition]       |      |     |     | ✓        |        |
 | first_release       | dcat:first                 | dcat:Dataset as ons:Edition         |      |     |     | ✓        |        |
 | latest_release      | dcat:last                  | dcat:Dataset as ons:Edition         |      |     |     | ✓        |        |
@@ -431,31 +432,30 @@ Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://ww
 
 Editions are the child object of Datasets, and are in fact dcat:Dataset. They are the parent object of Versions.
 
-| Type            | Predicate                       | Range                               | POST Editions | PUT Editions | GET Editions | GET Editions/{ID} | DELETE Editions |
-| --------------- | ------------------------------- | ----------------------------------- | ------------- | ------------ | ------------ | ----------------- | --------------- |
-| 0 Management    | dcterms:identifier              | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 | ✓               |
-| 1 Descriptive   | dcat:publisher                  | foaf:Agent                          | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:created                 | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:creator                 | foaf:Agent                          | ✓             | ✓            |              | ✓                 |                 |
-| 1 Descriptive   | dcterms:issued                  | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:modified                | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dcterms:title                   | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | dqv:hasQualityQualityAnnotation | dqv:QualityAnnotation as blank node | ✓             | ✓            | ✓            | ✓                 |                 |
-| 1 Descriptive   | rdfs:label                      | rdfs:Literal as xsd:string          | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcat:keyword                    | [rdfs:Literal as xsd:string]        | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcat:theme                      | [skos:Concept]                      | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcterms:abstract                | rdfs:Literal as xsd:string          | ✓             | ✓            | ✓            | ✓                 |                 |
-| 2 Summary       | dcterms:accuralPeriodicity      | dcterms:Frequency                   | ✓             | ✓            | ✓            | ✓                 |                 |
-| 2 Summary       | dcterms:description             | rdfs:Literal as xsd:string/markdown | ✓             | ✓            |              | ✓                 |                 |
-| 2 Summary       | dcterms:license                 | dcterms:LicenseDocument             | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | dcat:temporalResolution         | [rdfs:Literal as xsd:duration]      | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | dcterms:spatial                 | dcterms:Location                    | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | dcterms:temporal                | dcterms:PeriodOfTime                | ✓             | ✓            | ✓            | ✓                 |                 |
-| 5 Scope         | ons:spatialResolution           | [skos:Concept]                      | ✓             | ✓            | ✓            | ✓                 |                 |
-| 6 Management    | dcat:first                      | dcat:Dataset                        |               |              |              | ✓                 |                 |
-| 6 Management    | dcat:last                       | dcat:Dataset                        |               |              |              | ✓                 |                 |
-| 6 Management    | ons:nextRelease                 | rdfs:Literal as xsd:dateTime        | ✓             | ✓            | ✓            | ✓                 |                 |
-| 8 Distributions | dcat:landingPage                | foaf:Document                       | ✓             | ✓            |              | ✓                 |                 |
+| Keyword             | Predicate                  | Range                               | POST | PUT | GET | GET {ID} | DELETE |
+| ------------------- | -------------------------- | ----------------------------------- | ---- | --- | --- | -------- | ------ |
+| @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        | ✓      |
+| pulisher            | dcat:publisher             | foaf:Agent                          | ✓    | ✓   | ✓   | ✓        |        |
+| created             | dcterms:created            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
+| creator             | dcterms:creator            | foaf:Agent                          | ✓    | ✓   |     | ✓        |        |
+| issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
+| modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
+| title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        |        |
+| quality             | dqv:hasQualityAnnotation   | dqv:QualityAnnotation as blank node | ✓    | ✓   | ✓   | ✓        |        |
+| keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        | ✓    | ✓   |     | ✓        |        |
+| theme               | dcat:theme                 | [skos:Concept]                      | ✓    | ✓   |     | ✓        |        |
+| summary             | dcterms:abstract           | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        |        |
+| frequency           | dcterms:accuralPeriodicity | dcterms:Frequency                   | ✓    | ✓   | ✓   | ✓        |        |
+| description         | dcterms:description        | rdfs:Literal as xsd:string/markdown | ✓    | ✓   |     | ✓        |        |
+| license             | dcterms:license            | dcterms:LicenseDocument             | ✓    | ✓   | ✓   | ✓        |        |
+| temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      | ✓    | ✓   | ✓   | ✓        |        |
+| spatial_coverage    | dcterms:spatial            | dcterms:Location                    | ✓    | ✓   | ✓   | ✓        |        |
+| tempora_coverage    | dcterms:temporal           | dcterms:PeriodOfTime                | ✓    | ✓   | ✓   | ✓        |        |
+| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      | ✓    | ✓   | ✓   | ✓        |        |
+| first_version       | dcat:first                 | dcat:Dataset                        |      |     |     | ✓        |        |
+| last_version        | dcat:last                  | dcat:Dataset                        |      |     |     | ✓        |        |
+| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
+| landing_page        | dcat:landingPage           | foaf:Document                       | ✓    | ✓   |     | ✓        |        |
 
 ##### Statistics quality designations
 
