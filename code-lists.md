@@ -596,7 +596,7 @@ The examples in the table above show the best way to represent different age cat
 | M        | Male           |
 | _N       | Non response   |
 | _O       | Other          |
-| -U       | Unknown        |
+| _U       | Unknown        |
 | _Z       | Not applicable |
 
 The examples in the table above show the best way to represent different sex categories. This has come from the Statistical Data and Metadata eXchange (SDMX) guidelines [^2]
