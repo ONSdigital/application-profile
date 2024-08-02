@@ -98,7 +98,7 @@ Examples include:
 
 ##### Why use strings for all dimensions?
 
-Consider a dataset is initially published only as annual data; however due to process improvements it can now be released quarterly. By defining the period_code dimension as strings, no changes are required to the schema to accept `2019-Q3` along with `2017`.
+Consider a dataset is initially published only as annual data; however, due to process improvements it can now be released quarterly. By defining the period_code dimension as strings, no changes are required to the schema to accept `2019-Q3` along with `2017`.
 
 #### Decimal
 
@@ -175,7 +175,7 @@ Consider the pattern often used for geographies:
 | E92000001      | England                | Country                  | 1337  | ... |
 | K04000001      | England and Wales      | England and Wales        | 1701  | ... |
 
-In this case, `geography_label` and `geography_type` are useful for humans, and `geography_code` is useful for machines. In fact, using linked data, the `geography_label` and `geography_type` values can be looked up from the `geography_code` value. In order to have more efficience storage and interpretation of data, data which isn't machine readable should be suppressed.
+In this case, `geography_label` and `geography_type` are useful for humans, and `geography_code` is useful for machines. In fact, using linked data, the `geography_label` and `geography_type` values can be looked up from the `geography_code` value. In order to have more efficient storage and interpretation of data, data which isn't machine readable should be suppressed.
 
 Columns can be suppressed for interpretation by including the optional value `suppressOutput`. If this is true, it suppresses any output that would be generated when converting cells in this column into other formats. The default is false. [^column-properties]
 
@@ -329,7 +329,7 @@ Metadata improves the discoverability of datasets, in CSVWs the following proper
 - `dcat:license` This is where you place which license you are using.
 - `dcat:keywords` You use this provide keywords, that can be used as searcahable terms.
 - `dc:publisher` This is where you put the publisher of the dataset.
-- `dcat:theme` If your dataset is part of an overreaching geography. Such as Economy, Business, Industry and Trade. This is where you oput the url of where the dataset is.
+- `dcat:theme` If your dataset is part of an overreaching geography. Such as Economy, Business, Industry and Trade. This is where you output the url of where the dataset is.
 
 ## Discoverability of CSVW
 
@@ -352,7 +352,7 @@ This section will help you how to write your table section of your JSON-LD file.
 
 The first section will show you what needs to be done for each csv you are using.
 
-The second section will go through a step by step process of writing and describing the columns in your csv.
+The second section will go through a step-by-step process of writing and describing the columns in your csv.
 
 ### How to write the table section
 
@@ -376,7 +376,7 @@ The way you write your JSON-LD should follow the same layout as your csv.
 
 You write the JSON-LD runs from top to bottom and you should read your csv from left to right.
 
-For example the first entry in the JSON-LD should be the column that appears on the left hand side of the csv.
+For example, the first entry in the JSON-LD should be the column that appears on the left hand side of the csv.
 
 #### Time Period
 
@@ -389,7 +389,7 @@ For example the first entry in the JSON-LD should be the column that appears on 
 },
 ```  
 
-This section will look at the period type column. This entry should include a `title`, and `data type`. The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
+This section will look at the period type column. This entry should include a `title`, and `data type`. The title provides the human readable name of the column. The name provides the machine-readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
 
 ```JSON
 {
@@ -400,7 +400,7 @@ This section will look at the period type column. This entry should include a `t
 },
 ```
 
-This section will look at the period code column. This entry should include a `title`, `name` and `data type` The title provies the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
+This section will look at the period code column. This entry should include a `title`, `name` and `data type`. The title provides the human readable name of the column. The name provides the machine readable name of the column. This should be in `snake_case`. The data type provides the detail of what data type is being represented in the column. The suppress output uses the information you have provided.
 
 ```JSON
 {

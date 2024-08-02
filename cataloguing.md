@@ -84,7 +84,7 @@ For example:
 
 ## Catalogue record
 
-We recommend creaing a IRI for catalogue records by appending `/record` or `#record` to the IRI of the resource being described by the catalogue record:
+We recommend creating a IRI for catalogue records by appending `/record` or `#record` to the IRI of the resource being described by the catalogue record:
 
 - `http://{dataset_iri}/record`
 - `http://{dataset_iri}#record`

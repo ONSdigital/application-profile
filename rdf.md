@@ -283,7 +283,7 @@ Our recommended format for a CSVW is as follows. Note the use of virtual columns
 }
 ```
 
-Diagramatically, the CSV distribution, the dataset and the RDF data cube distribution (and its components) are related in the following way:
+Diagrammatically, the CSV distribution, the dataset and the RDF data cube distribution (and its components) are related in the following way:
 
 ```mermaid
 classDiagram

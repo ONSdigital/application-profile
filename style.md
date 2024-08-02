@@ -17,7 +17,7 @@
 
 Titles should be front-loaded with the most important information first. They are the headline to help prospective users select the best dataset for their use. Titles are designed to be scannable by users, helping them to quickly include or exclude datasets from their search results with minimal effort and low error.
 
-Contrary to guidance from ONS on titles geographic information isn't necessary as this information is better captured elsewhere in the metadata; however it is important to align the titles of datasets in this service to the titles of datasets in other services to prevent unnecessary divergance.
+Contrary to guidance from ONS on titles geographic information isn't necessary as this information is better captured elsewhere in the metadata; however, it is important to align the titles of datasets in this service to the titles of datasets in other services to prevent unnecessary divergence.
 
 - [GOVUK title guidance](https://www.gov.uk/guidance/content-design/writing-for-gov-uk#titles)
 - [ONS title guidance for datasets](https://service-manual.ons.gov.uk/content/content-types/datasets#dataset-titles-and-summaries)
@@ -28,7 +28,7 @@ We recommend that titles not exceed 60 characters, including spaces.
 
 Summaries are designed to support users to further refine their selection of the best dataset for their intended use. They should be written in 160 characters or less, including spaces. They should be written in plain English, avoiding jargon and acronyms. Including intended temporal and spatial coverage and resolution is recommended at the end of the summary. Summaries should not contain update or publication dates which are otherwise captured in the metadata.
 
-A well contstructed summary should cover the topic of measurement, its population, the time period, and its geographic scope in that order. For example, "Egg packing station throughput and prices for the UK, quarterly from 1996."
+A well-constructed summary should cover the topic of measurement, its population, the time period, and its geographic scope in that order. For example, "Egg packing station throughput and prices for the UK, quarterly from 1996."
 
 - [ONS summary guidance for datasets](https://service-manual.ons.gov.uk/content/content-types/datasets#dataset-titles-and-summaries)
 
@@ -38,7 +38,7 @@ Descriptions are designed to provide users with a more detailed understanding of
 
 Our description fields support markdown, which can be used to format text. This can be used to create lists, headings, and links.
 
-We suggest using the description field to provide details of the methodology, data sources, and any limitations of the dataset for now; however we intend on providing a separate field for these components in the future.
+We suggest using the description field to provide details of the methodology, data sources, and any limitations of the dataset for now; however, we intend on providing a separate field for these components in the future.
 
 When providing a description, follow these guidelines:
 
@@ -55,7 +55,7 @@ When using `dcat:keyword` to describe resources in metadata, it's important to c
 
 - Be relevant: Keywords should be closely related to the content of the resource. They should reflect the search words people would use to find it via a search engine.
 - Be descriptive: Keywords should be descriptive enough to give a clear idea of the resource's content. Avoid vague or generic terms.
-- Be concisene: Try to keep keywords short and to the point. Long phrases or sentences are not suitable as keywords.
+- Be concise: Try to keep keywords short and to the point. Long phrases or sentences are not suitable as keywords.
 - Don't repeat yourself: Place names, or time periods are not appropriate as keywords. This information is better conveyed in the spatial/temporal bounds/resolution of the resource. These fields are also searchable.
 - Use spaces and lowercases: Keywords should be written in lowercase and separated by spaces, unless the keyword is a proper name. For example, "Scotch whiskey" and "imports" are appropriate, but "Alcohol Duties" is not.
 - Proper Names: If a keyword is a proper name, it should be written as it is normally used, including any capitalization. For example, "Scotch whiskey" or "Champagne".
