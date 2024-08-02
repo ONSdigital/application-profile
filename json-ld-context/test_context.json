@@ -1,0 +1,47 @@
+{
+    "@context": {
+        "@import": "http://www.w3.org/2013/json-ld-context/rdfa11",
+        "ons": "http://ons.gov.uk/ns#",
+        "title": "dcterms:title",
+        "download_url": "dcterms:downloadURL",
+        "media_type": "dcat:mediaType",
+        "abstract": "dcterms:abstract",
+        "description": "dcterms:description",
+        "publisher": "dcterms:publisher",
+        "creator": "dcterms:creator",
+        "licence": "dcterms:license",
+        "contact_point": {
+            "@type": "vcard:Individual",
+            "@id": "dcat:contactPoint",
+            "@context": {
+                "email": {
+                    "@type": "@id",
+                    "@id": "vcard:hasEmail",
+                    "@context": {
+                        "@base": "mailto:"
+                    }
+                },
+                "name": {
+                    "@id": "vcard:fn"
+                }
+            }
+        },
+        "issued": "dcterms:issued",
+        "modified": "dcterms:modified",
+        "keyword": "dcterms:keyword",
+        "theme": "dcat:theme",
+        "spatial_coverage": "dcterms:spatial",
+        "spatial_resolution": "ons:spatialResolution",
+        "temporal_coverage": {
+            "@id": "dcterms:temporal",
+            "@context": {
+                "start": "dcat:startDate",
+                "end": "dcat:endDate"
+            }
+        },
+        "temporal_resolution": "dcat:temporalResolution",
+        "quality": {
+            "@id": "dqv:hasQualityAnnotation"
+        }
+    }
+}
