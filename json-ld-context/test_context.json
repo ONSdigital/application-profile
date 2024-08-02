@@ -39,6 +39,9 @@
                 "end": "dcat:endDate"
             }
         },
-        "temporal_resolution": "dcat:temporalResolution"
+        "temporal_resolution": "dcat:temporalResolution",
+        "quality": {
+            "@id": "dqv:hasQualityAnnotation"
+        }
     }
 }

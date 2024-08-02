@@ -1,27 +1,27 @@
 {
     "@context": "json-ld-context/test_context.json",
-    "@id": "https://ons.gov.uk/datasets/clam01/editions/2019-Q4/versions/1",
+    "@id": "https://ons.gov.uk/datasets/cla01/editions/2019-Q4/versions/1",
     "@type": "ons:Version",
-    "title": "CLAM01: Claimant Count",
+    "title": "CLA01: Claimant Count",
     "dcat:distribution": [
         {
-            "@id": "https://ons.gov.uk/datasets/clam01/editions/2019-Q4/versions/1.csv",
-            "title": "CLAM01: Claimant Count",
-            "download_url": "https://ons.gov.uk/datasets/clam01/editions/2019-Q4/versions/1.csv",
+            "@id": "https://ons.gov.uk/datasets/cla01/editions/2019-Q4/versions/1.csv",
+            "title": "CLA01: Claimant Count",
+            "download_url": "https://ons.gov.uk/datasets/cla01/editions/2019-Q4/versions/1.csv",
             "media_type": "text/csv"
         },
         {
-            "@id": "https://ons.gov.uk/datasets/clam01/editions/2019-Q4/versions/1.xlsx",
-            "title": "CLAM01: Claimant Count",
-            "download_url": "https://ons.gov.uk/datasets/clam01/editions/2019-Q4/versions/1.xlsx",
+            "@id": "https://ons.gov.uk/datasets/cla01/editions/2019-Q4/versions/1.xlsx",
+            "title": "CLA01: Claimant Count",
+            "download_url": "https://ons.gov.uk/datasets/cla01/editions/2019-Q4/versions/1.xlsx",
             "media_type": "application/vnd.ms-excel"
         }
     ],
     "@reverse": {
-        "dcat:distribution": {
-            "@id": "https://ons.gov.uk/datasets/clam01/editions/2019-Q4",
+        "dcat:hasVersion": {
+            "@id": "https://ons.gov.uk/datasets/cla01/editions/2019-Q4",
             "@type": "ons:Edition",
-            "title": "CLAM01: Claimant Count 2019-Q4",
+            "title": "CLA01: Claimant Count 2019-Q4",
             "abstract": "Claimant Count by sex including Jobseeker's Allowance and out of work Universal Credit claimants, UK, published monthly.",
             "description": "Claimant Count by sex including Jobseeker's Allowance and out of work Universal Credit claimants, UK, published monthly. These are official statistics in development. Under certain circumstances, some people are able to claim both contribution-based Jobseeker’s Allowance and Universal Credit at the same time. We do not currently have timely enough information to identify these individuals prior to producing the Claimant Count. Consequently, there has been a small amount of double counting. Information from DWP suggests this double counting increased at the start of the pandemic and has stabilised at approximately 1.0 to 1.5% of the Claimant Count. We will monitor this rate and provide further updates if the rate shifts outside of these boundaries.",
             "publisher": "https://www.gov.uk/government/organisations/office-for-national-statistics",
@@ -40,13 +40,18 @@
             ],
             "theme": "https://www.ons.gov.uk/employmentandlabourmarket",
             "spatial_coverage": "K02000001",
-            "spatial_resolution": ["K02"],
+            "spatial_resolution": [
+                "K02"
+            ],
             "temporal_coverage": {
                 "@type": "dcterms:PeriodOfTime",
                 "start": "2019-10-15T07:00:00+00:00",
                 "end": "2019-11-15T09:30:00+00:00"
-              },
-            "temporal_resolution": ["P3M"]
+            },
+            "temporal_resolution": [
+                "P3M"
+            ],
+            "quality": "https://osr.statisticsauthority.gov.uk/policies/official-statistics-policies/official-statistics-in-development/"
         }
     }
 }
