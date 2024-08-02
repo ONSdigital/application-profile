@@ -17,17 +17,18 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Tidy Data dependencies](#tidy-data-dependencies)
     - [Using JSON-LD to describe statistical data](#using-json-ld-to-describe-statistical-data)
       - [Standards divergence from CSVW](#standards-divergence-from-csvw)
-    - [Overview Object Model Diagram](#overview-object-model-diagram)
-  - [Our API endpoints](#our-api-endpoints)
-    - [Design decision on object model](#design-decision-on-object-model)
+  - [Our statistical Object Model Diagram](#our-statistical-object-model-diagram)
+    - [Our API endpoints](#our-api-endpoints)
+    - [Design decisions on object model](#design-decisions-on-object-model)
     - [Draft JSON-LD Context](#draft-json-ld-context)
     - [HTTP verbs and their applicability to our objects](#http-verbs-and-their-applicability-to-our-objects)
-      - [Datasets](#datasets)
-        - [GET of a CPIH Dataset](#get-of-a-cpih-dataset)
+    - [Datasets](#datasets)
+      - [GET of a CPIH Dataset](#get-of-a-cpih-dataset)
       - [POST of a CPIH dataset](#post-of-a-cpih-dataset)
-      - [Editions](#editions)
-        - [Statistics quality designations](#statistics-quality-designations)
-      - [Distributions](#distributions)
+    - [Editions](#editions)
+      - [Statistics quality designations](#statistics-quality-designations)
+    - [Versions](#versions)
+    - [Distributions](#distributions)
   - [Versioning](#versioning)
     - [Example of versioning in RDF for CPIH](#example-of-versioning-in-rdf-for-cpih)
 
@@ -125,7 +126,7 @@ In order to gain the benefits of JSON-LD being directly consumable as RDF, we ad
 
 (Note: We know the drama between JSON-LD and CSVW was a bit of a mess when both were being developed, but we think the benefits of using JSON-LD outweigh the drawbacks of violating the CSVW specification.)
 
-### Overview Object Model Diagram
+## Our statistical Object Model Diagram
 
 ```mermaid
 classDiagram
@@ -262,11 +263,11 @@ We are heavily reliant on dcat and dcterms to relate our statistical datasets, e
 - We call all versions within these Editions _Versions_, and they are the object of the Editions' `dcat:hasVersion` property and are of type `dcat:Dataset`.
 - Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however we are targetting JSON-LD with a CSVW context representing a qb:DataSet.
 
-## Our API endpoints
+### Our API endpoints
 
 Our primary objective is to establish a URL framework that caters to both user-friendly web browsing and efficient data retrieval, for example in Python using `pandas.read_csv(url)`. The link should provide users with a comprehensive webpage if visited in a browser, but when consumed using pandas it would provide a csv file - this approach is known as [content negotiation](https://www.w3.org/TR/dwbp/#Conneg).
 
-### Design decision on object model
+### Design decisions on object model
 
 Our API will use pluralised nouns to represent collections of objects and the individual objects as well. For example, the following URLs may be used to access the CPIH dataset:
 
@@ -293,7 +294,7 @@ We are building a series of JSON-LD contexts to support the publication of our s
 
 We use the standard HTTP verbs to interact with our objects. Not all verbs are applicable to all objects, nor are all accessible publicly. We are still working out the business logic of mandatory and optional fields, and how to curate the namespace available to the ID of objects.
 
-#### Datasets
+### Datasets
 
 Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset_Series). They are the parent object of Editions, and are the object of the CatalogRecord. They are typically a recurring publication, such as the Consumer Price Inflation including owner occupiers' housing costs (CPIH) dataset.
 
@@ -323,7 +324,7 @@ Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://ww
 | next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
 | landing_page        | dcat:landingPage           | foaf:Document                       | ✓    | ✓   |     | ✓        |        |
 
-##### GET of a CPIH Dataset
+#### GET of a CPIH Dataset
 
 ```JSON
 {
@@ -428,9 +429,9 @@ Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://ww
 }
 ```
 
-#### Editions
+### Editions
 
-Editions are the child object of Datasets, and are in fact dcat:Dataset. They are the parent object of Versions.
+Editions are the child object of Datasets, using our own `ons:Edition` object class which is a child of `dcat:Dataset`. They are the parent object of `ons:Version`s.
 
 | Keyword             | Predicate                  | Range                               | POST | PUT | GET | GET {ID} | DELETE |
 | ------------------- | -------------------------- | ----------------------------------- | ---- | --- | --- | -------- | ------ |
@@ -450,14 +451,14 @@ Editions are the child object of Datasets, and are in fact dcat:Dataset. They ar
 | license             | dcterms:license            | dcterms:LicenseDocument             | ✓    | ✓   | ✓   | ✓        |        |
 | temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      | ✓    | ✓   | ✓   | ✓        |        |
 | spatial_coverage    | dcterms:spatial            | dcterms:Location                    | ✓    | ✓   | ✓   | ✓        |        |
-| tempora_coverage    | dcterms:temporal           | dcterms:PeriodOfTime                | ✓    | ✓   | ✓   | ✓        |        |
+| temporal_coverage    | dcterms:temporal           | dcterms:PeriodOfTime                | ✓    | ✓   | ✓   | ✓        |        |
 | spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      | ✓    | ✓   | ✓   | ✓        |        |
 | first_version       | dcat:first                 | dcat:Dataset                        |      |     |     | ✓        |        |
 | last_version        | dcat:last                  | dcat:Dataset                        |      |     |     | ✓        |        |
 | next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
 | landing_page        | dcat:landingPage           | foaf:Document                       | ✓    | ✓   |     | ✓        |        |
 
-##### Statistics quality designations
+#### Statistics quality designations
 
 While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate IRI. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropraite to attach at the Dataset (`dcat:DatasetSeries`) level as quality designations may change over time.
 
@@ -500,10 +501,43 @@ ex:myDataset a dcat:Dataset ;
 }
 ```
 
-#### Distributions
+### Versions
 
-TODO: Split this into a table for Versions.
-TODO: Create a new section for Distributions, show how they relate to Excel or CSV or RDF.
+Versions are the child object of Editions, using our own `ons:Version` object class which is a child of `dcat:Dataset`. They are the parent object of `dcat:Distribution`s.
+
+| Type            | Predicate            | Range                                  | GET | GET {ID} | POST | DELETE |
+|-----------------|----------------------|----------------------------------------|:---:|:--------:|:----:|:------:|
+| 0 Management    | dcterms:identifier   | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |    ✓   |
+| 1 Descriptive   | dcterms:created      | rdfs:Literal as xsd:dateTime           |  ✓  |     ✓    |   ✓  |        |
+| 1 Descriptive   | dcterms:creator      | foaf:Agent                             |  ✓  |     ✓    |   ✓  |        |
+| 1 Descriptive   | dcterms:issued       | rdfs:Literal as xsd:dateTime           |  ✓  |     ✓    |   ✓  |        |
+| 1 Descriptive   | rdfs:label           | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
+| 2 Summary       | dcterms:description  | rdfs:Literal as xsd:string/markdown    |     |     ✓    |   ✓  |        |
+| 4 Quality       | adms:versionNotes    | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
+| 6 Management    | dcat:nextVersion     | dcat:Dataset                           |     |     ✓    |      |        |
+| 6 Management    | dcat:version         | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
+| 7 Relationships | dcat:previousVersion | dcat:Dataset                           |     |     ✓    |      |        |
+| 7 Relationships | prov:wasDerivedFrom  | prov:Entity                            |     |     ✓    |   ✓  |        |
+| 7 Relationships | prov:wasGeneratedBy  | prov:Activity                          |     |     ✓    |   ✓  |        |
+| 7 Relationships | wdrs:describedBy     | rdfs:Resource                          |     |     ✓    |   ✓  |        |
+| 8 Distributions | dcat:byteSize        | rdfs:Literal as xsd:nonNegativeInteger |     |     ✓    |      |        |
+| 8 Distributions | dcat:downloadURL     | rdf:Resource                           |  ✓  |     ✓    |      |        |
+| 8 Distributions | dcat:mediaType       | dcterms:MediaType                      |  ✓  |     ✓    |   ✓  |        |
+| 8 Distributions | spdx:checksum        | spdx:Checksum                          |  ✓  |     ✓    |      |        |
+| 9 Schema        | csvqb:columntype     | csvqb:ColumnType                       |  ✓  |     ✓    |   ✓  |        |
+| 9 Schema        | csvw:aboutUrl        | rdfs:Literal as xsd:anyURI             |     |     ✓    |   ✓  |        |
+| 9 Schema        | csvw:column          | csvw:Column                            |     |     ✓    |   ✓  |        |
+| 9 Schema        | csvw:datatype        | xsd:Datatype                           |     |     ✓    |   ✓  |        |
+| 9 Schema        | csvw:name            | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
+| 9 Schema        | csvw:propertyUrl     | rdfs:Literal as xsd:anyURI             |     |     ✓    |   ✓  |        |
+| 9 Schema        | csvw:title           | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
+| 9 Schema        | csvw:valueUrl        | rdfs:Literal as xsd:anyURI             |     |     ✓    |   ✓  |        |
+
+
+### Distributions
+
+Distributions are the child object of Versions, and are `dcat:Distribution`. They are connected to the Version by the `dcat:distribution` predicate.
+
 
 | Type            | Predicate            | Range                                  | dcat:Dataset (Version) | dcat:Distribution | csvw:TableSchema | csvw:Column | POST Versions | GET Versions | GET Versions/{ID} | DELETE Version |
 | --------------- | -------------------- | -------------------------------------- | ---------------------- | ----------------- | ---------------- | ----------- | ------------- | ------------ | ----------------- | -------------- |
