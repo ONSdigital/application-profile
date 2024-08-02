@@ -123,6 +123,7 @@ We recommend the use of the following properties:
 
 | Property                     | Requirement level | Notes                                                                              |
 | ---------------------------- | ----------------- | ---------------------------------------------------------------------------------- |
+| `dcterms:identifier`         | mandatory         |                                                                                    |
 | `dcterms:title`              | mandatory         | See [titles](style.md#titles)                                                      |
 | `dcterms:description`        | mandatory         | See [descriptions](style.md#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
@@ -143,8 +144,8 @@ We recommend the use of the following properties:
 | `dcat:version`               | recommended       | See [versions](#versions)                                                          |
 | `adms:versionNotes`          | recommended       | See [versions](#versions)                                                          |
 | `dcat:prev`                  | recommended       | See [versions](#versions)                                                          |
+| `adms:status`                | recommended       |                                                                                    |
 | `dcat:landingPage`           | optional          |                                                                                    |
-| `dcterms:identifier`         | optional          |                                                                                    |
 | `dcterms:isReferencedBy`     | optional          |                                                                                    |
 
 For example:
