@@ -29,6 +29,7 @@ The key words must, must not, required, shall, shall not, should, should not, re
       - [Statistics quality designations](#statistics-quality-designations)
     - [Versions](#versions)
     - [Distributions](#distributions)
+      - [CSV-W Distributions](#csv-w-distributions)
   - [Versioning](#versioning)
     - [Example of versioning in RDF for CPIH](#example-of-versioning-in-rdf-for-cpih)
 
@@ -294,35 +295,37 @@ We are building a series of JSON-LD contexts to support the publication of our s
 
 We use the standard HTTP verbs to interact with our objects. Not all verbs are applicable to all objects, nor are all accessible publicly. We are still working out the business logic of mandatory and optional fields, and how to curate the namespace available to the ID of objects.
 
+Additionally, the POST and PUT verbs are not required to define the `@type` of the object as this is predefined by the predicate's range. The GET verb is used to retrieve the objects, and here the reponses will be in JSON-LD format and will include the `@context` and `@type` of the object.
+
 ### Datasets
 
 Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset_Series). They are the parent object of Editions, and are the object of the CatalogRecord. They are typically a recurring publication, such as the Consumer Price Inflation including owner occupiers' housing costs (CPIH) dataset.
 
-| Keyword             | Predicate                  | Range                               | POST | PUT | GET | GET {ID} | DELETE |
-| ------------------- | -------------------------- | ----------------------------------- | ---- | --- | --- | -------- | ------ |
-| @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        | ✓      |
-| publisher           | dcat:publisher             | foaf:Agent                          | ✓    | ✓   | ✓   | ✓        |        |
-| created             | dcterms:created            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| creator             | dcterms:creator            | foaf:Agent                          | ✓    | ✓   |     | ✓        |        |
-| issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        |        |
-| keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        | ✓    | ✓   |     | ✓        |        |
-| theme               | dcat:theme                 | [skos:Concept]                      | ✓    | ✓   |     | ✓        |        |
-| summary             | dcterms:abstract           | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        |        |
-| frequency           | dcterms:accuralPeriodicity | dcterms:Frequency                   | ✓    | ✓   | ✓   | ✓        |        |
-| description         | dcterms:description        | rdfs:Literal as xsd:string/markdown | ✓    | ✓   |     | ✓        |        |
-| license             | dcterms:license            | dcterms:LicenseDocument             | ✓    | ✓   | ✓   | ✓        |        |
-| temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      | ✓    | ✓   | ✓   | ✓        |        |
-| temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                | ✓    | ✓   | ✓   | ✓        |        |
-| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      | ✓    | ✓   | ✓   | ✓        |        |
-| spatial_coverage    | dcterms:spatial            | dcterms:Location                    | ✓    | ✓   | ✓   | ✓        |        |
-| status              | adms:status                | skos:Concept                        | ✓    | ✓   | ✓   | ✓        |        |
-| editions            | dcat:hasVersion            | [dcat:Dataset as ons:Edition]       |      |     |     | ✓        |        |
-| first_release       | dcat:first                 | dcat:Dataset as ons:Edition         |      |     |     | ✓        |        |
-| latest_release      | dcat:last                  | dcat:Dataset as ons:Edition         |      |     |     | ✓        |        |
-| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| landing_page        | dcat:landingPage           | foaf:Document                       | ✓    | ✓   |     | ✓        |        |
+| Keyword             | Predicate                  | Range                               | POST/PUT |  GET  | GET {ID} | DELETE |
+| ------------------- | -------------------------- | ----------------------------------- | :------: | :---: | :------: | :----: |
+| @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |   ✓    |
+| publisher           | dcat:publisher             | foaf:Agent                          |    ✓     |   ✓   |    ✓     |        |
+| created             | dcterms:created            | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| creator             | dcterms:creator            | foaf:Agent                          |    ✓     |       |    ✓     |        |
+| issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |        |
+| keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        |    ✓     |       |    ✓     |        |
+| theme               | dcat:theme                 | [skos:Concept]                      |    ✓     |       |    ✓     |        |
+| summary             | dcterms:abstract           | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |        |
+| frequency           | dcterms:accuralPeriodicity | dcterms:Frequency                   |    ✓     |   ✓   |    ✓     |        |
+| description         | dcterms:description        | rdfs:Literal as xsd:string/markdown |    ✓     |       |    ✓     |        |
+| license             | dcterms:license            | dcterms:LicenseDocument             |    ✓     |   ✓   |    ✓     |        |
+| temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      |    ✓     |   ✓   |    ✓     |        |
+| temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                |    ✓     |   ✓   |    ✓     |        |
+| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      |    ✓     |   ✓   |    ✓     |        |
+| spatial_coverage    | dcterms:spatial            | dcterms:Location                    |    ✓     |   ✓   |    ✓     |        |
+| status              | adms:status                | skos:Concept                        |    ✓     |   ✓   |    ✓     |        |
+| editions            | dcat:hasVersion            | [dcat:Dataset as ons:Edition]       |          |       |    ✓     |        |
+| first_release       | dcat:first                 | dcat:Dataset as ons:Edition         |          |       |    ✓     |        |
+| latest_release      | dcat:last                  | dcat:Dataset as ons:Edition         |          |       |    ✓     |        |
+| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| landing_page        | dcat:landingPage           | foaf:Document                       |    ✓     |       |    ✓     |        |
 
 #### GET of a CPIH Dataset
 
@@ -433,30 +436,31 @@ Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://ww
 
 Editions are the child object of Datasets, using our own `ons:Edition` object class which is a child of `dcat:Dataset`. They are the parent object of `ons:Version`s.
 
-| Keyword             | Predicate                  | Range                               | POST | PUT | GET | GET {ID} | DELETE |
-| ------------------- | -------------------------- | ----------------------------------- | ---- | --- | --- | -------- | ------ |
-| @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        | ✓      |
-| pulisher            | dcat:publisher             | foaf:Agent                          | ✓    | ✓   | ✓   | ✓        |        |
-| created             | dcterms:created            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| creator             | dcterms:creator            | foaf:Agent                          | ✓    | ✓   |     | ✓        |        |
-| issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        |        |
-| quality             | dqv:hasQualityAnnotation   | dqv:QualityAnnotation as blank node | ✓    | ✓   | ✓   | ✓        |        |
-| keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        | ✓    | ✓   |     | ✓        |        |
-| theme               | dcat:theme                 | [skos:Concept]                      | ✓    | ✓   |     | ✓        |        |
-| summary             | dcterms:abstract           | rdfs:Literal as xsd:string          | ✓    | ✓   | ✓   | ✓        |        |
-| frequency           | dcterms:accuralPeriodicity | dcterms:Frequency                   | ✓    | ✓   | ✓   | ✓        |        |
-| description         | dcterms:description        | rdfs:Literal as xsd:string/markdown | ✓    | ✓   |     | ✓        |        |
-| license             | dcterms:license            | dcterms:LicenseDocument             | ✓    | ✓   | ✓   | ✓        |        |
-| temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      | ✓    | ✓   | ✓   | ✓        |        |
-| spatial_coverage    | dcterms:spatial            | dcterms:Location                    | ✓    | ✓   | ✓   | ✓        |        |
-| temporal_coverage    | dcterms:temporal           | dcterms:PeriodOfTime                | ✓    | ✓   | ✓   | ✓        |        |
-| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      | ✓    | ✓   | ✓   | ✓        |        |
-| first_version       | dcat:first                 | dcat:Dataset                        |      |     |     | ✓        |        |
-| last_version        | dcat:last                  | dcat:Dataset                        |      |     |     | ✓        |        |
-| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        | ✓    | ✓   | ✓   | ✓        |        |
-| landing_page        | dcat:landingPage           | foaf:Document                       | ✓    | ✓   |     | ✓        |        |
+| Keyword             | Predicate                  | Range                               | POST/PUT | GET | GET {ID} | DELETE |
+|---------------------|----------------------------|-------------------------------------|:--------:|:---:|:--------:|:------:|
+| @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          |     ✓    |  ✓  |     ✓    |    ✓   |
+| pulisher            | dcat:publisher             | foaf:Agent                          |     ✓    |  ✓  |     ✓    |        |
+| created             | dcterms:created            | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
+| creator             | dcterms:creator            | foaf:Agent                          |     ✓    |     |     ✓    |        |
+| issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
+| modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
+| title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          |     ✓    |  ✓  |     ✓    |        |
+| quality             | dqv:hasQualityAnnotation   | dqv:QualityAnnotation as blank node |     ✓    |  ✓  |     ✓    |        |
+| keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        |     ✓    |     |     ✓    |        |
+| theme               | dcat:theme                 | [skos:Concept]                      |     ✓    |     |     ✓    |        |
+| summary             | dcterms:abstract           | rdfs:Literal as xsd:string          |     ✓    |  ✓  |     ✓    |        |
+| frequency           | dcterms:accuralPeriodicity | dcterms:Frequency                   |     ✓    |  ✓  |     ✓    |        |
+| description         | dcterms:description        | rdfs:Literal as xsd:string/markdown |     ✓    |     |     ✓    |        |
+| license             | dcterms:license            | dcterms:LicenseDocument             |     ✓    |  ✓  |     ✓    |        |
+| temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      |     ✓    |  ✓  |     ✓    |        |
+| spatial_coverage    | dcterms:spatial            | dcterms:Location                    |     ✓    |  ✓  |     ✓    |        |
+| temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                |     ✓    |  ✓  |     ✓    |        |
+| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      |     ✓    |  ✓  |     ✓    |        |
+| first_version       | dcat:first                 | dcat:Dataset                        |          |     |     ✓    |        |
+| last_version        | dcat:last                  | dcat:Dataset                        |          |     |     ✓    |        |
+| versions            | dcat:hasVersion            | [dcat:Dataset as ons:Version]       |          |     |     ✓    |        |
+| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
+| landing_page        | dcat:landingPage           | foaf:Document                       |     ✓    |     |     ✓    |        |
 
 #### Statistics quality designations
 
@@ -505,67 +509,53 @@ ex:myDataset a dcat:Dataset ;
 
 Versions are the child object of Editions, using our own `ons:Version` object class which is a child of `dcat:Dataset`. They are the parent object of `dcat:Distribution`s.
 
-| Type            | Predicate            | Range                                  | GET | GET {ID} | POST | DELETE |
-|-----------------|----------------------|----------------------------------------|:---:|:--------:|:----:|:------:|
-| 0 Management    | dcterms:identifier   | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |    ✓   |
-| 1 Descriptive   | dcterms:created      | rdfs:Literal as xsd:dateTime           |  ✓  |     ✓    |   ✓  |        |
-| 1 Descriptive   | dcterms:creator      | foaf:Agent                             |  ✓  |     ✓    |   ✓  |        |
-| 1 Descriptive   | dcterms:issued       | rdfs:Literal as xsd:dateTime           |  ✓  |     ✓    |   ✓  |        |
-| 1 Descriptive   | rdfs:label           | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
-| 2 Summary       | dcterms:description  | rdfs:Literal as xsd:string/markdown    |     |     ✓    |   ✓  |        |
-| 4 Quality       | adms:versionNotes    | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
-| 6 Management    | dcat:nextVersion     | dcat:Dataset                           |     |     ✓    |      |        |
-| 6 Management    | dcat:version         | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
-| 7 Relationships | dcat:previousVersion | dcat:Dataset                           |     |     ✓    |      |        |
-| 7 Relationships | prov:wasDerivedFrom  | prov:Entity                            |     |     ✓    |   ✓  |        |
-| 7 Relationships | prov:wasGeneratedBy  | prov:Activity                          |     |     ✓    |   ✓  |        |
-| 7 Relationships | wdrs:describedBy     | rdfs:Resource                          |     |     ✓    |   ✓  |        |
-| 8 Distributions | dcat:byteSize        | rdfs:Literal as xsd:nonNegativeInteger |     |     ✓    |      |        |
-| 8 Distributions | dcat:downloadURL     | rdf:Resource                           |  ✓  |     ✓    |      |        |
-| 8 Distributions | dcat:mediaType       | dcterms:MediaType                      |  ✓  |     ✓    |   ✓  |        |
-| 8 Distributions | spdx:checksum        | spdx:Checksum                          |  ✓  |     ✓    |      |        |
-| 9 Schema        | csvqb:columntype     | csvqb:ColumnType                       |  ✓  |     ✓    |   ✓  |        |
-| 9 Schema        | csvw:aboutUrl        | rdfs:Literal as xsd:anyURI             |     |     ✓    |   ✓  |        |
-| 9 Schema        | csvw:column          | csvw:Column                            |     |     ✓    |   ✓  |        |
-| 9 Schema        | csvw:datatype        | xsd:Datatype                           |     |     ✓    |   ✓  |        |
-| 9 Schema        | csvw:name            | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
-| 9 Schema        | csvw:propertyUrl     | rdfs:Literal as xsd:anyURI             |     |     ✓    |   ✓  |        |
-| 9 Schema        | csvw:title           | rdfs:Literal as xsd:string             |  ✓  |     ✓    |   ✓  |        |
-| 9 Schema        | csvw:valueUrl        | rdfs:Literal as xsd:anyURI             |     |     ✓    |   ✓  |        |
-
+| Keyword          | Predicate                  | Range                               |  GET  | GET {ID} | POST  | DELETE |
+| ---------------- | -------------------------- | ----------------------------------- | :---: | :------: | :---: | :----: |
+| @id              | dcterms:identifier         | rdfs:Literal as xsd:string          |   ✓   |    ✓     |   ✓   |   ✓    |
+| created          | dcterms:created            | rdfs:Literal as xsd:dateTime        |   ✓   |    ✓     |   ✓   |        |
+| creator          | dcterms:creator            | foaf:Agent                          |   ✓   |    ✓     |   ✓   |        |
+| issued           | dcterms:issued             | rdfs:Literal as xsd:dateTime        |   ✓   |    ✓     |   ✓   |        |
+| title            | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          |   ✓   |    ✓     |   ✓   |        |
+| description      | dcterms:description        | rdfs:Literal as xsd:string/markdown |       |    ✓     |   ✓   |        |
+| version_notes    | adms:versionNotes          | rdfs:Literal as xsd:string          |   ✓   |    ✓     |   ✓   |        |
+| next_version     | dcat:nextVersion           | dcat:Dataset                        |       |    ✓     |       |        |
+| previous_version | dcat:previousVersion       | dcat:Dataset                        |       |    ✓     |       |        |
 
 ### Distributions
 
 Distributions are the child object of Versions, and are `dcat:Distribution`. They are connected to the Version by the `dcat:distribution` predicate.
 
+| Type         | Predicate                  | Range                                  | POST/PUT |  GET  | GET {ID} | DELETE |
+| ------------ | -------------------------- | -------------------------------------- | :------: | :---: | :------: | :----: |
+| @id          | dcterms:identifier         | rdfs:Literal as xsd:string             |    ✓     |   ✓   |    ✓     |   ✓    |
+| created      | dcterms:created            | rdfs:Literal as xsd:dateTime           |    ✓     |   ✓   |    ✓     |        |
+| creator      | dcterms:creator            | foaf:Agent                             |    ✓     |   ✓   |    ✓     |        |
+| issued       | dcterms:issued             | rdfs:Literal as xsd:dateTime           |    ✓     |   ✓   |    ✓     |        |
+| title        | dcterms:title / rdfs:label | rdfs:Literal as xsd:string             |    ✓     |   ✓   |    ✓     |        |
+| description  | dcterms:description        | rdfs:Literal as xsd:string/markdown    |    ✓     |       |    ✓     |        |
+| derived_from | prov:wasDerivedFrom        | prov:Entity                            |    ✓     |       |    ✓     |        |
+| generated_by | prov:wasGeneratedBy        | prov:Activity                          |    ✓     |       |    ✓     |        |
+| described_by | wdrs:describedBy           | rdfs:Resource                          |    ✓     |       |    ✓     |        |
+| byte_size    | dcat:byteSize              | rdfs:Literal as xsd:nonNegativeInteger |          |       |    ✓     |        |
+| download_url | dcat:downloadURL           | rdf:Resource                           |          |   ✓   |    ✓     |        |
+| media_type   | dcat:mediaType             | dcterms:MediaType                      |    ✓     |   ✓   |    ✓     |        |
+| checksum     | spdx:checksum              | spdx:Checksum                          |          |   ✓   |    ✓     |        |
 
-| Type            | Predicate            | Range                                  | dcat:Dataset (Version) | dcat:Distribution | csvw:TableSchema | csvw:Column | POST Versions | GET Versions | GET Versions/{ID} | DELETE Version |
-| --------------- | -------------------- | -------------------------------------- | ---------------------- | ----------------- | ---------------- | ----------- | ------------- | ------------ | ----------------- | -------------- |
-| 0 Management    | dcterms:identifier   | rdfs:Literal as xsd:string             | ✓                      | ✓                 |                  |             | ✓             | ✓            | ✓                 | ✓              |
-| 1 Descriptive   | dcterms:created      | rdfs:Literal as xsd:dateTime           | ✓                      | ✓                 |                  |             | ✓             | ✓            | ✓                 |                |
-| 1 Descriptive   | dcterms:creator      | foaf:Agent                             |                        | ✓                 |                  |             | ✓             | ✓            | ✓                 |                |
-| 1 Descriptive   | dcterms:issued       | rdfs:Literal as xsd:dateTime           | ✓                      | ✓                 |                  |             | ✓             | ✓            | ✓                 |                |
-| 1 Descriptive   | rdfs:label           | rdfs:Literal as xsd:string             |                        |                   |                  | ✓           | ✓             | ✓            | ✓                 |                |
-| 2 Summary       | dcterms:description  | rdfs:Literal as xsd:string/markdown    |                        |                   |                  | ✓           | ✓             |              | ✓                 |                |
-| 4 Quality       | adms:versionNotes    | rdfs:Literal as xsd:string             | ✓                      |                   |                  |             | ✓             | ✓            | ✓                 |                |
-| 6 Management    | dcat:nextVersion     | dcat:Dataset                           | ✓                      |                   |                  |             |               |              | ✓                 |                |
-| 6 Management    | dcat:version         | rdfs:Literal as xsd:string             | ✓                      |                   |                  |             | ✓             | ✓            | ✓                 |                |
-| 7 Relationships | dcat:previousVersion | dcat:Dataset                           | ✓                      |                   |                  |             |               |              | ✓                 |                |
-| 7 Relationships | prov:wasDerivedFrom  | prov:Entity                            |                        | ✓                 |                  |             | ✓             |              | ✓                 |                |
-| 7 Relationships | prov:wasGeneratedBy  | prov:Activity                          |                        | ✓                 |                  |             | ✓             |              | ✓                 |                |
-| 7 Relationships | wdrs:describedBy     | rdfs:Resource                          |                        | ✓                 |                  |             | ✓             |              | ✓                 |                |
-| 8 Distributions | dcat:byteSize        | rdfs:Literal as xsd:nonNegativeInteger |                        | ✓                 |                  |             |               |              | ✓                 |                |
-| 8 Distributions | dcat:downloadURL     | rdf:Resource                           |                        | ✓                 |                  |             |               | ✓            | ✓                 |                |
-| 8 Distributions | dcat:mediaType       | dcterms:MediaType                      |                        | ✓                 |                  |             | ✓             | ✓            | ✓                 |                |
-| 8 Distributions | spdx:checksum        | spdx:Checksum                          |                        | ✓                 |                  |             |               | ✓            | ✓                 |                |
-| 9 Schema        | csvqb:columntype     | csvqb:ColumnType                       |                        |                   |                  | ✓           | ✓             | ✓            | ✓                 |                |
-| 9 Schema        | csvw:aboutUrl        | rdfs:Literal as xsd:anyURI             |                        |                   | ✓                |             | ✓             |              | ✓                 |                |
-| 9 Schema        | csvw:column          | csvw:Column                            |                        |                   | ✓                |             | ✓             |              | ✓                 |                |
-| 9 Schema        | csvw:datatype        | xsd:Datatype                           |                        |                   |                  | ✓           | ✓             |              | ✓                 |                |
-| 9 Schema        | csvw:name            | rdfs:Literal as xsd:string             |                        |                   |                  | ✓           | ✓             | ✓            | ✓                 |                |
-| 9 Schema        | csvw:propertyUrl     | rdfs:Literal as xsd:anyURI             |                        |                   |                  | ✓           | ✓             |              | ✓                 |                |
-| 9 Schema        | csvw:title           | rdfs:Literal as xsd:string             |                        |                   |                  | ✓           | ✓             | ✓            | ✓                 |                |
-| 9 Schema        | csvw:valueUrl        | rdfs:Literal as xsd:anyURI             |                        |                   |                  | ✓           | ✓             |              | ✓                 |                |
+#### CSV-W Distributions
+
+Distributions of type CSV-W are a special case of distributions, and are `qb:DataSet` with a `csvw:TableSchema`. These properties are in addition to the standard distribution properties.
+
+| Type             | Predicate        | Range                      | POST/PUT |  GET  | GET {ID} | DELETE |
+| ---------------- | ---------------- | -------------------------- | :------: | :---: | :------: | :----: |
+| csvqb:columnType | csvqb:columnType | csvqb:ColumnType           |    ✓     |   ✓   |    ✓     |        |
+| csvw:aboutUrl    | csvw:aboutUrl    | rdfs:Literal as xsd:anyURI |    ✓     |       |    ✓     |        |
+| csvw:column      | csvw:column      | csvw:Column                |    ✓     |       |    ✓     |        |
+| csvw:datatype    | csvw:datatype    | xsd:Datatype               |    ✓     |       |    ✓     |        |
+| csvw:name        | csvw:name        | rdfs:Literal as xsd:string |    ✓     |   ✓   |    ✓     |        |
+| csvw:propertyUrl | csvw:propertyUrl | rdfs:Literal as xsd:anyURI |    ✓     |       |    ✓     |        |
+| csvw:title       | csvw:title       | rdfs:Literal as xsd:string |    ✓     |   ✓   |    ✓     |        |
+| csvw:valueUrl    | csvw:valueUrl    | rdfs:Literal as xsd:anyURI |    ✓     |       |    ✓     |        |
+| csvw:virtual     | csvw:virtual     | xsd:boolean                |    ✓     |       |    ✓     |        |
 
 ## Versioning
 
