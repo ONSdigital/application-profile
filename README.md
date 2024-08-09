@@ -129,140 +129,75 @@ In order to gain the benefits of JSON-LD being directly consumable as RDF, we ad
 
 ## Our statistical Object Model Diagram
 
+Our object model is a representation of the relationships between the objects in our statistical data publication lifecycle. The model is a high-level view of the relationships between the objects. A detailed view of the major objects is provided in later sections, and the whole model with details can be found [here](./worked-examples/json_ld_object_model.md).
+
 ```mermaid
-classDiagram
-Distribution <|-- DatasetVersion : dcat.distribution 
-DatasetVersion <|-- Edition : dcat.hasVersion
-Edition --|> DatasetSeries : dcat.inSeries 
-CatalogRecord --|> DatasetSeries : foaf.primaryTopic
-Catalog --|> CatalogRecord : dcat.record
-Edition --|> VcardKind : dcat.contactPoint
-Edition --|> PeriodOfTime : dcterms.temporal
-TableSchema <|-- Distribution : csvw.tableSchema
-Column <|-- TableSchema : csvw.column
+flowchart LR
+    Dist[Distribution]
+    Vers[Version]
+    Edit[Edition]
+    Seri[Dataset]
+    Entr[Entry]
+    Cata[Catalogue]
 
-class Catalog["Catalog a dcat:Catalog"] {
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +dcat:record ∋ [dcat:CatalogRecord]
-    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
-}
+    Dist2[Distribution CSV]
+    Sche[TableSchema]
 
-class CatalogRecord["Record a dcat:CatalogRecord"] {
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +foaf:primaryTopic ∋ dcat:DatasetSeries
-    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
-}
+    Dist3[Distribution RDF Cube/DataSet]
+    DSD[DataStructureDefinition]
+    Obs[Observations]
 
-class TableSchema["TableSchema a csvw:TableSchema"] {
-    +csvw:column ∋ csvw:Column
-    +csvw:aboutUrl ∋ rdfs:Literal as xsd:anyURI
-}
+   style Obs stroke-dasharray: 5 5
 
-class Column["Column a csvw:Column"] {
-    +csvw:name ∋ rdfs:Literal as xsd:string
-    +csvw:title ∋ rdfs:Literal as xsd:string
-    +rdfs:label ∋ rdfs:Literal as xsd:string
-    +csvw:datatype ∋ xsd:Datatype
-    +csvqb:columntype ∋ csvqb:ColumnType
-    +dcterms:description ∋ rdfs:Literal as xsd:string
-    +csvw:propertyUrl ∋ rdfs:Literal as xsd:anyURI
-    +csvw:valueUrl ∋ rdfs:Literal as xsd:anyURI
-    +csvw:aboutUrl ∋ rdfs:Literal as xsd:anyURI
-}
 
-class Edition["Edition a dcat:Dataset"] {
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
-    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:creator ∋ foaf:Agent
-    +dcat:contactPoint ∋ vcard:Kind
-    +dcterms:abstract ∋ rdfs:Literal as xsd:string
-    +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
-    +adms:status ∋ skos:Concept
-    +dcat:inSeries ∋ dcat:DatasetSeries
-    +dqv:hasQualityQualityAnnotation ∋ dqv:QualityAnnotation
-    -dcat:hasVersion ∋ dcat:Dataset
-    -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
-    -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
-    -dcterms:spatial ∋ dcterms:Location
-    -ons:spatialResolution ∋ [skos:Concept]
-    -dcterms:temporal ∋ dcterms:PeriodOfTime
-    -dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
-    -dcat:prev ∋ dcat:Dataset
-    -dcat:next ∋ dcat:Dataset
-    -calculateTemporalResolution()
-    -calculateSpatialResolution()
-    -calculateTemporalCoverage() 
-    -calculateSpaitialCoverage()   
-}
+    Edit -- dcat:inSeries --> Seri
+    Edit -- dcat:hasVersion --> Vers
+    Vers -- dcat:distribution --> Dist
 
-class VcardKind["VcardKind a vcard:Kind"] {
-    +vcard:hasEmail ∋ vcard:Email
-    +vcard:fn ∋ rdfs:Literal as xsd:string
-    +vcard:hasTelephone ∋ vcard:Telephone
-}
+    Entr -. foaf:primaryTopic .-> Seri
+    Cata -. dcat:record .-> Entr
 
-class PeriodOfTime["PeriodOfTime a dcterms:PeriodOfTime"] {
-    +dcat:startDate ∋ rdfs:Literal as xsd:dateTime
-    +dcat:endDate ∋ rdfs:Literal as xsd:dateTime
-}
+    subgraph Full statistical object model
+        subgraph Minimum model
+            Vers
+            Dist
+        end
+        Edit
+        Seri
+    end
 
-class Distribution["Distribution a dcat:Distribution"] {
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:creator ∋ foaf:Agent
-    +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
-    +prov:wasDerivedFrom ∋ [prov:Entity]
-    +prov:wasGeneratedBy ∋ prov:Activity
-    +dcat:downloadURL ∋ rdf:Resource
-    +dcat:byteSize ∋ rdfs:Literal as xsd:nonNegativeInteger
-    +dcat:mediaType ∋ dcterms:MediaType
-    +wdrs:describedBy ∋ rdfs:Resource
-    +spdx:checksum ∋ spdx:Checksum
-}
+    subgraph CSV-W
+        Vers -- dcat:distirbution --> Dist2
+        Dist2 -. csvw:tableSchema .-> Sche
+    end
 
-class DatasetVersion["DatasetVersion a dcat:Dataset"] {
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +dcat:version ∋ rdfs:Literal as xsd:string
-    +adms:versionNotes ∋ rdfs:Literal as xsd:string
-    -dcterms:created ∋ rdfs:Literal as xsd:dateTime
-    -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
-    -dcat:previousVersion ∋ dcat:Dataset
-    -dcat:nextVersion ∋ dcat:Dataset
-}
+    subgraph RDF Cube Vocabulary
+        Vers -- dcat:distirbution --> Dist3
+        Dist3 -. qb:structure .-> DSD
+        Dist3 -. qb:observation .-> Obs
+    end
 
-class DatasetSeries["DatasetSeries a dcat:DatasetSeries"] {
-    +dcterms:identifier ∋ rdfs:Literal as xsd:string
-    +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
-    +ons:nextRelease ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:abstract ∋ rdfs:Literal as xsd:string
-    +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
-    +dcat:landingPage ∋ foaf:Document
-    +dcat:publisher ∋ foaf:Agent
-    +dcterms:modified ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:creator ∋ foaf:Agent
-    +dcterms:created ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
-    +dcterms:accuralPeriodicity ∋ dcterms:Frequency
-    +dcat:keyword ∋ [rdfs:Literal as xsd:string]
-    +dcat:theme ∋ [skos:Concept]
-    +dcterms:license ∋ dcterms:LicenseDocument
-    +dcterms:spatial ∋ dcterms:Location
-    +ons:spatialResolution ∋ [skos:Concept]
-    +dcterms:temporal ∋ dcterms:PeriodOfTime
-    +dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
-    -dcat:first ∋ dcat:Dataset
-    -dcat:last ∋ dcat:Dataset
-}
-
+    subgraph Catalogue triplestore
+        Entr
+        Cata
+    end
 ```
 
-We are heavily reliant on dcat and dcterms to relate our statistical datasets, editions and versions together. In brief:
+We are heavily reliant on dcat and dcterms to relate our statistical datasets, editions and versions together. Editions are the centre of our model, in brief:
 
 - We call our statistical publication series _Datasets_, although they are actually `dcat:DatasetSeries`.
 - We call releases within these Datasets _Editions_, and they are dcat:inSeries of the `dcat:DatasetSeries` and are of type dcat:Dataset.
 - We call all versions within these Editions _Versions_, and they are the object of the Editions' `dcat:hasVersion` property and are of type `dcat:Dataset`.
 - Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however we are targetting JSON-LD with a CSVW context representing a qb:DataSet.
+
+We have also broken out the model into components which can be implemented in order to allow for progressive realisation of the model and benefit.
+
+1. The minimimum model is the core of the model, which allows for the publication of versions of datasets in many formats (i.e. csv, Excel, pdf) called _Distributions_.
+2. The _Full statistical object model_ caputres a publication release cycle typical of recurring publications where a dataset is refereshed on a recurring basis; however it doesn't provide schema information of the dataset contents.
+3. The _CSV-W_ model adds tabular schema to the model, which provides content type and columnar information in machine readable format to the model.
+4. The _RDF Cube Vocabulary_ model adds full machine readability using our implementation of the [RDF Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube/), and enables full [5-star data](https://5stardata.info/en/) publication.
+5. The _Catalogue triplestore_ focuses on connecting the statistical datasets to a catalgoue, making it easier to link and discover datasets using [SPARQL](https://www.w3.org/TR/sparql11-query/) queries over surfacing JSON-LD data.
+6. Although not in the diagram separately, the _RDF Cube Vocabulary_ _Observations_ can also added to a Triplestore; however not for every edition and verison combination as the utility of previous releases is low and the cost of storage is increidbly high.
 
 ### Our API endpoints
 
@@ -276,20 +211,21 @@ Our API will use pluralised nouns to represent collections of objects and the in
 
 - In a browser, this URL will return a webpage with the latest information about the CPIH dataset, a summary of its structure, a preview of the data, and links to download the data in open formats.
 - When used programmatically along with an accept header, this URL will return the latest data in the requested format but defaulting to machine readable CSV.
+- This URL is in effect an an evergreen URL always displaying the latest edition's latest version of the dataset.
 
 > `https://data.ons.gov.uk/datasets/cpih/editions/2019-03`
 
-- In a browser, this URL will redirect to the primary CPIH webpage.
+- In a browser, this URL will be similar to the main CPIH webpage as above but for the latest version of the specified edition.
 - When used programmatically along with an accept header, this URL will return the data for the most recent version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
 
 > `https://data.ons.gov.uk/datasets/cpih/editions/2019-03/versions/2`
 
-- In a browser, this URL will redirect to the primary CPIH webpage.
+- In a browser, this URL will be similar to the main CPIH webpage as above but for the specified version of the specified edition.
 - When used programmatically along with an accept header, this URL will return the data for the second version of the March 2019 dataset in the requested format but defaulting to machine readable CSV.
 
 ### Draft JSON-LD Context
 
-We are building a series of JSON-LD contexts to support the publication of our statistical data. The draft context is currently [here](./worked-examples/cpih/draft_onsns_context.json), and we will be improving the context and ensuring conformation to the object model as described earlier.
+We are building a series of JSON-LD contexts to support the publication of our statistical data. The draft context is currently [here](./ons_context_v0.1.json), and we will be improving the context and ensuring conformation to the object model as described earlier.
 
 ### HTTP verbs and their applicability to our objects
 
@@ -300,6 +236,38 @@ Additionally, the POST and PUT verbs are not required to define the `@type` of t
 ### Datasets
 
 Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset_Series). They are the parent object of Editions, and are the object of the CatalogRecord. They are typically a recurring publication, such as the Consumer Price Inflation including owner occupiers' housing costs (CPIH) dataset.
+
+```mermaid
+classDiagram
+    direction LR
+
+    Edition --|> Dataset : dcat.inSeries 
+    CatalogRecord --|> Dataset : foaf.primaryTopic
+
+    class Dataset["Dataset a dcat:DatasetSeries"] {
+        +dcterms:identifier ∋ rdfs:Literal as xsd:string
+        +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
+        +ons:nextRelease ∋ rdfs:Literal as xsd:dateTime
+        +dcterms:abstract ∋ rdfs:Literal as xsd:string
+        +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
+        +dcat:landingPage ∋ foaf:Document
+        +dcat:publisher ∋ foaf:Agent
+        +dcterms:modified ∋ rdfs:Literal as xsd:dateTime
+        +dcterms:creator ∋ foaf:Agent
+        +dcterms:created ∋ rdfs:Literal as xsd:dateTime
+        +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
+        +dcterms:accuralPeriodicity ∋ dcterms:Frequency
+        +dcat:keyword ∋ [rdfs:Literal as xsd:string]
+        +dcat:theme ∋ [skos:Concept]
+        +dcterms:license ∋ dcterms:LicenseDocument
+        +dcterms:spatial ∋ dcterms:Location
+        +ons:spatialResolution ∋ [skos:Concept]
+        +dcterms:temporal ∋ dcterms:PeriodOfTime
+        +dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
+        -dcat:first ∋ dcat:Dataset
+        -dcat:last ∋ dcat:Dataset
+    }
+```
 
 | Keyword             | Predicate                  | Range                               | POST/PUT |  GET  | GET {ID} | DELETE |
 | ------------------- | -------------------------- | ----------------------------------- | :------: | :---: | :------: | :----: |
@@ -436,6 +404,43 @@ Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://ww
 
 Editions are the child object of Datasets, using our own `ons:Edition` object class which is a child of `dcat:Dataset`. They are the parent object of `ons:Version`s.
 
+```mermaid
+classDiagram
+    direction LR
+
+    Version <|-- Edition : dcat.hasVersion
+    Edition --|> Dataset : dcat.inSeries 
+    Edition --|> VcardKind : dcat.contactPoint
+    Edition --|> PeriodOfTime : dcterms.temporal
+
+
+    class Edition["Edition a dcat:Dataset"] {
+        +dcterms:identifier ∋ rdfs:Literal as xsd:string
+        +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
+        +dcterms:created ∋ rdfs:Literal as xsd:dateTime
+        +dcterms:creator ∋ foaf:Agent
+        +dcat:contactPoint ∋ vcard:Kind
+        +dcterms:abstract ∋ rdfs:Literal as xsd:string
+        +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
+        +adms:status ∋ skos:Concept
+        +dcat:inSeries ∋ dcat:DatasetSeries
+        +dqv:hasQualityQualityAnnotation ∋ dqv:QualityAnnotation
+        -dcat:hasVersion ∋ dcat:Dataset
+        -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
+        -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
+        -dcterms:spatial ∋ dcterms:Location
+        -ons:spatialResolution ∋ [skos:Concept]
+        -dcterms:temporal ∋ dcterms:PeriodOfTime
+        -dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
+        -dcat:prev ∋ dcat:Dataset
+        -dcat:next ∋ dcat:Dataset
+        -calculateTemporalResolution()
+        -calculateSpatialResolution()
+        -calculateTemporalCoverage() 
+        -calculateSpaitialCoverage()   
+    }
+```
+
 | Keyword             | Predicate                  | Range                               | POST/PUT | GET | GET {ID} | DELETE |
 |---------------------|----------------------------|-------------------------------------|:--------:|:---:|:--------:|:------:|
 | @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          |     ✓    |  ✓  |     ✓    |    ✓   |
@@ -509,6 +514,24 @@ ex:myDataset a dcat:Dataset ;
 
 Versions are the child object of Editions, using our own `ons:Version` object class which is a child of `dcat:Dataset`. They are the parent object of `dcat:Distribution`s.
 
+```mermaid
+classDiagram
+    direction RL
+
+    Distribution <|-- Version : dcat.distribution 
+    Version <|-- Edition : dcat.hasVersion
+
+    class Version["Version a dcat:Dataset"] {
+        +dcterms:identifier ∋ rdfs:Literal as xsd:string
+        +dcat:version ∋ rdfs:Literal as xsd:string
+        +adms:versionNotes ∋ rdfs:Literal as xsd:string
+        -dcterms:created ∋ rdfs:Literal as xsd:dateTime
+        -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
+        -dcat:previousVersion ∋ dcat:Dataset
+        -dcat:nextVersion ∋ dcat:Dataset
+    }
+```
+
 | Keyword          | Predicate                  | Range                               |  GET  | GET {ID} | POST  | DELETE |
 | ---------------- | -------------------------- | ----------------------------------- | :---: | :------: | :---: | :----: |
 | @id              | dcterms:identifier         | rdfs:Literal as xsd:string          |   ✓   |    ✓     |   ✓   |   ✓    |
@@ -524,6 +547,30 @@ Versions are the child object of Editions, using our own `ons:Version` object cl
 ### Distributions
 
 Distributions are the child object of Versions, and are `dcat:Distribution`. They are connected to the Version by the `dcat:distribution` predicate.
+
+```mermaid
+classDiagram
+    direction RL
+
+    Distribution <|-- Version : dcat.distribution 
+    TableSchema <|-- Distribution : csvw.tableSchema
+    DataStructureDefinition <|-- Distribution : qb.structure
+    Column <|-- TableSchema : csvw.column
+
+    class Distribution["Distribution a dcat:Distribution"] {
+        +dcterms:identifier ∋ rdfs:Literal as xsd:string
+        +dcterms:created ∋ rdfs:Literal as xsd:dateTime
+        +dcterms:creator ∋ foaf:Agent
+        +dcterms:issued ∋ rdfs:Literal as xsd:dateTime
+        +prov:wasDerivedFrom ∋ [prov:Entity]
+        +prov:wasGeneratedBy ∋ prov:Activity
+        +dcat:downloadURL ∋ rdf:Resource
+        +dcat:byteSize ∋ rdfs:Literal as xsd:nonNegativeInteger
+        +dcat:mediaType ∋ dcterms:MediaType
+        +wdrs:describedBy ∋ rdfs:Resource
+        +spdx:checksum ∋ spdx:Checksum
+    }
+```
 
 | Type         | Predicate                  | Range                                  | POST/PUT |  GET  | GET {ID} | DELETE |
 | ------------ | -------------------------- | -------------------------------------- | :------: | :---: | :------: | :----: |

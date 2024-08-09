@@ -1,5 +1,5 @@
 {
-    "@context": "json-ld-context/test_context.json",
+    "@context": "../ons_context_v0.1.json",
     "@id": "https://ons.gov.uk/datasets/cla01/editions/2019-Q4/versions/1",
     "@type": "ons:Version",
     "title": "CLA01: Claimant Count",
