@@ -4,135 +4,136 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
-@prefix ons: <http://www.https://www.ons.gov.uk/> .
+@prefix cogs: <http://www.ons.gov.uk/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <#DatasetShape> a sh:NodeShape ;
-    sh:targetClass dcat:DatasetSeries ;
+    sh:targetClass cogs:Dataset ;
     sh:property [
         sh:path dcterms:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:identifier." ;
+        sh:message: "A cogs:Dataset must have a dcterms:identifier." ;
     ];
  sh:property [
         sh:path dcterms:title ;
         sh:datatype: xsd:string ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:title." ;
+        sh:message: "A cogs:Dataset must have a dcterms:title." ;
     ];
     sh:property [
-        sh:path ons:nextRelease ;
+        sh:path cogs:nextRelease ;
         rdfs:Literal xsd:dateTime;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a ons:nextRelease." ;
+        sh:message: "A cogs:Dataset should have a cogs:nextRelease." ;
+        sh:severity sh:Warning ;
     ];
      sh:property [
         sh:path dcterms:abstract ;
         sh:datatype: xsd:string ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:abstract." ;
+        sh:message: "A cogs:Dataset must have a dcterms:abstract." ;
     ];
      sh:property [
         sh:path dcterms:description ;
         sh:datatype: xsd:string ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:description." ;
+        sh:message: "A cogs:Dataset must have a dcterms:description." ;
     ];
      #sh:property [
        # sh:path dcat:landingPage ;
         #sh:foaf:Document ;
         #sh:minCount 1 ;
-        #sh:message: "A dcat:DatasetSeries must have a dcat:landingPage." ;
+        #sh:message: "A cogs:Dataset must have a dcat:landingPage." ;
      sh:property [
         sh:path dcat:publisher ;
         #sh:foaf:Agent ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:title." ;
+        sh:message: "A cogs:Dataset must have a dcterms:title." ;
     ];
      sh:property [
         sh:path dcterms:modified ;
         sh:datatype: xsd:dateTime ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:modified." ;
+        sh:message: "A cogs:Dataset must have a dcterms:modified." ;
     ];
      sh:property [
         sh:path dcterms:creator ;
         #sh:foaf:Agent ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:creator." ;
+        sh:message: "A cogs:Dataset must have a dcterms:creator." ;
     ];
      sh:property [
         sh:path dcterms:created ;
         sh:datatype: xsd:dateTime ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:created." ;
+        sh:message: "A cogs:Dataset must have a dcterms:created." ;
     ];
      sh:property [
         sh:path dcterms:issued ;
         sh:datatype: xsd:dateTime ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:issued." ;
+        sh:message: "A cogs:Dataset must have a dcterms:issued." ;
     ];
      sh:property [
         sh:path dcterms:accrualPeriodicity ;
         sh:path dcterms:Frequency ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:accrualPeriodicity." ;
+        sh:message: "A cogs:Dataset must have a dcterms:accrualPeriodicity." ;
     ];
      sh:property [
         sh:path dcat:keyword ;
         rdfs:Literal: xsd:string ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcat:keyword." ;
+        sh:message: "A cogs:Dataset must have a dcat:keyword." ;
     ];
      sh:property [
         sh:path dcat:theme ;
         #skos:Concept ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcat:theme." ;
+        sh:message: "A cogs:Dataset must have a dcat:theme." ;
     ];
      sh:property [
         sh:path dcterms:license ;
         sh:path dcterms:LicenseDocument ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:license." ;
+        sh:message: "A cogs:Dataset must have a dcterms:license." ;
     ];
      sh:property [
         sh:path dcterms:spatial ;
         sh:path dcterms:Location ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:spatial." ;
+        sh:message: "A cogs:Dataset must have a dcterms:spatial." ;
     ];
     sh:property [
-        sh:path ons:spatialResolution ;
+        sh:path cogs:spatialResolution ;
         #skos:Concept ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:title." ;
+        sh:message: "A cogs:Dataset must have a dcterms:title." ;
     ];
      sh:property [
         sh:path dcterms:temporal ;
         sh:path dcterms:PeriodOftime ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:temporal." ;
+        sh:message: "A cogs:Dataset must have a dcterms:temporal." ;
     ];
      sh:property [
         sh:path dcat:temporalResolution ;
         rdfs:Literal xsd:duration ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcat:temporalResolution." ;
+        sh:message: "A cogs:Dataset must have a dcat:temporalResolution." ;
     ];
      sh:property [
         sh:path dcat:first ;
         sh:path dcat:Dataset ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcat:first." ;
+        sh:message: "A cogs:Dataset must have a dcat:first." ;
     ];
      sh:property [
         sh:path dcat:last ;
         sh:path dcat:Dataset ;
         sh:minCount 1 ;
-        sh:message: "A dcat:DatasetSeries must have a dcterms:description." ;
+        sh:message: "A cogs:Dataset must have a dcterms:description." ;
     ] .

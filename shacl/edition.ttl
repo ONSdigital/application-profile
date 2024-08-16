@@ -3,115 +3,122 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
-@prefix ons: <http://www.https://www.ons.gov.uk/> .
+@prefix cogs: <https://www.ons.gov.uk/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
 @prefix adms: <http://www.w3.org/ns/adms#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <#DatasetShape> a sh:NodeShape ;
-    sh:targetClass dcat:Dataset ;
+    sh:targetClass cogs:Edition ;
     sh:property [
         sh:path dcterms:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have at least one dcterms:identifier." ;
+        sh:message "A cogs:Edition must have at least one dcterms:identifier." ;
     ] ;
     sh:property [
         sh:path dcterms:title ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:title." ;
+        sh:message "A cogs:Edition must have a dcterms:title." ;
     ] ;
       sh:property [
         sh:path dcterms:created ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:created." ;
+        sh:message "A cogs:Edition must have a dcterms:created." ;
     ] ;
       sh:property [
         sh:path dcterms:creator ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:creator." ;
+        sh:message "A cogs:Edition must have a dcterms:creator." ;
     ] ;
       sh:property [
         sh:path dcat:contactPoint ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcat:contactPoint." ;
+        sh:message "A cogs:Edition must have a dcat:contactPoint." ;
     ] ;
       sh:property [
         sh:path dcterms:abstract ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:abstract." ;
+        sh:message "A cogs:Edition must have a dcterms:abstract." ;
     ] ;
       sh:property [
         sh:path dcterms:description ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:description." ;
+        sh:message "A cogs:Edition must have a dcterms:description." ;
     ] ;
        sh:property [
         sh:path adms:status ;
         sh:path skos:Concept ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a adms:status." ;
+        sh:message "A cogs:Edition must have a adms:status." ;
     ] ;
       sh:property [
         sh:path dcat:inSeries ;
-        sh:path dcat:DatasetSeries ;
+        sh:class cogs:Dataset ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcat:inSeries." ;
+        sh:message "A cogs:Edition must have a dcat:inSeries pointing to a cogs:Dataset." ;
     ] ;
       sh:property [
         sh:path dcat:hasVersion ;
-        sh:path dcat:Dataset ;
+        sh:class cogs:Version ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcat:hasVersion." ;
+        sh:message "A cogs:Edition must have a cogs:hasVersion." ;
     ] ;
       sh:property [
         sh:path dcterms:modified ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:modified." ;
+        sh:message "A cogs:Edition must have a dcterms:modified." ;
     ] ;
       sh:property [
         sh:path dcterms:issued ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:issued." ;
+        sh:message "A cogs:Edition must have a dcterms:issued." ;
     ] ;
       sh:property [
         sh:path dcterms:spatial ;
-        sh:path dcterms:Location ;
+        sh:class dcterms:Location ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:spatial." ;
+        sh:message "A cogs:Edition should have a dcterms:spatial." ;
+        sh:severity sh:Warning ;
     ] ;
       sh:property [
-        sh:path ons:spatialResolution ;
+        sh:path cogs:spatialResolution ;
+        sh:class skos:Concept ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a ons:spatialResolution" ;
+        sh:message "A cogs:Edition should have a cogs:spatialResolution" ;
+        sh:severity sh:Warning ;
     ] ;
       sh:property [
         sh:path dcterms:temporal ;
-        sh:path dcterms:PeriodOfTime ;
+        sh:class dcterms:PeriodOfTime ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:temporal." ;
+        sh:message "A cogs:Edition should have a dcterms:temporal." ;
+        sh:severity sh:Warning ;
     ] ;
       sh:property [
         sh:path dcterms:temporalResolution ;
         sh:datatype xsd:duration ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcterms:temporalResolution." ;
+        sh:message "A cogs:Edition should have a dcterms:temporalResolution comprised of xsd:durations." ;
+        sh:severity sh:Warning ;
     ] ;
       sh:property [
         sh:path dcat:prev ;
-        sh:path dcat:DataSet ;
+        sh:path cogs:Edition ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcat:prev." ;
+        sh:message "A cogs:Edition can have a dcat:prev, especially when it is a recurring publication with a given frequency." ;
+        sh:severity sh:Info ;
     ] ;
        sh:property [
         sh:path dcat:next ;
-        sh:path dcat:DataSet ;
+        sh:path cogs:Edition ;
         sh:minCount 1 ;
-        sh:message "A dcat:Dataset must have a dcat:next." ;
+        sh:message "A cogs:Edition can have a dcat:next, especially when it is a recurring publication with a given frequency." ;
+        sh:severity sh:Info ;
     ] .

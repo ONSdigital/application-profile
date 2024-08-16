@@ -41,27 +41,19 @@ cogs:inSeries a owl:ObjectProperty ;
     rdfs:label "in series" ;
     rdfs:comment "A property linking an Edition to the Dataset it is part of." .
 
-# dcat:hasVersions (relationship between Dataset and Version)
-dcat:hasVersions a owl:ObjectProperty ;
-    rdfs:domain cogs:Dataset ;
+# cogs:hasVersion (relationship between Edition and Version)
+cogs:hasVersion a owl:ObjectProperty ;
+    rdfs:domain cogs:Edition ;
     rdfs:range cogs:Version ;
     rdfs:label "has versions" ;
     rdfs:comment "A property linking a Dataset to its Versions." .
 
-# dcat:hasDistribution (relationship between Version and Distribution)
-dcat:hasDistribution a owl:ObjectProperty ;
+# cogs:hasDistribution (relationship between Version and Distribution)
+cogs:distribution a owl:ObjectProperty ;
     rdfs:domain cogs:Version ;
-    rdfs:range cogs:Distribution ;
+    rdfs:range dcat:Distribution ;
     rdfs:label "has distribution" ;
     rdfs:comment "A property linking a Version to its Distribution." .
-
-# cogs:hasDistribution (specialization of dcat:hasDistribution)
-cogs:hasDistribution a owl:ObjectProperty ;
-    rdfs:subPropertyOf dcat:hasDistribution ;
-    rdfs:domain cogs:Version ;
-    rdfs:range cogs:Distribution ;
-    rdfs:label "has distribution" ;
-    rdfs:comment "A property linking a Version to its specialized Distribution." .
 
 # Define additional properties for the COGS ontology
 

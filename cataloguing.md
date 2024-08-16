@@ -13,16 +13,16 @@ classDiagram
         a dcat:CatalogRecord
     }
     class Dataset{
-        a dcat:DatasetSeries, ons:Dataset
+        a dcat:DatasetSeries, cogs:Dataset
     }
     class Edition {
-        a dcat:Dataset, ons:Edition
+        a dcat:Dataset, cogs:Edition
     }
     class Version {
-        a dcat:Dataset, ons:Version
+        a dcat:Dataset, cogs:Version
     }
     class Distribution {
-        a dcat:Distribution, ons:Distribution
+        a dcat:Distribution, cogs:Distribution
     }
 
     Catalog --> "1..*" CatalogRecord : dcat.record
