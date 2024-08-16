@@ -1,0 +1,89 @@
+@prefix cogs: <https://www.ons.gov.uk/ns#> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Define the COGS ontology
+<https://www.ons.gov.uk/ns#>
+    a owl:Ontology ;
+    rdfs:label "COGS Ontology" ;
+    rdfs:comment "An ontology for the COGS (Connected Open Graph Statistics) model based on the DCAT vocabulary." ;
+    owl:versionInfo "1.0" .
+
+# Define the Dataset class (a specialised dcat:DatasetSeries)
+cogs:Dataset a owl:Class ;
+    rdfs:subClassOf dcat:DatasetSeries ;
+    rdfs:label "Dataset" ;
+    rdfs:comment "A class representing a dataset in a statistical publication object model, a child of dcat:DatasetSeries. A recurring publication." .
+
+# Define the Edition class (a specialised dcat:Dataset)
+cogs:Edition a owl:Class ;
+    rdfs:subClassOf cogs:Dataset ;
+    rdfs:label "Edition" ;
+    rdfs:comment "A class representing an edition of a statistical publication object model, a child of dcat:Dataset. A member of a recurring publication." .
+
+# Define the Version class (a specialised dcat:Dataset)
+cogs:Version a owl:Class ;
+    rdfs:subClassOf cogs:Dataset ;
+    rdfs:label "Version" ;
+    rdfs:comment "A class representing a version of a statistical publication object model, a child of dcat:Dataset. A member of an edition of a recurring publication. Ideally there will only ever be one version, however multiple versions may be required due to corrections or updates to the first release of an edition." .
+
+# Define the properties for relationships between the classes
+
+# cogs:inSeries (linking cogs:Edition to cogs:Dataset)
+cogs:inSeries a owl:ObjectProperty ;
+    rdfs:domain cogs:Edition ;
+    rdfs:range cogs:Dataset ;
+    rdfs:label "in series" ;
+    rdfs:comment "A property linking an Edition to the Dataset it is part of." .
+
+# dcat:hasVersions (relationship between Dataset and Version)
+dcat:hasVersions a owl:ObjectProperty ;
+    rdfs:domain cogs:Dataset ;
+    rdfs:range cogs:Version ;
+    rdfs:label "has versions" ;
+    rdfs:comment "A property linking a Dataset to its Versions." .
+
+# dcat:hasDistribution (relationship between Version and Distribution)
+dcat:hasDistribution a owl:ObjectProperty ;
+    rdfs:domain cogs:Version ;
+    rdfs:range cogs:Distribution ;
+    rdfs:label "has distribution" ;
+    rdfs:comment "A property linking a Version to its Distribution." .
+
+# cogs:hasDistribution (specialization of dcat:hasDistribution)
+cogs:hasDistribution a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcat:hasDistribution ;
+    rdfs:domain cogs:Version ;
+    rdfs:range cogs:Distribution ;
+    rdfs:label "has distribution" ;
+    rdfs:comment "A property linking a Version to its specialized Distribution." .
+
+# Define additional properties for the COGS ontology
+
+# Define the cogs:nextRelease property
+cogs:nextRelease a owl:DatatypeProperty ;
+    rdfs:domain cogs:Dataset ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "Next release date" ;
+    rdfs:comment """
+        A property indicating the date and time when the next edition of a dataset will be released. 
+        If the date is specified without a time component, the release should be considered to occur on that day.
+        If a specific time is provided, the release should be expected at that precise time.
+    """ .
+
+# Define the cogs:spatialResolution property
+cogs:spatialResolution a owl:DatatypeProperty ;
+    rdfs:domain cogs:Dataset, cogs:Edition ;
+    rdfs:range skos:Concept ;
+    rdfs:label "Spatial resolution" ;
+    rdfs:comment """
+        A property indicating the spatial resolution of the dataset or edition. 
+        This should use one or more concepts from a controlled vocabulary such as the SKOS concept scheme.
+        Similar to the dcat:temporalResolution property also employed at the dataset or edition level.
+    """ .
+
