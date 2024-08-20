@@ -68,7 +68,7 @@ The [Data on the Web Best Practices (DWBP)](https://www.w3.org/TR/dwbp/) describ
 | ★★☆☆☆ | data needs to be machine-readable,                                                                   |
 | ★★★☆☆ | data needs to be non-proprietary,                                                                    |
 | ★★★★☆ | identifiers need to be used to denote things, so that people can talk about resources unambiguously, |
-| ★★★★★ | data needs to able to be linked to other data to provide context.                                   |
+| ★★★★★ | data needs to able to be linked to other data to provide context.                                    |
 
 ### FAIR principles
 
@@ -441,35 +441,35 @@ classDiagram
     }
 ```
 
-| Keyword             | Predicate                  | Range                               | POST/PUT | GET | GET {ID} | DELETE |
-|---------------------|----------------------------|-------------------------------------|:--------:|:---:|:--------:|:------:|
-| @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          |     ✓    |  ✓  |     ✓    |    ✓   |
-| pulisher            | dcat:publisher             | foaf:Agent                          |     ✓    |  ✓  |     ✓    |        |
-| created             | dcterms:created            | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
-| creator             | dcterms:creator            | foaf:Agent                          |     ✓    |     |     ✓    |        |
-| issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
-| modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
-| title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          |     ✓    |  ✓  |     ✓    |        |
-| quality             | dqv:hasQualityAnnotation   | dqv:QualityAnnotation as blank node |     ✓    |  ✓  |     ✓    |        |
-| keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        |     ✓    |     |     ✓    |        |
-| theme               | dcat:theme                 | [skos:Concept]                      |     ✓    |     |     ✓    |        |
-| summary             | dcterms:abstract           | rdfs:Literal as xsd:string          |     ✓    |  ✓  |     ✓    |        |
-| frequency           | dcterms:accuralPeriodicity | dcterms:Frequency                   |     ✓    |  ✓  |     ✓    |        |
-| description         | dcterms:description        | rdfs:Literal as xsd:string/markdown |     ✓    |     |     ✓    |        |
-| license             | dcterms:license            | dcterms:LicenseDocument             |     ✓    |  ✓  |     ✓    |        |
-| temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      |     ✓    |  ✓  |     ✓    |        |
-| spatial_coverage    | dcterms:spatial            | dcterms:Location                    |     ✓    |  ✓  |     ✓    |        |
-| temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                |     ✓    |  ✓  |     ✓    |        |
-| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      |     ✓    |  ✓  |     ✓    |        |
-| first_version       | dcat:first                 | dcat:Dataset                        |          |     |     ✓    |        |
-| last_version        | dcat:last                  | dcat:Dataset                        |          |     |     ✓    |        |
-| versions            | dcat:hasVersion            | [dcat:Dataset as ons:Version]       |          |     |     ✓    |        |
-| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        |     ✓    |  ✓  |     ✓    |        |
-| landing_page        | dcat:landingPage           | foaf:Document                       |     ✓    |     |     ✓    |        |
+| Keyword             | Predicate                  | Range                               | POST/PUT |  GET  | GET {ID} | DELETE |
+| ------------------- | -------------------------- | ----------------------------------- | :------: | :---: | :------: | :----: |
+| @id                 | dcterms:identifier         | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |   ✓    |
+| pulisher            | dcat:publisher             | foaf:Agent                          |    ✓     |   ✓   |    ✓     |        |
+| created             | dcterms:created            | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| creator             | dcterms:creator            | foaf:Agent                          |    ✓     |       |    ✓     |        |
+| issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |        |
+| quality_designation | dqv:hasQualityAnnotation   | dqv:QualityAnnotation as blank node |    ✓     |   ✓   |    ✓     |        |
+| keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        |    ✓     |       |    ✓     |        |
+| theme               | dcat:theme                 | [skos:Concept]                      |    ✓     |       |    ✓     |        |
+| summary             | dcterms:abstract           | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |        |
+| frequency           | dcterms:accuralPeriodicity | dcterms:Frequency                   |    ✓     |   ✓   |    ✓     |        |
+| description         | dcterms:description        | rdfs:Literal as xsd:string/markdown |    ✓     |       |    ✓     |        |
+| license             | dcterms:license            | dcterms:LicenseDocument             |    ✓     |   ✓   |    ✓     |        |
+| temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      |    ✓     |   ✓   |    ✓     |        |
+| spatial_coverage    | dcterms:spatial            | dcterms:Location                    |    ✓     |   ✓   |    ✓     |        |
+| temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                |    ✓     |   ✓   |    ✓     |        |
+| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      |    ✓     |   ✓   |    ✓     |        |
+| first_version       | dcat:first                 | dcat:Dataset                        |          |       |    ✓     |        |
+| last_version        | dcat:last                  | dcat:Dataset                        |          |       |    ✓     |        |
+| versions            | dcat:hasVersion            | [dcat:Dataset as ons:Version]       |          |       |    ✓     |        |
+| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| landing_page        | dcat:landingPage           | foaf:Document                       |    ✓     |       |    ✓     |        |
 
 #### Statistics quality designations
 
-While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate IRI. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropriate to attach at the Dataset (`dcat:DatasetSeries`) level as quality designations may change over time.
+While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate IRI. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropriate to attach at the Dataset (`cogs:Dataset`) level as quality designations may change over time.
 
 | Label                              | Previous name           | IRI                                                                                                                |
 | ---------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
