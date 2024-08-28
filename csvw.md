@@ -327,7 +327,7 @@ Metadata improves the discoverability of datasets, in CSVWs the following proper
 - `dc:abstract` Another string used to describe the dataset. This needs to be more detailed than the `title`.
 - `dc:description` This is used to provide all the information you want to provide for the dataset.
 - `dcat:license` This is where you place which license you are using.
-- `dcat:keywords` You use this provide keywords, that can be used as searcahable terms.
+- `dcat:keywords` You use this to provide keywords, that can be used as searcahable terms.
 - `dc:publisher` This is where you put the publisher of the dataset.
 - `dcat:theme` If your dataset is part of an overreaching geography. Such as Economy, Business, Industry and Trade. This is where you output the url of where the dataset is.
 

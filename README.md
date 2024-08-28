@@ -470,7 +470,7 @@ classDiagram
 | temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                |    ✓     |   ✓   |    ✓     |        |
 | spatial_resolution  | cogs:spatialResolution     | [skos:Concept]                      |    ✓     |   ✓   |    ✓     |        |
 | first_version       | dcat:first                 | dcat:Version                        |          |       |    ✓     |        |
-| last_version        | dcat:last                  | dcat:Edition                        |          |       |    ✓     |        |
+| last_version        | dcat:last                  | cogs:Edition                        |          |       |    ✓     |        |
 | versions            | dcat:hasVersion            | [cogs:Version]                      |          |       |    ✓     |        |
 | next_release        | cogs:nextRelease           | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
 | landing_page        | dcat:landingPage           | foaf:Document                       |    ✓     |       |    ✓     |        |
@@ -677,3 +677,5 @@ We believe publishing data in a versioned manner is important. Every publication
 <cpihQB> a dcat:Distribution , qb:Dataset .
 
 ```
+
+Copyright 2024 Office for National Statistics, under Crown Copyright 
