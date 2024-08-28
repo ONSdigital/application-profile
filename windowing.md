@@ -1,6 +1,6 @@
 # Human vs Machine readability in JSON-LD API Responses
 
-As JSON-LD serialises RDF, it is a powerful tool to provide linked data in API responses. Machine readability through RDF allows resources to be enumerated with easy-to-read URIs (i.e. <https://ons.gov.uk/datasets/cpih/editions/2019-07/version/2> for the seccond version of the CPIH dataset for July 2019) and API resposnes with JSON-LD context to fully describe that particular resource. If additional context and related resources are desired, subsequent calls to the endpoint for those resources can be made. However, when human users interact with APIs, they often need context upfront to understand the relationships between resources, so discretely responding for an individual resource may not be appropriate.
+As JSON-LD serialises RDF, it is a powerful tool to provide linked data in API responses. Machine readability through RDF allows resources to be enumerated with easy-to-read URIs (i.e. <https://ons.gov.uk/datasets/cpih/editions/2019-07/version/2> for the second version of the CPIH dataset for July 2019) and API resposnes with JSON-LD context to fully describe that particular resource. If additional context and related resources are desired, subsequent calls to the endpoint for those resources can be made. However, when human users interact with APIs, they often need context upfront to understand the relationships between resources, so discretely responding for an individual resource may not be appropriate.
 
 ## Introducing Windowing
 
@@ -10,11 +10,11 @@ For example, important context about the quality assurance performed on an editi
 
 ## Key Concepts
 
-There are several important factors when considering windowing a JSON-LD API response, and they depend not only whether the response is intended for human or machine consumption but also on whether the request is for a named resource or a collection of resources.
+There are several important factors when considering windowing a JSON-LD API response, and they depend not only on whether the response is intended for human or machine consumption but also on whether the request is for a named resource or a collection of resources.
 
 ### Contextual Understanding
 
-When a user requests a specific dataset edition or version, windowing allows the response to include relevant information about its relationship to parent or child objects. This helps human users, understand the a particular version in relation to its parent edition and all the distributions a version may have.
+When a user requests a specific dataset edition or version, windowing allows the response to include relevant information about its relationship to parent or child objects. This helps human users understand a particular version in relation to its parent edition and all the distributions a version may have.
 
 ### Human-Centric View
 
