@@ -31,7 +31,7 @@
         "keyword": "dcterms:keyword",
         "theme": "dcat:theme",
         "spatial_coverage": "dcterms:spatial",
-        "spatial_resolution": "ons:spatialResolution",
+        "spatial_resolution": "cogs:spatialResolution",
         "temporal_coverage": {
             "@id": "dcterms:temporal",
             "@context": {

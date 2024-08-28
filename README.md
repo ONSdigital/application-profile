@@ -21,6 +21,7 @@ The key words must, must not, required, shall, shall not, should, should not, re
     - [Our API endpoints](#our-api-endpoints)
     - [Design decisions on object model](#design-decisions-on-object-model)
     - [Draft JSON-LD Context](#draft-json-ld-context)
+    - [Connected Open Graph Statistics (COGS) namespace](#connected-open-graph-statistics-cogs-namespace)
     - [HTTP verbs and their applicability to our objects](#http-verbs-and-their-applicability-to-our-objects)
     - [Datasets](#datasets)
       - [GET of a CPIH Dataset](#get-of-a-cpih-dataset)
@@ -88,6 +89,8 @@ The Application Profile uses terms from various existing specifications. Classes
 | Namespace | Namespace IRI                                 | Specification name                                                                   |
 | --------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
 | `adms`    | `http://www.w3.org/ns/adms#`                  | Asset Description Metadata Schema                                                    |
+| `cogs`    | `http://www.ons.gov.uk/ns#`                   | Connected Open Graph Statistics                                                      |
+| `csvw`    | `http://www.w3.org/ns/csvw#`                  | CSV on the Web Vocabulary                                                            |
 | `dcat`    | `http://www.w3.org/ns/dcat#`                  | Data Catalog Vocabulary                                                              |
 | `dcterms` | `http://purl.org/dc/terms/`                   | DCMI (Dublin Core Metadata Initiative) Metadata Terms                                |
 | `dqv`     | `https://www.w3.org/TR/vocab-dqv/`            | Data Quality Vocabulary                                                              |
@@ -185,10 +188,10 @@ flowchart LR
 
 We are heavily reliant on dcat and dcterms to relate our statistical datasets, editions and versions together. Editions are the centre of our model, in brief:
 
-- We call our statistical publication series _Datasets_, although they are actually `dcat:DatasetSeries`.
-- We call releases within these Datasets _Editions_, and they are dcat:inSeries of the `dcat:DatasetSeries` and are of type dcat:Dataset.
-- We call all versions within these Editions _Versions_, and they are the object of the Editions' `dcat:hasVersion` property and are of type `dcat:Dataset`.
-- Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however we are targetting JSON-LD with a CSVW context representing a qb:DataSet.
+- We call our statistical publication series _Datasets_, which are typed `cogs:Dataset` which is a specialisation of `dcat:DatasetSeries`.
+- We call releases within these Datasets _Editions_, which are typed `cogs:Edition` which is a specialisation of `dcat:Dataset` and they are linked to `cogs:Dataset` using `cogs:inSeries`.
+- We call all versions within these Editions _Versions_, which are typed `cogs:Versions` which is a specialisation of `dcat:Dataset` and they are the object of the Editions' `cogs:hasVersion` property.
+- Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however our idealised data distribution is a JSON-LD with a CSVW context representing a qb:DataSet from the RDF Cube Vocabulary.
 
 We have also broken out the model into components which can be implemented in order to allow for progressive realisation of the model and benefit.
 
@@ -227,6 +230,12 @@ Our API will use pluralised nouns to represent collections of objects and the in
 
 We are building a series of JSON-LD contexts to support the publication of our statistical data. The draft context is currently [here](./ons_context_v0.1.json), and we will be improving the context and ensuring conformation to the object model as described earlier.
 
+### Connected Open Graph Statistics (COGS) namespace
+
+We have extended several dcat classes and properties to better represent the statistical data publication lifecycle. The COGS namespace also addresses a few gaps within the catalogue metadata management in dcterms. You can find the ontology [here](./cogs-vocab.ttl).
+
+TODO: Add the COGS namespace and its hosting to http://www.ons.gov.uk/ns.
+
 ### HTTP verbs and their applicability to our objects
 
 We use the standard HTTP verbs to interact with our objects. Not all verbs are applicable to all objects, nor are all accessible publicly. We are still working out the business logic of mandatory and optional fields, and how to curate the namespace available to the ID of objects.
@@ -235,7 +244,7 @@ Additionally, the POST and PUT verbs are not required to define the `@type` of t
 
 ### Datasets
 
-Datasets are the primary object, and are in fact [dcat:DatasetSeries](https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset_Series). They are the parent object of Editions, and are the object of the CatalogRecord. They are typically a recurring publication, such as the Consumer Price Inflation including owner occupiers' housing costs (CPIH) dataset.
+Datasets are the primary object, and typed `cogs:Dataset` which is a sepcialisation [dcat:DatasetSeries](https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset_Series). They are the parent object of Editions, and are the object of `foaf:primaryTopic` from a `dcat:CatalogRecord`. They are typically a recurring publication, such as the Consumer Price Inflation including owner occupiers' housing costs (CPIH) dataset.
 
 ```mermaid
 classDiagram
@@ -244,10 +253,10 @@ classDiagram
     Edition --|> Dataset : dcat.inSeries 
     CatalogRecord --|> Dataset : foaf.primaryTopic
 
-    class Dataset["Dataset a dcat:DatasetSeries"] {
+    class Dataset["Dataset a cogs:Dataset"] {
         +dcterms:identifier ∋ rdfs:Literal as xsd:string
         +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
-        +ons:nextRelease ∋ rdfs:Literal as xsd:dateTime
+        +cogs:nextRelease ∋ rdfs:Literal as xsd:dateTime
         +dcterms:abstract ∋ rdfs:Literal as xsd:string
         +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
         +dcat:landingPage ∋ foaf:Document
@@ -261,11 +270,11 @@ classDiagram
         +dcat:theme ∋ [skos:Concept]
         +dcterms:license ∋ dcterms:LicenseDocument
         +dcterms:spatial ∋ dcterms:Location
-        +ons:spatialResolution ∋ [skos:Concept]
+        +cogs:spatialResolution ∋ [skos:Concept]
         +dcterms:temporal ∋ dcterms:PeriodOfTime
         +dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
-        -dcat:first ∋ dcat:Dataset
-        -dcat:last ∋ dcat:Dataset
+        -dcat:first ∋ cogs:Edition
+        -dcat:last ∋ cogs:Edition
     }
 ```
 
@@ -286,13 +295,13 @@ classDiagram
 | license             | dcterms:license            | dcterms:LicenseDocument             |    ✓     |   ✓   |    ✓     |        |
 | temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      |    ✓     |   ✓   |    ✓     |        |
 | temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                |    ✓     |   ✓   |    ✓     |        |
-| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      |    ✓     |   ✓   |    ✓     |        |
+| spatial_resolution  | cogs:spatialResolution     | [skos:Concept]                      |    ✓     |   ✓   |    ✓     |        |
 | spatial_coverage    | dcterms:spatial            | dcterms:Location                    |    ✓     |   ✓   |    ✓     |        |
 | status              | adms:status                | skos:Concept                        |    ✓     |   ✓   |    ✓     |        |
-| editions            | dcat:hasVersion            | [dcat:Dataset as ons:Edition]       |          |       |    ✓     |        |
-| first_release       | dcat:first                 | dcat:Dataset as ons:Edition         |          |       |    ✓     |        |
-| latest_release      | dcat:last                  | dcat:Dataset as ons:Edition         |          |       |    ✓     |        |
-| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| editions            | dcat:hasVersion            | [cogs:Edition]                      |          |       |    ✓     |        |
+| first_release       | dcat:first                 | cogs:Edition                        |          |       |    ✓     |        |
+| latest_release      | dcat:last                  | cogs:Edition                        |          |       |    ✓     |        |
+| next_release        | cogs:nextRelease           | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
 | landing_page        | dcat:landingPage           | foaf:Document                       |    ✓     |       |    ✓     |        |
 
 #### GET of a CPIH Dataset
@@ -300,8 +309,8 @@ classDiagram
 ```JSON
 {
   "@context": "https://data.ons.gov.uk/ns#",
-  "@id": "https://data.ons.gov.uk/datasets/cpih",
-  "@type": "dcat:DatasetSeries",
+  "@id": "https://ons.gov.uk/datasets/cpih",
+  "@type": "cogs:Dataset",
   "identifier": "cpih",
   "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
   "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home.",
@@ -358,9 +367,8 @@ classDiagram
 
 ```JSON
 {
-  "@context": "./draft_onsns_context.json",
   "@id": "https://data.ons.gov.uk/datasets/cpih",
-  "@type": "dcat:DatasetSeries",
+  "@type": "cogs:Dataset",
   "identifier": "cpih",
   "title": "Consumer Price Inflation including owner occupiers' housing costs (CPIH)",
   "summary": "The Consumer Prices Index including owner occupiers' housing costs (CPIH) is a measure of inflation which includes the costs associated with owning, maintaining and living in one's own home.",
@@ -402,19 +410,19 @@ classDiagram
 
 ### Editions
 
-Editions are the child object of Datasets, using our own `ons:Edition` object class which is a child of `dcat:Dataset`. They are the parent object of `ons:Version`s.
+Editions are the child object of Datasets, using our own `cogs:Edition` object class which is a specialisation `dcat:Dataset`. They are the parent object of `cogs:Version`s via `cogs:hasVersion`.
 
 ```mermaid
 classDiagram
     direction LR
 
-    Version <|-- Edition : dcat.hasVersion
-    Edition --|> Dataset : dcat.inSeries 
+    Version <|-- Edition : cogs.hasVersion
+    Edition --|> Dataset : cogs.inSeries 
     Edition --|> VcardKind : dcat.contactPoint
     Edition --|> PeriodOfTime : dcterms.temporal
 
 
-    class Edition["Edition a dcat:Dataset"] {
+    class Edition["Edition a cogs:Edition"] {
         +dcterms:identifier ∋ rdfs:Literal as xsd:string
         +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
         +dcterms:created ∋ rdfs:Literal as xsd:dateTime
@@ -423,17 +431,17 @@ classDiagram
         +dcterms:abstract ∋ rdfs:Literal as xsd:string
         +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
         +adms:status ∋ skos:Concept
-        +dcat:inSeries ∋ dcat:DatasetSeries
+        +dcat:inSeries ∋ cogs:Dataset
         +dqv:hasQualityQualityAnnotation ∋ dqv:QualityAnnotation
-        -dcat:hasVersion ∋ dcat:Dataset
+        -dcat:hasVersion ∋ cogs:Version
         -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
         -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
         -dcterms:spatial ∋ dcterms:Location
-        -ons:spatialResolution ∋ [skos:Concept]
+        -cogs:spatialResolution ∋ [skos:Concept]
         -dcterms:temporal ∋ dcterms:PeriodOfTime
         -dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
-        -dcat:prev ∋ dcat:Dataset
-        -dcat:next ∋ dcat:Dataset
+        -dcat:prev ∋ cogs:Edition
+        -dcat:next ∋ cogs:Edition
         -calculateTemporalResolution()
         -calculateSpatialResolution()
         -calculateTemporalCoverage() 
@@ -450,7 +458,7 @@ classDiagram
 | issued              | dcterms:issued             | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
 | modified            | dcterms:modified           | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
 | title               | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |        |
-| quality_designation | dqv:hasQualityAnnotation   | dqv:QualityAnnotation as blank node |    ✓     |   ✓   |    ✓     |        |
+| quality             | dqv:hasQualityAnnotation   | dqv:QualityAnnotation as blank node |    ✓     |   ✓   |    ✓     |        |
 | keywords            | dcat:keyword               | [rdfs:Literal as xsd:string]        |    ✓     |       |    ✓     |        |
 | theme               | dcat:theme                 | [skos:Concept]                      |    ✓     |       |    ✓     |        |
 | summary             | dcterms:abstract           | rdfs:Literal as xsd:string          |    ✓     |   ✓   |    ✓     |        |
@@ -460,16 +468,16 @@ classDiagram
 | temporal_resolution | dcat:temporalResolution    | [rdfs:Literal as xsd:duration]      |    ✓     |   ✓   |    ✓     |        |
 | spatial_coverage    | dcterms:spatial            | dcterms:Location                    |    ✓     |   ✓   |    ✓     |        |
 | temporal_coverage   | dcterms:temporal           | dcterms:PeriodOfTime                |    ✓     |   ✓   |    ✓     |        |
-| spatial_resolution  | ons:spatialResolution      | [skos:Concept]                      |    ✓     |   ✓   |    ✓     |        |
-| first_version       | dcat:first                 | dcat:Dataset                        |          |       |    ✓     |        |
-| last_version        | dcat:last                  | dcat:Dataset                        |          |       |    ✓     |        |
-| versions            | dcat:hasVersion            | [dcat:Dataset as ons:Version]       |          |       |    ✓     |        |
-| next_release        | ons:nextRelease            | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
+| spatial_resolution  | cogs:spatialResolution     | [skos:Concept]                      |    ✓     |   ✓   |    ✓     |        |
+| first_version       | dcat:first                 | dcat:Version                        |          |       |    ✓     |        |
+| last_version        | dcat:last                  | cogs:Edition                        |          |       |    ✓     |        |
+| versions            | dcat:hasVersion            | [cogs:Version]                      |          |       |    ✓     |        |
+| next_release        | cogs:nextRelease           | rdfs:Literal as xsd:dateTime        |    ✓     |   ✓   |    ✓     |        |
 | landing_page        | dcat:landingPage           | foaf:Document                       |    ✓     |       |    ✓     |        |
 
 #### Statistics quality designations
 
-While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate IRI. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropriate to attach at the Dataset (`cogs:Dataset`) level as quality designations may change over time.
+While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate URL. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, as it is not appropriate to attach at the Dataset level (i.e. `cogs:Dataset`) as quality designations may change over time.
 
 | Label                              | Previous name           | IRI                                                                                                                |
 | ---------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -485,8 +493,9 @@ For example, the following RDF expresses that a dataset is accredited official s
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix cogs: <https://www.ons.gov.uk/ns#> .
 
-ex:myDataset a dcat:Dataset ;
+ex:myEdition a cogs:Edition ;
     dqv:hasQualityAnnotation [
         a dqv:QualityAnnotation ;
         rdfs:label "Accredited Official Statistic" ;
@@ -497,9 +506,9 @@ ex:myDataset a dcat:Dataset ;
 
 ```json
 {
-  "@context": "https://data.ons.gov.uk/ns#",
-  "$id": "https://data.ons.gov.uk/datasets/cpih/2023-09",
-  "@type": "dcat:Dataset",
+  "@context": "https://data.ons.gov.uk/#",
+  "$id": "https://data.ons.gov.uk/datasets/cpih/edition/2023-09",
+  "@type": "cogs:Edition",
   ...
   "quality_designation": 
     {
@@ -512,23 +521,23 @@ ex:myDataset a dcat:Dataset ;
 
 ### Versions
 
-Versions are the child object of Editions, using our own `ons:Version` object class which is a child of `dcat:Dataset`. They are the parent object of `dcat:Distribution`s.
+Versions are the child object of Editions, using our own `cogs:Version` object class which is a specialisation `dcat:Dataset`. They are the parent object of any `dcat:Distribution` via `cogs:hasDistirbution`.
 
 ```mermaid
 classDiagram
     direction RL
 
-    Distribution <|-- Version : dcat.distribution 
+    Distribution <|-- Version : cogs.distribution 
     Version <|-- Edition : dcat.hasVersion
 
-    class Version["Version a dcat:Dataset"] {
+    class Version["Version a cogs:Version"] {
         +dcterms:identifier ∋ rdfs:Literal as xsd:string
         +dcat:version ∋ rdfs:Literal as xsd:string
         +adms:versionNotes ∋ rdfs:Literal as xsd:string
         -dcterms:created ∋ rdfs:Literal as xsd:dateTime
         -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
-        -dcat:previousVersion ∋ dcat:Dataset
-        -dcat:nextVersion ∋ dcat:Dataset
+        -dcat:previousVersion ∋ cogs:Version
+        -dcat:nextVersion ∋ cogs:Version
     }
 ```
 
@@ -541,18 +550,19 @@ classDiagram
 | title            | dcterms:title / rdfs:label | rdfs:Literal as xsd:string          |   ✓   |    ✓     |   ✓   |        |
 | description      | dcterms:description        | rdfs:Literal as xsd:string/markdown |       |    ✓     |   ✓   |        |
 | version_notes    | adms:versionNotes          | rdfs:Literal as xsd:string          |   ✓   |    ✓     |   ✓   |        |
-| next_version     | dcat:nextVersion           | dcat:Dataset                        |       |    ✓     |       |        |
-| previous_version | dcat:previousVersion       | dcat:Dataset                        |       |    ✓     |       |        |
+| next_version     | dcat:nextVersion           | cogs:Version                        |       |    ✓     |       |        |
+| previous_version | dcat:previousVersion       | cogs:Version                        |       |    ✓     |       |        |
+| distributions    | cogs:distribution          | [dcat:Distribution]                 |       |    ✓     |   ✓   |        |
 
 ### Distributions
 
-Distributions are the child object of Versions, and are `dcat:Distribution`. They are connected to the Version by the `dcat:distribution` predicate.
+Distributions are the child object of Versions, and are `dcat:Distribution`. They are connected to the Version by the `cogs:distribution` predicate.
 
 ```mermaid
 classDiagram
     direction RL
 
-    Distribution <|-- Version : dcat.distribution 
+    Distribution <|-- Version : cogs.distribution 
     TableSchema <|-- Distribution : csvw.tableSchema
     DataStructureDefinition <|-- Distribution : qb.structure
     Column <|-- TableSchema : csvw.column
@@ -619,18 +629,19 @@ We believe publishing data in a versioned manner is important. Every publication
 @prefix datatext: <https://iana.org/assignments/media-types/text/> .
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix cogs: <https://www.ons.gov.uk/ns#> .
 
-<cpih> a dcat:DatasetSeries ;
+<cpih> a cogs:Dataset ;
   dcat:hasCurrentVersion <cpih/2019-03/version/2> .
-<cpih/2019-01> a dcat:Dataset ;
- dcat:inSeries <cpih> ;
+<cpih/2019-01> a cogs:Edition ;
+ cogs:inSeries <cpih> ;
  dcat:hasCurrentVersion <cpih/2019-01/version/3> .
  dcat:hasVersion <cpih/2019-01/version/1>,
   <cpih/2019-01/version/2>,
   <cpih/2019-01/version/3> .
 
-<cpih/2019-01/version/1> a dcat:Dataset ;
- dcat:distribution <cpih-2019-01-version-1.csv> .
+<cpih/2019-01/version/1> a cogs:Version ;
+ cogs:distribution <cpih-2019-01-version-1.csv> .
 
 <cpih-2019-01-version-1.csv> a dcat:Distribution ;
   dcat:mediaType datatext:csv ;
@@ -638,30 +649,30 @@ We believe publishing data in a versioned manner is important. Every publication
 
 <cpih-2019-01-version-1-metadata.json> dcat:mediaType <https://iana.org/assignments/media-types/application/csvm+json> .
 
-<cpih/2019-01/version/2> a dcat:Dataset ;
- dcat:distribution <cpih-2019-01-version-2.json> .
+<cpih/2019-01/version/2> a cogs:Version ;
+ cogs:distribution <cpih-2019-01-version-2.json> .
 
 <cpih-2019-01-version-2.json> a dcat:Distribution ;
   dcat:mediaType <https://iana.org/assignments/media-types/application/ld+json> .
 
-<cpih/2019-01/version/3> a dcat:Dataset .
+<cpih/2019-01/version/3> a cogs:Version .
 
-<cpih/2019-02> a dcat:Dataset ;
- dcat:inSeries <cpih> ;
+<cpih/2019-02> a cogs:Edition ;
+ cogs:inSeries <cpih> ;
  dcat:hasCurrentversion <cpih/2019-02/version/1> ;
- dcat:hasVersion <cpih/2019-02/version/1> .
+ cogs:hasVersion <cpih/2019-02/version/1> .
 
-<cpih/2019-02/version/1> a dcat:Dataset .
+<cpih/2019-02/version/1> a cogs:Version .
 
-<cpih/2019-03> a dcat:Dataset ;
- dcat:inSeries <cpih> ;
+<cpih/2019-03> a cogs:Edition ;
+ cogs:inSeries <cpih> ;
  dcat:hasCurrentVersion <cpih/2019-01/version/2> ;
- dcat:hasVersion <cpih/2019-01/version/1>,
+ cogs:hasVersion <cpih/2019-01/version/1>,
   <cpih/2019-01/version/2> .
 
-<cpih/2019-03/version/1> a dcat:Dataset .
+<cpih/2019-03/version/1> a cogs:Version .
 
-<cpih/2019-03/version/2> a dcat:Dataset .
+<cpih/2019-03/version/2> a cogs:Version .
 
 <cpihQB> a dcat:Distribution , qb:Dataset .
 

@@ -3,9 +3,9 @@
 ```mermaid
 classDiagram
 
-    Distribution <|-- Version : dcat.distribution 
-    Version <|-- Edition : dcat.hasVersion
-    Edition --|> Dataset : dcat.inSeries 
+    Distribution <|-- Version : cogs.distribution 
+    Version <|-- Edition : cogs.hasVersion
+    Edition --|> Dataset : cogs.inSeries 
     CatalogRecord --|> Dataset : foaf.primaryTopic
     Catalog --|> CatalogRecord : dcat.record
     Edition --|> VcardKind : dcat.contactPoint
@@ -43,7 +43,7 @@ classDiagram
         +csvw:aboutUrl ∋ rdfs:Literal as xsd:anyURI
     }
 
-    class Edition["Edition a dcat:Dataset"] {
+    class Edition["Edition a cogs:Dataset"] {
         +dcterms:identifier ∋ rdfs:Literal as xsd:string
         +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
         +dcterms:created ∋ rdfs:Literal as xsd:dateTime
@@ -52,17 +52,17 @@ classDiagram
         +dcterms:abstract ∋ rdfs:Literal as xsd:string
         +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
         +adms:status ∋ skos:Concept
-        +dcat:inSeries ∋ dcat:DatasetSeries
+        +dcat:inSeries ∋ cogs:Dataset
         +dqv:hasQualityQualityAnnotation ∋ dqv:QualityAnnotation
-        -dcat:hasVersion ∋ dcat:Dataset
+        -dcat:hasVersion ∋ [cogs:Version]
         -dcterms:modified ∋ rdfs:Literal as xsd:dateTime
         -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
         -dcterms:spatial ∋ dcterms:Location
-        -ons:spatialResolution ∋ [skos:Concept]
+        -cogs:spatialResolution ∋ [skos:Concept]
         -dcterms:temporal ∋ dcterms:PeriodOfTime
         -dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
-        -dcat:prev ∋ dcat:Dataset
-        -dcat:next ∋ dcat:Dataset
+        -dcat:prev ∋ cogs:Edition
+        -dcat:next ∋ cogs:Edition
         -calculateTemporalResolution()
         -calculateSpatialResolution()
         -calculateTemporalCoverage() 
@@ -94,20 +94,20 @@ classDiagram
         +spdx:checksum ∋ spdx:Checksum
     }
 
-    class Version["Version a dcat:Dataset"] {
+    class Version["Version a cogs:Version"] {
         +dcterms:identifier ∋ rdfs:Literal as xsd:string
         +dcat:version ∋ rdfs:Literal as xsd:string
         +adms:versionNotes ∋ rdfs:Literal as xsd:string
         -dcterms:created ∋ rdfs:Literal as xsd:dateTime
         -dcterms:issued ∋ rdfs:Literal as xsd:dateTime
-        -dcat:previousVersion ∋ dcat:Dataset
-        -dcat:nextVersion ∋ dcat:Dataset
+        -dcat:previousVersion ∋ cogs:Version
+        -dcat:nextVersion ∋ cogs:Version
     }
 
-    class Dataset["Dataset a dcat:DatasetSeries"] {
+    class Dataset["Dataset a cogs:Dataset"] {
         +dcterms:identifier ∋ rdfs:Literal as xsd:string
         +dcterms:title, rdfs:label ∋ rdfs:Literal as xsd:string
-        +ons:nextRelease ∋ rdfs:Literal as xsd:dateTime
+        +cogs:nextRelease ∋ rdfs:Literal as xsd:dateTime
         +dcterms:abstract ∋ rdfs:Literal as xsd:string
         +dcterms:description ∋ rdfs:Literal as xsd:string/markdown
         +dcat:landingPage ∋ foaf:Document
@@ -121,11 +121,11 @@ classDiagram
         +dcat:theme ∋ [skos:Concept]
         +dcterms:license ∋ dcterms:LicenseDocument
         +dcterms:spatial ∋ dcterms:Location
-        +ons:spatialResolution ∋ [skos:Concept]
+        +cogs:spatialResolution ∋ [skos:Concept]
         +dcterms:temporal ∋ dcterms:PeriodOfTime
         +dcat:temporalResolution ∋ [rdfs:Literal as xsd:duration]
-        -dcat:first ∋ dcat:Dataset
-        -dcat:last ∋ dcat:Dataset
+        -dcat:first ∋ cogs:Edition
+        -dcat:last ∋ cogs:Edition
     }
 
 ```
