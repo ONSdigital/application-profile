@@ -188,9 +188,9 @@ flowchart LR
 
 We are heavily reliant on dcat and dcterms to relate our statistical datasets, editions and versions together. Editions are the centre of our model, in brief:
 
-- We call our statistical publication series _Datasets_, are typed `cogs:Dataset` which is a specialisation of `dcat:DatasetSeries`.
-- We call releases within these Datasets _Editions_, are typed `cogs:Edition` which is a specialisation of `dcat:Dataset` and they are linked to `cogs:Dataset` using `cogs:inSeries`.
-- We call all versions within these Editions _Versions_, are typed `cogs:Versions` which is a specialisation of `dcat:Dataset` and they are the object of the Editions' `cogs:hasVersion` property.
+- We call our statistical publication series _Datasets_, which are typed `cogs:Dataset` which is a specialisation of `dcat:DatasetSeries`.
+- We call releases within these Datasets _Editions_, which are typed `cogs:Edition` which is a specialisation of `dcat:Dataset` and they are linked to `cogs:Dataset` using `cogs:inSeries`.
+- We call all versions within these Editions _Versions_, which are typed `cogs:Versions` which is a specialisation of `dcat:Dataset` and they are the object of the Editions' `cogs:hasVersion` property.
 - Versions of data are provided as a _Distribution_, which is a `dcat:Distribution`, and can be of varying types, such as CSV, JSON, RDF, etc; however our idealised data distribution is a JSON-LD with a CSVW context representing a qb:DataSet from the RDF Cube Vocabulary.
 
 We have also broken out the model into components which can be implemented in order to allow for progressive realisation of the model and benefit.
@@ -477,7 +477,7 @@ classDiagram
 
 #### Statistics quality designations
 
-While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate URL. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, it is not appropriate to attach at the Dataset level (i.e. `cogs:Dataset`) as quality designations may change over time.
+While the [Office for Statistics Regulation](https://osr.statisticsauthority.gov.uk/) provides definitions for different types of statistics, it does not provide a codelist or concepts of these designations. We recommend creating a blank node for each designation, assigning the appropriate `type`, `label` and `skos:exactMatch` to the appropriate URL. These should be attached to individual Editions as `dqv:QualityAnnotation` using the `dqv:hasQualityAnnotation` predicate, as it is not appropriate to attach at the Dataset level (i.e. `cogs:Dataset`) as quality designations may change over time.
 
 | Label                              | Previous name           | IRI                                                                                                                |
 | ---------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
