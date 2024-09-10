@@ -34,26 +34,50 @@ cogs:Version a owl:Class ;
 
 # Define the properties for relationships between the classes
 
-# cogs:inSeries (linking cogs:Edition to cogs:Dataset)
+# cogs:inSeries, cogs:seriesMember (linking cogs:Edition to cogs:Dataset)
 cogs:inSeries a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcat:inSeries ;
     rdfs:domain cogs:Edition ;
     rdfs:range cogs:Dataset ;
     rdfs:label "in series" ;
-    rdfs:comment "A property linking an Edition to the Dataset it is part of." .
+    rdfs:comment "A property linking a cogs:Edition to the cogs:Dataset it is part of." .
 
-# cogs:hasVersion (relationship between Edition and Version)
+cogs:seriesMember a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcat:seriesMember ;
+    rdfs:domain cogs:Dataset ;
+    rdfs:range cogs:Edition ;
+    rdfs:label "series member" ;
+    rdfs:comment "A property linking a cogs:Dataset to its cogs:Editions." .
+
+# cogs:hasVersion, cogs:isVersionOf (relationship between Edition and Version)
 cogs:hasVersion a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcat:hasVersion ;
     rdfs:domain cogs:Edition ;
     rdfs:range cogs:Version ;
     rdfs:label "has versions" ;
-    rdfs:comment "A property linking a Dataset to its Versions." .
+    rdfs:comment "A property linking a cogs:Dataset to its cogs:Versions." .
 
-# cogs:hasDistribution (relationship between Version and Distribution)
+cogs:isVersionOf a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcat:isVersionOf ;
+    rdfs:domain cogs:Version ;
+    rdfs:range cogs:Edition ;
+    rdfs:label "is version of" ;
+    rdfs:comment "A property linking a cogs:Version to its cogs:Edition." .
+
+# cogs:hasDistribution, cogs:isDistributionOf (relationship between Version and Distribution)
 cogs:distribution a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcat:distribution ;
     rdfs:domain cogs:Version ;
     rdfs:range dcat:Distribution ;
     rdfs:label "has distribution" ;
-    rdfs:comment "A property linking a Version to its Distribution." .
+    rdfs:comment "A property linking a cogs:Version to its cogs:Distribution." .
+
+cogs:isDistributionOf a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcat:isDistributionOf ;
+    rdfs:domain cogs:Distribution ;
+    rdfs:range cogs:Version ;
+    rdfs:label "A property linking a cogs:Distribution to its cogs:Version." .
+
 
 # Define additional properties for the COGS ontology
 
@@ -79,3 +103,12 @@ cogs:spatialResolution a owl:DatatypeProperty ;
         Similar to the dcat:temporalResolution property also employed at the dataset or edition level.
     """ .
 
+# Define the cogs:caveat property
+cogs:caveat a owl:DatatypeProperty ;
+    rdfs:domain cogs:Dataset, cogs:Edition, cogs:Version ;
+    rdfs:range xsd:string ;
+    rdfs:label "Caveat" ;
+    rdfs:comment """
+        A property indicating any caveats or limitations associated with the dataset, edition, or version.
+        This could include information on data quality, coverage, or other important considerations for users.
+    """ .
