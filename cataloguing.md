@@ -13,31 +13,31 @@ classDiagram
         a dcat:CatalogRecord
     }
     class Dataset{
-        a dcat:DatasetSeries, cogs:Dataset
+        a cogs:Dataset
     }
     class Edition {
-        a dcat:Dataset, cogs:Edition
+        a cogs:Edition
     }
     class Version {
-        a dcat:Dataset, cogs:Version
+        a cogs:Version
     }
     class Distribution {
-        a dcat:Distribution, cogs:Distribution
+        a cogs:Distribution
     }
 
     Catalog --> "1..*" CatalogRecord : dcat.record
     CatalogRecord --> "1" Dataset : foaf.primaryTopic
 
-    Edition --> "*" Version : dcat.hasVersion
-    Version --> "*" Distribution : dcat.distribution
+    Edition --> "*" Version : cogs.hasVersion
+    Version --> "*" Distribution : cogs.distribution
 
-    Edition "*" --> "*" Dataset : dcat.inSeries
-    Distribution ..|> "1" Version : dcat.isDistributionOf
-    Version ..|> "1" Edition : dcat.isVersionOf
-    Dataset "*" ..|> "1" Edition : dcat.seriesMember
+    Edition "*" --> "*" Dataset : cogs.inSeries
+    Distribution ..|> "1" Version : cogs.isDistributionOf
+    Version ..|> "1" Edition : cogs.isVersionOf
+    Dataset "*" ..|> "1" Edition : cogs.seriesMember
 ```
 
-We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `dcat:DatasetSeries` and `dcat:Dataset` classes.
+We recommend the use of `dcat:Catalog`, `dcat:CatalogRecord`, `cogs:Dataset` and `cogs:Distribution` classes. Additionally you can use `cogs:Edition` and `cogs:Version` classes if you are managing recurring publications.
 
 ## Catalog
 
@@ -111,13 +111,7 @@ For example:
 
 - `http://data.gov.uk/datasets/my-dataset`
 
-For datasets belonging to a dataset series, we recommend extending the series IRI to form the dataset IRI. We recommend the `edition_slug` adopt identifiers from the [`reference.data.gov.uk` service](https://github.com/epimorphics/IntervalServer/blob/master/interval-uris.md).
-
-- `http://{domain}/datasets/{datasets_slug}/editions/{edition_slug}`
-
-For example:
-
-- `http://data.gov.uk/datasets/some-dataset-series/editions/2018-Q3`
+Using `dcat:Dataset` as a stand alone publication with no recurring components or revisions possible.
 
 We recommend the use of the following properties:
 
@@ -128,7 +122,7 @@ We recommend the use of the following properties:
 | `dcterms:description`        | mandatory         | See [descriptions](style.md#descriptions)                                          |
 | `dcterms:publisher`          | mandatory         | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
 | `dcterms:license`            | mandatory         | See [licenses](style.md#licenses)                                                  |
-| `dcat:distribution`          | recommended       | See [distributions](#distributions)                                                |
+| `cogs:distribution`          | recommended       | See [distributions](#distributions)                                                |
 | `dcterms:creator`            | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
 | `dcat:contactPoint`          | recommended       | See [publishers, creators and contacts](style.md#publishers-creators-and-contacts) |
 | `dcterms:issued`             | recommended       | See [dates and times](style.md#dates-and-times)                                    |
@@ -138,12 +132,8 @@ We recommend the use of the following properties:
 | `dcterms:accrualPeriodicity` | recommended       | See [frequency](code-lists.md#frequency)                                           |
 | `dcterms:spatial`            | recommended       | See [geography](code-lists.md#geography)                                           |
 | `dcterms:temporal`           | recommended       | See [dates and times](style.md#dates-and-times)                                    |
-| `dcat:inSeries`              | recommended       | See [editions](#editions)                                                          |
-| `dcat:hasCurrentVersion`     | recommended       | See [versions](#versions)                                                          |
-| `dcat:hasVersion`            | recommended       | See [versions](#versions)                                                          |
-| `dcat:version`               | recommended       | See [versions](#versions)                                                          |
+| `dcat:distribution`          | recommended       | See [distributions](#distribution)                                                 |
 | `adms:versionNotes`          | recommended       | See [versions](#versions)                                                          |
-| `dcat:prev`                  | recommended       | See [versions](#versions)                                                          |
 | `adms:status`                | recommended       |                                                                                    |
 | `dcat:landingPage`           | optional          |                                                                                    |
 | `dcterms:isReferencedBy`     | optional          |                                                                                    |
@@ -169,12 +159,6 @@ For example:
     dcterms:accrualPeriodicity <http://purl.org/cld/freq/annual> ;
     dcterms:spatial <http://statistics.data.gov.uk/id/statistical-geography/K02000001> ;
     dcterms:temporal <http://reference.data.gov.uk/id/gregorian-interval/1990-01-01T00:00:00/P28Y> ;
-    dcat:inSeries <http://data.gov.uk/datasets/greenhouse-gas-emissions> ;
-    dcat:hasCurrentVersion <http://data.gov.uk/datasets/greenhouse-gas-emissions/editions/2018/versions/2> ;
-    dcat:hasVersion <http://data.gov.uk/datasets/greenhouse-gas-emissions/editions/2018/versions/1>, 
-        <http://data.gov.uk/datasets/greenhouse-gas-emissions/editions/2018/versions/2> ;
-    dcat:version 2 ;
-    adms:versionNotes "Dataset was corrected following an error being recognised."@en ;
     dcat:prev <http://data.gov.uk/datasets/greenhouse-gas-emissions/editions/2017> ;
     dcterms:identifier "ghg-2018" ;
     .
@@ -308,7 +292,7 @@ curl http://data.gov.uk/datasets/my-dataset -H "Accept: text/csv"
 ## Editions
 
 > **Note**
-> `dcat:DatasetSeries` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is a W3C Proposed Recommendation.
+> `dcat:DatasetSeries` is recommended as part of [DCAT v3](https://w3c.github.io/dxwg/dcat/), which is a W3C Recommendation.
 
 Many statistics producers publish sets of statistics at a regular frequency as monthly, quarterly, or annual releases.
 
