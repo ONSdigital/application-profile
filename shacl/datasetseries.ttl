@@ -21,6 +21,7 @@
         sh:path dcterms:title ;
         sh:datatype: xsd:string ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message: "A cogs:Dataset must have a dcterms:title." ;
     ];
     sh:property [
@@ -40,6 +41,7 @@
         sh:path dcterms:description ;
         sh:datatype: xsd:string ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message: "A cogs:Dataset must have a dcterms:description." ;
     ];
      #sh:property [
@@ -51,18 +53,21 @@
         sh:path dcat:publisher ;
         #sh:foaf:Agent ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message: "A cogs:Dataset must have a dcterms:title." ;
     ];
      sh:property [
         sh:path dcterms:modified ;
         sh:datatype: xsd:dateTime ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcterms:modified." ;
     ];
      sh:property [
         sh:path dcterms:creator ;
         #sh:foaf:Agent ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcterms:creator." ;
     ];
      sh:property [
@@ -75,36 +80,42 @@
         sh:path dcterms:issued ;
         sh:datatype: xsd:dateTime ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcterms:issued." ;
     ];
      sh:property [
         sh:path dcterms:accrualPeriodicity ;
         sh:path dcterms:Frequency ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcterms:accrualPeriodicity." ;
     ];
      sh:property [
         sh:path dcat:keyword ;
         rdfs:Literal: xsd:string ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcat:keyword." ;
     ];
      sh:property [
         sh:path dcat:theme ;
         #skos:Concept ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcat:theme." ;
     ];
      sh:property [
         sh:path dcterms:license ;
         sh:path dcterms:LicenseDocument ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message: "A cogs:Dataset must have a dcterms:license." ;
     ];
      sh:property [
         sh:path dcterms:spatial ;
         sh:path dcterms:Location ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcterms:spatial." ;
     ];
     sh:property [
@@ -117,23 +128,34 @@
         sh:path dcterms:temporal ;
         sh:path dcterms:PeriodOftime ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcterms:temporal." ;
     ];
      sh:property [
         sh:path dcat:temporalResolution ;
         rdfs:Literal xsd:duration ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcat:temporalResolution." ;
     ];
      sh:property [
         sh:path dcat:first ;
         sh:path dcat:Dataset ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message: "A cogs:Dataset must have a dcat:first." ;
     ];
      sh:property [
         sh:path dcat:last ;
         sh:path dcat:Dataset ;
         sh:minCount 1 ;
-        sh:message: "A cogs:Dataset must have a dcterms:description." ;
-    ] .
+        sh:severity sh:Info ;
+        sh:message: "A cogs:Dataset must have a dcat:last." ;
+    ];
+     sh:property [
+        sh:path dcat:contactPoint ;
+        sh:path dcat:Dataset ;
+        sh:minCount 1 ;
+        sh:severity sh:Info ;
+        sh:message: "A cogs:Dataset must have a dcat:contactPoint." ;
+    ]  .

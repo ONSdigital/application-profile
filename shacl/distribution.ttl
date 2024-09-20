@@ -27,12 +27,14 @@
        sh:property [
         sh:path dcterms:creator ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one dcterms:creator." ;
     ] ;
        sh:property [
         sh:path dcterms:issued ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one dcterms:issued." ;
     ] ;
       sh:property [
@@ -50,6 +52,7 @@
        sh:property [
         sh:path dcterms:downloadURL ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one dcterms:downloadURL." ;
     ] ;
        sh:property [
@@ -62,17 +65,20 @@
         sh:path dcat:mediaType ;
         sh:path dcterms:MediaType ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one dcat:mediaType." ;
     ] ;
      sh:property [
         sh:path wdrs:describedBy ;
         sh:path rdfs:Resource ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one wdrs:describedBy." ;
     ] ;
      sh:property [
         sh:path spdx:checksum ;
         sh:minCount 1 ;
+        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one spdx:checksum." ;
      ].
     
