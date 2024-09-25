@@ -13,72 +13,84 @@
 <#DatasetShape> a sh:NodeShape ;
     sh:targetClass dcat:Distribution ;
     sh:property [
-        sh:path dcterms:identifier ;
+        sh:path dcterms:title ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Distribution must have at least one dcterms:identifier." ;
+        sh:message "A dcat:Distribution must have at least one dcterms:title." ;
+        sh:severity sh:Warning ;
     ] ;
        sh:property [
-        sh:path dcterms:created ;
-        sh:datatype xsd:dateTime ;
+        sh:path dcterms:description ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Distribution must have at least one dcterms:created." ;
+        sh:message "A dcat:Distribution must have at least one dcterms:description." ;
+        sh:severity sh:Warning ;
+    ] ;
+        sh:property [
+        sh:path dcterms:license ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcterms:issued." ;
+        sh:severity sh:Warning ;
     ] ;
        sh:property [
         sh:path dcterms:creator ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one dcterms:creator." ;
+        sh:severity sh:Info ;
     ] ;
        sh:property [
         sh:path dcterms:issued ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
-        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one dcterms:issued." ;
+        sh:severity sh:Info ;
     ] ;
-      sh:property [
-        sh:path prov:wasDerivedFrom ;
-        sh:path prov:Entity ;
+    sh:property [
+        sh:path dcterms:modified ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Distribution must have at least one prov:wasDerivedFrom." ;
+        sh:message "A dcat:Distribution must have at least one dcterms:modified." ;
+        sh:severity sh:Info ;
     ] ;
-     sh:property [
-        sh:path prov:wasGeneratedBy ;
-        sh:path prov:Activity ;
+        sh:property [
+        sh:path dcat:isDistribtionOf ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Distribution must have at least one prov:wasGeneratedBy." ;
+        sh:message "A dcat:Distribution must have at least one dcat:isDistribtionOf." ;
+        sh:severity sh:Info ;
     ] ;
-       sh:property [
+        sh:property [
+        sh:path dcat:mediaType ;
+        sh:path dcterms:MediaType ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one dcat:mediaType." ;
+        sh:severity sh:Info ;
+    ] ;
+        sh:property [
         sh:path dcterms:downloadURL ;
         sh:minCount 1 ;
-        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one dcterms:downloadURL." ;
+        sh:severity sh:Info ;
     ] ;
-       sh:property [
+        sh:property [
         sh:path dcat:byteSize ;
         sh:datatype xsd:nonNegativeInteger ;
         sh:minCount 1 ;
         sh:message "A dcat:Distribution must have at least one dcat:byteSize." ;
-    ] ;
-       sh:property [
-        sh:path dcat:mediaType ;
-        sh:path dcterms:MediaType ;
-        sh:minCount 1 ;
         sh:severity sh:Info ;
-        sh:message "A dcat:Distribution must have at least one dcat:mediaType." ;
     ] ;
-     sh:property [
+        sh:property [
+        sh:path spdx:checksum ;
+        sh:minCount 1 ;
+        sh:message "A dcat:Distribution must have at least one spdx:checksum." ;
+        sh:severity sh:Info ;
+     ];
+        sh:property [
         sh:path wdrs:describedBy ;
         sh:path rdfs:Resource ;
         sh:minCount 1 ;
-        sh:severity sh:Info ;
         sh:message "A dcat:Distribution must have at least one wdrs:describedBy." ;
-    ] ;
-     sh:property [
-        sh:path spdx:checksum ;
-        sh:minCount 1 ;
         sh:severity sh:Info ;
-        sh:message "A dcat:Distribution must have at least one spdx:checksum." ;
-     ].
-    
+    ] .

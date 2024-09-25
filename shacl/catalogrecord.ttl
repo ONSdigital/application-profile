@@ -6,25 +6,35 @@
 @prefix cogs: <http://www.ons.gov.uk/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 <#DatasetShape> a sh:NodeShape ;
     sh:targetClass dcat:CatalogRecord ;
     sh:property [
-        sh:path dcterms:identifier ;
+        sh:path dcterms:issued ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:CatalogRecord must have at least one dcterms:identifier." ;
+        sh:message "A dcat:CatalogRecord must have at least one dcterms:issued." ;
+        sh:severity sh:Warning ;
     ] ;
      sh:property [
         sh:path foaf:primaryTopic ;
         sh:path dcat:DatasetSeries ;
         sh:minCount 1 ;
+        sh:message "A dcat:CatalogRecord must have at least one foaf:primaryTopic." ;
         sh:severity sh:Warning ;
-        sh:message "A dcat:CatalogRecord must have at least one foaf:primaryTopic ." ;
     ] ;
     sh:property [
-        sh:path dcterms:created ;
-        sh:datatype xsd:dateTime ;
+        sh:path prov:wasAttributedTo;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:CatalogRecord must have at least one dcterms:identifier." ;
+        sh:message "A dcat:CatalogRecord must have at least one prov:wasAttributedTo." ;
+        sh:severity sh:Info ;
+    ] 
+      sh:property [
+        sh:path dcterms:modified;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A dcat:CatalogRecord must have at least one dcterms:modified." ;
+        sh:severity sh:Info ;
     ] .

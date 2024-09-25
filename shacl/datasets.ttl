@@ -13,6 +13,13 @@
 <#DatasetShape> a sh:NodeShape ;
     sh:targetClass cogs:Dataset ;
     sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset must have a dcterms:identifier." ;
+        sh:severity sh:Warning ;
+    ];
+    sh:property [
         sh:path dcterms:title ;
         sh:datatype: xsd:string ;
         sh:minCount 1 ;
@@ -39,6 +46,12 @@
         sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcterms:license." ;
         sh:severity sh:Warning ;
+    ];
+     sh:property [
+        sh:path dcat:distribution;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset must have a dcat:distribution." ;
+        sh:severity sh:Info ;
     ];
     sh:property [
         sh:path dcterms:creator ;
@@ -101,5 +114,68 @@
         sh:path dcterms:PeriodOftime ;
         sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcterms:temporal." ;
+        sh:severity sh:Info ;
+    ];
+     sh:property [
+        sh:path dcat:inSeries ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset must have a dcat:inSeries." ;
+        sh:severity sh:Info ;
+    ];
+    sh:property [
+        sh:path dcat:hasCurrentVersion ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset should have a dcat:hasCurrentVersion." ;
+        sh:severity sh:Info ;
+    ];
+     sh:property [
+        sh:path dcat:hasVersion ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset should have a dcat:hasVersion." ; 
+        sh:severity sh:Info ;  
+    ];
+     sh:property [
+        sh:path dcat:version ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset should have a dcat:version." ;
+        sh:severity sh:Info ;
+    ];
+     sh:property [
+        sh:path adms:versionNotes ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset should have a adms:versionNotes ." ; 
+        sh:severity sh:Info ;
+    ];
+      sh:property [
+        sh:path dcat:prev ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset should have a dcat:prev." ;
+        sh:severity sh:Info ;
+    ];
+      sh:property [
+        sh:path adms:status ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset should have a adms:status." ;
+        sh:severity sh:Info ;
+    ];
+        sh:property [
+        sh:path dcat:landingPage ;
+        #sh:foaf:Document ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset must have a dcat:landingPage." ;
+        sh:severity sh:Info ;
+     ];
+        sh:property [
+        sh:path dcterms:isReferencedBy ;
+        sh:datatype: xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Dataset must have a dcterms:isReferencedBy." ;
         sh:severity sh:Info ;
     ].

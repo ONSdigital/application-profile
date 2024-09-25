@@ -1,27 +1,70 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
-@prefix cogs: <https://www.ons.gov.uk/ns#> .
+@prefix cogs: <http://www.ons.gov.uk/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <#DatasetShape> a sh:NodeShape ;
-    sh:targetClass dcat:Catalog ;
+    sh:targetClass cogs:Catalog ;
     sh:property [
-        sh:path dcterms:identifier ;
+        sh:path dcterms:title ;
+        sh:datatype: xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Catalog must have a dcterms:title." ;
+        sh:severity sh:Warning ;
+    ];
+    sh:property [
+        sh:path dcterms:description ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Catalog must have at least one dcterms:identifier." ;
-    ] ;
-      sh:property [
-        sh:path dcat:record ;
+        sh:message: "A cogs:Catalog must have a dcterms:description." ;
+        sh:severity sh:Warning ;
+    ];
+     sh:property [
+        sh:path dcterms:publisher ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Catalog must have at least one dcat:record." ;
-    ] ;
-      sh:property [
-        sh:path dcterms:created ;
-        sh:datatype xsd:dateTime ;
+        sh:message: "A cogs:Catalog must have a dcterms:publisher." ;
+        sh:severity sh:Warning ;
+    ];
+     sh:property [
+        sh:path dcterms:creator ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-        sh:message "A dcat:Catalog must have at least one dcterms:created." ;
-    ] .
+        sh:message: "A cogs:Catalog must have a dcterms:creator." ;
+        sh:severity sh:Info ;
+    ];
+     sh:property [
+        sh:path dcat:contactPoint ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Catalog must have a dcat:contactPoint." ;
+        sh:severity sh:Info ;
+    ];
+     sh:property [
+        sh:path dcterms:issued ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Catalog must have a dcterms:issued." ;
+        sh:severity sh:Info ;
+    ];
+     sh:property [
+        sh:path dcterms:modified ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Catalog must have a dcterms:modified." ;
+        sh:severity sh:Info ;
+    ];
+     sh:property [
+        sh:path dcterms:themeTaxonomy ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message: "A cogs:Catalog must have a dcterms:themeTaxonomy ." ;
+        sh:severity sh:Info ;
+    ].
+    

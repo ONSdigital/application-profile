@@ -11,74 +11,86 @@
 <#DatasetShape> a sh:NodeShape ;
     sh:targetClass cogs:Edition ;
     sh:property [
-        sh:path dcterms:identifier ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:message "A cogs:Edition must have at least one dcterms:identifier." ;
-    ] ;
-    sh:property [
         sh:path dcterms:title ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcterms:title." ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A cogs:Edition must have at least one dcterms:identifier." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcterms:created ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcterms:created." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcterms:creator ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcterms:creator." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcat:contactPoint ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcat:contactPoint." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcterms:abstract ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcterms:abstract." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcterms:description ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcterms:description." ;
+        sh:severity sh:Warning ;
     ] ;
        sh:property [
         sh:path adms:status ;
         sh:path skos:Concept ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a adms:status." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcat:inSeries ;
         sh:class cogs:Dataset ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcat:inSeries pointing to a cogs:Dataset." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcat:hasVersion ;
         sh:class cogs:Version ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a cogs:hasVersion." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcterms:modified ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcterms:modified." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcterms:issued ;
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
         sh:message "A cogs:Edition must have a dcterms:issued." ;
+        sh:severity sh:Info;
     ] ;
       sh:property [
         sh:path dcterms:spatial ;
