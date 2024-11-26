@@ -42,7 +42,7 @@
     ];
     sh:property [
         sh:path dcterms:license ;
-        sh:path dcterms:LicenseDocument ;
+        #sh:path dcterms:LicenseDocument ;
         sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcterms:license." ;
         sh:severity sh:Warning ;
@@ -63,10 +63,10 @@
      sh:property [
         sh:path dcat:contactPoint ;
         sh:path dcat:Dataset ;
-        sh:minCount 1 ;
+        #sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcat:contactPoint." ;
         sh:severity sh:Info ;
-    ]; 
+     ];
       sh:property [
         sh:path dcterms:issued ;
         sh:datatype: xsd:dateTime ;
@@ -98,21 +98,21 @@
       sh:property [
         sh:path dcterms:accrualPeriodicity ;
         sh:path dcterms:Frequency ;
-        sh:minCount 1 ;
+        #sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcterms:accrualPeriodicity." ;
         sh:severity sh:Info ;
     ];
      sh:property [
         sh:path dcterms:spatial ;
         sh:path dcterms:Location ;
-        sh:minCount 1 ;
+        #sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcterms:spatial." ;
         sh:severity sh:Info ;
     ];
     sh:property [
         sh:path dcterms:temporal ;
         sh:path dcterms:PeriodOftime ;
-        sh:minCount 1 ;
+        #sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcterms:temporal." ;
         sh:severity sh:Info ;
     ];

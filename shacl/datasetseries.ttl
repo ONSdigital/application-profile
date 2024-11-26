@@ -35,7 +35,7 @@
     ];
     sh:property [
         sh:path dcterms:license ;
-        sh:path dcterms:LicenseDocument ;
+        #sh:path dcterms:LicenseDocument ;
         sh:minCount 1 ;
         sh:message: "A cogs:Dataset must have a dcterms:license." ;
         sh:severity sh:Warning ;

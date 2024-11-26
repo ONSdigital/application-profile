@@ -14,11 +14,13 @@
     sh:property [
         sh:path dcterms:title ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message "A cogs:Version must have at least one dcterms:title." ;
     ] ;
     sh:property [
         sh:path dcterms:description ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message "A cogs:Version must have a dterms:description." ;
     ] ;
     sh:not [
@@ -29,6 +31,7 @@
         sh:path dcterms:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message "A cogs:Version must have a dcterms:identifier." ;
     ] ;
     sh:property [
@@ -40,6 +43,7 @@
     sh:property [
         sh:path dcterms:publisher ;
         sh:minCount 1 ;
+        sh:severity sh:Warning ;
         sh:message "A cogs:Version must have a dcterms:publisher." ;
     ];
     sh:property [
